@@ -10,5 +10,5 @@ package systemautonet;
  * @author Henrique
  */
 public class wqeqw {
-    
+    int x;
 }
