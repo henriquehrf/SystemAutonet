@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SystemAutonet">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../utilitarios/teste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SystemAutonet">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -82,9 +82,4 @@
    <bottom>
       <Label text="SystemAutonet 1.0 SNAPSHOT" textAlignment="CENTER" BorderPane.alignment="CENTER" />
    </bottom>
-   <stylesheets>
-      <URL value="@../../../../../Desktop/teste/teste.css" />
-      <URL value="@../../../../../Desktop/teste/teste.css" />
-      <URL value="@teste/teste.css" />
-   </stylesheets>
 </BorderPane>
