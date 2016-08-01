@@ -4,83 +4,83 @@
 
 .button{
     -fx-border-color:darkgrey;
-	-fx-background-color:none;
-	-fx-font-size: 9pt;
+    -fx-background-color:none;
+    -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-	-fx-cursor:hand;
- -fx-background-color: linear-gradient( #ffffff, #808080);
+    -fx-cursor:hand;
+    -fx-background-color: linear-gradient( #ffffff, #808080);
 
 }
 .button:hover{
-	-fx-background-color:seashell ;
- -fx-background-color: linear-gradient( #ffffff, #778899);
-	
-	 
+    -fx-background-color:seashell ;
+    -fx-background-color: linear-gradient( #ffffff, #778899);
+
+
 }
 .text-field{
-	-fx-border-color:darkgrey;
-	-fx-background-color:none;
-	-fx-max-height:10;
-	-fx-font-size: 9pt;
+    -fx-border-color:darkgrey;
+    -fx-background-color:none;
+    -fx-max-height:10;
+    -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-	
+
 }
 .text-area{
-	-fx-border-color:darkgrey;
-	-fx-background-color:none;
-	-fx-max-height:100;
-	-fx-font-size: 9pt;
+    -fx-border-color:darkgrey;
+    -fx-background-color:none;
+    -fx-max-height:100;
+    -fx-font-size: 9pt;
     -fx-font-family: "Arial";
 }
 .menu-bar{
-	-fx-border-color:darkgrey;
-	-fx-background-color:none;
+    -fx-border-color:darkgrey;
+    -fx-background-color:none;
 }
 .choice-box{
-	-fx-border-color:darkgrey;
-	-fx-background-color:none;
-	-fx-font-size: 9pt;
+    -fx-border-color:darkgrey;
+    -fx-background-color:none;
+    -fx-font-size: 9pt;
     -fx-font-family: "Arial";
 }
 .radio-button{
-	 -fx-text-fill: none;
+    -fx-text-fill: none;
     -fx-border-color: none;
     -fx-border-radius: 5;
     -fx-padding: 3 6 6 6;
-	-fx-font-size: 9pt;
+    -fx-font-size: 9pt;
     -fx-font-family: "Arial";
 }
 .check-box{
-	-fx-font-size: 9pt;
+    -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-	
+
 }
 .tab-pane{
-	-fx-border-color:darkgrey;
-	-fx-background-color:white;
-	-fx-font-size: 9pt;
-   	 -fx-font-family: "Arial";
-	
+    -fx-border-color:darkgrey;
+    -fx-background-color:white;
+    -fx-font-size: 9pt;
+    -fx-font-family: "Arial";
+
 }
 .tab{
-	-fx-border-color:darkgrey;
-	-fx-background-color:transparent;
-	 -fx-background-color: linear-gradient( #ffffff,  #dcdcdc);
-	
-	
+    -fx-border-color:darkgrey;
+    -fx-background-color:transparent;
+    -fx-background-color: linear-gradient( #ffffff,  #dcdcdc);
+
+
 }
 
 .tab:hover{
-	
- -fx-background-color: linear-gradient( #ffffff, #778899);
-	
-	 
+
+    -fx-background-color: linear-gradient( #ffffff, #778899);
+
+
 }
 .date-piker{
-	-fx-border-color:darkgrey;
-	-fx-background-color:white;
-	-fx-font-size: 9pt;
-    	-fx-font-family: "Arial";
+    -fx-border-color:darkgrey;
+    -fx-background-color:white;
+    -fx-font-size: 9pt;
+    -fx-font-family: "Arial";
 
 }
 .label-header{
@@ -97,37 +97,37 @@
 }
 
 .border-pane{
-	-fx-background-color:white;
+    -fx-background-color:white;
 }
 .anchor-pane{
-	-fx-background-color:white;
+    -fx-background-color:white;
 }
 .table-view{
 
-	-fx-border-color:darkgrey;
-	-fx-background-color:white;
-	-fx-font-size: 9pt;
-    	-fx-font-family: "Arial";
+    -fx-border-color:darkgrey;
+    -fx-background-color:white;
+    -fx-font-size: 9pt;
+    -fx-font-family: "Arial";
 
 }
 .table-column{
-	-fx-border-color:darkgrey;
-	-fx-background-color:white;
-	-fx-font-size: 9pt;
-    	-fx-font-family: "Arial";
+    -fx-border-color:darkgrey;
+    -fx-background-color:white;
+    -fx-font-size: 9pt;
+    -fx-font-family: "Arial";
 }
 .button-search{
-	  -fx-border-color:darkgrey;
-	-fx-background-color:none;
-	-fx-font-size: 9pt;
+    -fx-border-color:#6495ed;
+    -fx-background-color:#6495ed;
+    -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-	-fx-cursor:hand;
- -fx-background-color: linear-gradient( #ffffff, #808080);
-	 -fx-background-image: url('icon.png');
-  -fx-background-size: 30 30;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position:left; 
+    -fx-cursor:hand;
     
-	
+    -fx-background-image: url('icon.png');
+    -fx-background-size: 20 20 ;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center; 
+
+
 }
 
