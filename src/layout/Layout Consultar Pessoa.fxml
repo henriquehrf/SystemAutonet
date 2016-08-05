@@ -78,7 +78,10 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="325.0">
                      <children>
-                        <Label text="Procurar: " />
+                        <Label text="Pesquisar:">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin></Label>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -95,19 +98,35 @@
                         </Button>
                      </children>
                   </HBox>
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="28.0" prefWidth="458.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <RadioButton alignment="BOTTOM_LEFT" mnemonicParsing="false" text="Nome" />
-                        <RadioButton alignment="BOTTOM_LEFT" mnemonicParsing="false" text="CPF" />
-                        <RadioButton alignment="BOTTOM_LEFT" mnemonicParsing="false" text="RG" />
-                        <RadioButton mnemonicParsing="false" text="Numero de Matricula" />
+                        <HBox alignment="TOP_CENTER" prefHeight="28.0" prefWidth="381.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="Nome">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="CPF">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="RG">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="Numero de Matricula">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </RadioButton>
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                     <children>
-                        <Label text="Buscar por: " />
-                     </children>
-                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="200.0" />
