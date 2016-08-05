@@ -5,6 +5,7 @@
  */
 package vo;
 
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,28 +14,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Eduardo
  */
-
 @Entity
 public class Entrada {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id_entrada;
-    
+
     @Column(length = 20, nullable = false)
     private String numero_nf;
-    
-    @Column(nullable = false)
+
+    @Temporal(TemporalType.DATE)
     private Date dt_entrada;
-    
+
     @Column(scale = 8, precision = 2)
     private float valor_total;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Fornecedor id_fornecedor;
 
@@ -77,8 +79,5 @@ public class Entrada {
     public void setId_fornecedor(Fornecedor id_fornecedor) {
         this.id_fornecedor = id_fornecedor;
     }
-    
-    
-    
-    
+
 }

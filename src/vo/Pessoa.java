@@ -11,65 +11,66 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Eduardo
  */
-
 @Entity
 public class Pessoa {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id_pessoa;
-    
-    @Column(length = 100 , nullable = false)
+
+    @Column(length = 100, nullable = false)
     private String nome;
-    
-    @Column(length = 1,nullable = false)
+
+    @Column(length = 1, nullable = false)
     private String sexo;
-    
+
     @Column(length = 11, nullable = false)
     private String cpf;
-    
-    @Column(length = 20,nullable = false)
+
+    @Column(length = 20, nullable = false)
     private String rg;
-    
+
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dt_nascimento;
-    
-    @Column(length = 20,nullable = false)
+
+    @Column(length = 20, nullable = false)
     private String fone_principal;
-    
+
     @Column(length = 20, nullable = true)
     private String fone_secundario;
-    
+
     @Column(length = 100, nullable = false)
     private String email;
-    
+
     @Column(length = 200, nullable = false)
     private String endereco;
-    
+
     @Column(length = 20, nullable = false)
     private String funcao;
-    
+
     @Column(length = 20, nullable = false)
     private String num_matricula;
-    
-    @Column(length = 1,nullable = false)
+
+    @Column(length = 1, nullable = false)
     private String ativo;
-    
+
     @Column(length = 20, nullable = false)
     private String usuario;
-    
+
     @Column(length = 20, nullable = false)
     private String senha;
-    
-    @Column(nullable = true)
+
+    @Column(nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date ultimo_acesso;
-    
-    
 
     public long getId_pessoa() {
         return id_pessoa;
@@ -198,12 +199,5 @@ public class Pessoa {
     public void setUltimo_acesso(Date ultimo_acesso) {
         this.ultimo_acesso = ultimo_acesso;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

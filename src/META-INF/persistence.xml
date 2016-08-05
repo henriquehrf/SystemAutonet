@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="TrabalhoPU" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="SystemAutonetPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>vo.Baixa</class>
+    <class>vo.BaixaEstoqueMaterial</class>
+    <class>vo.Categoria</class>
+    <class>vo.Departamento</class>
+    <class>vo.Emprestimo</class>
+    <class>vo.EmprestimoEstoqueMaterial</class>
+    <class>vo.Entrada</class>
+    <class>vo.EntradaMaterial</class>
+    <class>vo.EstoqueMaterial</class>
+    <class>vo.Fornecedor</class>
+    <class>vo.Local</class>
+    <class>vo.Material</class>
+    <class>vo.TipoSaida</class>
+    <class>vo.TipoUnidade</class>
+    <class>vo.Pessoa</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/TrabalhoJPA"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/SystemAutonet"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="28121995"/>
+      <property name="javax.persistence.jdbc.password" value="password"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-      <property name="eclipselink.logging.level.sql" value="FINE"/>
-      <property name="eclipselink.logging.parameters" value="true"/>
     </properties>
   </persistence-unit>
 </persistence>

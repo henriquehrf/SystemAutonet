@@ -5,6 +5,7 @@
  */
 package vo;
 
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -20,17 +23,17 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Baixa {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id_baixa;
-    
+
     @Column(length = 200, nullable = false)
-    private String observacao; 
-    
-    @Column(nullable = false)
-    private Date dt_baixa;
-    
+    private String observacao;
+
+    @Temporal(TemporalType.DATE)
+    private Calendar dt_baixa;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private TipoSaida id_tipo_saida;
 
@@ -40,7 +43,7 @@ public class Baixa {
 
     public void setId_baixa(long id_baixa) {
         this.id_baixa = id_baixa;
-    } 
+    }
 
     public String getObservacao() {
         return observacao;
@@ -50,11 +53,11 @@ public class Baixa {
         this.observacao = observacao;
     }
 
-    public Date getDt_baixa() {
+    public Calendar getDt_baixa() {
         return dt_baixa;
     }
 
-    public void setDt_baixa(Date dt_baixa) {
+    public void setDt_baixa(Calendar dt_baixa) {
         this.dt_baixa = dt_baixa;
     }
 
@@ -65,7 +68,5 @@ public class Baixa {
     public void setId_tipo_saida(TipoSaida id_tipo_saida) {
         this.id_tipo_saida = id_tipo_saida;
     }
-    
-    
-    
+
 }

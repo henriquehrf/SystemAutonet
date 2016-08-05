@@ -5,7 +5,9 @@
  */
 package vo;
 
+import java.util.Calendar;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -24,7 +28,7 @@ public class Emprestimo {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id_emprestimo;
     
-    @Column(nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dt_emprestimo;
     
     @Column(length = 1, nullable = false)
@@ -58,6 +62,7 @@ public class Emprestimo {
     public void setDt_emprestimo(Date dt_emprestimo) {
         this.dt_emprestimo = dt_emprestimo;
     }
+
 
     public String getStatus_emprestimo() {
         return status_emprestimo;
