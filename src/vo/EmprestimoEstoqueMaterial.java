@@ -5,6 +5,7 @@
  */
 package vo;
 
+import DAO.EntidadeBase;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -22,11 +23,11 @@ import javax.persistence.Temporal;
  * @author Eduardo
  */
 @Entity
-public class EmprestimoEstoqueMaterial implements Serializable {
+public class EmprestimoEstoqueMaterial implements Serializable, EntidadeBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id_emprestimoestoquematerial;
+    private Long id_emprestimoestoquematerial;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private EstoqueMaterial id_estoquematerial;
@@ -46,11 +47,11 @@ public class EmprestimoEstoqueMaterial implements Serializable {
     @Basic
     private Integer qtd_emprestada;
 
-    public long getId_emprestimoestoquematerial() {
+    public Long getId() {
         return id_emprestimoestoquematerial;
     }
 
-    public void setId_emprestimoestoquematerial(long id_emprestimoestoquematerial) {
+    public void setId_emprestimoestoquematerial(Long id_emprestimoestoquematerial) {
         this.id_emprestimoestoquematerial = id_emprestimoestoquematerial;
     }
 

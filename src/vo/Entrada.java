@@ -3,6 +3,7 @@
  */
 package vo;
 
+import DAO.EntidadeBase;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -15,7 +16,7 @@ import javax.persistence.ManyToMany;
  * @author Eduardo
  */
 @Entity
-public class Entrada implements Serializable {
+public class Entrada implements Serializable, EntidadeBase {
 
     @Id
     private Long id_entrada;
@@ -32,7 +33,8 @@ public class Entrada implements Serializable {
     @ManyToMany(targetEntity = Material.class, mappedBy = "id_entrada")
     private List<Material> id_material;
 
-    public Long getId_entrada() {
+    @Override
+    public Long getId() {
         return this.id_entrada;
     }
 

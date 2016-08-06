@@ -5,6 +5,7 @@
  */
 package vo;
 
+import DAO.EntidadeBase;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -23,11 +24,11 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 
-public class EntradaMaterial implements Serializable{
+public class EntradaMaterial implements Serializable, EntidadeBase{
 
     @Id
      @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    long id_entradaMaterial;
+    Long id_entradaMaterial;
     
     @ManyToOne(fetch = FetchType.EAGER)
     private Material id_material;
@@ -41,11 +42,12 @@ public class EntradaMaterial implements Serializable{
     @Column(scale = 8, precision = 2)
     private int valor_unitario_material;
 
-    public long getId_entradaMaterial() {
+    @Override
+    public Long getId() {
         return id_entradaMaterial;
     }
 
-    public void setId_entradaMaterial(long id_entradaMaterial) {
+    public void setId_entradaMaterial(Long id_entradaMaterial) {
         this.id_entradaMaterial = id_entradaMaterial;
     }
 

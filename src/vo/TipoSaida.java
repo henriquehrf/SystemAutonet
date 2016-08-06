@@ -5,6 +5,7 @@
  */
 package vo;
 
+import DAO.EntidadeBase;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,20 +19,21 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class TipoSaida implements Serializable {
+public class TipoSaida implements Serializable, EntidadeBase {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id_tipo_saida;
+    private Long id_tipo_saida;
     
     @Column(length = 50, nullable = false)
     private String descricao;
 
     
-    public long getId_tipo_saida() {
+    @Override
+    public Long getId() {
         return id_tipo_saida;
     }
 
-    public void setId_tipo_saida(long id_tipo_saida) {
+    public void setId_tipo_saida(Long id_tipo_saida) {
         this.id_tipo_saida = id_tipo_saida;
     }
 

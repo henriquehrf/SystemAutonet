@@ -5,6 +5,7 @@
  */
 package vo;
 
+import DAO.EntidadeBase;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,10 +25,10 @@ import javax.persistence.TemporalType;
  * @author Eduardo
  */
 @Entity
-public class Emprestimo implements Serializable {
+public class Emprestimo implements Serializable, EntidadeBase {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id_emprestimo;
+    private Long id_emprestimo;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dt_emprestimo;
@@ -48,11 +49,11 @@ public class Emprestimo implements Serializable {
     private Pessoa id_pessoa_autoriza;
     
 
-    public long getId_emprestimo() {
+    public Long getId() {
         return id_emprestimo;
     }
 
-    public void setId_emprestimo(long id_emprestimo) {
+    public void setId_emprestimo(Long id_emprestimo) {
         this.id_emprestimo = id_emprestimo;
     }
 

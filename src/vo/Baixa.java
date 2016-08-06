@@ -5,6 +5,7 @@
  */
 package vo;
 
+import DAO.EntidadeBase;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,11 +24,11 @@ import javax.persistence.TemporalType;
  * @author Eduardo
  */
 @Entity
-public class Baixa implements Serializable {
+public class Baixa implements Serializable, EntidadeBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id_baixa;
+    private Long id_baixa;
 
     @Column(length = 200, nullable = false)
     private String observacao;
@@ -38,11 +39,12 @@ public class Baixa implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private TipoSaida id_tipo_saida;
 
-    public long getId_baixa() {
+    @Override
+    public Long getId() {
         return id_baixa;
     }
 
-    public void setId_baixa(long id_baixa) {
+    public void setId_baixa(Long id_baixa) {
         this.id_baixa = id_baixa;
     }
 

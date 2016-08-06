@@ -5,6 +5,7 @@
  */
 package vo;
 
+import DAO.EntidadeBase;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,11 +18,11 @@ import javax.persistence.Id;
  * @author Eduardo
  */
 @Entity
-public class Fornecedor implements Serializable {
+public class Fornecedor implements Serializable, EntidadeBase {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id_fornecedor;
+    private Long id_fornecedor;
     
     @Column(length = 100, nullable = false)
     private String razao_social;
@@ -48,11 +49,12 @@ public class Fornecedor implements Serializable {
     private String pessoa_responsavel;
     
     
-    public long getId_fornecedor() {
+    @Override
+    public Long getId() {
         return id_fornecedor;
     }
 
-    public void setId_fornecedor(long id_fornecedor) {
+    public void setId_fornecedor(Long id_fornecedor) {
         this.id_fornecedor = id_fornecedor;
     }
 

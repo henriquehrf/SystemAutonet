@@ -5,6 +5,7 @@
  */
 package vo;
 
+import DAO.EntidadeBase;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,11 +21,11 @@ import javax.persistence.TemporalType;
  * @author Eduardo
  */
 @Entity
-public class Pessoa implements Serializable {
+public class Pessoa  implements EntidadeBase, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id_pessoa;
+    private Long id_pessoa;
 
     @Column(length = 100, nullable = false)
     private String nome;
@@ -73,14 +74,17 @@ public class Pessoa implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ultimo_acesso;
 
-    public long getId_pessoa() {
+    
+    @Override
+    public Long getId() {
         return id_pessoa;
     }
 
-    public void setId_pessoa(long id_pessoa) {
+    public void setId_pessoa(Long id_pessoa) {
         this.id_pessoa = id_pessoa;
     }
 
+  
     public String getNome() {
         return nome;
     }

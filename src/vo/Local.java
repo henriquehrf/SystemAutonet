@@ -5,6 +5,7 @@
  */
 package vo;
 
+import DAO.EntidadeBase;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,11 +20,11 @@ import javax.persistence.ManyToOne;
  * @author Eduardo
  */
 @Entity
-public class Local implements Serializable {
+public class Local implements Serializable, EntidadeBase {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id_local;
+    private Long id_local;
     
     @Column(length = 100, nullable = false)
     private String descricao;
@@ -37,11 +38,12 @@ public class Local implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Departamento id_departamento;
 
-    public long getId_local() {
+    @Override
+    public Long getId() {
         return id_local;
     }
 
-    public void setId_local(long id_local) {
+    public void setId_local(Long id_local) {
         this.id_local = id_local;
     }
 

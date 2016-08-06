@@ -5,6 +5,7 @@
  */
 package vo;
 
+import DAO.EntidadeBase;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,11 +20,11 @@ import javax.persistence.ManyToOne;
  */
 
 @Entity
-public class BaixaEstoqueMaterial implements Serializable {
+public class BaixaEstoqueMaterial implements Serializable, EntidadeBase {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id_baixaestoquematerial;
+    private Long id_baixaestoquematerial;
     
     @ManyToOne(fetch = FetchType.LAZY)
     private Baixa id_baixa;
@@ -31,11 +32,12 @@ public class BaixaEstoqueMaterial implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private EstoqueMaterial id_estoquematerial;
 
-    public long getId_baixaestoquematerial() {
+    @Override
+    public Long getId() {
         return id_baixaestoquematerial;
     }
 
-    public void setId_baixaestoquematerial(long id_baixaestoquematerial) {
+    public void setId_baixaestoquematerial(Long id_baixaestoquematerial) {
         this.id_baixaestoquematerial = id_baixaestoquematerial;
     }
 
