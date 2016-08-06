@@ -15,16 +15,17 @@ import javax.swing.JOptionPane;
  * @author Eduardo
  */
 public class CriarBancoTeste {
+
     public static void main(String[] args) {
-          EntityManagerFactory fabricaEntityManager = null;
+        EntityManagerFactory fabricaEntityManager = null;
         EntityManager entityManager = null;
-        
-        try{
+
+        try {
             fabricaEntityManager = Persistence.createEntityManagerFactory("SystemAutonetPU");
             entityManager = fabricaEntityManager.createEntityManager();
             System.out.println("De boa é pra ter criado as tabelas");
-            
-        }catch (Exception ex){
+
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }

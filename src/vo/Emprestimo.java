@@ -5,6 +5,7 @@
  */
 package vo;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -23,7 +24,7 @@ import javax.persistence.TemporalType;
  * @author Eduardo
  */
 @Entity
-public class Emprestimo {
+public class Emprestimo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id_emprestimo;

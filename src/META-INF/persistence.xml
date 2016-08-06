@@ -14,9 +14,9 @@
     <class>vo.Fornecedor</class>
     <class>vo.Local</class>
     <class>vo.Material</class>
+    <class>vo.Pessoa</class>
     <class>vo.TipoSaida</class>
     <class>vo.TipoUnidade</class>
-    <class>vo.Pessoa</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/SystemAutonet"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

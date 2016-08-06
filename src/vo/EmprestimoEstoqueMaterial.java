@@ -5,7 +5,8 @@
  */
 package vo;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ import javax.persistence.Temporal;
  * @author Eduardo
  */
 @Entity
-public class EmprestimoEstoqueMaterial {
+public class EmprestimoEstoqueMaterial implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

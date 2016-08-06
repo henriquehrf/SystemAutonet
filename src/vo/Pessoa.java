@@ -5,6 +5,7 @@
  */
 package vo;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ import javax.persistence.TemporalType;
  * @author Eduardo
  */
 @Entity
-public class Pessoa {
+public class Pessoa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

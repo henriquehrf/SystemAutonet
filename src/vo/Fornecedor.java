@@ -5,6 +5,7 @@
  */
 package vo;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import javax.persistence.Id;
  * @author Eduardo
  */
 @Entity
-public class Fornecedor {
+public class Fornecedor implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

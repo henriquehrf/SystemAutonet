@@ -5,6 +5,7 @@
  */
 package vo;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,7 +23,7 @@ import javax.persistence.TemporalType;
  * @author Eduardo
  */
 @Entity
-public class Baixa {
+public class Baixa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

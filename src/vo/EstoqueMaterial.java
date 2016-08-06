@@ -5,6 +5,7 @@
  */
 package vo;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +19,7 @@ import javax.persistence.ManyToOne;
  * @author Eduardo
  */
 @Entity
-public class EstoqueMaterial {
+public class EstoqueMaterial implements Serializable {
 
     @Id
      @GeneratedValue(strategy = GenerationType.SEQUENCE)
