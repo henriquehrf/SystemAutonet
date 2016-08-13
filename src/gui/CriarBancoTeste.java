@@ -5,10 +5,16 @@
  */
 package gui;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import negocio.NegocioPessoa;
+import vo.Pessoa;
+import java.util.Date;
 
 /**
  *
@@ -19,6 +25,11 @@ public class CriarBancoTeste {
     public static void main(String[] args) {
         EntityManagerFactory fabricaEntityManager = null;
         EntityManager entityManager = null;
+        NegocioPessoa NegocioP = new NegocioPessoa();
+        List<Pessoa> list;
+        Date nascimento = new Date(1995, 12, 28);
+        Date ultimoAcesso = new java.sql.Date(2016, 8, 13);
+        Pessoa pessoa = new Pessoa();
 
         try {
             fabricaEntityManager = Persistence.createEntityManagerFactory("SystemAutonetPU");
@@ -28,5 +39,45 @@ public class CriarBancoTeste {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+//        
+//        // testando o metodo salvar
+//        pessoa.setCpf("36773389720");
+//        pessoa.setEndereco("Rua 48, Quadra 17, Casa 14, CPA 3, Setor 4");
+//        pessoa.setNome("Eduardo Roosevelt de Oliveira Silva");
+//        pessoa.setFone_principal("92290278");
+//        pessoa.setNum_matricula("2013178440267");
+//        pessoa.setSexo("M");
+//        pessoa.setUsuario("E.Roosevelt");
+//        pessoa.setSenha("12345678");
+//        pessoa.setAtivo("N");
+//        pessoa.setFuncao("UsuarioComum");
+//        pessoa.setDt_nascimento(nascimento);
+//        pessoa.setRg("123123123");
+//        pessoa.setUltimo_acesso(ultimoAcesso);
+//
+//        try {
+//            NegocioP.salvar(pessoa);
+//            System.out.println("Pessoa salva com sucesso");
+//            System.out.println("-------------------------------");
+//            pessoa = new Pessoa();
+//            pessoa.setNome("Eduardo Roosevelt");
+//            list = NegocioP.buscarPorNome(pessoa);
+//            
+//            System.out.println("Nome: "+list.get(0).getNome()+ 
+//                                "\nCPF: "+list.get(0).getCpf()+
+//                                "\nNumero da matricula: "+list.get(0).getNum_matricula());
+//        } catch (Exception ex) {
+//            System.out.println("Erro " + ex.getMessage());
+//        }
+        
+        //Testando o metodo remover
+        pessoa.setId_pessoa(51L);
+        try {
+            NegocioP.remover(pessoa);
+            System.out.println("Pessoa removida com sucesso");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+      
     }
 }

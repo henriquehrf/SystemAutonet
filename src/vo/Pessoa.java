@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,6 +23,10 @@ import javax.persistence.TemporalType;
  * @author Eduardo
  */
 @Entity
+@NamedQueries({
+     @NamedQuery(name= "Pessoa.BuscarUsuario",query="Select p from Pessoa p where p.usuario = :usuario"),
+     @NamedQuery(name= "Pessoa.BuscarPorNome",query="Select p from Pessoa p where p.nome = :nome")
+})
 public class Pessoa  implements EntidadeBase, Serializable {
 
     @Id
@@ -46,10 +52,10 @@ public class Pessoa  implements EntidadeBase, Serializable {
     @Column(length = 20, nullable = false)
     private String fone_principal;
 
-    @Column(length = 20, nullable = true)
+    @Column(length = 20,nullable = true)
     private String fone_secundario;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String email;
 
     @Column(length = 200, nullable = false)
@@ -90,7 +96,7 @@ public class Pessoa  implements EntidadeBase, Serializable {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public String getSexo() {
@@ -154,7 +160,7 @@ public class Pessoa  implements EntidadeBase, Serializable {
     }
 
     public void setEndereco(String endereco) {
-        this.endereco = endereco;
+        this.endereco = endereco.toUpperCase();
     }
 
     public String getFuncao() {
@@ -162,7 +168,7 @@ public class Pessoa  implements EntidadeBase, Serializable {
     }
 
     public void setFuncao(String funcao) {
-        this.funcao = funcao;
+        this.funcao = funcao.toUpperCase();
     }
 
     public String getNum_matricula() {
@@ -186,7 +192,7 @@ public class Pessoa  implements EntidadeBase, Serializable {
     }
 
     public void setUsuario(String usuario) {
-        this.usuario = usuario;
+        this.usuario = usuario.toUpperCase();
     }
 
     public String getSenha() {
