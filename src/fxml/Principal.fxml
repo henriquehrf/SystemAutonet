@@ -5,72 +5,72 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../utilitarios/teste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SystemAutonet">
+<BorderPane fx:id="bdp_principal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../utilitarios/teste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar fx:id="mnu_bar" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="%mnu.Cadastro">
+          <Menu fx:id="mnu_Cadastro" mnemonicParsing="false" text="%mnu.Cadastro">
             <items>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="%mni.Departamento" />
+                  <MenuItem fx:id="cad_departamento" mnemonicParsing="false" text="%mni.Departamento" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="%mni.Fornecedor" />
+                  <MenuItem fx:id="cad_fornecedor" mnemonicParsing="false" text="%mni.Fornecedor" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="mni.Local" />
+                  <MenuItem fx:id="cad_local" mnemonicParsing="false" text="%mni.Local" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="%mni.Material" />
+                  <MenuItem fx:id="cad_material" mnemonicParsing="false" text="%mni.Material" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="%mni.Pessoa" />
+              <MenuItem fx:id="cad_pessoa" mnemonicParsing="false" text="%mni.Pessoa" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="%mni.TipoBaixa" />
+                  <MenuItem fx:id="cad_tipoBaixa" mnemonicParsing="false" text="%mni.TipoBaixa" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="%mni.UnidadeMedida" />
+                  <MenuItem fx:id="cad_unidadeMedida" mnemonicParsing="false" text="%mni.UnidadeMedida" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Empréstimo">
+          <Menu fx:id="mnu_emprestimo" mnemonicParsing="false" text="%mnu.Emprestimo">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Acompanhar" />
+                  <MenuItem fx:id="emp_acompanhar" mnemonicParsing="false" text="%mni.Acompanhar" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Análisar" />
+                  <MenuItem fx:id="emp_analisar" mnemonicParsing="false" text="%mni.Analisar" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Devolver" />
+                  <MenuItem fx:id="emp_devolver" mnemonicParsing="false" text="%mni.Devolver" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Solicitar" />
+              <MenuItem fx:id="emp_solicitar" mnemonicParsing="false" text="%mni.Solicitar" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Estoque">
+            <Menu fx:id="mnu_estoque" mnemonicParsing="false" text="%mnu.Estoque">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Baixar Material" />
+                  <MenuItem fx:id="est_baixarMaterial" mnemonicParsing="false" text="%mni.BaixarMaterial" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                <MenuItem mnemonicParsing="false" text="Entrada de Material" />
+                <MenuItem fx:id="est_entradaMaterial" mnemonicParsing="false" text="%mni.EntradaMaterial" />
                </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="Consulta">
+          <Menu fx:id="mnu_consulta" mnemonicParsing="false" text="%mnu.Consulta">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Empréstimo" />
+                  <MenuItem fx:id="cons_emprestimo" mnemonicParsing="false" text="%mni.Emprestimo" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Fornecedor" />
+                  <MenuItem fx:id="cons_fornecedor" mnemonicParsing="false" text="%mni.Fornecedor" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Local" />
+                  <MenuItem fx:id="cons_local" mnemonicParsing="false" text="%mni.Local" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Material" />
+                  <MenuItem fx:id="cons_material" mnemonicParsing="false" text="%mni.Material" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <Menu mnemonicParsing="false" text="Movimentações">
+                  <Menu fx:id="cons_mnu_Movimetacoes" mnemonicParsing="false" text="%mnu.Movimentacoes">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Entrada de Material" />
+                      <MenuItem fx:id="cons_mov_entradaMaterial" mnemonicParsing="false" text="%mni.EntradaMaterial" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Saida de Material" />
+                        <MenuItem fx:id="cons_mov_saidaMaterial" mnemonicParsing="false" text="%mni.SaidaMaterial" />
                     </items>
                   </Menu>
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Pessoa" />
+              <MenuItem fx:id="cons_pessoa" mnemonicParsing="false" text="%mni.Pessoa" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Ajuda">
+            <Menu fx:id="mnu_ajuda" mnemonicParsing="false" text="%mnu.Ajuda">
               <items>
-                <MenuItem mnemonicParsing="false" text="Sobre" />
+                <MenuItem fx:id="ajuda_sobre" mnemonicParsing="false" text="%mni.Sobre" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Manual do Sistema" />
+                  <MenuItem fx:id="ajuda_manualSistema" mnemonicParsing="false" text="%mni.ManualSistema" />
               </items>
             </Menu>
         </menus>
