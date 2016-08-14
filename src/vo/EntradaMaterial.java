@@ -31,10 +31,10 @@ public class EntradaMaterial implements Serializable, EntidadeBase{
     Long id_entradaMaterial;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    private Material id_material;
+    private Material id_material = null;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Entrada id_entrada;
+    private Entrada id_entrada = null;
     
     @Basic
     private Integer quantidade_material;

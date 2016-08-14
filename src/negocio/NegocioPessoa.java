@@ -15,7 +15,7 @@ import vo.Pessoa;
  * @author Eduardo
  */
 public class NegocioPessoa {
-    private PessoaDAO pessoaDAO;
+    private final PessoaDAO pessoaDAO;
     
     public NegocioPessoa(){
         pessoaDAO = new PessoaDAO();
@@ -31,11 +31,11 @@ public class NegocioPessoa {
     }
     
     public void remover(Pessoa pessoa) throws Exception{
-        pessoaDAO.remover(Pessoa.class, pessoa.getId());
+        pessoaDAO.remover(Pessoa.class, pessoa);
     }
     
-    public Pessoa consultarPorId(Long id){
-       return pessoaDAO.consutarPorId(Pessoa.class, id);
+    public Pessoa consultarPorId(Pessoa pessoa){
+       return pessoaDAO.consutarPorId(Pessoa.class, pessoa);
     }
     
     public List<Pessoa> buscarPorNome(Pessoa pessoa){

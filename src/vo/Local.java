@@ -36,7 +36,7 @@ public class Local implements Serializable, EntidadeBase {
     private String responsavel;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    private Departamento id_departamento;
+    private Departamento id_departamento = null;
 
     @Override
     public Long getId() {

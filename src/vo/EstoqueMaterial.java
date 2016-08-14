@@ -20,11 +20,17 @@ import javax.persistence.ManyToOne;
  * @author Eduardo
  */
 @Entity
-public class EstoqueMaterial implements Serializable,EntidadeBase {
+public class EstoqueMaterial implements Serializable, EntidadeBase {
 
     @Id
-     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id_estoque;
+
+    @Column(nullable = false)
+    private int quantidade_emprestada;
+
+    @Column(nullable = false)
+    private int quantidade;
 
     public Local getId_departamento() {
         return id_departamento;
@@ -42,17 +48,11 @@ public class EstoqueMaterial implements Serializable,EntidadeBase {
         this.id_material = id_material;
     }
 
-    @Column(nullable = false)
-    private int quantidade_emprestada;
-
-    @Column(nullable = false)
-    private int quantidade;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Local id_departamento = null;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Local id_departamento;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Material id_material;
+    private Material id_material = null;
 
     @Override
     public Long getId() {

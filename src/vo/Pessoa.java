@@ -24,8 +24,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @NamedQueries({
-     @NamedQuery(name= "Pessoa.BuscarUsuario",query="Select p from Pessoa p where p.usuario = :usuario"),
-     @NamedQuery(name= "Pessoa.BuscarPorNome",query="Select p from Pessoa p where p.nome = :nome")
+     @NamedQuery(name= "Pessoa.BuscarUsuario",query="Select p from Pessoa p where UPPER (p.usuario) = :usuario"),
+     @NamedQuery(name= "Pessoa.BuscarPorNome",query="Select p from Pessoa p where UPPER (p.nome) like :nome")
 })
 public class Pessoa  implements EntidadeBase, Serializable {
 
@@ -96,7 +96,7 @@ public class Pessoa  implements EntidadeBase, Serializable {
     }
 
     public void setNome(String nome) {
-        this.nome = nome.toUpperCase();
+        this.nome = nome;
     }
 
     public String getSexo() {
@@ -192,7 +192,7 @@ public class Pessoa  implements EntidadeBase, Serializable {
     }
 
     public void setUsuario(String usuario) {
-        this.usuario = usuario.toUpperCase();
+        this.usuario = usuario;
     }
 
     public String getSenha() {

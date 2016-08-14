@@ -60,24 +60,38 @@ public class CriarBancoTeste {
 //            System.out.println("Pessoa salva com sucesso");
 //            System.out.println("-------------------------------");
 //            pessoa = new Pessoa();
-//            pessoa.setNome("Eduardo Roosevelt");
-//            list = NegocioP.buscarPorNome(pessoa);
+//            pessoa.setId_pessoa(1L);
+//            Pessoa p = new Pessoa();
 //            
-//            System.out.println("Nome: "+list.get(0).getNome()+ 
-//                                "\nCPF: "+list.get(0).getCpf()+
-//                                "\nNumero da matricula: "+list.get(0).getNum_matricula());
+//            p = NegocioP.consultarPorId(pessoa);
+//            
+//            p.setNome("Eduardo Roosevelt de Oliveira Silva");
+//            p.setAtivo("N");
+//            pessoa = NegocioP.salvar(p);
+//             System.out.println("Nome: " + pessoa.getNome()
+//                            + "\nCPF: " + pessoa.getCpf()
+//                            + "\nNumero da matricula: " + pessoa.getNum_matricula());
+//            list = NegocioP.buscarPorNome(pessoa);
+//            if (list.isEmpty()) {
+//                System.out.println("Erro na lista");
+//            } else {
+//                for (int i = 0; i < list.size(); i++) {
+//                    System.out.println("Nome: " + list.get(i).getNome()
+//                            + "\nCPF: " + list.get(i).getCpf()
+//                            + "\nNumero da matricula: " + list.get(i).getNum_matricula());
+//                }
+//            }
 //        } catch (Exception ex) {
 //            System.out.println("Erro " + ex.getMessage());
 //        }
-        
+
         //Testando o metodo remover
-        pessoa.setId_pessoa(51L);
-        try {
-            NegocioP.remover(pessoa);
-            System.out.println("Pessoa removida com sucesso");
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-      
+//        pessoa.setId_pessoa(51L);
+//        try {
+//            NegocioP.remover(pessoa);
+//            System.out.println("Pessoa removida com sucesso");
+//        } catch (Exception ex) {
+//            System.out.println(ex.getMessage());
+//        }
     }
 }

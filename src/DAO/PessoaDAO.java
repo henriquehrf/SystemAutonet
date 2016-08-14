@@ -42,10 +42,11 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
         List<Pessoa> list;
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarPorNome");
-            query.setParameter("nome", pessoa.getNome());
+            query.setParameter("nome", "%"+pessoa.getNome().toUpperCase()+"%");
             list = query.getResultList();
         } catch (Exception ex) {
             list = new ArrayList();
+          
         } finally {
             em.close();
         }

@@ -42,10 +42,10 @@ public class GenericoDAO<T extends EntidadeBase> {
         return t;
     }
 
-    public void remover(Class<T> clazz,Long id) throws Exception{
+    public void remover(Class<T> clazz,T tt) throws Exception{
         EntityManager em = getEM();
 
-        T t = em.find(clazz, id);
+        T t = em.find(clazz, tt.getId());
 
         try {
             em.getTransaction().begin();
@@ -56,12 +56,12 @@ public class GenericoDAO<T extends EntidadeBase> {
         }
     }
     
-    public  T consutarPorId(Class<T> clazz,Long id){
+    public  T consutarPorId(Class<T> clazz,T tt){
         EntityManager em = getEM();
         T t = null; 
         
         try{
-            t = em.find(clazz, id); // execulta o select no banco de dados
+            t = em.find(clazz, tt.getId()); // execulta o select no banco de dados
             
         }finally{
             em.close();

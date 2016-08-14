@@ -8,9 +8,11 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  * @author Eduardo
@@ -27,9 +29,30 @@ public class Material implements Serializable, EntidadeBase {
     @Basic
     private String descricao;
 
-    @ManyToMany(targetEntity = Entrada.class)
-    @JoinTable(name = "teste2", schema = "teste")
-    private List<Entrada> id_entrada;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private TipoUnidade id_tipo_unidade = null;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Categoria id_categoria = null;
+
+    
+    public TipoUnidade getId_tipo_unidade() {
+        return id_tipo_unidade;
+    }
+
+    public void setId_tipo_unidade(TipoUnidade id_tipo_unidade) {
+        this.id_tipo_unidade = id_tipo_unidade;
+    }
+
+    public Categoria getId_categoria() {
+        return id_categoria;
+    }
+
+    public void setId_categoria(Categoria id_categoria) {
+        this.id_categoria = id_categoria;
+    }
+
+  
 
     @Override
     public Long getId() {
@@ -56,12 +79,6 @@ public class Material implements Serializable, EntidadeBase {
         this.descricao = descricao;
     }
 
-    public List<Entrada> getId_entrada() {
-        return this.id_entrada;
-    }
-
-    public void setId_entrada(List<Entrada> id_entrada) {
-        this.id_entrada = id_entrada;
-    }
+ 
 
 }

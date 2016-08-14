@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
@@ -19,6 +21,10 @@ import javax.persistence.Id;
  */
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "TipoSaida.BuscarPorNome",
+            query = "Select t from TipoSaida t where UPPER (t.descricao) like :descricao")
+})
 public class TipoSaida implements Serializable, EntidadeBase {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

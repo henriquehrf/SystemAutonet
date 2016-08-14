@@ -9,30 +9,31 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import vo.Departamento;
+import vo.TipoSaida;
 
 /**
  *
  * @author Eduardo
  */
-public class DepartamentoDAO extends GenericoDAO<Departamento> {
-
-    public List<Departamento> buscarPorNome(Departamento departamento) {
+public class TipoSaidaDAO extends GenericoDAO<TipoSaida> {
+    
+    
+    public List<TipoSaida> buscarPorNome(TipoSaida ts){
         EntityManager em = getEM();
-        List<Departamento> list;
-        try {
-            Query query = em.createNamedQuery("Departamento.ConsultarPorNome");
-            query.setParameter("nome", "%" + departamento.getNome().toUpperCase() + "%");
+        List<TipoSaida> list;
+        Query query;
+        
+        try{
+            
+            query = em.createNamedQuery("TipoSaida.BuscarPorNome");
+            query.setParameter("descricao", "%"+ts.getDescricao().toUpperCase()+"%");
             list = query.getResultList();
-
-        } catch (Exception ex) {
+            
+        }catch(Exception ex){
             list = new ArrayList();
-
-        } finally {
+        }finally{
             em.close();
         }
-      
         return list;
-
     }
 }
