@@ -11,6 +11,6 @@ import vo.Emprestimo;
  *
  * @author Eduardo
  */
-public class EmprestimoMaterial extends GenericoDAO<Emprestimo>{
+public class EmprestimoDAO extends GenericoDAO<Emprestimo>{
     
 }

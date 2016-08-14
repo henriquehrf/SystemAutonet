@@ -9,8 +9,10 @@ import java.sql.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  * @author Eduardo
@@ -30,8 +32,8 @@ public class Entrada implements Serializable, EntidadeBase {
     @Basic
     private Integer valor_total;
 
-    @ManyToMany(targetEntity = Material.class, mappedBy = "id_entrada")
-    private List<Material> id_material;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Fornecedor id_fornecedor = null;
 
     @Override
     public Long getId() {
@@ -66,12 +68,13 @@ public class Entrada implements Serializable, EntidadeBase {
         this.valor_total = valor_total;
     }
 
-    public List<Material> getId_material() {
-        return this.id_material;
+    public Fornecedor getId_fornecedor() {
+        return id_fornecedor;
     }
 
-    public void setId_material(List<Material> id_material) {
-        this.id_material = id_material;
+    public void setId_fornecedor(Fornecedor id_fornecedor) {
+        this.id_fornecedor = id_fornecedor;
     }
 
+  
 }

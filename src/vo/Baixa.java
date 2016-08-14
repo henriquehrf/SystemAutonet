@@ -37,7 +37,7 @@ public class Baixa implements Serializable, EntidadeBase {
     private Calendar dt_baixa;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private TipoSaida id_tipo_saida;
+    private TipoSaida id_tipo_saida = null;
 
     @Override
     public Long getId() {

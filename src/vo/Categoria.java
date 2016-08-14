@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
@@ -19,6 +21,9 @@ import javax.persistence.Id;
  */
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Categoria.buscarPorDescricao",query = "select c from Categoria c where UPPER (c.descricao) like :descricao")
+})
 public class Categoria implements Serializable, EntidadeBase {
     
     @Id

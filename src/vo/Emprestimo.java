@@ -43,10 +43,10 @@ public class Emprestimo implements Serializable, EntidadeBase {
     private String observacao;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    private Pessoa id_pessoa_solicita;
+    private Pessoa id_pessoa_solicita = null;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    private Pessoa id_pessoa_autoriza;
+    private Pessoa id_pessoa_autoriza = null;
     
 
     public Long getId() {
