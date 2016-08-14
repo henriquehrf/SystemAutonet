@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -79,4 +80,11 @@
    <bottom>
       <Label text="SystemAutonet 1.0 SNAPSHOT" textAlignment="CENTER" BorderPane.alignment="CENTER" />
    </bottom>
+   <center>
+      <ImageView fitHeight="219.0" fitWidth="629.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../utilitarios/LogoSistema.png" />
+         </image>
+      </ImageView>
+   </center>
 </BorderPane>

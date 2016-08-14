@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
@@ -7,11 +9,10 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../teste/teste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../../utilitarios/teste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Cadastro.Consulta.ConsultarTipoSaidaController">
    <bottom>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane alignment="TOP_RIGHT" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -21,36 +22,41 @@
         </rowConstraints>
          <children>
             <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Selecionar">
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </HBox.margin></Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Alterar">
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Excluir">
+                  <Button fx:id="btnVoltar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="100.0" text="%btn.voltar">
                      <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
+                        <Insets right="50.0" top="30.0" />
                      </HBox.margin>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Voltar">
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </HBox.margin>
-                  </Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="35.0" prefWidth="816.0">
+                     <children>
+                        <Button fx:id="btnInserir" alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="%btn.inserir">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnAlterar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="100.0" text="%btn.alterar">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnExcluir" alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="%btn.excluir">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
          </children>
@@ -61,7 +67,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 20; -fx-font-family: Arial;" text="Cadastrar Material" textAlignment="CENTER">
+                  <Label fx:id="Title" alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 20; -fx-font-family: Arial;" text="%consulta.tipo.saida" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -72,35 +78,40 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="325.0">
                      <children>
-                        <Label text="Procurar: " />
+                        <Label text="%lbl.pesquisar">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin></Label>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="379.0">
+                        <TextField fx:id="txtBuscador" maxHeight="25.0" prefHeight="25.0" prefWidth="379.0">
                            <HBox.margin>
-                              <Insets right="5.0" />
+                              <Insets />
                            </HBox.margin>
                         </TextField>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" styleClass="button-search" text="Buscar">
+                        <Button fx:id="btnBuscar" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="button-search">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="28.0" prefWidth="458.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <RadioButton alignment="BOTTOM_LEFT" mnemonicParsing="false" text="Descrição" />
-                        <RadioButton alignment="BOTTOM_LEFT" mnemonicParsing="false" text="Quantidade Disponível" />
-                        <RadioButton alignment="BOTTOM_LEFT" mnemonicParsing="false" text="Nº Patrimonio" />
+                        <HBox alignment="TOP_CENTER" prefHeight="28.0" prefWidth="381.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="%rdb.descricao">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </RadioButton>
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                     <children>
-                        <Label text="Procurar por: " />
-                     </children>
-                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="200.0" />
@@ -118,12 +129,9 @@
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView prefHeight="310.0" prefWidth="735.0">
+            <TableView fx:id="tblPrincipal" prefHeight="286.0" prefWidth="735.0">
               <columns>
-                <TableColumn prefWidth="314.0" text="Descrição" />
-                <TableColumn minWidth="0.0" prefWidth="104.0" text="Quantidade" />
-                  <TableColumn prefWidth="135.0" text="Unidade de Medida" />
-                  <TableColumn prefWidth="180.0" text="Categoria" />
+                <TableColumn fx:id="tbcDescricao" prefWidth="733.0" text="%tblColumn.descricao" />
               </columns>
             </TableView>
          </children>
