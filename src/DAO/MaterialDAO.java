@@ -5,12 +5,74 @@
  */
 package DAO;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import vo.Categoria;
 import vo.Material;
 
 /**
  *
  * @author Eduardo
  */
-public class MaterialDAO extends GenericoDAO<Material>{
+public class MaterialDAO extends GenericoDAO<Material> {
+
+    public List<Material> buscarPorDescricao(Material material) {
+
+        EntityManager em = getEM();
+        List<Material> list;
+        try {
+            Query query = em.createNamedQuery("Material.consultarPorDescricao");
+            query.setParameter("descricao", "%" + material.getDescricao().toUpperCase() + "%");
+            list = query.getResultList();
+
+        } catch (Exception ex) {
+            list = new ArrayList();
+
+        } finally {
+            em.close();
+        }
+
+        return list;
+    }
+
+    public List<Material> buscarPorQuantidade(Material material) {
+
+        EntityManager em = getEM();
+        List<Material> list;
+        try {
+            Query query = em.createNamedQuery("Material.consultarPorQuantidade");
+            query.setParameter("quantidade", material.getQuantidade());
+            list = query.getResultList();
+
+        } catch (Exception ex) {
+            list = new ArrayList();
+
+        } finally {
+            em.close();
+        }
+
+        return list;
+    }
     
+     public List<Material> buscarPorCategoria(Categoria categoria) {
+
+        EntityManager em = getEM();
+        List<Material> list;
+        try {
+            Query query = em.createNamedQuery("Material.consultarPorCategoria");
+            query.setParameter("dcategoria", categoria.getId());
+            list = query.getResultList();
+
+        } catch (Exception ex) {
+            list = new ArrayList();
+
+        } finally {
+            em.close();
+        }
+
+        return list;
+    }
+
 }
