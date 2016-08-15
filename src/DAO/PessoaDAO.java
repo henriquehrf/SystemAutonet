@@ -26,8 +26,7 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarUsuario");
             query.setParameter("usuario", pessoa.getUsuario().toUpperCase());
-            p = (Pessoa) query.getSingleResult();
-
+            p =  (Pessoa) query.getSingleResult();
             if (p != null) {
                 encontrou = true;
             }
@@ -57,7 +56,7 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
 
     public Pessoa buscarPorCPF(Pessoa pessoa) {
         EntityManager em = getEM();
-        Pessoa p;
+        Pessoa p=null;
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarPorCPF");
             query.setParameter("cpf", pessoa.getCpf());
