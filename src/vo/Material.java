@@ -7,26 +7,40 @@ import DAO.EntidadeBase;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * @author Eduardo
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Material.consultarPorDescricao",
+            query = "select m from Material m where UPPER (m.descricao) like :descricao"),
+
+    @NamedQuery(name = "Material.consultarPorQuantidade",
+            query = "select m from Material m where m.quantidade = :quantidade"),
+        
+        @NamedQuery(name = "Material.consultarPorCategoria",
+                query = "Select m from Material m where m.id_categoria.id_categoria = :idcategoria")
+
+})
 public class Material implements Serializable, EntidadeBase {
 
     @Id
     private Long id_material;
 
-    @Basic
-    private String quantidade;
+    @Column(nullable = false)
+    private int quantidade;
 
-    @Basic
+    @Column(length = 200)
     private String descricao;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -35,7 +49,6 @@ public class Material implements Serializable, EntidadeBase {
     @ManyToOne(fetch = FetchType.EAGER)
     private Categoria id_categoria = null;
 
-    
     public TipoUnidade getId_tipo_unidade() {
         return id_tipo_unidade;
     }
@@ -52,8 +65,6 @@ public class Material implements Serializable, EntidadeBase {
         this.id_categoria = id_categoria;
     }
 
-  
-
     @Override
     public Long getId() {
         return this.id_material;
@@ -63,11 +74,11 @@ public class Material implements Serializable, EntidadeBase {
         this.id_material = id_material;
     }
 
-    public String getQuantidade() {
+    public int getQuantidade() {
         return this.quantidade;
     }
 
-    public void setQuantidade(String quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -78,7 +89,5 @@ public class Material implements Serializable, EntidadeBase {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
- 
 
 }

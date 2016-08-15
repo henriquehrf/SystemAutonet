@@ -83,6 +83,10 @@ public class Pessoa implements EntidadeBase, Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ultimo_acesso;
 
+    
+    
+    
+    
     @Override
     public Long getId() {
         return id_pessoa;

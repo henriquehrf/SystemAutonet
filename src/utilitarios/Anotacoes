@@ -12,17 +12,20 @@ Consultar Fornecedor
 4-Pessoa Responsável -> ok
 
 Consultar Locais
+
 1-Descrição -> ok
 2-Número -> ok
 3-Bloco -> ok
 4-Pessoa Responsável -> ok
 
 Consulta Material
-1-Descrição
-2-Quantidade
-3-Categoria
+
+1-Descrição -> ok
+2-Quantidade -> ok
+3-Categoria  ->> perguntar
 
 Consulta Pessoa
+
 1-Nome -> ok
 2-CPF -> ok
 3-RG -> ok
