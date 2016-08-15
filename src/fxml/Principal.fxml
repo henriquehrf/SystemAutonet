@@ -13,19 +13,19 @@
           <Menu fx:id="mnu_Cadastro" mnemonicParsing="false" text="%mnu.Cadastro">
             <items>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="cad_departamento" mnemonicParsing="false" text="%mni.Departamento" />
+                  <MenuItem fx:id="cad_departamento" mnemonicParsing="false" onAction="#cad_departamentoOnAction" text="%mni.Departamento" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="cad_fornecedor" mnemonicParsing="false" text="%mni.Fornecedor" />
+                  <MenuItem fx:id="cad_fornecedor" mnemonicParsing="false" onAction="#cad_fornecedorOnAction" text="%mni.Fornecedor" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="cad_local" mnemonicParsing="false" text="%mni.Local" />
+                  <MenuItem fx:id="cad_local" mnemonicParsing="false" onAction="#cad_local_OnAction" text="%mni.Local" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="cad_material" mnemonicParsing="false" text="%mni.Material" />
+                  <MenuItem fx:id="cad_material" mnemonicParsing="false" onAction="#cad_materialOnAction" text="%mni.Material" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem fx:id="cad_pessoa" mnemonicParsing="false" text="%mni.Pessoa" />
+              <MenuItem fx:id="cad_pessoa" mnemonicParsing="false" onAction="#cad_pessoaOnAction" text="%mni.Pessoa" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="cad_tipoBaixa" mnemonicParsing="false" text="%mni.TipoBaixa" />
+                  <MenuItem fx:id="cad_tipoBaixa" mnemonicParsing="false" onAction="#cad_tipoBaixaOnAction" text="%mni.TipoBaixa" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="cad_unidadeMedida" mnemonicParsing="false" text="%mni.UnidadeMedida" />
+                  <MenuItem fx:id="cad_unidadeMedida" mnemonicParsing="false" onAction="#cad_unidadeMedidaOnAction" text="%mni.UnidadeMedida" />
             </items>
           </Menu>
           <Menu fx:id="mnu_emprestimo" mnemonicParsing="false" text="%mnu.Emprestimo">

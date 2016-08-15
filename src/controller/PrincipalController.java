@@ -1,10 +1,16 @@
 package controller;
 
+import gui.SystemAutonet;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
+import controller.cadastro.Consulta.*;
+import javafx.scene.Parent;
 
 public class PrincipalController {
 
@@ -97,5 +103,93 @@ public class PrincipalController {
 
     @FXML
     private Menu mnu_Cadastro;
+
+    public void initialize() {
+
+    }
+
+    @FXML
+    void cad_departamentoOnAction(ActionEvent event) {
+        try {
+            Parent root;
+            root = FXMLLoader.load(ConsultarDepartamentoController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Departamento.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
+
+    @FXML
+    void cad_fornecedorOnAction(ActionEvent event) {
+         try {
+            Parent root;
+            root = FXMLLoader.load(ConsultarFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
+
+    @FXML
+    void cad_local_OnAction(ActionEvent event) {
+         try {
+            Parent root;
+            root = FXMLLoader.load(ConsultarLocaisController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Locais.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
+
+    @FXML
+    void cad_materialOnAction(ActionEvent event) {
+         try {
+            Parent root;
+            root = FXMLLoader.load(ConsultarMaterialController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Material.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
+
+    @FXML
+    void cad_pessoaOnAction(ActionEvent event) {
+         try {
+            Parent root;
+            root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
+
+    @FXML
+    void cad_tipoBaixaOnAction(ActionEvent event) {
+         try {
+            Parent root;
+            root = FXMLLoader.load(ConsultarTipoSaidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_TipoSaida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
+
+    @FXML
+    void cad_unidadeMedidaOnAction(ActionEvent event) {
+         try {
+            Parent root;
+            root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_UnidadeMedida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
 
 }

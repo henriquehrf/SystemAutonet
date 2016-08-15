@@ -43,7 +43,7 @@
     -fx-font-family: "Arial";
 }
 .radio-button{
-    -fx-text-fill: none;
+    -fx-text-fill: black;
     -fx-border-color: none;
     -fx-border-radius: 5;
     -fx-padding: 3 6 6 6;

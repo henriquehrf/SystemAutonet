@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../../utilitarios/teste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Cadastro.Consulta.ConsultarTipoSaidaController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../../utilitarios/teste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.cadastro.Consulta.ConsultarTipoSaidaController">
    <bottom>
       <GridPane alignment="TOP_RIGHT" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -67,7 +67,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="Title" alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 20; -fx-font-family: Arial;" text="%consulta.tipo.saida" textAlignment="CENTER">
+                  <Label fx:id="Title" alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 20; -fx-font-family: Arial;" text="%title.consulta.tipo.saida" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>

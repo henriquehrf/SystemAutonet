@@ -1,4 +1,4 @@
-package controller;
+package controller.cadastro.Consulta;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
