@@ -14,7 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import controller.PrincipalController;
+import controller.cadastro.Consulta.PrincipalController;
 
 /**
  *

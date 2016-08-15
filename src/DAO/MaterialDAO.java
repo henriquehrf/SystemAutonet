@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import vo.Categoria;
 import vo.Material;
 
 /**
@@ -55,13 +56,13 @@ public class MaterialDAO extends GenericoDAO<Material> {
         return list;
     }
     
-     public List<Material> buscarPorCategoria(Material material) {
+     public List<Material> buscarPorCategoria(Categoria categoria) {
 
         EntityManager em = getEM();
         List<Material> list;
         try {
             Query query = em.createNamedQuery("Material.consultarPorCategoria");
-            query.setParameter("dcategoria", material.getId_categoria().getId());
+            query.setParameter("dcategoria", categoria.getId());
             list = query.getResultList();
 
         } catch (Exception ex) {

@@ -22,7 +22,7 @@ Consulta Material
 
 1-Descrição -> ok
 2-Quantidade -> ok
-3-Categoria  ->> perguntar
+3-Categoria  -> ok
 
 Consulta Pessoa
 
@@ -36,4 +36,3 @@ Consulta Tipo de Saida
 
 Unidade de Medida
 1-descrição
-2-Sigla 

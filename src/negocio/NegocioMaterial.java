@@ -7,6 +7,7 @@ package negocio;
 
 import DAO.MaterialDAO;
 import java.util.List;
+import vo.Categoria;
 import vo.Material;
 
 /**
@@ -47,8 +48,8 @@ public class NegocioMaterial {
         return materialDAO.buscarPorQuantidade(material);
     }
 
-    public List<Material> buscarPorCategoria(Material material) {
-        return materialDAO.buscarPorCategoria(material);
+    public List<Material> buscarPorCategoria(Categoria categoria) {
+        return materialDAO.buscarPorCategoria(categoria);
     }
 
     private String validar(Material material) {

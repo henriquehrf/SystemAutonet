@@ -45,12 +45,16 @@ public class Local implements Serializable, EntidadeBase {
 
     @Column(nullable = false)
     private int numero;
+    
+    @Column(length = 10)
+    private String bloco;
 
     @Column(length = 100, nullable = false)
     private String responsavel;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Departamento id_departamento = null;
+    
 
     public Local() {
         this.id_local = null;
@@ -100,4 +104,14 @@ public class Local implements Serializable, EntidadeBase {
         this.id_departamento = id_departamento;
     }
 
+    public String getBloco() {
+        return bloco;
+    }
+
+    public void setBloco(String bloco) {
+        this.bloco = bloco;
+    }
+
+    
+    
 }

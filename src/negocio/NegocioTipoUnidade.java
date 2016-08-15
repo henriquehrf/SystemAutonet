@@ -6,6 +6,7 @@
 package negocio;
 
 import DAO.TipoUnidadeDAO;
+import java.util.List;
 import vo.TipoUnidade;
 
 /**
@@ -31,6 +32,10 @@ public class NegocioTipoUnidade {
 
     public TipoUnidade consultarPorId(TipoUnidade tu) {
         return tuDAO.consutarPorId(TipoUnidade.class, tu);
+    }
+    
+    public List<TipoUnidade> buscarPorDescricao(TipoUnidade tu){
+        return tuDAO.buscarPorDescricao(tu);
     }
 
 }

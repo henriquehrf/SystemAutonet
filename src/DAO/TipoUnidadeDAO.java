@@ -5,6 +5,10 @@
  */
 package DAO;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import vo.TipoUnidade;
 
 /**
@@ -12,5 +16,26 @@ import vo.TipoUnidade;
  * @author Eduardo
  */
 public class TipoUnidadeDAO extends GenericoDAO<TipoUnidade> {
+    
+    public List<TipoUnidade> buscarPorDescricao(TipoUnidade tu){
+           
+        EntityManager em = getEM();
+        List<TipoUnidade> list;
+        Query query;       
+        
+        try{
+            
+            query = em.createNamedQuery("TipoUnidade.descricao");
+            query.setParameter("descricao", "%"+tu.getDescricao().toUpperCase()+"%");
+            list = query.getResultList();
+            
+        }catch(Exception ex){
+            list = new ArrayList();
+        }finally{
+            em.close();
+        }
+        return list;
+    }
+    
     
 }
