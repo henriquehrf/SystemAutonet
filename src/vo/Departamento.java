@@ -19,23 +19,29 @@ import javax.persistence.NamedQuery;
  *
  * @author Eduardo
  */
-
 @Entity
 
 @NamedQueries({
-    @NamedQuery(name = "Departamento.ConsultarPorNome",query = "select d from Departamento d where UPPER (d.nome) Like :nome")
-
+    @NamedQuery(name = "Departamento.ConsultarPorNome", query = "select d from Departamento d where UPPER (d.nome) Like :nome"),
+    @NamedQuery(name = "Departamento.ConsultarPorSigla", query = "select d from Departamento d where UPPER (d.sigla) Like :sigla")
 })
 public class Departamento implements Serializable, EntidadeBase {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id_departamento;
-    
+
     @Column(length = 5, nullable = false)
     private String sigla;
-    
+
     @Column(length = 100, nullable = false)
     private String nome;
+
+    public Departamento() {
+        this.id_departamento = null;
+        this.sigla = null;
+        this.nome = null;
+    }
 
     @Override
     public Long getId() {
@@ -61,6 +67,5 @@ public class Departamento implements Serializable, EntidadeBase {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    
+
 }

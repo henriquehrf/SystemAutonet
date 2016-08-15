@@ -18,14 +18,14 @@ import vo.TipoSaida;
 public class TipoSaidaDAO extends GenericoDAO<TipoSaida> {
     
     
-    public List<TipoSaida> buscarPorNome(TipoSaida ts){
+    public List<TipoSaida> buscarPorDescricao(TipoSaida ts){
         EntityManager em = getEM();
         List<TipoSaida> list;
         Query query;
         
         try{
             
-            query = em.createNamedQuery("TipoSaida.BuscarPorNome");
+            query = em.createNamedQuery("TipoSaida.BuscarPorDescricao");
             query.setParameter("descricao", "%"+ts.getDescricao().toUpperCase()+"%");
             list = query.getResultList();
             

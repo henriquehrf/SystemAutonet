@@ -1,21 +1,21 @@
 Filtros Necessários no Cadastro
 
 Consultar Departamento
-1-Por Nome
-2-Por Sigla
+1-Por Nome -> ok
+2-Por Sigla -> ok
 
 Consultar Fornecedor
 
-1-Nome Fantasia
-2-Razão Social
-3-CNPJ
-4-Pessoa Responsável
+1-Nome Fantasia -> ok
+2-Razão Social -> ok
+3-CNPJ -> ok
+4-Pessoa Responsável -> ok
 
 Consultar Locais
-1-Descrição
-2-Número
-3-Bloco
-4-Pessoa Responsável
+1-Descrição -> ok
+2-Número -> ok
+3-Bloco -> ok
+4-Pessoa Responsável -> ok
 
 Consulta Material
 1-Descrição
@@ -23,14 +23,14 @@ Consulta Material
 3-Categoria
 
 Consulta Pessoa
-1-Nome
-2-CPF
-3-RG
-4-Numero de Matricula
+1-Nome -> ok
+2-CPF -> ok
+3-RG -> ok
+4-Numero de Matricula -> ok
 
 Consulta Tipo de Saida
-1-Descrição
+1-Descrição -> ok
 
 Unidade de Medida
 1-descrição
-2-Sigla
+2-Sigla 

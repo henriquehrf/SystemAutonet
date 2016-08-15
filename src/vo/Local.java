@@ -14,29 +14,50 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Eduardo
  */
 @Entity
-public class Local implements Serializable, EntidadeBase {
+@NamedQueries({
+    @NamedQuery(name = "Local.consultarPorDescricao",
+            query = "select l from Local l where UPPER (l.descricao) like :descricao"),
     
+    @NamedQuery(name = "Local.consultarPorNumero",
+            query = "select l from Local l where l.numero = :numero"),
+    
+//    @NamedQuery(name = "Local.consultarPorBloco",
+//            query = "select l from Local l where UPPER (l.descricao) like :bloco"),
+    
+    @NamedQuery(name = "Local.consultarPorPessoaResponsavel",
+            query = "select l from Local l where UPPER (l.responsavel) like :responsavel"),})
+public class Local implements Serializable, EntidadeBase {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id_local;
-    
+
     @Column(length = 100, nullable = false)
     private String descricao;
-    
+
     @Column(nullable = false)
     private int numero;
-    
+
     @Column(length = 100, nullable = false)
     private String responsavel;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Departamento id_departamento = null;
+
+    public Local() {
+        this.id_local = null;
+        this.descricao = null;
+        this.numero = 0;
+        this.responsavel = null;
+    }
 
     @Override
     public Long getId() {
@@ -78,8 +99,5 @@ public class Local implements Serializable, EntidadeBase {
     public void setId_departamento(Departamento id_departamento) {
         this.id_departamento = id_departamento;
     }
-    
-    
-    
-    
+
 }

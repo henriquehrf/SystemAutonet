@@ -24,10 +24,13 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @NamedQueries({
-     @NamedQuery(name= "Pessoa.BuscarUsuario",query="Select p from Pessoa p where UPPER (p.usuario) = :usuario"),
-     @NamedQuery(name= "Pessoa.BuscarPorNome",query="Select p from Pessoa p where UPPER (p.nome) like :nome")
+    @NamedQuery(name = "Pessoa.BuscarUsuario", query = "Select p from Pessoa p where UPPER (p.usuario) = :usuario"),
+    @NamedQuery(name = "Pessoa.BuscarPorNome", query = "Select p from Pessoa p where UPPER (p.nome) like :nome"),
+    @NamedQuery(name = "Pessoa.BuscarPorCPF", query = "Select p from Pessoa p where p.cpf like :cpf"),
+    @NamedQuery(name = "Pessoa.BuscarPorRg", query = "Select p from Pessoa p where p.rg like :rg"),
+    @NamedQuery(name = "Pessoa.BuscarPorMatricula", query = "Select p from Pessoa p where p.num_matricula like :matricula")
 })
-public class Pessoa  implements EntidadeBase, Serializable {
+public class Pessoa implements EntidadeBase, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -52,7 +55,7 @@ public class Pessoa  implements EntidadeBase, Serializable {
     @Column(length = 20, nullable = false)
     private String fone_principal;
 
-    @Column(length = 20,nullable = true)
+    @Column(length = 20, nullable = true)
     private String fone_secundario;
 
     @Column(length = 100)
@@ -80,7 +83,6 @@ public class Pessoa  implements EntidadeBase, Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ultimo_acesso;
 
-    
     @Override
     public Long getId() {
         return id_pessoa;
@@ -90,7 +92,6 @@ public class Pessoa  implements EntidadeBase, Serializable {
         this.id_pessoa = id_pessoa;
     }
 
-  
     public String getNome() {
         return nome;
     }

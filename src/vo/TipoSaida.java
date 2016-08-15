@@ -22,7 +22,7 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "TipoSaida.BuscarPorNome",
+    @NamedQuery(name = "TipoSaida.BuscarPorDescricao",
             query = "Select t from TipoSaida t where UPPER (t.descricao) like :descricao")
 })
 public class TipoSaida implements Serializable, EntidadeBase {

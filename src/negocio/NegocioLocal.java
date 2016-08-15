@@ -6,6 +6,7 @@
 package negocio;
 
 import DAO.LocalDAO;
+import java.util.List;
 import vo.Local;
 
 /**
@@ -13,35 +14,51 @@ import vo.Local;
  * @author Eduardo
  */
 public class NegocioLocal {
+
     private LocalDAO localDAO;
-    
-    public NegocioLocal(){
+
+    public NegocioLocal() {
         localDAO = new LocalDAO();
     }
-    
-    public Local salvar(Local local) throws Exception{
+
+    public Local salvar(Local local) throws Exception {
         String erro = validar(local);
-        
-        if(erro.equals("")){
+
+        if (erro.equals("")) {
             return localDAO.salvar(Local.class, local);
-        }else{
+        } else {
             throw new Exception(erro);
         }
     }
-    
-    public void remover(Local local) throws Exception{
+
+    public void remover(Local local) throws Exception {
         localDAO.remover(Local.class, local);
     }
-    
-    public Local consultarPorId(Local local){
+
+    public Local consultarPorId(Local local) {
         return localDAO.consutarPorId(Local.class, local);
     }
-    
-    public String validar(Local local){
+
+    public String validar(Local local) {
         String erro = "";
-        
-        if(local.getId_departamento() == null) erro+="Erro: não foi encontrado o departamento";
-        
+
+        if (local.getId_departamento() == null) {
+            erro += "Erro: não foi encontrado o departamento";
+        }
+
         return erro;
     }
+
+    public List<Local> buscarPorDescricao(Local local) {
+        return localDAO.buscarPorDescricao(local);
+    }
+
+    public List<Local> buscarPorPessoaResponsavel(Local local) {
+        return localDAO.buscarPorPessoaResponsavel(local);
+    }
+
+    public Local buscarPorNumero(Local local) {
+        return localDAO.buscarPorNumero(local);
+    }
+
 }

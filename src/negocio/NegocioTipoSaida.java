@@ -33,8 +33,8 @@ public class NegocioTipoSaida {
         return tsDAO.consutarPorId(TipoSaida.class, ts);
     }
     
-    public List<TipoSaida> buscarPorNome(TipoSaida ts){
-        return tsDAO.buscarPorNome(ts);
+    public List<TipoSaida> buscarPorDescricao(TipoSaida ts){
+        return tsDAO.buscarPorDescricao(ts);
     }
     
 }

@@ -31,7 +31,7 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
             if (p != null) {
                 encontrou = true;
             }
-        } finally{
+        } finally {
             em.close();
         }
         return encontrou;
@@ -42,16 +42,71 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
         List<Pessoa> list;
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarPorNome");
-            query.setParameter("nome", "%"+pessoa.getNome().toUpperCase()+"%");
+            query.setParameter("nome", "%" + pessoa.getNome().toUpperCase() + "%");
             list = query.getResultList();
         } catch (Exception ex) {
             list = new ArrayList();
-          
+
         } finally {
             em.close();
         }
 
         return list;
+
+    }
+
+    public Pessoa buscarPorCPF(Pessoa pessoa) {
+        EntityManager em = getEM();
+        Pessoa p;
+        try {
+            Query query = em.createNamedQuery("Pessoa.BuscarPorCPF");
+            query.setParameter("cpf", pessoa.getCpf());
+            p = (Pessoa) query.getSingleResult();
+        } catch (Exception ex) {
+            p = null;
+
+        } finally {
+            em.close();
+        }
+
+        return p;
+
+    }
+
+    public Pessoa buscarPorRg(Pessoa pessoa) {
+        EntityManager em = getEM();
+        Pessoa p;
+        try {
+            Query query = em.createNamedQuery("Pessoa.BuscarPorRg");
+            query.setParameter("rg", pessoa.getRg());
+           p = (Pessoa) query.getSingleResult();
+        } catch (Exception ex) {
+            p = null;
+
+        } finally {
+            em.close();
+        }
+
+        return p;
+    }
+    
+        public Pessoa buscarPorMatricula(Pessoa pessoa) {
+        EntityManager em = getEM();
+        Pessoa p;
+        try {
+            Query query = em.createNamedQuery("Pessoa.BuscarPorMatricula");
+            query.setParameter("matricula", pessoa.getNum_matricula());
+           p = (Pessoa) query.getSingleResult();
+        } catch (Exception ex) {
+            p = null;
+
+        } finally {
+            em.close();
+        }
+
+        return p;
+
+       
 
     }
 

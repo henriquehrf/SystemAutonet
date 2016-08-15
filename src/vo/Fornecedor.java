@@ -12,42 +12,70 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Eduardo
  */
 @Entity
-public class Fornecedor implements Serializable, EntidadeBase {
+@NamedQueries({
+    @NamedQuery(name = "Fornecedor.consultarPorNomeFantasia",
+            query = "select f from Fornecedor f where UPPER(f.nome_fantasia) Like :nomeFantasia"),
     
+    @NamedQuery(name = "Fornecedor.consultarPorRazaoSical",
+            query = "select f from Fornecedor f where UPPER (f.razao_social) Like :razaoSocial"),
+    
+    @NamedQuery(name = "Fornecedor.consultarPorCNPJ",
+            query = "select f from Fornecedor f where f.cnpj Like :cnpj"),
+    
+    @NamedQuery(name = "Fornecedor.consultarPorPessoaResponsavel",
+            query = "select f from Fornecedor f where UPPER (f.pessoa_responsavel) Like :nomePessoaResponsavel")
+
+})
+public class Fornecedor implements Serializable, EntidadeBase {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id_fornecedor;
-    
+
     @Column(length = 100, nullable = false)
     private String razao_social;
-    
-    @Column(length = 100,nullable = false)
+
+    @Column(length = 100, nullable = false)
     private String nome_fantasia;
-    
+
     @Column(length = 14, nullable = false)
     private String cnpj;
-    
+
     @Column(length = 20, nullable = false)
     private String inscricao_estadual;
-    
+
     @Column(length = 20, nullable = false)
     private String telefone;
-    
+
     @Column(length = 200, nullable = false)
     private String endereco;
-    
+
     @Column(length = 100, nullable = false)
     private String email;
-    
+
     @Column(length = 100, nullable = false)
     private String pessoa_responsavel;
-    
+
+    public Fornecedor() {
+        this.id_fornecedor = null;
+        this.razao_social = null;
+        this.nome_fantasia = null;
+        this.cnpj = null;
+        this.inscricao_estadual = null;
+        this.telefone = null;
+        this.endereco = null;
+        this.email = null;
+        this.pessoa_responsavel =null;
+    }
+
     
     @Override
     public Long getId() {
@@ -121,9 +149,5 @@ public class Fornecedor implements Serializable, EntidadeBase {
     public void setPessoa_responsavel(String pessoa_responsavel) {
         this.pessoa_responsavel = pessoa_responsavel;
     }
-    
-    
-    
-    
-    
+
 }
