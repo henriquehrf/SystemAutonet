@@ -55,6 +55,23 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
         return list;
 
     }
+    
+       public List<Pessoa> buscarTodos() {
+        EntityManager em = getEM();
+        List<Pessoa> list;
+        try {
+            Query query = em.createNamedQuery("Pessoa.BuscarTodos");
+            list = query.getResultList();
+        } catch (Exception ex) {
+            list = new ArrayList();
+
+        } finally {
+            em.close();
+        }
+
+        return list;
+
+    }
 
     public Pessoa buscarPorCPF(Pessoa pessoa) {
         EntityManager em = getEM();
@@ -107,9 +124,8 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
         }
 
         return p;
-
-       
-
     }
+        
+        
 
 }
