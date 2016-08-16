@@ -8,8 +8,14 @@ package controller.cadastro.Cadastro;
 import controller.cadastro.Consulta.ConsultarFornecedorController;
 import controller.cadastro.Consulta.ConsultarPessoaController;
 import gui.SystemAutonet;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Observable;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,8 +41,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.util.converter.PercentageStringConverter;
 import negocio.NegocioPessoa;
+import vo.Atividade;
 import vo.PerfilUsuario;
 import vo.Pessoa;
+import vo.Sexo;
 
 /**
  *
@@ -152,28 +160,42 @@ public class CadastroPessoaController {
 
         if (verificaCampoObrigatorio()) {
 
-        Pessoa pessoa = new Pessoa();
-        Date data = new Date();
-           pessoa.setNome(txtNome.getText());
-           pessoa.setCpf(txtCpf.getText());
-           pessoa.setEmail(txtEmail.getText());
-           pessoa.setEndereco(txtEndereco.getText());
-           pessoa.setFone_principal(txtPrincipal.getText());
-           pessoa.setFone_secundario(txtSecundario.getText());
-           pessoa.setUsuario(txtUsuario.getText());
-           pessoa.setSenha(txtSenha.getText());
-           pessoa.setNum_matricula(txtNumMatricula.getText());
-           pessoa.setUltimo_acesso(data);
-           pessoa.setFuncao(cmbFuncao.getValue().name());
-           pessoa.setRg(txtRg.getText());
-           if(rdbFeminino.isSelected()) pessoa.setSexo("F");
-           if(rdbMasculino.isSelected())pessoa.setSexo("M");
-           if(CheckBoxAtivo.isSelected())pessoa.setAtivo("S");
-           if(CheckBoxInativo.isSelected())pessoa.setAtivo("N");
-           
-         //  Date dataNascimento = new Date(dtpDtNascimento.getValue().toString());
-          // pessoa.setDt_nascimento(dataNascimento);
-          
+            Pessoa pessoa = new Pessoa();
+            Date cadastro = new Date();
+            pessoa.setNome(txtNome.getText());
+            pessoa.setCpf(txtCpf.getText());
+            pessoa.setEmail(txtEmail.getText());
+            pessoa.setEndereco(txtEndereco.getText());
+            pessoa.setFone_principal(txtPrincipal.getText());
+            pessoa.setFone_secundario(txtSecundario.getText());
+            pessoa.setUsuario(txtUsuario.getText());
+            pessoa.setSenha(txtSenha.getText());
+            pessoa.setNum_matricula(txtNumMatricula.getText());
+            pessoa.setUltimo_acesso(cadastro);
+            pessoa.setFuncao(cmbFuncao.getValue().name());
+            pessoa.setRg(txtRg.getText());
+            if (rdbFeminino.isSelected()) {
+                pessoa.setSexo(Sexo.F.name());
+            }
+            if (rdbMasculino.isSelected()) {
+                pessoa.setSexo(Sexo.M.name());
+            }
+            if (CheckBoxAtivo.isSelected()) {
+                pessoa.setAtivo(Atividade.A.name());
+            }
+            if (CheckBoxInativo.isSelected()) {
+                pessoa.setAtivo(Atividade.I.name());
+            }
+            Instant instant = dtpDtNascimento.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            Date data = Date.from(instant);
+            pessoa.setDt_nascimento(data);
+//           
+//           LocalDate ld = datePicker.getValue();
+//        Instant instant = ld.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+//        Date date = Date.from(instant);
+            //  Date dataNascimento = new Date(dtpDtNascimento.getValue().toString());
+            // pessoa.setDt_nascimento(dataNascimento);
+
 //        pessoa.setCpf("36773389720");
 //        pessoa.setEndereco("Rua 48, Quadra 17, Casa 14, CPA 3, Setor 4");
 //        pessoa.setNome("Eduardo Roosevelt de Oliveira Silva");
@@ -184,18 +206,18 @@ public class CadastroPessoaController {
 //        pessoa.setSenha("12345678");
 //        pessoa.setAtivo("N");
 //        pessoa.setFuncao("UsuarioComum");
-        pessoa.setDt_nascimento(data);
+            pessoa.setDt_nascimento(data);
 //        pessoa.setRg("123123123");
 //        pessoa.setUltimo_acesso(data);
 
-        try {
-            NegocioP.salvar(pessoa);
-            Parent root;
-            root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
-            SystemAutonet.SCENE.setRoot(root);
-        } catch (Exception ex) {
-            System.out.println("Erro " + ex.getMessage());
-        }
+            try {
+                NegocioP.salvar(pessoa);
+                Parent root;
+                root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.out.println("Erro " + ex.getMessage());
+            }
         }
     }
 
@@ -315,11 +337,15 @@ public class CadastroPessoaController {
         return verifica;
     }
 
-    public void initialize() {
+    public void initialize() throws IOException {
         setcamposObrigatorio();
         cmbFuncao.setItems(perf);
         CheckBoxAtivo.setDisable(true);
         CheckBoxInativo.setDisable(true);
+//        Properties properties = new Properties();
+//        properties.load(new  FileInputStream("utilitarios/i18N_pt_BR.properties"));
+        // String msg1 = messages
+     
     }
 
 }
