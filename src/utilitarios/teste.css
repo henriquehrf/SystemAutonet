@@ -36,7 +36,7 @@
     -fx-border-color:darkgrey;
     -fx-background-color:none;
 }
-.choice-box{
+.combo-box{
     -fx-border-color:darkgrey;
     -fx-background-color:none;
     -fx-font-size: 9pt;
@@ -93,6 +93,12 @@
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
     -fx-text-fill: black;
+    -fx-opacity: 1;
+}
+.label-alert{
+    -fx-font-size: 9pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: red;
     -fx-opacity: 1;
 }
 
