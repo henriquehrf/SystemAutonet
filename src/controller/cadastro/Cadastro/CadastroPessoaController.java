@@ -37,6 +37,7 @@ import javafx.util.converter.PercentageStringConverter;
 import negocio.NegocioPessoa;
 import vo.PerfilUsuario;
 import vo.Pessoa;
+import vo.Sexo;
 
 /**
  *
@@ -164,10 +165,10 @@ public class CadastroPessoaController {
            pessoa.setSenha(txtSenha.getText());
            pessoa.setNum_matricula(txtNumMatricula.getText());
            pessoa.setUltimo_acesso(data);
-           pessoa.setFuncao(cmbFuncao.getValue().name());
+           pessoa.setFuncao(cmbFuncao.getValue());
            pessoa.setRg(txtRg.getText());
-           if(rdbFeminino.isSelected()) pessoa.setSexo("F");
-           if(rdbMasculino.isSelected())pessoa.setSexo("M");
+           if(rdbFeminino.isSelected()) pessoa.setSexo(Sexo.F);
+           if(rdbMasculino.isSelected())pessoa.setSexo(Sexo.M);
            if(CheckBoxAtivo.isSelected())pessoa.setAtivo("S");
            if(CheckBoxInativo.isSelected())pessoa.setAtivo("N");
            
