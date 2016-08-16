@@ -23,7 +23,9 @@ import javax.persistence.NamedQuery;
 
 @NamedQueries({
     @NamedQuery(name = "Departamento.ConsultarPorNome", query = "select d from Departamento d where UPPER (d.nome) Like :nome"),
-    @NamedQuery(name = "Departamento.ConsultarPorSigla", query = "select d from Departamento d where UPPER (d.sigla) Like :sigla")
+    @NamedQuery(name = "Departamento.ConsultarPorSigla", query = "select d from Departamento d where UPPER (d.sigla) Like :sigla"),
+    @NamedQuery(name = "Departamento.ConsultarTodos", query = "select d from Departamento d ORDER BY (d.nome)")
+
 })
 public class Departamento implements Serializable, EntidadeBase {
 

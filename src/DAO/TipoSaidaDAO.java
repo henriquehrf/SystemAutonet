@@ -36,4 +36,22 @@ public class TipoSaidaDAO extends GenericoDAO<TipoSaida> {
         }
         return list;
     }
+    
+        public List<TipoSaida> buscarTodos(){
+        EntityManager em = getEM();
+        List<TipoSaida> list;
+        Query query;
+        
+        try{
+            
+            query = em.createNamedQuery("TipoSaida.BuscarPorDescricao");
+            list = query.getResultList();
+            
+        }catch(Exception ex){
+            list = new ArrayList();
+        }finally{
+            em.close();
+        }
+        return list;
+    }
 }

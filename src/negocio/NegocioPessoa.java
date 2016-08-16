@@ -9,6 +9,9 @@ import DAO.PessoaDAO;
 import classesAuxiliares.ValidarCpf;
 import classesAuxiliares.ValidarEmail;
 import java.util.List;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import vo.Pessoa;
 
 /**
@@ -99,10 +102,10 @@ public class NegocioPessoa {
             erro += "Senha tem que ter pelo menos 8 caracteres\n";
         }
         
-//        if (pessoaDAO.EncontrarUsuario(pessoa)) {
-//            erro += "Usuário já cadastrado\n";
-//        }
-//        
+        if (pessoaDAO.EncontrarUsuario(pessoa)) {
+            erro += "Usuário já cadastrado\n";
+        }
+        
         if (!pessoa.getEmail().isEmpty()) {
             if (!ValidarEmail.validar(pessoa.getEmail())) {
                 erro += "Email inválido\n";

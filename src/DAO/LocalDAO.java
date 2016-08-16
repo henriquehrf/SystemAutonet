@@ -86,5 +86,21 @@ public class LocalDAO extends GenericoDAO<Local> {
 //        }
 //        return list;
 //    }
+    
+        public List<Local> buscarTodos() {
+        EntityManager em = getEM();
+        List<Local> list;
+        try {
+            Query query = em.createNamedQuery("Local.consultarTodos");
+            list = query.getResultList();
+
+        } catch (Exception ex) {
+            list = new ArrayList();
+
+        } finally {
+            em.close();
+        }
+        return list;
+    }
 
 }

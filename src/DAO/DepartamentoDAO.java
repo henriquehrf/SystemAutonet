@@ -53,4 +53,21 @@ public class DepartamentoDAO extends GenericoDAO<Departamento> {
         }
         return list;
     }
+    
+      public List<Departamento> buscarTodos(){
+        EntityManager em = getEM();
+        List<Departamento> list;
+        Query query;
+        
+        try{
+            query = em.createNamedQuery("Departamento.ConsultarTodos");
+            list = query.getResultList();
+            
+        }catch(Exception ex){
+            list = new ArrayList();
+        }finally{
+            em.close();
+        }
+        return list;
+    }
 }

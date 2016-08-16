@@ -37,5 +37,24 @@ public class TipoUnidadeDAO extends GenericoDAO<TipoUnidade> {
         return list;
     }
     
+       public List<TipoUnidade> buscarTodos(){
+           
+        EntityManager em = getEM();
+        List<TipoUnidade> list;
+        Query query;       
+        
+        try{
+            
+            query = em.createNamedQuery("TipoUnidade.BuscarTodos");
+            list = query.getResultList();
+            
+        }catch(Exception ex){
+            list = new ArrayList();
+        }finally{
+            em.close();
+        }
+        return list;
+    }
+    
     
 }

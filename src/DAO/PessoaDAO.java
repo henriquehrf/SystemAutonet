@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import vo.Pessoa;
@@ -28,6 +29,8 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
             query.setParameter("usuario", pessoa.getUsuario().toUpperCase());
             p =  (Pessoa) query.getSingleResult();
             
+        }catch(NoResultException ex){
+             p = null;
         }finally {
             em.close();
         }

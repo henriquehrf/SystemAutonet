@@ -39,5 +39,8 @@ public class NegocioDepartamento {
     public List<Departamento> buscarPorSigla(Departamento dp){
         return departamentoDAO.buscarPorSigla(dp);
     }
+     public List<Departamento> buscarTodos(){
+        return departamentoDAO.buscarTodos();
+    }
     
 }
