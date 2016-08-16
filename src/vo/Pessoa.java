@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,10 +31,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Pessoa.BuscarPorCPF", query = "Select p from Pessoa p where p.cpf like :cpf"),
     @NamedQuery(name = "Pessoa.BuscarPorRg", query = "Select p from Pessoa p where p.rg like :rg"),
     @NamedQuery(name = "Pessoa.BuscarPorMatricula", query = "Select p from Pessoa p where p.num_matricula like :matricula"),
-    @NamedQuery(name = "Pessoa.BuscarTodos", query = "Select p from Pessoa p"),
-    
-        
-})
+    @NamedQuery(name = "Pessoa.BuscarTodos", query = "Select p from Pessoa p")})
+
 public class Pessoa implements EntidadeBase, Serializable {
 
     @Id
@@ -43,7 +43,8 @@ public class Pessoa implements EntidadeBase, Serializable {
     private String nome;
 
     @Column(length = 1, nullable = false)
-    private String sexo;
+    @Enumerated(EnumType.STRING)
+    private Sexo sexo;
 
     @Column(length = 11, nullable = false)
     private String cpf;
@@ -68,7 +69,8 @@ public class Pessoa implements EntidadeBase, Serializable {
     private String endereco;
 
     @Column(length = 20, nullable = false)
-    private String funcao;
+    @Enumerated(EnumType.STRING)
+    private PerfilUsuario funcao;
 
     @Column(length = 20, nullable = false)
     private String num_matricula;
@@ -85,7 +87,7 @@ public class Pessoa implements EntidadeBase, Serializable {
     @Column(nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ultimo_acesso;
-    
+
     @Override
     public Long getId() {
         return id_pessoa;
@@ -103,11 +105,11 @@ public class Pessoa implements EntidadeBase, Serializable {
         this.nome = nome;
     }
 
-    public String getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
 
@@ -167,12 +169,12 @@ public class Pessoa implements EntidadeBase, Serializable {
         this.endereco = endereco.toUpperCase();
     }
 
-    public String getFuncao() {
+    public PerfilUsuario getFuncao() {
         return funcao;
     }
 
-    public void setFuncao(String funcao) {
-        this.funcao = funcao.toUpperCase();
+    public void setFuncao(PerfilUsuario funcao) {
+        this.funcao = funcao;
     }
 
     public String getNum_matricula() {

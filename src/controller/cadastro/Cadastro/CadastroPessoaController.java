@@ -160,42 +160,28 @@ public class CadastroPessoaController {
 
         if (verificaCampoObrigatorio()) {
 
-            Pessoa pessoa = new Pessoa();
-            Date cadastro = new Date();
-            pessoa.setNome(txtNome.getText());
-            pessoa.setCpf(txtCpf.getText());
-            pessoa.setEmail(txtEmail.getText());
-            pessoa.setEndereco(txtEndereco.getText());
-            pessoa.setFone_principal(txtPrincipal.getText());
-            pessoa.setFone_secundario(txtSecundario.getText());
-            pessoa.setUsuario(txtUsuario.getText());
-            pessoa.setSenha(txtSenha.getText());
-            pessoa.setNum_matricula(txtNumMatricula.getText());
-            pessoa.setUltimo_acesso(cadastro);
-            pessoa.setFuncao(cmbFuncao.getValue().name());
-            pessoa.setRg(txtRg.getText());
-            if (rdbFeminino.isSelected()) {
-                pessoa.setSexo(Sexo.F.name());
-            }
-            if (rdbMasculino.isSelected()) {
-                pessoa.setSexo(Sexo.M.name());
-            }
-            if (CheckBoxAtivo.isSelected()) {
-                pessoa.setAtivo(Atividade.A.name());
-            }
-            if (CheckBoxInativo.isSelected()) {
-                pessoa.setAtivo(Atividade.I.name());
-            }
-            Instant instant = dtpDtNascimento.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-            Date data = Date.from(instant);
-            pessoa.setDt_nascimento(data);
-//           
-//           LocalDate ld = datePicker.getValue();
-//        Instant instant = ld.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
-//        Date date = Date.from(instant);
-            //  Date dataNascimento = new Date(dtpDtNascimento.getValue().toString());
-            // pessoa.setDt_nascimento(dataNascimento);
-
+        Pessoa pessoa = new Pessoa();
+        Date data = new Date();
+           pessoa.setNome(txtNome.getText());
+           pessoa.setCpf(txtCpf.getText());
+           pessoa.setEmail(txtEmail.getText());
+           pessoa.setEndereco(txtEndereco.getText());
+           pessoa.setFone_principal(txtPrincipal.getText());
+           pessoa.setFone_secundario(txtSecundario.getText());
+           pessoa.setUsuario(txtUsuario.getText());
+           pessoa.setSenha(txtSenha.getText());
+           pessoa.setNum_matricula(txtNumMatricula.getText());
+           pessoa.setUltimo_acesso(data);
+           pessoa.setFuncao(cmbFuncao.getValue());
+           pessoa.setRg(txtRg.getText());
+           if(rdbFeminino.isSelected()) pessoa.setSexo(Sexo.F);
+           if(rdbMasculino.isSelected())pessoa.setSexo(Sexo.M);
+           if(CheckBoxAtivo.isSelected())pessoa.setAtivo("S");
+           if(CheckBoxInativo.isSelected())pessoa.setAtivo("N");
+           
+         //  Date dataNascimento = new Date(dtpDtNascimento.getValue().toString());
+          // pessoa.setDt_nascimento(dataNascimento);
+          
 //        pessoa.setCpf("36773389720");
 //        pessoa.setEndereco("Rua 48, Quadra 17, Casa 14, CPA 3, Setor 4");
 //        pessoa.setNome("Eduardo Roosevelt de Oliveira Silva");
