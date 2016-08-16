@@ -33,7 +33,12 @@ import javax.persistence.NamedQuery;
 //            query = "select l from Local l where UPPER (l.descricao) like :bloco"),
     
     @NamedQuery(name = "Local.consultarPorPessoaResponsavel",
-            query = "select l from Local l where UPPER (l.responsavel) like :responsavel"),})
+            query = "select l from Local l where UPPER (l.responsavel) like :responsavel"),
+    
+      @NamedQuery(name = "Local.consultarTodos",
+            query = "select l from Local l ORDER BY (l.descricao)")
+
+})
 public class Local implements Serializable, EntidadeBase {
 
     @Id

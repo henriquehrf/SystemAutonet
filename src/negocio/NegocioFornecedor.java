@@ -56,6 +56,11 @@ public class NegocioFornecedor {
         return fornecedorDAO.buscarPorPessoaResponsavel(fornecedor);
     }
     
+     public List<Fornecedor> buscarTodos() {
+        return fornecedorDAO.buscarTodos();
+    }
+    
+    
     public String validar(Fornecedor fornecedor){
         String erro ="";
         

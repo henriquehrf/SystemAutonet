@@ -25,7 +25,9 @@ import javax.persistence.NamedQuery;
             query = "select m from Material m where m.quantidade = :quantidade"),
         
         @NamedQuery(name = "Material.consultarPorCategoria",
-                query = "Select m from Material m where m.id_categoria.id_categoria = :idcategoria")
+                query = "Select m from Material m where m.id_categoria.id_categoria = :idcategoria"),
+           @NamedQuery(name = "Material.consultarTodos",
+                query = "Select m from Material m ORDER BY (m.descricao)")
 
 })
 public class Material implements Serializable, EntidadeBase {

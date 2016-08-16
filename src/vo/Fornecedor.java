@@ -31,7 +31,10 @@ import javax.persistence.NamedQuery;
             query = "select f from Fornecedor f where f.cnpj Like :cnpj"),
     
     @NamedQuery(name = "Fornecedor.consultarPorPessoaResponsavel",
-            query = "select f from Fornecedor f where UPPER (f.pessoa_responsavel) Like :nomePessoaResponsavel")
+            query = "select f from Fornecedor f where UPPER (f.pessoa_responsavel) Like :nomePessoaResponsavel"),
+        
+    @NamedQuery(name = "Fornecedor.consultarTodos",
+            query = "select f from Fornecedor f ORDER BY (f.nome_fantasia)")
 
 })
 public class Fornecedor implements Serializable, EntidadeBase {

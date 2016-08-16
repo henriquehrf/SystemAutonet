@@ -60,5 +60,9 @@ public class NegocioLocal {
     public Local buscarPorNumero(Local local) {
         return localDAO.buscarPorNumero(local);
     }
+    
+    public List<Local> buscarTodos() {
+        return localDAO.buscarTodos();
+    }
 
 }

@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 import utilitarios.LerProperties;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import vo.Pessoa;
 
 /**
@@ -104,10 +107,10 @@ public class NegocioPessoa {
             erro += prop.getProperty("msg.cadastro.senhaPequena");
         }
         
-//        if (pessoaDAO.EncontrarUsuario(pessoa)) {
-//            erro += "Usuário já cadastrado\n";
-//        }
-//        
+        if (pessoaDAO.EncontrarUsuario(pessoa)) {
+            erro += "Usuário já cadastrado\n";
+        }
+        
         if (!pessoa.getEmail().isEmpty()) {
             if (!ValidarEmail.validar(pessoa.getEmail())) {
                 erro += "Email inválido\n";

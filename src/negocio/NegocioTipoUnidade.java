@@ -37,5 +37,9 @@ public class NegocioTipoUnidade {
     public List<TipoUnidade> buscarPorDescricao(TipoUnidade tu){
         return tuDAO.buscarPorDescricao(tu);
     }
+    
+       public List<TipoUnidade> buscarTodos(){
+        return tuDAO.buscarTodos();
+    }
 
 }

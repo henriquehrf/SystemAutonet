@@ -89,4 +89,20 @@ public class FornecedorDAO extends GenericoDAO<Fornecedor> {
         return list;
     }
 
+        public List<Fornecedor> buscarTodos() {
+        EntityManager em = getEM();
+        List<Fornecedor> list;
+        try {
+            Query query = em.createNamedQuery("FFornecedor.consultarTodos");
+            list = query.getResultList();
+
+        } catch (Exception ex) {
+            list = new ArrayList();
+
+        } finally {
+            em.close();
+        }
+
+        return list;
+    }
 }

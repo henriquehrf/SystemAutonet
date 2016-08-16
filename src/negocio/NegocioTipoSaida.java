@@ -37,4 +37,8 @@ public class NegocioTipoSaida {
         return tsDAO.buscarPorDescricao(ts);
     }
     
+     public List<TipoSaida> buscarTodos(){
+        return tsDAO.buscarTodos();
+    }
+    
 }

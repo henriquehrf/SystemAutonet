@@ -47,6 +47,10 @@ public class NegocioMaterial {
     public List<Material> buscarPorQuantidade(Material material) {
         return materialDAO.buscarPorQuantidade(material);
     }
+    
+    public List<Material> buscarTodos() {
+        return materialDAO.buscarTodos();
+    }
 
     public List<Material> buscarPorCategoria(Categoria categoria) {
         return materialDAO.buscarPorCategoria(categoria);
