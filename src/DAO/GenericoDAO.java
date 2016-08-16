@@ -30,7 +30,7 @@ public class GenericoDAO<T extends EntidadeBase> {
             } else {
                 if (!em.contains(t)) {
                     if (em.find(clazz, t.getId()) == null) {
-                        throw new Exception("Erro ao atualizar");
+                        throw new Exception("Erro ao alterar o cadastro.");
                     }
                 }
                 t = em.merge(t); // executa update

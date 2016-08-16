@@ -8,102 +8,102 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" styleClass="border-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="600.0" prefWidth="800.0" styleClass="border-pane" stylesheets="@../../../utilitarios/teste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.cadastro.Cadastro.CadastroPessoaController">
    <center>
       <TabPane prefHeight="455.0" prefWidth="761.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
          <tabs>
-            <Tab text="Dados Pessoais">
+            <Tab fx:id="tabDadoPessoais" text="%tab.dados.pessoais">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="800.0">
                      <children>
                         <GridPane layoutX="14.0" layoutY="7.0" prefHeight="434.0" prefWidth="733.0">
                            <children>
-                              <Label text="Nome: " />
-                              <Label text="Sexo: " GridPane.rowIndex="1" />
-                              <Label text="CPF: " GridPane.rowIndex="2" />
-                              <Label text="RG: " GridPane.rowIndex="3" />
-                              <Label text="Data de Nascimento: " GridPane.rowIndex="4" />
-                              <Label text="Telefone Principal: " GridPane.rowIndex="5" />
-                              <Label text="Telefone Secundário: " GridPane.rowIndex="6" />
-                              <Label text="Email: " GridPane.rowIndex="7" />
-                              <Label text="Endereço: " GridPane.rowIndex="8" />
-                              <Label text="Função: " GridPane.rowIndex="9" />
-                              <Label text="Numero de Matricula: " GridPane.rowIndex="10" />
-                              <Label text="Status de Atividade: " GridPane.rowIndex="11" />
-                              <Label text="Usuário: " GridPane.rowIndex="12" />
-                              <Label text="Senha: " GridPane.rowIndex="13" />
+                              <Label text="%lbl.nome" />
+                              <Label text="%lbl.sexo" GridPane.rowIndex="1" />
+                              <Label text="%lbl.cpf" GridPane.rowIndex="2" />
+                              <Label text="%lbl.rg" GridPane.rowIndex="3" />
+                              <Label text="%lbl.dataNascimento" GridPane.rowIndex="4" />
+                              <Label text="%lbl.telefonePrincipal" GridPane.rowIndex="5" />
+                              <Label text="%lbl.telefoneSecundario" GridPane.rowIndex="6" />
+                              <Label text="%lbl.email" GridPane.rowIndex="7" />
+                              <Label text="%lbl.endereco" GridPane.rowIndex="8" />
+                              <Label text="%lbl.funcao" GridPane.rowIndex="9" />
+                              <Label text="%lbl.numMatricula" GridPane.rowIndex="10" />
+                              <Label text="%lbl.statusAtividade" GridPane.rowIndex="11" />
+                              <Label text="%lbl.usuario" GridPane.rowIndex="12" />
+                              <Label text="%lbl.senha" GridPane.rowIndex="13" />
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
-                                    <TextField prefWidth="350.0" />
+                                    <TextField fx:id="txtNome" prefWidth="350.0" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <RadioButton alignment="BOTTOM_CENTER" mnemonicParsing="false" prefHeight="23.0" prefWidth="84.0" text="Feminino" />
-                                    <RadioButton alignment="BOTTOM_CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Masculino" />
+                                    <RadioButton fx:id="rdbFeminino" alignment="BOTTOM_CENTER" mnemonicParsing="false" prefHeight="23.0" prefWidth="84.0" text="%rdb.feminino" />
+                                    <RadioButton fx:id="rdbMasculino" alignment="BOTTOM_CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="%rdb.masculino" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
-                                    <TextField prefWidth="150.0" />
+                                    <TextField fx:id="txtCpf" prefWidth="150.0" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="150.0" />
+                                    <TextField fx:id="txtRg" prefHeight="25.0" prefWidth="150.0" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="15.0" prefWidth="611.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
-                                    <TextField maxWidth="150.0" />
+                                    <TextField fx:id="txtPrincipal" maxWidth="150.0" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
-                                    <DatePicker prefHeight="25.0" prefWidth="119.0" styleClass="date-piker" />
+                                    <DatePicker fx:id="dtpDtNascimento" prefHeight="25.0" prefWidth="119.0" styleClass="date-piker" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <children>
-                                    <TextField maxWidth="150.0" prefHeight="20.0" />
+                                    <TextField fx:id="txtSecundario" maxWidth="150.0" prefHeight="20.0" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <children>
-                                    <TextField prefWidth="300.0" />
+                                    <TextField fx:id="txtEmail" prefWidth="300.0" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                  <children>
-                                    <TextField prefHeight="27.0" prefWidth="450.0" />
+                                    <TextField fx:id="txtEndereco" prefHeight="27.0" prefWidth="450.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
                                  <children>
-                                    <ChoiceBox prefWidth="150.0" />
+                                    <ChoiceBox fx:id="cmbFuncao" prefWidth="150.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
                                  <children>
-                                    <TextField prefWidth="150.0" />
+                                    <TextField fx:id="txtNumMatricula" prefWidth="150.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="16.0" prefWidth="611.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
                                  <children>
-                                    <CheckBox mnemonicParsing="false" selected="true" text="Ativo  " />
-                                    <CheckBox mnemonicParsing="false" text="Inativo" />
+                                    <CheckBox fx:id="CheckBoxAtivo" mnemonicParsing="false" selected="true" text="%checkbox.ativo" />
+                                    <CheckBox fx:id="CheckBoxInativo" mnemonicParsing="false" text="%checkbox.inativo" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
                                  <children>
-                                    <TextField prefWidth="150.0" />
+                                    <TextField fx:id="txtUsuario" prefWidth="150.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
                                  <children>
-                                    <PasswordField prefWidth="150.0" />
-                                    <Label text="  Repita a Senha: " />
-                                    <PasswordField prefWidth="150.0" />
+                                    <PasswordField fx:id="txtSenha" prefWidth="150.0" />
+                                    <Label text="%lbl.repSenha" />
+                                    <PasswordField fx:id="txtRSenha" prefWidth="150.0" />
                                  </children>
                               </HBox>
                            </children>
@@ -136,7 +136,7 @@
       </TabPane>
    </center>
    <top>
-      <Label style="-fx-font-size: 20; fx-font-family: arial;" styleClass="label-header" text="Cadastro de Pessoa" BorderPane.alignment="CENTER">
+      <Label style="-fx-font-size: 20; fx-font-family: arial;" styleClass="label-header" text="%title.cadastro.pessoa" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -156,7 +156,7 @@
          <children>
             <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Salvar" />
+                  <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#btnSalvarOnAction" prefWidth="100.0" text="%btn.salvar" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -167,7 +167,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Cancelar">
+                  <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCancelarOnAction" prefWidth="100.0" text="%btn.cancelar">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -177,9 +177,4 @@
          </children>
       </GridPane>
    </bottom>
-   <stylesheets>
-      <URL value="@../../../../../Desktop/teste/teste.css" />
-      <URL value="@teste/teste.css" />
-      <URL value="@../teste/teste.css" />
-   </stylesheets>
 </BorderPane>
