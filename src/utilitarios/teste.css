@@ -83,12 +83,7 @@
     -fx-font-family: "Arial";
 
 }
-.label-header{
-    -fx-font-size: 30pt;
-    -fx-font-family: "Arial";
-    -fx-text-fill: black;
-    -fx-opacity: 1;
-}
+
 .label{
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
@@ -99,6 +94,12 @@
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
     -fx-text-fill: red;
+    -fx-opacity: 1;
+}
+.label-head{
+    -fx-font-size: 20pt;
+    -fx-font-family: "Arial";
+    -fx-text-fill: black;
     -fx-opacity: 1;
 }
 
