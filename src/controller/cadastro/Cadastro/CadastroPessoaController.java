@@ -35,7 +35,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.util.converter.PercentageStringConverter;
 import negocio.NegocioPessoa;
-import negocio.PerfilUsuario;
+import vo.PerfilUsuario;
 import vo.Pessoa;
 
 /**
