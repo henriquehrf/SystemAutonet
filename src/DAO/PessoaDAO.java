@@ -27,12 +27,14 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
             Query query = em.createNamedQuery("Pessoa.BuscarUsuario");
             query.setParameter("usuario", pessoa.getUsuario().toUpperCase());
             p =  (Pessoa) query.getSingleResult();
-            if (p != null) {
-                encontrou = true;
-            }
-        } finally {
+            
+        }finally {
             em.close();
         }
+        
+        if (p != null) {
+                encontrou = true;
+            }
         return encontrou;
     }
 
@@ -96,6 +98,7 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
             Query query = em.createNamedQuery("Pessoa.BuscarPorMatricula");
             query.setParameter("matricula", pessoa.getNum_matricula());
            p = (Pessoa) query.getSingleResult();
+           
         } catch (Exception ex) {
             p = null;
 

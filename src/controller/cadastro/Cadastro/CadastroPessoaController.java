@@ -108,10 +108,11 @@ public class CadastroPessoaController {
         pessoa.setFone_principal("92290278");
         pessoa.setNum_matricula("2013178440269");
         pessoa.setSexo("M");
-        pessoa.setUsuario("E.Roosevelt");
+        pessoa.setUsuario("E");
         pessoa.setSenha("12345678");
         pessoa.setAtivo("N");
         pessoa.setFuncao("UsuarioComum");
+        pessoa.setEmail("eduardo.roosevelt@gmail.com");
         pessoa.setDt_nascimento(data);
         pessoa.setRg("1231232131233");
         pessoa.setUltimo_acesso(data);

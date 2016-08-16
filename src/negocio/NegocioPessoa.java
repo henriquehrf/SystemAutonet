@@ -77,11 +77,11 @@ public class NegocioPessoa {
      
         if (pessoa.getSenha().length() < 8)  erro += "Senha tem que ter pelo menos 8 caracteres\n";
       
-//        if (pessoaDAO.EncontrarUsuario(pessoa))  erro += "Usuário já cadastrado\n";
+        if (pessoaDAO.EncontrarUsuario(pessoa))  erro += "Usuário já cadastrado\n";
       
-//        if(!pessoa.getEmail().isEmpty()){
-//            if(!ValidarEmail.validar(pessoa.getEmail())) erro += "Email inválido\n";
-//        }
+        if(!pessoa.getEmail().isEmpty()){
+            if(!ValidarEmail.validar(pessoa.getEmail())) erro += "Email inválido\n";
+        }
         
         if (pessoa.getId() == null || pessoa.getId() == 0) {
             if (buscarPorCPF(pessoa) != null) erro += "CPF já cadastrado\n";
