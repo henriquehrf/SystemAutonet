@@ -149,13 +149,19 @@
                </content>
             </Tab>
          </tabs>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </TabPane>
    </center>
    <top>
-      <Label style="-fx-font-size: 20; fx-font-family: arial;" styleClass="label-header" text="%title.cadastro.pessoa" BorderPane.alignment="CENTER">
+      <Label styleClass="label-head" text="%title.cadastro.pessoa" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
       </Label>
    </top>
    <bottom>
