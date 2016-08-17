@@ -91,7 +91,7 @@
                               <Insets />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="btnBuscar" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="button-search">
+                        <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#btnBuscarOnAction" prefHeight="25.0" prefWidth="25.0" styleClass="button-search">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -106,18 +106,21 @@
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="Filtros" />
+                                 </toggleGroup>
                               </RadioButton>
-                              <RadioButton fx:id="rdbCPF" mnemonicParsing="false" text="%rdb.cpf">
+                              <RadioButton fx:id="rdbCPF" mnemonicParsing="false" text="%rdb.cpf" toggleGroup="$Filtros">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </RadioButton>
-                              <RadioButton fx:id="rdbRG" mnemonicParsing="false" text="%rdb.rg">
+                              <RadioButton fx:id="rdbRG" mnemonicParsing="false" text="%rdb.rg" toggleGroup="$Filtros">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </RadioButton>
-                              <RadioButton fx:id="rgbNumMatricula" mnemonicParsing="false" text="%rdb.numero.matricula">
+                              <RadioButton fx:id="rgbNumMatricula" mnemonicParsing="false" text="%rdb.numero.matricula" toggleGroup="$Filtros">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>

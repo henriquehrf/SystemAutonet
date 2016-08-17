@@ -51,15 +51,15 @@ public class NegocioPessoa {
         return pessoaDAO.buscarPorNome(pessoa);
     }
     
-    public Pessoa buscarPorCPF(Pessoa pessoa) {
+    public List<Pessoa> buscarPorCPF(Pessoa pessoa) {
         return pessoaDAO.buscarPorCPF(pessoa);
     }
     
-    public Pessoa buscarPorRG(Pessoa pessoa) {
+    public List<Pessoa> buscarPorRG(Pessoa pessoa) {
         return pessoaDAO.buscarPorRg(pessoa);
     }
     
-    public Pessoa buscarPorMatricula(Pessoa pessoa) {
+    public List<Pessoa> buscarPorMatricula(Pessoa pessoa) {
         return pessoaDAO.buscarPorMatricula(pessoa);
     }
     
