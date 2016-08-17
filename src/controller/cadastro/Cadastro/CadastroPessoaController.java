@@ -158,7 +158,20 @@ public class CadastroPessoaController {
     private RadioButton rdbFeminino;
 
     private NegocioPessoa NegocioP = new NegocioPessoa();
+    
+    private static Pessoa alterar;
+    
+    private static boolean cadastrar;
 
+    public static boolean isCadastrar() {
+        return cadastrar;
+    }
+
+    public static void setCadastrar(boolean cadastra) {
+        CadastroPessoaController.cadastrar = cadastra;
+    }
+    
+    
     public static Pessoa getAlterar() {
         return alterar;
     }
@@ -167,7 +180,6 @@ public class CadastroPessoaController {
         CadastroPessoaController.alterar = alterar;
     }
 
-    private static Pessoa alterar;
     ObservableList<PerfilUsuario> perf = FXCollections.observableArrayList((PerfilUsuario.values()));
 
     @FXML
@@ -234,6 +246,7 @@ public class CadastroPessoaController {
 
         try {
             NegocioP.salvar(pessoa);
+            alterar = null;
             Parent root;
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();
@@ -372,8 +385,10 @@ public class CadastroPessoaController {
         cmbFuncao.setItems(perf);
         CheckBoxAtivo.setDisable(true);
         CheckBoxInativo.setDisable(true);
-        if (alterar != null) {
+        if (!isCadastrar()) {
             completar();
+        } else {
+            alterar = null;
         }
 
     }

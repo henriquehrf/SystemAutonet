@@ -5,6 +5,7 @@ import controller.cadastro.Cadastro.CadastroPessoaController;
 import gui.SystemAutonet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -20,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioPessoa;
+import utilitarios.LerProperties;
 import vo.Pessoa;
 
 public class ConsultarPessoaController {
@@ -72,7 +75,7 @@ public class ConsultarPessoaController {
     @FXML
     private RadioButton rdbCPF;
 
-    NegocioPessoa pessoa = new NegocioPessoa();
+    NegocioPessoa pessoa;
 
     void completarTabela(List<Pessoa> lista) {
         ObservableList<Pessoa> dado = FXCollections.observableArrayList();
@@ -87,8 +90,9 @@ public class ConsultarPessoaController {
     }
 
     public void initialize() {
-
+        pessoa = new NegocioPessoa();
         List<Pessoa> lista = pessoa.buscarTodos();
+
         completarTabela(lista);
         rdbNome.setSelected(true);
 
@@ -109,6 +113,7 @@ public class ConsultarPessoaController {
     @FXML
     void btnInserirOnAction(ActionEvent event) {
         try {
+            CadastroPessoaController.setCadastrar(true);
             Parent root;
             root = FXMLLoader.load(CadastroPessoaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -122,6 +127,7 @@ public class ConsultarPessoaController {
     void btnAlterarOnAction(ActionEvent event) {
 
         Pessoa p = tblPrincipal.getSelectionModel().getSelectedItem();
+        CadastroPessoaController.setCadastrar(false);
         CadastroPessoaController.setAlterar(p);
         try {
             Parent root;

@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="600.0" prefWidth="800.0" styleClass="border-pane" stylesheets="@../../../utilitarios/teste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.cadastro.Cadastro.CadastroFornecedorController">
    <center>
       <TabPane prefHeight="455.0" prefWidth="761.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
          <tabs>
@@ -23,42 +23,42 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
-                                    <TextField prefWidth="350.0" />
+                                    <TextField fx:id="txtNomeFantasia" prefWidth="350.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
-                                    <TextField prefWidth="350.0" />
+                                    <TextField fx:id="txtRazaoSocial" prefWidth="350.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <children>
-                                    <TextField prefWidth="150.0" />
+                                    <TextField fx:id="txtCnpj" prefWidth="150.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <children>
-                                    <TextField prefWidth="200.0" />
+                                    <TextField fx:id="txtInscricaoEstadual" prefWidth="200.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                  <children>
-                                    <TextField prefWidth="150.0" />
+                                    <TextField fx:id="txtTelefone" prefWidth="150.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
                                  <children>
-                                    <TextField prefWidth="350.0" />
+                                    <TextField fx:id="txtEmail" prefWidth="350.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
                                  <children>
-                                    <TextArea prefHeight="200.0" prefWidth="350.0" />
+                                    <TextArea fx:id="txtEndereco" prefHeight="200.0" prefWidth="350.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
                                  <children>
-                                    <TextField prefWidth="350.0" />
+                                    <TextField fx:id="txtPessoaResponsavel" prefWidth="350.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
@@ -103,7 +103,7 @@
       </TabPane>
    </center>
    <top>
-      <Label text="Cadastro de Fornecedor" BorderPane.alignment="CENTER">
+      <Label fx:id="Title" text="%" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -123,7 +123,7 @@
          <children>
             <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Salvar" />
+                  <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#btnSalvar_OnAction" prefWidth="100.0" text="Salvar" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -134,7 +134,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Cancelar">
+                  <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCancelar_OnAction" prefWidth="100.0" text="Cancelar">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

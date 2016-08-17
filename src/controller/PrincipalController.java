@@ -105,9 +105,11 @@ public class PrincipalController {
     private Menu mnu_Cadastro;
 
     public void initialize() {
-
+      
     }
 
+
+    
     @FXML
     void cad_departamentoOnAction(ActionEvent event) {
         try {

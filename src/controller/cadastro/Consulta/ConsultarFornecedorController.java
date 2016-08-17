@@ -1,17 +1,30 @@
 package controller.cadastro.Consulta;
 
+import controller.PrincipalController;
+import controller.cadastro.Cadastro.CadastroFornecedorController;
+import gui.SystemAutonet;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import negocio.NegocioFornecedor;
+import vo.Fornecedor;
 
 public class ConsultarFornecedorController {
 
     @FXML
-    private TableView<?> tblPrincipal;
+    private TableView<Fornecedor> tblPrincipal;
 
     @FXML
     private Button btnInserir;
@@ -23,13 +36,13 @@ public class ConsultarFornecedorController {
     private TextField txtBuscador;
 
     @FXML
-    private TableColumn<?, ?> tbcRazaoSocial;
+    private TableColumn<Fornecedor, String> tbcRazaoSocial;
 
     @FXML
     private RadioButton rdbRazaoSocial;
 
     @FXML
-    private TableColumn<?, ?> tbcPessoaResponsavel;
+    private TableColumn<Fornecedor, String> tbcPessoaResponsavel;
 
     @FXML
     private Button btnVoltar;
@@ -41,10 +54,10 @@ public class ConsultarFornecedorController {
     private Button btnAlterar;
 
     @FXML
-    private TableColumn<?, ?> tbcNomeFantasia;
+    private TableColumn<Fornecedor, String> tbcNomeFantasia;
 
     @FXML
-    private TableColumn<?, ?> tbcCNPJ;
+    private TableColumn<Fornecedor, String> tbcCNPJ;
 
     @FXML
     private RadioButton rdbCNPJ;
@@ -57,5 +70,105 @@ public class ConsultarFornecedorController {
 
     @FXML
     private Button btnBuscar;
+
+    private NegocioFornecedor negocioF;
+
+    public void initialize() {
+        negocioF = new NegocioFornecedor();
+        List<Fornecedor> lista = negocioF.buscarTodos();
+
+        completarTabela(lista);
+
+    }
+
+    void completarTabela(List<Fornecedor> lista) {
+        ObservableList<Fornecedor> dado = FXCollections.observableArrayList();
+        for (int i = 0; i < lista.size(); i++) {
+            dado.add(lista.get(i));
+        }
+        this.tbcNomeFantasia.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("nome_fantasia"));
+        this.tbcCNPJ.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("cnpj"));
+        this.tbcPessoaResponsavel.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("pessoa_responsavel"));
+        this.tbcRazaoSocial.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("razao_social"));
+        this.tblPrincipal.setItems(dado);
+    }
+
+    @FXML
+    void btnVoltar_OnAction(ActionEvent event) {
+        try {
+            Parent root;
+            root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void btnInserir_OnAction(ActionEvent event) {
+        try {
+            CadastroFornecedorController.setCadastrar(true);
+            negocioF = null;
+            Parent root;
+            root = FXMLLoader.load(CadastroFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Fornecedor"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void btnAlterar_OnAction(ActionEvent event) {
+        Fornecedor f = tblPrincipal.getSelectionModel().getSelectedItem();
+        
+        CadastroFornecedorController.setCadastrar(false);
+        CadastroFornecedorController.setAlterar(f);
+
+        try {
+            negocioF = null;
+            CadastroFornecedorController.setCadastrar(true);
+            Parent root;
+            root = FXMLLoader.load(CadastroFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void btnExcluir_OnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnBuscar_OnAction(ActionEvent event) {
+          if (rdbCNPJ.isSelected()) {
+            Fornecedor f = new Fornecedor();
+            f.setCnpj(txtBuscador.getText());
+            List<Fornecedor> lista = negocioF.buscarPorCnpj(f);
+            completarTabela(lista);
+
+        }
+        if (rdbNomeFantasia.isSelected()) {
+             Fornecedor f = new Fornecedor();
+            f.setCnpj(txtBuscador.getText());
+            List<Fornecedor> lista = negocioF.buscarPorNomeFantasia(f);
+            completarTabela(lista);
+
+        }
+        if (rdbPessoaResponsavel.isSelected()) {
+             Fornecedor f = new Fornecedor();
+            f.setCnpj(txtBuscador.getText());
+            List<Fornecedor> lista = negocioF.buscarPorPessoaResponsavel(f);
+            completarTabela(lista);
+
+        }
+        if (rdbRazaoSocial.isSelected()) {
+            Fornecedor f = new Fornecedor();
+            f.setCnpj(txtBuscador.getText());
+            List<Fornecedor> lista = negocioF.buscarPorRazaoSocial(f);
+            completarTabela(lista);
+        }
+    }
 
 }

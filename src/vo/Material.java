@@ -48,6 +48,7 @@ public class Material implements Serializable, EntidadeBase {
     private Categoria id_categoria = null;
     
     private String CategoriNome;
+    
     private String unidadeMedida;
 
     public TipoUnidade getId_tipo_unidade() {

@@ -48,7 +48,7 @@ public class NegocioFornecedor {
         return fornecedorDAO.buscarPorRazaoSical(fornecedor);
     }
 
-    public Fornecedor buscarPorCnpj(Fornecedor fornecedor) {
+    public List<Fornecedor> buscarPorCnpj(Fornecedor fornecedor) {
         return fornecedorDAO.buscarPorCNPJ(fornecedor);
     }
 
