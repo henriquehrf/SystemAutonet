@@ -23,8 +23,7 @@ public class TipoUnidadeDAO extends GenericoDAO<TipoUnidade> {
         List<TipoUnidade> list;
         Query query;       
         
-        try{
-            
+        try{            
             query = em.createNamedQuery("TipoUnidade.descricao");
             query.setParameter("descricao", "%"+tu.getDescricao().toUpperCase()+"%");
             list = query.getResultList();
