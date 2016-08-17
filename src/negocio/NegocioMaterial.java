@@ -5,10 +5,13 @@
  */
 package negocio;
 
+import DAO.CategoriaDAO;
 import DAO.MaterialDAO;
+import DAO.TipoUnidadeDAO;
 import java.util.List;
 import vo.Categoria;
 import vo.Material;
+import vo.TipoUnidade;
 
 /**
  *
@@ -17,9 +20,13 @@ import vo.Material;
 public class NegocioMaterial {
 
     private MaterialDAO materialDAO;
+    private TipoUnidadeDAO tuDAO;
+    private CategoriaDAO categoriaDAO;
 
     public NegocioMaterial() {
         materialDAO = new MaterialDAO();
+        tuDAO = new TipoUnidadeDAO();
+        categoriaDAO = new CategoriaDAO ();
     }
 
     public Material salvar(Material material) throws Exception {
@@ -49,7 +56,18 @@ public class NegocioMaterial {
     }
     
     public List<Material> buscarTodos() {
-        return materialDAO.buscarTodos();
+        
+        List<Material> list = materialDAO.buscarTodos();
+        
+        for(int i =0 ;i<list.size();i++){
+            Categoria cat = categoriaDAO.consutarPorId(Categoria.class, list.get(i).getId_categoria());
+            TipoUnidade tu = tuDAO.consutarPorId(TipoUnidade.class, list.get(i).getId_tipo_unidade());
+            
+            list.get(i).setCategoriNome(cat.getDescricao());
+            list.get(i).setUnidadeMedida(tu.getDescricao());
+        }
+        
+        return list;
     }
 
     public List<Material> buscarPorCategoria(Categoria categoria) {
