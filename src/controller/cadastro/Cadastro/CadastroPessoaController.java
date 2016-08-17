@@ -54,115 +54,115 @@ import vo.Sexo;
  * @author PET Autonet
  */
 public class CadastroPessoaController {
-    
+
     @FXML
     private TextField txtEndereco;
-    
+
     @FXML
     private PasswordField txtRSenha;
-    
+
     @FXML
     private Label foneObrigatorio;
-    
+
     @FXML
     private DatePicker dtpDtNascimento;
-    
+
     @FXML
     private TextField txtNome;
-    
+
     @FXML
     private RadioButton rdbMasculino;
-    
+
     @FXML
     private TextField txtCpf;
-    
+
     @FXML
     private TextField txtNumMatricula;
-    
+
     @FXML
     private Button btnSalvar;
-    
+
     @FXML
     private Label funcaoObrigatorio;
-    
+
     @FXML
     private CheckBox CheckBoxInativo;
-    
+
     @FXML
     private Label nomeObrigatorio;
-    
+
     @FXML
     private Label sexoObrigatorio;
-    
+
     @FXML
     private Button btnCancelar;
-    
+
     @FXML
     private ComboBox<PerfilUsuario> cmbFuncao;
-    
+
     @FXML
     private TextField txtRg;
-    
+
     @FXML
     private Label usuarioObrigatorio;
-    
+
     @FXML
     private PasswordField txtSenha;
-    
+
     @FXML
     private Label cpfObrigatorio;
-    
+
     @FXML
     private Tab tabDadoPessoais;
-    
+
     @FXML
     private TextField txtSecundario;
-    
+
     @FXML
     private Label matriculaObrigatorio;
-    
+
     @FXML
     private Label emailObrigatorio;
-    
+
     @FXML
     private TextField txtEmail;
-    
+
     @FXML
     private Label enderecoObrigatorio;
-    
+
     @FXML
     private CheckBox CheckBoxAtivo;
-    
+
     @FXML
     private TextField txtUsuario;
-    
+
     @FXML
     private Label rgObrigatorio;
-    
+
     @FXML
     private TextField txtPrincipal;
-    
+
     @FXML
     private Label repSenhaObrigatorio;
-    
+
     @FXML
     private Label dtNascimentoObrigatorio;
-    
+
     @FXML
     private Label senhaObrigatorio;
-    
+
     @FXML
     private RadioButton rdbFeminino;
-    
+
     private NegocioPessoa NegocioP = new NegocioPessoa();
-    
+
     ObservableList<PerfilUsuario> perf = FXCollections.observableArrayList((PerfilUsuario.values()));
-    
+
     @FXML
     void btnSalvarOnAction(ActionEvent event) throws Exception {
-        
+
         if (verificaCampoObrigatorio()) {
-            
+
             Pessoa pessoa = new Pessoa();
             Date data = new Date();
             pessoa.setNome(txtNome.getText());
@@ -184,45 +184,52 @@ public class CadastroPessoaController {
                 pessoa.setSexo(Sexo.M);
             }
             if (CheckBoxAtivo.isSelected()) {
-                pessoa.setAtivo("S");
+                pessoa.setAtivo(Atividade.A);
             }
             if (CheckBoxInativo.isSelected()) {
-                pessoa.setAtivo("N");
+                pessoa.setAtivo(Atividade.I);
             }
-            pessoa.setDt_nascimento(data);
-            
+
+            Instant instant = dtpDtNascimento.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            pessoa.setDt_nascimento(Date.from(instant));
+
             try {
                 NegocioP.salvar(pessoa);
                 Parent root;
+                LerProperties ler = new LerProperties();
+                Properties prop = ler.getProp();
+                alerta(AlertType.INFORMATION, prop.getProperty("msg.cadastro.confirmacao"), prop.getProperty("msg.cadastro.sucesso"));
                 root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
                 SystemAutonet.SCENE.setRoot(root);
             } catch (Exception ex) {
-                alerta(ex.getMessage());
+                LerProperties ler = new LerProperties();
+                Properties prop = ler.getProp();
+                alerta(AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
             }
         } else {
             try {
                 LerProperties ler = new LerProperties();
                 Properties prop = ler.getProp();
-                alerta(prop.getProperty("msg.cadastro.incompleto"));
+                alerta(AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), prop.getProperty("msg.cadastro.incompleto"));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-               
+
             }
         }
     }
-    
+
     @FXML
     void btnSalvarOnKeyPressed(KeyEvent event) {
     }
-    
+
     @FXML
     void btnCancelarOnKeyPressed(KeyEvent event) {
-        
+
     }
-    
+
     @FXML
     void btnCancelarOnAction(ActionEvent event) {
-        
+
         try {
             Parent root;
             root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
@@ -230,42 +237,42 @@ public class CadastroPessoaController {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        
+
     }
-    
+
     @FXML
     void rdbFemininoOnAction(ActionEvent event) {
-        
+
     }
-    
+
     @FXML
     void rdbFemininoOnKeyPressed(KeyEvent event) {
-        
+
     }
-    
+
     @FXML
     void rdbMasculinoOnAction(ActionEvent event) {
-        
+
     }
-    
+
     @FXML
     void rdbMasculinoOnKeyPressed(KeyEvent event) {
-        
+
     }
-    
-    void alerta(String erro) throws Exception {
+
+    void alerta(AlertType TipoAviso, String cabecalho, String msg) throws Exception {
         LerProperties ler = new LerProperties();
-        
+
         Properties prop = ler.getProp();
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle(prop.getProperty("msg.cadastro.erro"));
+        Alert alert = new Alert(TipoAviso);
+        alert.setTitle(cabecalho);
         alert.setHeaderText(null);
-        alert.setContentText(erro);
-        
+        alert.setContentText(msg);
+
         alert.showAndWait();
-        
+
     }
-    
+
     private void setcamposObrigatorio() {
         nomeObrigatorio.setVisible(false);
         sexoObrigatorio.setVisible(false);
@@ -281,7 +288,7 @@ public class CadastroPessoaController {
         senhaObrigatorio.setVisible(false);
         repSenhaObrigatorio.setVisible(false);
     }
-    
+
     private boolean verificaCampoObrigatorio() {
         setcamposObrigatorio();
         boolean verifica = true;
@@ -339,13 +346,13 @@ public class CadastroPessoaController {
         }
         return verifica;
     }
-    
+
     public void initialize() {
         setcamposObrigatorio();
         cmbFuncao.setItems(perf);
         CheckBoxAtivo.setDisable(true);
         CheckBoxInativo.setDisable(true);
-        
+
     }
-    
+
 }
