@@ -81,8 +81,9 @@ public class Pessoa implements EntidadeBase, Serializable {
     @Column(length = 20, nullable = false)
     private String usuario;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 1000, nullable = false)
     private String senha;
+
     
     
     @Column(nullable = false)
@@ -217,5 +218,8 @@ public class Pessoa implements EntidadeBase, Serializable {
     public void setUltimo_acesso(Date ultimo_acesso) {
         this.ultimo_acesso = ultimo_acesso;
     }
+
+     
+    
 
 }

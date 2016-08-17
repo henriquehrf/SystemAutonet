@@ -44,7 +44,7 @@ public class TipoSaidaDAO extends GenericoDAO<TipoSaida> {
         
         try{
             
-            query = em.createNamedQuery("TipoSaida.BuscarPorDescricao");
+            query = em.createNamedQuery("TipoSaida.BuscarTodos");
             list = query.getResultList();
             
         }catch(Exception ex){

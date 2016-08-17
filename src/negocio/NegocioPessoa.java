@@ -29,6 +29,7 @@ public class NegocioPessoa {
     public Pessoa salvar(Pessoa pessoa) throws Exception {
         String erro = validarPessoa(pessoa);
         if (erro.equals("")) {
+            
             return (pessoaDAO.salvar(Pessoa.class, pessoa));
         } else {
             throw new Exception(erro);
