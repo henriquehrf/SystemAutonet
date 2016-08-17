@@ -108,26 +108,26 @@ public class NegocioPessoa {
         }
         
         if (pessoaDAO.EncontrarUsuario(pessoa)) {
-            erro += "Usuário já cadastrado\n";
+            erro += prop.getProperty("msg.cadastro.usuarioJaCadastrado");
         }
         
         if (!pessoa.getEmail().isEmpty()) {
             if (!ValidarEmail.validar(pessoa.getEmail())) {
-                erro += "Email inválido\n";
+                erro += prop.getProperty("msg.cadastro.emailInvalido");
             }
         }
         
         if (pessoa.getId() == null || pessoa.getId() == 0) {
             if (buscarPorCPF(pessoa) != null) {
-                erro += "CPF já cadastrado\n";
+                erro += prop.getProperty("msg.cadastro.cpfJaCadastrado");
             }
             
             if (buscarPorRG(pessoa) != null) {
-                erro += "RG já cadastrado\n";
+                erro += prop.getProperty("msg.cadastro.rgJaCadastrado");
             }
             
             if (buscarPorMatricula(pessoa) != null) {
-                erro += "Matricula já cadastrado\n";
+                erro += prop.getProperty("msg.cadastro.MatriculaJaCadastrada");
             }
             
         }

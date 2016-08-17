@@ -60,13 +60,13 @@
                                     <Label fx:id="rgObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox prefHeight="15.0" prefWidth="611.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                              <HBox prefHeight="15.0" prefWidth="611.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
                                     <TextField fx:id="txtPrincipal" maxWidth="150.0" />
                                     <Label fx:id="foneObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
                                     <DatePicker fx:id="dtpDtNascimento" prefHeight="25.0" prefWidth="119.0" styleClass="date-piker" />
                                     <Label fx:id="dtNascimentoObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
