@@ -76,57 +76,57 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
 
     }
 
-    public Pessoa buscarPorCPF(Pessoa pessoa) {
+    public List<Pessoa> buscarPorCPF(Pessoa pessoa) {
         EntityManager em = getEM();
-        Pessoa p=null;
+         List<Pessoa> list=null;
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarPorCPF");
-            query.setParameter("cpf", pessoa.getCpf());
-            p = (Pessoa) query.getSingleResult();
+            query.setParameter("cpf", "%"+pessoa.getCpf()+"%");
+            list =  query.getResultList();
         } catch (Exception ex) {
-            p = null;
+            list = new ArrayList();
 
         } finally {
             em.close();
         }
 
-        return p;
+        return list;
 
     }
 
-    public Pessoa buscarPorRg(Pessoa pessoa) {
+    public List<Pessoa> buscarPorRg(Pessoa pessoa) {
         EntityManager em = getEM();
-        Pessoa p;
+       List<Pessoa>  list;
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarPorRg");
-            query.setParameter("rg", pessoa.getRg());
-           p = (Pessoa) query.getSingleResult();
+            query.setParameter("rg", "%"+pessoa.getRg()+"%");
+               list =  query.getResultList();
         } catch (Exception ex) {
-            p = null;
+           list = new ArrayList();
 
         } finally {
             em.close();
         }
 
-        return p;
+        return list;
     }
     
-        public Pessoa buscarPorMatricula(Pessoa pessoa) {
+        public List<Pessoa>  buscarPorMatricula(Pessoa pessoa) {
         EntityManager em = getEM();
-        Pessoa p;
+         List<Pessoa>  list;
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarPorMatricula");
-            query.setParameter("matricula", pessoa.getNum_matricula());
-           p = (Pessoa) query.getSingleResult();
+            query.setParameter("matricula", "%"+pessoa.getNum_matricula()+"%");
+                 list =  query.getResultList();
            
         } catch (Exception ex) {
-            p = null;
+            list = new ArrayList();
 
         } finally {
             em.close();
         }
 
-        return p;
+        return list;
     }
         
         

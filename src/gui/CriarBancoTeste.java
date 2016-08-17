@@ -63,17 +63,17 @@ public class CriarBancoTeste {
 //            pessoa = new Pessoa();
 //            pessoa.setId_pessoa(1L);
             Pessoa p = new Pessoa();
-//            
-            p = NegocioP.buscarPorCPF(pessoa);
-//            
-//            p.setNome("Eduardo Roosevelt de Oliveira Silva");
-//            p.setAtivo("N");
-//            pessoa = NegocioP.buscarPorCPF(p);
-            System.out.println("Nome: " + p.getNome()
-                    + "\nCPF: " + p.getCpf()
-                    + "\nNumero da matricula: " + p.getNum_matricula());
-//            list = NegocioP.buscarPorNome(pessoa);
-//            if (list.isEmpty()) {
+////            
+//           // p = NegocioP.buscarPorCPF(pessoa);
+////            
+////            p.setNome("Eduardo Roosevelt de Oliveira Silva");
+////            p.setAtivo("N");
+////            pessoa = NegocioP.buscarPorCPF(p);
+//            System.out.println("Nome: " + p.getNome()
+//                    + "\nCPF: " + p.getCpf()
+//                    + "\nNumero da matricula: " + p.getNum_matricula());
+////            list = NegocioP.buscarPorNome(pessoa);
+////            if (list.isEmpty()) {
 //                System.out.println("Erro na lista");
 //            } else {
 //                for (int i = 0; i < list.size(); i++) {

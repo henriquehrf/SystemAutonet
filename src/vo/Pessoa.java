@@ -76,7 +76,8 @@ public class Pessoa implements EntidadeBase, Serializable {
     private String num_matricula;
 
     @Column(length = 1, nullable = false)
-    private String ativo;
+      @Enumerated(EnumType.STRING)
+    private Atividade ativo;
 
     @Column(length = 20, nullable = false)
     private String usuario;
@@ -187,14 +188,15 @@ public class Pessoa implements EntidadeBase, Serializable {
         this.num_matricula = num_matricula;
     }
 
-    public String getAtivo() {
+    public Atividade getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(String ativo) {
+    public void setAtivo(Atividade ativo) {
         this.ativo = ativo;
     }
 
+   
     public String getUsuario() {
         return usuario;
     }

@@ -23,7 +23,6 @@
                               <Label text="%lbl.cpf" GridPane.rowIndex="2" />
                               <Label text="%lbl.rg" GridPane.rowIndex="3" />
                               <Label text="%lbl.dataNascimento" GridPane.rowIndex="4" />
-                              <Label text="%lbl.telefonePrincipal" GridPane.rowIndex="5" />
                               <Label text="%lbl.telefoneSecundario" GridPane.rowIndex="6" />
                               <Label text="%lbl.email" GridPane.rowIndex="7" />
                               <Label text="%lbl.endereco" GridPane.rowIndex="8" />
@@ -60,16 +59,16 @@
                                     <Label fx:id="rgObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox prefHeight="15.0" prefWidth="611.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                 <children>
-                                    <TextField fx:id="txtPrincipal" maxWidth="150.0" />
-                                    <Label fx:id="foneObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                              <HBox prefHeight="15.0" prefWidth="611.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
                                     <DatePicker fx:id="dtpDtNascimento" prefHeight="25.0" prefWidth="119.0" styleClass="date-piker" />
                                     <Label fx:id="dtNascimentoObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <children>
+                                    <TextField fx:id="txtPrincipal" maxWidth="150.0" />
+                                    <Label fx:id="foneObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
@@ -122,6 +121,7 @@
                                     <Label fx:id="repSenhaObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
+                              <Label text="%lbl.telefonePrincipal" GridPane.rowIndex="5" />
                            </children>
                            <columnConstraints>
                               <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="122.0" />
@@ -155,7 +155,7 @@
       </TabPane>
    </center>
    <top>
-      <Label styleClass="label-head" text="%title.cadastro.pessoa" BorderPane.alignment="CENTER">
+      <Label fx:id="Title" styleClass="label-head" text="%title.cadastro.pessoa" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
