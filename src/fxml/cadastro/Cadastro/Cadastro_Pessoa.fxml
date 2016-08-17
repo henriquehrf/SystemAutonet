@@ -155,7 +155,7 @@
       </TabPane>
    </center>
    <top>
-      <Label styleClass="label-head" text="%title.cadastro.pessoa" BorderPane.alignment="CENTER">
+      <Label fx:id="Title" styleClass="label-head" text="%title.cadastro.pessoa" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

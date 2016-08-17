@@ -121,6 +121,16 @@ public class ConsultarPessoaController {
     @FXML
     void btnAlterarOnAction(ActionEvent event) {
 
+        Pessoa p = tblPrincipal.getSelectionModel().getSelectedItem();
+        CadastroPessoaController.setAlterar(p);
+        try {
+            Parent root;
+            root = FXMLLoader.load(CadastroPessoaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
     }
 
     @FXML
@@ -152,7 +162,7 @@ public class ConsultarPessoaController {
             completarTabela(lista);
 
         }
-        if(rgbNumMatricula.isSelected()){
+        if (rgbNumMatricula.isSelected()) {
             Pessoa p = new Pessoa();
             p.setNum_matricula(txtBuscador.getText());
             List<Pessoa> lista = pessoa.buscarPorMatricula(p);
