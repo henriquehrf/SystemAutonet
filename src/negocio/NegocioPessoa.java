@@ -8,7 +8,10 @@ package negocio;
 import DAO.PessoaDAO;
 import classesAuxiliares.ValidarCpf;
 import classesAuxiliares.ValidarEmail;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
+import utilitarios.LerProperties;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -64,43 +67,45 @@ public class NegocioPessoa {
         return pessoaDAO.buscarTodos();
     }
 
-    private String validarPessoa(Pessoa pessoa) {
+    private String validarPessoa(Pessoa pessoa) throws Exception {
         String erro = "";
+        LerProperties ler = new LerProperties();
         
+        Properties prop = ler.getProp();
         if (pessoa.getNome().isEmpty()) {
-            erro += "Nome não pode ser vazio\n";
+            erro += prop.getProperty("msg.cadastro.sem.nome");
         }
         
         if (pessoa.getNome().length() < 3) {
-            erro += "Nome não pode ser menor do que 3 caracteres\n";
+            erro += prop.getProperty("msg.cadastro.curto.nome");
         }
         
         if (pessoa.getDt_nascimento() == null) {
-            erro += "Data de nascimento não pode ser nulo\n";
+            erro += prop.getProperty("msg.cadastro.sem.dtNascimento");
         }
         
         if (!ValidarCpf.isCPF(pessoa.getCpf())) {
-            erro += "CPF inválido\n";
+            erro += prop.getProperty("msg.cadastro.cpfInvalido");
         }
         
         if (pessoa.getFone_principal().isEmpty()) {
-            erro += "O telefone principal não pode ser vazio\n";
+            erro += prop.getProperty("msg.cadastro.principalVazio");
         }
         
         if (pessoa.getNum_matricula().isEmpty()) {
-            erro += "Numero de matricula não pode ser vazio\n";
+            erro += prop.getProperty("msg.cadastro.numMatriculaVazio");
         }
         
         if (pessoa.getEndereco().isEmpty()) {
-            erro += "Endereço não pode ser vazio\n";
+            erro += prop.getProperty("msg.cadastro.enderecoVazio");
         }
         
         if (pessoa.getSenha().isEmpty()) {
-            erro += "Senha não pode ser vazio\n";
+            erro += prop.getProperty("msg.cadastro.senhaVazio");
         }
         
-        if (pessoa.getSenha().length() < 8) {
-            erro += "Senha tem que ter pelo menos 8 caracteres\n";
+        if (pessoa.getSenha().length() < 4) {
+            erro += prop.getProperty("msg.cadastro.senhaPequena");
         }
         
         if (pessoaDAO.EncontrarUsuario(pessoa)) {
