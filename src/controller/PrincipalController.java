@@ -122,7 +122,7 @@ public class PrincipalController {
 
     @FXML
     void cad_fornecedorOnAction(ActionEvent event) {
-         try {
+        try {
             Parent root;
             root = FXMLLoader.load(ConsultarFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -134,7 +134,7 @@ public class PrincipalController {
 
     @FXML
     void cad_local_OnAction(ActionEvent event) {
-         try {
+        try {
             Parent root;
             root = FXMLLoader.load(ConsultarLocaisController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Locais.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -146,7 +146,7 @@ public class PrincipalController {
 
     @FXML
     void cad_materialOnAction(ActionEvent event) {
-         try {
+        try {
             Parent root;
             root = FXMLLoader.load(ConsultarMaterialController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Material.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -158,7 +158,7 @@ public class PrincipalController {
 
     @FXML
     void cad_pessoaOnAction(ActionEvent event) {
-         try {
+        try {
             Parent root;
             root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -170,7 +170,7 @@ public class PrincipalController {
 
     @FXML
     void cad_tipoBaixaOnAction(ActionEvent event) {
-         try {
+        try {
             Parent root;
             root = FXMLLoader.load(ConsultarTipoSaidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_TipoSaida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -182,9 +182,33 @@ public class PrincipalController {
 
     @FXML
     void cad_unidadeMedidaOnAction(ActionEvent event) {
-         try {
+        try {
             Parent root;
             root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_UnidadeMedida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
+
+    @FXML
+    void emp_solicitarOnAction(ActionEvent event) {
+        try {
+            Parent root;
+            root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/emprestimo/Solicita/SolicitaEmprestimo.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
+
+    @FXML
+    void emp_analisarOnAction(ActionEvent event) {
+          try {
+            Parent root;
+            root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/emprestimo/Analisar/AnalisarEmprestimo.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());

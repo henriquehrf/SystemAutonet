@@ -32,11 +32,11 @@
             <items>
                   <MenuItem fx:id="emp_acompanhar" mnemonicParsing="false" text="%mni.Acompanhar" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="emp_analisar" mnemonicParsing="false" text="%mni.Analisar" />
+                  <MenuItem fx:id="emp_analisar" mnemonicParsing="false" onAction="#emp_analisarOnAction" text="%mni.Analisar" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="emp_devolver" mnemonicParsing="false" text="%mni.Devolver" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem fx:id="emp_solicitar" mnemonicParsing="false" text="%mni.Solicitar" />
+              <MenuItem fx:id="emp_solicitar" mnemonicParsing="false" onAction="#emp_solicitarOnAction" text="%mni.Solicitar" />
             </items>
           </Menu>
             <Menu fx:id="mnu_estoque" mnemonicParsing="false" text="%mnu.Estoque">

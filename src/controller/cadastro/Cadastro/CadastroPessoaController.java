@@ -370,6 +370,7 @@ public class CadastroPessoaController {
     }
 
     public void initialize() {
+        btnCancelar.setStyle("button-analisar");
         setcamposObrigatorio();
         cmbFuncao.setItems(perf);
         CheckBoxAtivo.setDisable(true);
