@@ -5,33 +5,25 @@
  */
 package controller.cadastro.Cadastro;
 
-import controller.cadastro.Consulta.ConsultarFornecedorController;
 import controller.cadastro.Consulta.ConsultarPessoaController;
 import gui.SystemAutonet;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Observable;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -40,9 +32,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.util.converter.PercentageStringConverter;
 import negocio.NegocioPessoa;
 import utilitarios.LerProperties;
 import vo.Atividade;
@@ -157,10 +146,10 @@ public class CadastroPessoaController {
     @FXML
     private RadioButton rdbFeminino;
 
-    private NegocioPessoa NegocioP = new NegocioPessoa();
-    
+    private NegocioPessoa NegocioP;
+
     private static Pessoa alterar;
-    
+
     private static boolean cadastrar;
 
     public static boolean isCadastrar() {
@@ -170,8 +159,7 @@ public class CadastroPessoaController {
     public static void setCadastrar(boolean cadastra) {
         CadastroPessoaController.cadastrar = cadastra;
     }
-    
-    
+
     public static Pessoa getAlterar() {
         return alterar;
     }
@@ -182,6 +170,21 @@ public class CadastroPessoaController {
 
     ObservableList<PerfilUsuario> perf = FXCollections.observableArrayList((PerfilUsuario.values()));
 
+    public void initialize() {
+        
+        NegocioP = new NegocioPessoa();
+        setcamposObrigatorio();
+        cmbFuncao.setItems(perf);
+        CheckBoxAtivo.setDisable(true);
+        CheckBoxInativo.setDisable(true);
+        if (!isCadastrar()) {
+            completar();
+        } else {
+            alterar = null;
+        }
+
+    }
+
     @FXML
     void btnSalvarOnAction(ActionEvent event) throws Exception {
 
@@ -191,10 +194,9 @@ public class CadastroPessoaController {
             } else {
                 Pessoa pessoa = new Pessoa();
                 salvar(pessoa);
-                
-                
+
             }
-            
+
         } else {
             try {
                 LerProperties ler = new LerProperties();
@@ -252,6 +254,7 @@ public class CadastroPessoaController {
             Parent root;
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();
+            NegocioP = null;
             alerta(AlertType.INFORMATION, prop.getProperty("msg.cadastro.confirmacao"), prop.getProperty("msg.cadastro.sucesso"));
             root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -267,6 +270,8 @@ public class CadastroPessoaController {
 
         try {
             Parent root;
+            NegocioP = null;
+            alterar = null;
             root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -382,19 +387,6 @@ public class CadastroPessoaController {
         return verifica;
     }
 
-    public void initialize() {
-        setcamposObrigatorio();
-        cmbFuncao.setItems(perf);
-        CheckBoxAtivo.setDisable(true);
-        CheckBoxInativo.setDisable(true);
-        if (!isCadastrar()) {
-            completar();
-        } else {
-            alterar = null;
-        }
-
-    }
-
     void completar() {
         txtNome.setText(alterar.getNome());
         txtCpf.setText(alterar.getCpf());
@@ -418,7 +410,7 @@ public class CadastroPessoaController {
         LerProperties ler = new LerProperties();
         try {
             Properties prop = ler.getProp();
-            Title.setText(prop.getProperty("title.alterar.pessoa"));
+            Title.setText(prop.getProperty("title.alterar.departamento"));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }

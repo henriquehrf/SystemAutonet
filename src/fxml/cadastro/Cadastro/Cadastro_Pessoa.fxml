@@ -160,7 +160,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
          <BorderPane.margin>
-            <Insets top="10.0" />
+            <Insets bottom="10.0" top="10.0" />
          </BorderPane.margin>
       </Label>
    </top>

@@ -3,9 +3,7 @@ package controller.cadastro.Consulta;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroPessoaController;
 import gui.SystemAutonet;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -22,7 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioPessoa;
-import utilitarios.LerProperties;
 import vo.Pessoa;
 
 public class ConsultarPessoaController {
@@ -101,6 +97,7 @@ public class ConsultarPessoaController {
     @FXML
     void btnVoltarOnAction(ActionEvent event) {
         try {
+            pessoa = null;
             Parent root;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -115,6 +112,7 @@ public class ConsultarPessoaController {
         try {
             CadastroPessoaController.setCadastrar(true);
             Parent root;
+            pessoa = null;
             root = FXMLLoader.load(CadastroPessoaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -131,6 +129,7 @@ public class ConsultarPessoaController {
         CadastroPessoaController.setAlterar(p);
         try {
             Parent root;
+            pessoa = null;
             root = FXMLLoader.load(CadastroPessoaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {

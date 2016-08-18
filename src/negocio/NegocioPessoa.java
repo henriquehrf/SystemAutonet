@@ -119,15 +119,15 @@ public class NegocioPessoa {
             }
 
             if (pessoa.getId() == null || pessoa.getId() == 0) {
-                if (buscarPorCPF(pessoa) != null) {
+                if (!buscarPorCPF(pessoa).isEmpty()) {
                     erro += prop.getProperty("msg.cadastro.cpfJaCadastrado");
                 }
 
-                if (buscarPorRG(pessoa) != null) {
+                if (!buscarPorRG(pessoa).isEmpty()) {
                     erro += prop.getProperty("msg.cadastro.rgJaCadastrado");
                 }
 
-                if (buscarPorMatricula(pessoa) != null) {
+                if (!buscarPorMatricula(pessoa).isEmpty()) {
                     erro += prop.getProperty("msg.cadastro.MatriculaJaCadastrada");
                 }
 

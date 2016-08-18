@@ -24,54 +24,62 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
                                     <TextField fx:id="txtNomeFantasia" prefWidth="350.0" />
+                                    <Label fx:id="lblnomefantasiaObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
                                     <TextField fx:id="txtRazaoSocial" prefWidth="350.0" />
+                                    <Label fx:id="lblrazaoSocialObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <children>
                                     <TextField fx:id="txtCnpj" prefWidth="150.0" />
+                                    <Label fx:id="lblCnpjObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <children>
                                     <TextField fx:id="txtInscricaoEstadual" prefWidth="200.0" />
+                                    <Label fx:id="lblInscricaoObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                  <children>
                                     <TextField fx:id="txtTelefone" prefWidth="150.0" />
+                                    <Label fx:id="lblTelefoneObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
                                  <children>
                                     <TextField fx:id="txtEmail" prefWidth="350.0" />
+                                    <Label fx:id="lblEmailObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
                                  <children>
                                     <TextArea fx:id="txtEndereco" prefHeight="200.0" prefWidth="350.0" />
+                                    <Label fx:id="lblEnderecoObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
                                  <children>
                                     <TextField fx:id="txtPessoaResponsavel" prefWidth="350.0" />
+                                    <Label fx:id="lblPessoaResponsavelObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                              <Label text="Razão Social: " GridPane.rowIndex="4" />
-                              <Label text="Nome Fantasia: " GridPane.rowIndex="5" />
-                              <Label text="CNPJ: " GridPane.rowIndex="6" />
-                              <Label text="Inscriçao Estadual: " GridPane.rowIndex="7" />
-                              <Label text="Telefone: " GridPane.rowIndex="8" />
-                              <Label text="Email: " GridPane.rowIndex="9" />
-                              <Label text="Endereço: " GridPane.rowIndex="10" />
-                              <Label text="Pessoa Responsável: " GridPane.rowIndex="11" />
+                              <Label text="%lbl.razaosocial" GridPane.rowIndex="4" />
+                              <Label text="%lbl.nomefantasia" GridPane.rowIndex="5" />
+                              <Label text="%lbl.cnpj" GridPane.rowIndex="6" />
+                              <Label text="%lbl.inscricaoestadual" GridPane.rowIndex="7" />
+                              <Label text="%lbl.telefone" GridPane.rowIndex="8" />
+                              <Label text="%lbl.email" GridPane.rowIndex="9" />
+                              <Label text="%lbl.endereco" GridPane.rowIndex="10" />
+                              <Label text="%lbl.pessoaresponsavel" GridPane.rowIndex="11" />
                            </children>
                            <columnConstraints>
                               <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="122.0" />
@@ -103,7 +111,7 @@
       </TabPane>
    </center>
    <top>
-      <Label fx:id="Title" text="%" BorderPane.alignment="CENTER">
+      <Label fx:id="Title" styleClass="label-head" text="%title.cadastro.fornecedor" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -123,7 +131,7 @@
          <children>
             <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#btnSalvar_OnAction" prefWidth="100.0" text="Salvar" />
+                  <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#btnSalvar_OnAction" prefWidth="100.0" styleClass="button-save" text="%btn.salvar" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -134,7 +142,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCancelar_OnAction" prefWidth="100.0" text="Cancelar">
+                  <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCancelar_OnAction" prefWidth="100.0" styleClass="button-cancel" text="%btn.cancelar">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

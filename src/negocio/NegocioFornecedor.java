@@ -65,7 +65,7 @@ public class NegocioFornecedor {
         String erro ="";
         
         if(fornecedor.getId() == null || fornecedor.getId() == 0){
-            if (buscarPorCnpj(fornecedor) != null){
+            if (!buscarPorCnpj(fornecedor).isEmpty()){
                 erro += "Erro: CNPJ já cadastrado";
             }
         }         

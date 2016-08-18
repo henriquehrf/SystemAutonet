@@ -76,7 +76,6 @@ public class ConsultarFornecedorController {
     public void initialize() {
         negocioF = new NegocioFornecedor();
         List<Fornecedor> lista = negocioF.buscarTodos();
-
         completarTabela(lista);
 
     }
@@ -110,7 +109,7 @@ public class ConsultarFornecedorController {
             CadastroFornecedorController.setCadastrar(true);
             negocioF = null;
             Parent root;
-            root = FXMLLoader.load(CadastroFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Fornecedor"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            root = FXMLLoader.load(CadastroFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
@@ -126,7 +125,6 @@ public class ConsultarFornecedorController {
 
         try {
             negocioF = null;
-            CadastroFornecedorController.setCadastrar(true);
             Parent root;
             root = FXMLLoader.load(CadastroFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -151,21 +149,21 @@ public class ConsultarFornecedorController {
         }
         if (rdbNomeFantasia.isSelected()) {
              Fornecedor f = new Fornecedor();
-            f.setCnpj(txtBuscador.getText());
+            f.setNome_fantasia(txtBuscador.getText());
             List<Fornecedor> lista = negocioF.buscarPorNomeFantasia(f);
             completarTabela(lista);
 
         }
         if (rdbPessoaResponsavel.isSelected()) {
              Fornecedor f = new Fornecedor();
-            f.setCnpj(txtBuscador.getText());
+            f.setPessoa_responsavel(txtBuscador.getText());
             List<Fornecedor> lista = negocioF.buscarPorPessoaResponsavel(f);
             completarTabela(lista);
 
         }
         if (rdbRazaoSocial.isSelected()) {
             Fornecedor f = new Fornecedor();
-            f.setCnpj(txtBuscador.getText());
+            f.setRazao_social(txtBuscador.getText());
             List<Fornecedor> lista = negocioF.buscarPorRazaoSocial(f);
             completarTabela(lista);
         }

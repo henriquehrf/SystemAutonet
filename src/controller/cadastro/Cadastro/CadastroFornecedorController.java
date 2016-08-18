@@ -5,7 +5,6 @@
  */
 package controller.cadastro.Cadastro;
 
-
 import controller.cadastro.Consulta.ConsultarFornecedorController;
 import gui.SystemAutonet;
 import java.io.IOException;
@@ -37,6 +36,30 @@ public class CadastroFornecedorController {
     private static boolean cadastrar;
 
     private NegocioFornecedor negocioF;
+
+    @FXML
+    private Label lblCnpjObrigatorio;
+
+    @FXML
+    private Label lblPessoaResponsavelObrigatorio;
+
+    @FXML
+    private Label lblInscricaoObrigatorio;
+
+    @FXML
+    private Label lblEmailObrigatorio;
+
+    @FXML
+    private Label lblnomefantasiaObrigatorio;
+
+    @FXML
+    private Label lblTelefoneObrigatorio;
+
+    @FXML
+    private Label lblEnderecoObrigatorio;
+
+    @FXML
+    private Label lblrazaoSocialObrigatorio;
 
     @FXML
     private Label Title;
@@ -89,6 +112,7 @@ public class CadastroFornecedorController {
 
     public void initialize() {
         negocioF = new NegocioFornecedor();
+        setcamposObrigatorio();
         if (!isCadastrar()) {
             completar();
         } else {
@@ -99,19 +123,22 @@ public class CadastroFornecedorController {
 
     @FXML
     void btnSalvar_OnAction(ActionEvent event) throws Exception {
-        if (alterar != null) {
-            salvar(alterar);
+        if (verificaCampoObrigatorio()) {
+            if (alterar != null) {
+                salvar(alterar);
+            } else {
+                Fornecedor fornecedor = new Fornecedor();
+                salvar(fornecedor);
+            }
         } else {
-            Fornecedor pessoa = new Fornecedor();
-            salvar(pessoa);
-        }
-        try {
-            LerProperties ler = new LerProperties();
-            Properties prop = ler.getProp();
-            alerta(Alert.AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), prop.getProperty("msg.cadastro.incompleto"));
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            try {
+                LerProperties ler = new LerProperties();
+                Properties prop = ler.getProp();
+                alerta(Alert.AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), prop.getProperty("msg.cadastro.incompleto"));
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
 
+            }
         }
     }
 
@@ -140,7 +167,7 @@ public class CadastroFornecedorController {
 
         try {
             Properties prop = ler.getProp();
-            Title.setText(prop.getProperty("title.cadastro.fornecedor"));
+            Title.setText(prop.getProperty("title.alterar.fornecedor"));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -170,7 +197,9 @@ public class CadastroFornecedorController {
             root = FXMLLoader.load(ConsultarFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            LerProperties ler = new LerProperties();
+            Properties prop = ler.getProp();
+            alerta(Alert.AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
         }
     }
 
@@ -185,5 +214,56 @@ public class CadastroFornecedorController {
 
         alert.showAndWait();
 
+    }
+
+    private void setcamposObrigatorio() {
+        lblCnpjObrigatorio.setVisible(false);
+        lblEmailObrigatorio.setVisible(false);
+        lblEnderecoObrigatorio.setVisible(false);
+        lblInscricaoObrigatorio.setVisible(false);
+        lblPessoaResponsavelObrigatorio.setVisible(false);
+        lblTelefoneObrigatorio.setVisible(false);
+        lblnomefantasiaObrigatorio.setVisible(false);
+        lblrazaoSocialObrigatorio.setVisible(false);
+    }
+
+    private boolean verificaCampoObrigatorio() {
+        setcamposObrigatorio();
+        boolean verifica = true;
+
+        if (txtCnpj.getText().isEmpty()) {
+            lblCnpjObrigatorio.setVisible(true);
+            verifica = false;
+        }
+        if (txtEmail.getText().isEmpty()) {
+            lblEmailObrigatorio.setVisible(true);
+            verifica = false;
+        }
+        if (txtEndereco.getText().isEmpty()) {
+            lblEnderecoObrigatorio.setVisible(true);
+            verifica = false;
+        }
+        if (txtInscricaoEstadual.getText().isEmpty()) {
+            lblInscricaoObrigatorio.setVisible(true);
+            verifica = false;
+        }
+        if (txtNomeFantasia.getText().isEmpty()) {
+            lblnomefantasiaObrigatorio.setVisible(true);
+            verifica = false;
+        }
+        if (txtPessoaResponsavel.getText().isEmpty()) {
+            lblPessoaResponsavelObrigatorio.setVisible(true);
+            verifica = false;
+        }
+        if (txtRazaoSocial.getText().isEmpty()) {
+            lblrazaoSocialObrigatorio.setVisible(true);
+            verifica = false;
+        }
+        if (txtTelefone.getText().isEmpty()) {
+            lblTelefoneObrigatorio.setVisible(true);
+            verifica = false;
+        }
+
+        return verifica;
     }
 }

@@ -43,7 +43,7 @@ public class DepartamentoDAO extends GenericoDAO<Departamento> {
         
         try{
             query = em.createNamedQuery("Departamento.ConsultarPorSigla");
-            query.setParameter("sigla", departamento.getSigla().toUpperCase());
+            query.setParameter("sigla", "%"+departamento.getSigla().toUpperCase()+"%");
             list = query.getResultList();
             
         }catch(Exception ex){
