@@ -92,7 +92,7 @@ public class Material implements Serializable, EntidadeBase {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.descricao = descricao.toUpperCase();
     }
 
     public String getCategoriNome() {

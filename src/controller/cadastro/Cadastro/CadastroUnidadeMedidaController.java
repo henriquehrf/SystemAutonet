@@ -174,10 +174,12 @@ public class CadastroUnidadeMedidaController {
         try {
             NegocioT.salvar(ts);
             alterar = null;
+            NegocioT = null;
+            
             Parent root;
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();
-            NegocioT = null;
+
             alerta(AlertType.INFORMATION, prop.getProperty("msg.cadastro.confirmacao"), prop.getProperty("msg.cadastro.sucesso"));
             root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_UnidadeMedida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);

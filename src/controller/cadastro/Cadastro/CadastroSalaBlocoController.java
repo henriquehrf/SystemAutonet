@@ -84,7 +84,7 @@ public class CadastroSalaBlocoController {
         negocioDepartamento = new NegocioDepartamento();
         setcamposObrigatorio();
         lista = negocioDepartamento.buscarTodos();
-        
+
         ObservableList<String> dado = FXCollections.observableArrayList();
         for (int i = 0; i < lista.size(); i++) {
             dado.add(lista.get(i).getSigla());
@@ -101,13 +101,25 @@ public class CadastroSalaBlocoController {
     }
 
     @FXML
-    void btnSalvar_OnAction(ActionEvent event) throws Exception {
+    void btnSalvar_OnAction(ActionEvent event) {
+
         if (verificaCampoObrigatorio()) {
-            if (alterar != null) {
-                salvar(alterar);
-            } else {
-                Local local = new Local();
-                salvar(local);
+            try {
+                if (alterar != null) {
+                    salvar(alterar);
+                } else {
+                    Local local = new Local();
+                    salvar(local);
+                }
+            } catch (Exception ex) {
+                LerProperties ler = new LerProperties();
+                Properties prop;
+                try {
+                    prop = ler.getProp();
+                    alerta(Alert.AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
+                } catch (Exception ex1) {
+                    System.out.println(ex1.getMessage());
+                }
             }
 
         } else {
@@ -128,6 +140,7 @@ public class CadastroSalaBlocoController {
             Parent root;
             NegocioL = null;
             alterar = null;
+            negocioDepartamento = null;
             root = FXMLLoader.load(ConsultarLocaisController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Locais.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -209,8 +222,8 @@ public class CadastroSalaBlocoController {
         local.setNumero(Integer.parseInt(txtnumero.getText()));
         local.setResponsavel(txtresponsavel.getText());
         Departamento dp = new Departamento();
-        for(Departamento vo: lista){
-            if(vo.getSigla().equals(cmbDepartamento.getValue())){
+        for (Departamento vo : lista) {
+            if (vo.getSigla().equals(cmbDepartamento.getValue())) {
                 dp = vo;
                 break;
             }
@@ -218,14 +231,20 @@ public class CadastroSalaBlocoController {
         local.setId_departamento(dp);
         try {
             NegocioL.salvar(local);
-            Parent root;
-            LerProperties ler = new LerProperties();
-            Properties prop = ler.getProp();
+
             NegocioL = null;
             alterar = null;
+            negocioDepartamento = null;
+
+            Parent root;
+            LerProperties ler = new LerProperties();
+
+            Properties prop = ler.getProp();
             alerta(AlertType.INFORMATION, prop.getProperty("msg.cadastro.confirmacao"), prop.getProperty("msg.cadastro.sucesso"));
             root = FXMLLoader.load(ConsultarLocaisController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Locais.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+
             SystemAutonet.SCENE.setRoot(root);
+
         } catch (Exception ex) {
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();

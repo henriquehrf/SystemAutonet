@@ -94,7 +94,7 @@ public class Fornecedor implements Serializable, EntidadeBase {
     }
 
     public void setRazao_social(String razao_social) {
-        this.razao_social = razao_social;
+        this.razao_social = razao_social.toUpperCase();
     }
 
     public String getNome_fantasia() {
@@ -102,7 +102,7 @@ public class Fornecedor implements Serializable, EntidadeBase {
     }
 
     public void setNome_fantasia(String nome_fantasia) {
-        this.nome_fantasia = nome_fantasia;
+        this.nome_fantasia = nome_fantasia.toUpperCase();
     }
 
     public String getCnpj() {
@@ -118,7 +118,7 @@ public class Fornecedor implements Serializable, EntidadeBase {
     }
 
     public void setInscricao_estadual(String inscricao_estadual) {
-        this.inscricao_estadual = inscricao_estadual;
+        this.inscricao_estadual = inscricao_estadual.toUpperCase();
     }
 
     public String getTelefone() {
@@ -134,7 +134,7 @@ public class Fornecedor implements Serializable, EntidadeBase {
     }
 
     public void setEndereco(String endereco) {
-        this.endereco = endereco;
+        this.endereco = endereco.toUpperCase();
     }
 
     public String getEmail() {
@@ -150,7 +150,7 @@ public class Fornecedor implements Serializable, EntidadeBase {
     }
 
     public void setPessoa_responsavel(String pessoa_responsavel) {
-        this.pessoa_responsavel = pessoa_responsavel;
+        this.pessoa_responsavel = pessoa_responsavel.toUpperCase();
     }
 
 }

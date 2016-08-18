@@ -57,12 +57,21 @@ public class NegocioLocal {
         return localDAO.buscarPorPessoaResponsavel(local);
     }
 
-    public Local buscarPorNumero(Local local) {
+    public List<Local> buscarPorNumero(Local local) {
         return localDAO.buscarPorNumero(local);
     }
-    
+
     public List<Local> buscarTodos() {
         return localDAO.buscarTodos();
     }
+
+    public List<Local> buscarPorBloco(Local local) {
+        return localDAO.buscarPorBloco(local);
+    }
+    
+    public List<Local> buscarPorDepartamento(Local local) {
+        return localDAO.buscarPorDepartamento(local);
+    }
+    
 
 }

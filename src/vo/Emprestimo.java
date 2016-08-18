@@ -79,7 +79,7 @@ public class Emprestimo implements Serializable, EntidadeBase {
     }
 
     public void setFinalidade(String finalidade) {
-        this.finalidade = finalidade;
+        this.finalidade = finalidade.toUpperCase();
     }
 
     public String getObservacao() {
@@ -87,7 +87,7 @@ public class Emprestimo implements Serializable, EntidadeBase {
     }
 
     public void setObservacao(String observacao) {
-        this.observacao = observacao;
+        this.observacao = observacao.toUpperCase();
     }
 
     public Pessoa getId_pessoa_solicita() {

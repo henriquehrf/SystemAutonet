@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Transient;
 
 /**
  *
@@ -29,14 +30,17 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "Local.consultarPorNumero",
             query = "select l from Local l where l.numero = :numero"),
     
-//    @NamedQuery(name = "Local.consultarPorBloco",
-//            query = "select l from Local l where UPPER (l.descricao) like :bloco"),
+    @NamedQuery(name = "Local.consultarPorBloco",
+            query = "select l from Local l where UPPER (l.descricao) like :bloco"),
     
     @NamedQuery(name = "Local.consultarPorPessoaResponsavel",
             query = "select l from Local l where UPPER (l.responsavel) like :responsavel"),
     
       @NamedQuery(name = "Local.consultarTodos",
-            query = "select l from Local l ORDER BY (l.descricao)")
+            query = "select l from Local l ORDER BY (l.descricao)"),
+      
+       @NamedQuery(name = "Local.consultaDepartamento",
+            query = "select l from Local l WHERE l.id_departamento.id_departamento = :departamento ORDER BY (l.descricao)")
 
 })
 public class Local implements Serializable, EntidadeBase {
@@ -60,6 +64,9 @@ public class Local implements Serializable, EntidadeBase {
     @ManyToOne(fetch = FetchType.EAGER)
     private Departamento id_departamento = null;
     
+    @Transient
+    private String DepartamentoNome;
+        
 
     public Local() {
         this.id_local = null;
@@ -82,7 +89,7 @@ public class Local implements Serializable, EntidadeBase {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.descricao = descricao.toUpperCase();
     }
 
     public int getNumero() {
@@ -98,7 +105,7 @@ public class Local implements Serializable, EntidadeBase {
     }
 
     public void setResponsavel(String responsavel) {
-        this.responsavel = responsavel;
+        this.responsavel = responsavel.toUpperCase();
     }
 
     public Departamento getId_departamento() {

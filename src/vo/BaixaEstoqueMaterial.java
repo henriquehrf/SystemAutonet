@@ -68,7 +68,7 @@ public class BaixaEstoqueMaterial implements Serializable, EntidadeBase {
     }
 
     public void setObservacao(String observacao) {
-        this.observacao = observacao;
+        this.observacao = observacao.toUpperCase();
     }
 
     public int getQuantidade() {

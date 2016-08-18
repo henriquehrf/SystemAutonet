@@ -95,6 +95,7 @@ public class ConsultarFornecedorController {
     @FXML
     void btnVoltar_OnAction(ActionEvent event) {
         try {
+            negocioF = null;
             Parent root;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);

@@ -59,7 +59,7 @@ public class Departamento implements Serializable, EntidadeBase {
     }
 
     public void setSigla(String sigla) {
-        this.sigla = sigla;
+        this.sigla = sigla.toUpperCase();
     }
 
     public String getNome() {
@@ -67,7 +67,7 @@ public class Departamento implements Serializable, EntidadeBase {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
 }

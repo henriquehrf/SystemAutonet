@@ -56,7 +56,7 @@ public class TipoUnidade implements Serializable, EntidadeBase {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.descricao = descricao.toUpperCase();
     }
 
     public String getSigla() {
@@ -64,7 +64,7 @@ public class TipoUnidade implements Serializable, EntidadeBase {
     }
 
     public void setSigla(String sigla) {
-        this.sigla = sigla;
+        this.sigla = sigla.toUpperCase();
     }
     
 }

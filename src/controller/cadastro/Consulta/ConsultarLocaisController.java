@@ -18,7 +18,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import negocio.NegocioDepartamento;
 import negocio.NegocioLocal;
+import vo.Departamento;
 import vo.Local;
 
 public class ConsultarLocaisController {
@@ -128,7 +130,34 @@ public class ConsultarLocaisController {
 
     @FXML
     void btnBuscar_OnAction(ActionEvent event) {
+        if (rdbBloco.isSelected()) {
+            Local local = new Local();
+            local.setBloco(txtBuscador.getText());
+            completarTabela(negocioLocal.buscarPorBloco(local));
+        }
 
+        if (rdbNumero.isSelected()) {
+            Local local = new Local();
+            local.setNumero(Integer.parseInt(txtBuscador.getText()));
+            completarTabela(negocioLocal.buscarPorNumero(local));
+        }
+        if (rdbPessoaResponsavel.isSelected()) {
+            Local local = new Local();
+            local.setResponsavel(txtBuscador.getText());
+            completarTabela(negocioLocal.buscarPorPessoaResponsavel(local));
+        }
+        if (rdbDepartamento.isSelected()) {
+            NegocioDepartamento nd = new NegocioDepartamento();
+            Departamento dp = new Departamento();
+            dp.setNome(txtBuscador.getText());
+            List<Departamento> listD = nd.buscarPorNome(dp);
+            if (listD.size() == 1) {
+                Local local = new Local();
+                local.setId_departamento(listD.get(0));
+                completarTabela(negocioLocal.buscarPorDepartamento(local));
+            }
+
+        }
     }
 
     private void completarTabela(List<Local> lista) {

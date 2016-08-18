@@ -10,6 +10,8 @@ import gui.SystemAutonet;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,8 +31,7 @@ import vo.Fornecedor;
  */
 public class CadastroFornecedorController {
 
-    private NegocioFornecedor NegocioF = new NegocioFornecedor();
-
+  
     private static Fornecedor alterar;
 
     private static boolean cadastrar;
@@ -122,13 +123,24 @@ public class CadastroFornecedorController {
     }
 
     @FXML
-    void btnSalvar_OnAction(ActionEvent event) throws Exception {
+    void btnSalvar_OnAction(ActionEvent event) {
         if (verificaCampoObrigatorio()) {
-            if (alterar != null) {
-                salvar(alterar);
-            } else {
-                Fornecedor fornecedor = new Fornecedor();
-                salvar(fornecedor);
+            try {
+                if (alterar != null) {
+                    salvar(alterar);
+                } else {
+                    Fornecedor fornecedor = new Fornecedor();
+                    salvar(fornecedor);
+                }
+            } catch (Exception ex) {
+                LerProperties ler = new LerProperties();
+                Properties prop;
+                try {
+                    prop = ler.getProp();
+                    alerta(Alert.AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
+                } catch (Exception ex1) {
+                    System.out.println(ex1.getMessage());
+                }
             }
         } else {
             try {
@@ -146,6 +158,8 @@ public class CadastroFornecedorController {
     void btnCancelar_OnAction(ActionEvent event) {
         try {
             Parent root;
+            alterar = null;
+            negocioF = null;
             root = FXMLLoader.load(ConsultarFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -186,9 +200,9 @@ public class CadastroFornecedorController {
         fornecedor.setTelefone(txtTelefone.getText());
 
         try {
-            NegocioF.salvar(fornecedor);
+            negocioF.salvar(fornecedor);
             alterar = null;
-            NegocioF = null;
+            negocioF = null;
             Parent root;
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();

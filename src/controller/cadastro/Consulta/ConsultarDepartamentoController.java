@@ -83,6 +83,7 @@ public class ConsultarDepartamentoController {
     @FXML
     void btnInserir_OnAction(ActionEvent event) {
         try {
+            negocioD = null;
             CadastroDepartamentoController.setCadastrar(true);
             Parent root;
             root = FXMLLoader.load(CadastroDepartamentoController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Departamento.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
@@ -98,7 +99,7 @@ public class ConsultarDepartamentoController {
         CadastroDepartamentoController.setCadastrar(false);
         CadastroDepartamentoController.setAlterar(p);
         try {
-
+            negocioD = null;
             Parent root;
             root = FXMLLoader.load(CadastroDepartamentoController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Departamento.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -114,15 +115,15 @@ public class ConsultarDepartamentoController {
 
     @FXML
     void btnBuscar_OnAction(ActionEvent event) {
-        if(rdbNome.isSelected()){
-              Departamento p = new Departamento();
+        if (rdbNome.isSelected()) {
+            Departamento p = new Departamento();
             p.setNome(txtBuscador.getText());
             List<Departamento> lista = negocioD.buscarPorNome(p);
             completarTabela(lista);
         }
-        
-        if(rdbSigla.isSelected()){
-              Departamento p = new Departamento();
+
+        if (rdbSigla.isSelected()) {
+            Departamento p = new Departamento();
             p.setSigla(txtBuscador.getText());
             List<Departamento> lista = negocioD.buscarPorSigla(p);
             completarTabela(lista);
@@ -132,6 +133,7 @@ public class ConsultarDepartamentoController {
     @FXML
     void btnVoltar_OnAction(ActionEvent event) {
         try {
+             negocioD =  null;
             Parent root;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);

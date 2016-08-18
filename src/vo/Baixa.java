@@ -53,7 +53,7 @@ public class Baixa implements Serializable, EntidadeBase {
     }
 
     public void setObservacao(String observacao) {
-        this.observacao = observacao;
+        this.observacao = observacao.toUpperCase();
     }
 
     public Calendar getDt_baixa() {

@@ -171,7 +171,7 @@ public class CadastroPessoaController {
     ObservableList<PerfilUsuario> perf = FXCollections.observableArrayList((PerfilUsuario.values()));
 
     public void initialize() {
-        
+
         NegocioP = new NegocioPessoa();
         setcamposObrigatorio();
         cmbFuncao.setItems(perf);
@@ -186,15 +186,27 @@ public class CadastroPessoaController {
     }
 
     @FXML
-    void btnSalvarOnAction(ActionEvent event) throws Exception {
+    void btnSalvarOnAction(ActionEvent event) {
 
         if (verificaCampoObrigatorio()) {
-            if (alterar != null) {
-                salvar(alterar);
-            } else {
-                Pessoa pessoa = new Pessoa();
-                salvar(pessoa);
 
+            try {
+                if (alterar != null) {
+                    salvar(alterar);
+                } else {
+                    Pessoa pessoa = new Pessoa();
+                    salvar(pessoa);
+
+                }
+            } catch (Exception ex) {
+                LerProperties ler = new LerProperties();
+                Properties prop;
+                try {
+                    prop = ler.getProp();
+                    alerta(Alert.AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
+                } catch (Exception ex1) {
+                    System.out.println(ex1.getMessage());
+                }
             }
 
         } else {
@@ -250,11 +262,11 @@ public class CadastroPessoaController {
 
         try {
             NegocioP.salvar(pessoa);
-            alterar = null;
             Parent root;
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();
             NegocioP = null;
+            alterar = null;
             alerta(AlertType.INFORMATION, prop.getProperty("msg.cadastro.confirmacao"), prop.getProperty("msg.cadastro.sucesso"));
             root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -386,6 +398,7 @@ public class CadastroPessoaController {
         }
         return verifica;
     }
+
     void completar() {
         txtNome.setText(alterar.getNome());
         txtCpf.setText(alterar.getCpf());

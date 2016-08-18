@@ -9,7 +9,6 @@ import controller.cadastro.Consulta.ConsultarDepartamentoController;
 import controller.cadastro.Consulta.ConsultarPessoaController;
 import gui.SystemAutonet;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -114,6 +113,8 @@ public class CadastroDepartamentoController {
     @FXML
     void btnCancelar_OnAction(ActionEvent event) {
         try {
+            alterar = null;
+            NegocioP = null;
             Parent root;
             root = FXMLLoader.load(ConsultarDepartamentoController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Departamento.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -181,6 +182,7 @@ public class CadastroDepartamentoController {
         try {
             NegocioP.salvar(departamento);
             alterar = null;
+            NegocioP = null;
             Parent root;
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();
@@ -196,7 +198,7 @@ public class CadastroDepartamentoController {
 
     private void completar() {
         LerProperties ler = new LerProperties();
-        
+
         txtNome.setText(alterar.getNome());
         txtSigla.setText(alterar.getSigla());
         try {

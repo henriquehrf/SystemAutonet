@@ -35,16 +35,16 @@ public class LocalDAO extends GenericoDAO<Local> {
         return list;
     }
 
-    public Local buscarPorNumero(Local local) {
+    public List<Local> buscarPorNumero(Local local) {
         EntityManager em = getEM();
-        Local l;
+        List<Local> l;
         try {
             Query query = em.createNamedQuery("Local.consultarPorNumero");
             query.setParameter("numero", local.getNumero());
-            l = (Local) query.getSingleResult();
+            l = query.getResultList();
 
         } catch (Exception ex) {
-            l = null;
+            l = new ArrayList();
 
         } finally {
             em.close();
@@ -70,28 +70,45 @@ public class LocalDAO extends GenericoDAO<Local> {
         return list;
     }
 
-//    public List<Local> buscarPorBloco(Local local) {
-//        EntityManager em = getEM();
-//        List<Local> list;
-//        try {
-//            Query query = em.createNamedQuery("Local.consultarPorBloco");
-//            query.setParameter("bloco", "%" + + "%");
-//            list = query.getResultList();
-//
-//        } catch (Exception ex) {
-//            list = new ArrayList();
-//
-//        } finally {
-//            em.close();
-//        }
-//        return list;
-//    }
-    
-        public List<Local> buscarTodos() {
+    public List<Local> buscarPorBloco(Local local) {
+        EntityManager em = getEM();
+        List<Local> list;
+        try {
+            Query query = em.createNamedQuery("Local.consultarPorBloco");
+            query.setParameter("bloco", "%" + local.getBloco() + "%");
+            list = query.getResultList();
+
+        } catch (Exception ex) {
+            list = new ArrayList();
+
+        } finally {
+            em.close();
+        }
+        return list;
+    }
+
+    public List<Local> buscarTodos() {
         EntityManager em = getEM();
         List<Local> list;
         try {
             Query query = em.createNamedQuery("Local.consultarTodos");
+            list = query.getResultList();
+
+        } catch (Exception ex) {
+            list = new ArrayList();
+
+        } finally {
+            em.close();
+        }
+        return list;
+    }
+    
+     public List<Local> buscarPorDepartamento(Local local) {
+        EntityManager em = getEM();
+        List<Local> list;
+        try {
+            Query query = em.createNamedQuery("Local.consultaDepartamento");
+            query.setParameter("departamento", local.getId_departamento().getId());
             list = query.getResultList();
 
         } catch (Exception ex) {

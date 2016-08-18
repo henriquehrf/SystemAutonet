@@ -105,7 +105,7 @@ public class Pessoa implements EntidadeBase, Serializable {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public Sexo getSexo() {
@@ -165,7 +165,7 @@ public class Pessoa implements EntidadeBase, Serializable {
     }
 
     public String getEndereco() {
-        return endereco;
+        return endereco.toUpperCase();
     }
 
     public void setEndereco(String endereco) {
