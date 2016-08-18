@@ -33,13 +33,17 @@ public class NegocioTipoUnidade {
     public TipoUnidade consultarPorId(TipoUnidade tu) {
         return tuDAO.consutarPorId(TipoUnidade.class, tu);
     }
-    
-    public List<TipoUnidade> buscarPorDescricao(TipoUnidade tu){
+
+    public List<TipoUnidade> buscarPorDescricao(TipoUnidade tu) {
         return tuDAO.buscarPorDescricao(tu);
     }
-    
-       public List<TipoUnidade> buscarTodos(){
+
+    public List<TipoUnidade> buscarTodos() {
         return tuDAO.buscarTodos();
+    }
+    
+    public List<TipoUnidade> buscarPorSigla(TipoUnidade tu){
+        return tuDAO.buscarPorSigla(tu);
     }
 
 }

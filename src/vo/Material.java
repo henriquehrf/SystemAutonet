@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Transient;
 
 /**
  * @author Eduardo
@@ -23,11 +24,11 @@ import javax.persistence.NamedQuery;
 
     @NamedQuery(name = "Material.consultarPorQuantidade",
             query = "select m from Material m where m.quantidade = :quantidade"),
-        
-        @NamedQuery(name = "Material.consultarPorCategoria",
-                query = "Select m from Material m where m.id_categoria.id_categoria = :idcategoria"),
-           @NamedQuery(name = "Material.consultarTodos",
-                query = "Select m from Material m ORDER BY (m.descricao)")
+
+    @NamedQuery(name = "Material.consultarPorCategoria",
+            query = "Select m from Material m where m.id_categoria.id_categoria = :idcategoria"),
+    @NamedQuery(name = "Material.consultarTodos",
+            query = "Select m from Material m ORDER BY (m.descricao)")
 
 })
 public class Material implements Serializable, EntidadeBase {
@@ -46,9 +47,11 @@ public class Material implements Serializable, EntidadeBase {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Categoria id_categoria = null;
-    
+
+    @Transient
     private String CategoriNome;
-    
+
+    @Transient
     private String unidadeMedida;
 
     public TipoUnidade getId_tipo_unidade() {
@@ -107,7 +110,5 @@ public class Material implements Serializable, EntidadeBase {
     public void setUnidadeMedida(String unidadeMedida) {
         this.unidadeMedida = unidadeMedida;
     }
-    
-    
 
 }

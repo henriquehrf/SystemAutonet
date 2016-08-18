@@ -34,7 +34,7 @@
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
                                     <TextField fx:id="txtNome" prefWidth="350.0" />
-                                    <Label fx:id="nomeObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                    <Label fx:id="nomeObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -44,22 +44,22 @@
                                           <ToggleGroup fx:id="Sexo" />
                                        </toggleGroup></RadioButton>
                                     <RadioButton fx:id="rdbMasculino" alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#rdbMasculinoOnAction" onKeyPressed="#rdbMasculinoOnKeyPressed" prefHeight="26.0" prefWidth="94.0" text="%rdb.masculino" toggleGroup="$Sexo" />
-                                    <Label fx:id="sexoObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                    <Label fx:id="sexoObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
                                     <TextField fx:id="txtCpf" prefWidth="150.0" />
-                                    <Label fx:id="cpfObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                    <Label fx:id="cpfObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
                                     <TextField fx:id="txtRg" prefHeight="25.0" prefWidth="150.0" />
-                                    <Label fx:id="rgObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                    <Label fx:id="rgObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox prefHeight="15.0" prefWidth="611.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                              <HBox prefHeight="15.0" prefWidth="611.0" stylesheets="@../../../utilitarios/teste.css" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
                                     <DatePicker fx:id="dtpDtNascimento" prefHeight="25.0" prefWidth="119.0" styleClass="date-piker" />
                                     <Label fx:id="dtNascimentoObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
@@ -68,7 +68,7 @@
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
                                     <TextField fx:id="txtPrincipal" maxWidth="150.0" />
-                                    <Label fx:id="foneObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                    <Label fx:id="foneObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
@@ -79,25 +79,25 @@
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <children>
                                     <TextField fx:id="txtEmail" prefWidth="300.0" />
-                                    <Label fx:id="emailObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                    <Label fx:id="emailObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                  <children>
                                     <TextField fx:id="txtEndereco" prefHeight="27.0" prefWidth="450.0" />
-                                    <Label fx:id="enderecoObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                    <Label fx:id="enderecoObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
                                  <children>
                                     <ComboBox fx:id="cmbFuncao" prefWidth="150.0" />
-                                    <Label fx:id="funcaoObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                    <Label fx:id="funcaoObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
                                  <children>
                                     <TextField fx:id="txtNumMatricula" prefWidth="150.0" />
-                                    <Label fx:id="matriculaObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                    <Label fx:id="matriculaObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="16.0" prefWidth="611.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
@@ -109,16 +109,16 @@
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
                                  <children>
                                     <TextField fx:id="txtUsuario" prefWidth="150.0" />
-                                    <Label fx:id="usuarioObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                    <Label fx:id="usuarioObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
                                  <children>
                                     <PasswordField fx:id="txtSenha" prefWidth="150.0" />
-                                    <Label fx:id="senhaObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                    <Label fx:id="senhaObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                     <Label text="%lbl.repSenha" />
                                     <PasswordField fx:id="txtRSenha" prefWidth="150.0" />
-                                    <Label fx:id="repSenhaObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                    <Label fx:id="repSenhaObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <Label text="%lbl.telefonePrincipal" GridPane.rowIndex="5" />

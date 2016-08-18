@@ -23,9 +23,11 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "TipoUnidade.descricao",
-            query = "select t from TipoUnidade t where UPPER (t.descricao) like :descricao"),
+            query = "select t from TipoUnidade t where UPPER (t.descricao) like :descricao "),
        @NamedQuery(name = "TipoUnidade.BuscarTodos",
-            query = "select t from TipoUnidade t ORDER BY (t.descricao)")
+            query = "select t from TipoUnidade t ORDER BY (t.descricao)"),
+        @NamedQuery(name = "TipoUnidade.Sigla",
+            query = "select t from TipoUnidade t  where UPPER (t.sigla) like :sigla ")
 
 })
 public class TipoUnidade implements Serializable, EntidadeBase {
@@ -36,6 +38,9 @@ public class TipoUnidade implements Serializable, EntidadeBase {
     
     @Column(length = 20, nullable = false)
     private String descricao;
+    
+      @Column(length = 3, nullable = false)
+    private String sigla;
 
     @Override
     public Long getId() {
@@ -53,6 +58,13 @@ public class TipoUnidade implements Serializable, EntidadeBase {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+
+    public String getSigla() {
+        return sigla;
+    }
+
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
+    }
     
 }

@@ -16,44 +16,62 @@ import vo.TipoUnidade;
  * @author Eduardo
  */
 public class TipoUnidadeDAO extends GenericoDAO<TipoUnidade> {
-    
-    public List<TipoUnidade> buscarPorDescricao(TipoUnidade tu){
-           
+
+    public List<TipoUnidade> buscarPorDescricao(TipoUnidade tu) {
+
         EntityManager em = getEM();
         List<TipoUnidade> list;
-        Query query;       
-        
-        try{            
+        Query query;
+
+        try {
             query = em.createNamedQuery("TipoUnidade.descricao");
-            query.setParameter("descricao", "%"+tu.getDescricao().toUpperCase()+"%");
+            query.setParameter("descricao", "%" + tu.getDescricao().toUpperCase() + "%");
             list = query.getResultList();
-            
-        }catch(Exception ex){
+
+        } catch (Exception ex) {
             list = new ArrayList();
-        }finally{
+        } finally {
             em.close();
         }
         return list;
     }
-    
-       public List<TipoUnidade> buscarTodos(){
-           
+
+    public List<TipoUnidade> buscarTodos() {
+
         EntityManager em = getEM();
         List<TipoUnidade> list;
-        Query query;       
-        
-        try{
-            
+        Query query;
+
+        try {
+
             query = em.createNamedQuery("TipoUnidade.BuscarTodos");
             list = query.getResultList();
-            
-        }catch(Exception ex){
+
+        } catch (Exception ex) {
             list = new ArrayList();
-        }finally{
+        } finally {
             em.close();
         }
         return list;
     }
-    
-    
+
+    public List<TipoUnidade> buscarPorSigla(TipoUnidade tu) {
+
+        EntityManager em = getEM();
+        List<TipoUnidade> list;
+        Query query;
+
+        try {
+            query = em.createNamedQuery("TipoUnidade.Sigla");
+            query.setParameter("sigla", "%" + tu.getSigla().toUpperCase() + "%");
+            list = query.getResultList();
+
+        } catch (Exception ex) {
+            list = new ArrayList();
+        } finally {
+            em.close();
+        }
+        return list;
+    }
+
 }
