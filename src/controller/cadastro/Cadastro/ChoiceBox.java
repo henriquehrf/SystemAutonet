@@ -5,16 +5,10 @@
  */
 package controller.cadastro.Cadastro;
 
-
 /**
  *
- * @author PET Autonet
+ * @author Eduardo
  */
-public class CadastroMaterialController {
+class ChoiceBox<T> {
     
-   
-    
-    
-    
-
 }

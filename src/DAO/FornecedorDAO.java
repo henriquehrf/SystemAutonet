@@ -53,16 +53,16 @@ public class FornecedorDAO extends GenericoDAO<Fornecedor> {
         return list;
     }
 
-    public Fornecedor buscarPorCNPJ(Fornecedor fornecedor) {
+    public List<Fornecedor> buscarPorCNPJ(Fornecedor fornecedor) {
         EntityManager em = getEM();
-        Fornecedor forne;
+       List<Fornecedor> forne;
         try {
             Query query = em.createNamedQuery("Fornecedor.consultarPorCNPJ");
             query.setParameter("cnpj", "%" + fornecedor.getCnpj().toUpperCase() + "%");
-           forne = (Fornecedor) query.getSingleResult();
+           forne = query.getResultList();
 
         } catch (Exception ex) {
-           forne= null;
+           forne= new ArrayList();
 
         } finally {
             em.close();
@@ -93,7 +93,7 @@ public class FornecedorDAO extends GenericoDAO<Fornecedor> {
         EntityManager em = getEM();
         List<Fornecedor> list;
         try {
-            Query query = em.createNamedQuery("FFornecedor.consultarTodos");
+            Query query = em.createNamedQuery("Fornecedor.consultarTodos");
             list = query.getResultList();
 
         } catch (Exception ex) {

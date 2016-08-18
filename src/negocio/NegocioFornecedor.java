@@ -48,7 +48,7 @@ public class NegocioFornecedor {
         return fornecedorDAO.buscarPorRazaoSical(fornecedor);
     }
 
-    public Fornecedor buscarPorCnpj(Fornecedor fornecedor) {
+    public List<Fornecedor> buscarPorCnpj(Fornecedor fornecedor) {
         return fornecedorDAO.buscarPorCNPJ(fornecedor);
     }
 
@@ -65,7 +65,7 @@ public class NegocioFornecedor {
         String erro ="";
         
         if(fornecedor.getId() == null || fornecedor.getId() == 0){
-            if (buscarPorCnpj(fornecedor) != null){
+            if (!buscarPorCnpj(fornecedor).isEmpty()){
                 erro += "Erro: CNPJ já cadastrado";
             }
         }         
