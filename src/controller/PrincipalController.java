@@ -196,7 +196,7 @@ public class PrincipalController {
     void emp_solicitarOnAction(ActionEvent event) {
         try {
             Parent root;
-            root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/emprestimo/solicita/SolicitaEmprestimo.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/emprestimo/Solicitar/SolicitaEmprestimo.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
