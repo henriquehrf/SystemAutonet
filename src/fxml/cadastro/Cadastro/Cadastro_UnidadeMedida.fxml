@@ -11,7 +11,7 @@
    <center>
       <TabPane prefHeight="455.0" prefWidth="761.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
          <tabs>
-            <Tab text="Descrição da Unidade de Medida">
+            <Tab text="%tab.descricao.TipoUnidade">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -21,12 +21,14 @@
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="350.0" />
+                                    <TextField fx:id="txtdescricao" prefHeight="25.0" prefWidth="350.0" />
+                                    <Label fx:id="lbldescricaoOrbrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
-                                    <TextField prefWidth="75.0" />
+                                    <TextField fx:id="txtsigla" prefWidth="75.0" />
+                                    <Label fx:id="lblSiglaobrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
@@ -40,8 +42,8 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                              <Label text="Descrição: " GridPane.rowIndex="2" />
-                              <Label text="Sigla" GridPane.rowIndex="3" />
+                              <Label text="%lbl.descricao" GridPane.rowIndex="2" />
+                              <Label text="%lbl.Sigla" GridPane.rowIndex="3" />
                            </children>
                            <columnConstraints>
                               <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="122.0" />
@@ -73,7 +75,7 @@
       </TabPane>
    </center>
    <top>
-      <Label id="label-header" styleClass="label-header" text="Cadastro de Unidades de Medida" BorderPane.alignment="CENTER">
+      <Label id="label-header" fx:id="Title" styleClass="label-header" text="%title.cadastro.tipounidade" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -93,7 +95,7 @@
          <children>
             <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Salvar" />
+                  <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#btnSalvar_OnAction" prefWidth="100.0" styleClass="button-save" stylesheets="@../../../utilitarios/teste.css" text="%btn.salvar" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -104,7 +106,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Cancelar">
+                  <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCancelar_OnAction" prefWidth="100.0" styleClass="button-cancel" stylesheets="@../../../utilitarios/teste.css" text="%btn.cancelar">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

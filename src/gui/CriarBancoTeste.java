@@ -31,16 +31,16 @@ public class CriarBancoTeste {
         Date ultimoAcesso = new java.sql.Date(2016, 8, 13);
         Pessoa pessoa = new Pessoa();
 
-//        try {
-//            fabricaEntityManager = Persistence.createEntityManagerFactory("SystemAutonetPU");
-//            entityManager = fabricaEntityManager.createEntityManager();
-//            System.out.println("De boa é pra ter criado as tabelas");
-//
-//        } catch (Exception ex) {
-//            System.out.println(ex.getMessage());
-//        }
+        try {
+            fabricaEntityManager = Persistence.createEntityManagerFactory("SystemAutonetPU");
+            entityManager = fabricaEntityManager.createEntityManager();
+            System.out.println("De boa é pra ter criado as tabelas");
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 //        
-        pessoa.setCpf("05921855162");
+//        pessoa.setCpf("05921855162");
 //        // testando o metodo salvar
 //        pessoa.setCpf("36773389720");
 //        pessoa.setEndereco("Rua 48, Quadra 17, Casa 14, CPA 3, Setor 4");
@@ -56,13 +56,13 @@ public class CriarBancoTeste {
 //        pessoa.setRg("123123123");
 //        pessoa.setUltimo_acesso(ultimoAcesso);
 //
-        try {
+//        try {
 //            NegocioP.salvar(pessoa);
 //            System.out.println("Pessoa salva com sucesso");
 //            System.out.println("-------------------------------");
 //            pessoa = new Pessoa();
 //            pessoa.setId_pessoa(1L);
-            Pessoa p = new Pessoa();
+//            Pessoa p = new Pessoa();
 ////            
 //           // p = NegocioP.buscarPorCPF(pessoa);
 ////            
@@ -82,9 +82,9 @@ public class CriarBancoTeste {
 //                            + "\nNumero da matricula: " + list.get(i).getNum_matricula());
 //                }
 //            }
-        } catch (Exception ex) {
-            System.out.println("Erro " + ex.getMessage());
-        }
+//        } catch (Exception ex) {
+//            System.out.println("Erro " + ex.getMessage());
+//        }
 
         //Testando o metodo remover
 //        pessoa.setId_pessoa(51L);
