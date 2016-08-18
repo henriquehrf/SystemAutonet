@@ -30,7 +30,7 @@
           </Menu>
           <Menu fx:id="mnu_emprestimo" mnemonicParsing="false" text="%mnu.Emprestimo">
             <items>
-                  <MenuItem fx:id="emp_acompanhar" mnemonicParsing="false" text="%mni.Acompanhar" />
+                  <MenuItem fx:id="emp_acompanhar" mnemonicParsing="false" onAction="#emp_acompanharOnAction" text="%mni.Acompanhar" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="emp_analisar" mnemonicParsing="false" onAction="#emp_analisarOnAction" text="%mni.Analisar" />
                   <SeparatorMenuItem mnemonicParsing="false" />

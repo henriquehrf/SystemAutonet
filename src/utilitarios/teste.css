@@ -352,3 +352,20 @@
     -fx-text-fill:black;
 
 }
+.button-consultar{
+    -fx-border-color:darkgrey;
+    -fx-background-color:none;
+    -fx-font-size: 9pt;
+    -fx-font-family: "Arial";
+    -fx-cursor:hand;
+    -fx-background-color: linear-gradient( #ffffff, #808080);
+    -fx-background-image: url('icones/consultar.png');
+    -fx-background-size: 20 20 ;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:10; 
+    -fx-max-height:27;
+    -fx-max-width:120;
+    -fx-min-height:27;
+    -fx-min-width:120;
+    -fx-alignment:CENTER;
+}
