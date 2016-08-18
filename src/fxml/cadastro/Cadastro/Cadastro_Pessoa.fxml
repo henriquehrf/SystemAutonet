@@ -178,7 +178,7 @@
          <children>
             <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#btnSalvarOnAction" onKeyPressed="#btnSalvarOnKeyPressed" prefWidth="100.0" text="%btn.salvar" />
+                  <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#btnSalvarOnAction" onKeyPressed="#btnSalvarOnKeyPressed" prefWidth="100.0" styleClass="button-save" text="%btn.salvar" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -189,7 +189,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCancelarOnAction" onKeyPressed="#btnCancelarOnKeyPressed" prefWidth="100.0" text="%btn.cancelar">
+                  <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCancelarOnAction" onKeyPressed="#btnCancelarOnKeyPressed" prefWidth="100.0" styleClass="button-cancel" text="%btn.cancelar">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
