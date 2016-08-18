@@ -179,8 +179,10 @@ public class CadastroPessoaController {
             } else {
                 Pessoa pessoa = new Pessoa();
                 salvar(pessoa);
+                
+                
             }
-
+            
         } else {
             try {
                 LerProperties ler = new LerProperties();
