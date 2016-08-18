@@ -11,6 +11,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
@@ -19,27 +22,31 @@ import javafx.scene.control.Button;
  */
 public class AcompanharEmprestimoController implements Initializable {
 
+   @FXML
+    private Button btnAnalisar;
+
+    @FXML
+    private Tab tabBuscarMaterial;
+
     @FXML
     private Button btnVoltar;
 
     @FXML
-    private Button btnVoltar1;
+    private TableView<?> tblPrincipalBuscarMaterial;
 
     @FXML
-    private Button btnConsultar;
+    private TableColumn<?, ?> tbcDescricaoBusca;
 
     @FXML
-    void btnConsultarOnAction(ActionEvent event) {
+    private TableColumn<?, ?> tbcQuantidadeBusca;
+
+    @FXML
+    void btnAnalisarOnAction(ActionEvent event) {
 
     }
 
     @FXML
-    void btnVoltarOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnVoltar1OnAction(ActionEvent event) {
+    void btnCancelarOnAction(ActionEvent event) {
 
     }
 

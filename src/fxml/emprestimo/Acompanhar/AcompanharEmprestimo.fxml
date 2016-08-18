@@ -13,7 +13,7 @@
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" styleClass="label-head" text="%title.solicitar.emprestimo" />
+            <Label alignment="CENTER" styleClass="label-head" text="%title.acompanhar.emprestimo" />
          </children>
       </HBox>
    </top>
