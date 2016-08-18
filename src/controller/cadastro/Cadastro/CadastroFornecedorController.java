@@ -5,6 +5,7 @@
  */
 package controller.cadastro.Cadastro;
 
+import classesAuxiliares.Validar;
 import controller.cadastro.Consulta.ConsultarFornecedorController;
 import gui.SystemAutonet;
 import java.io.IOException;
@@ -31,7 +32,6 @@ import vo.Fornecedor;
  */
 public class CadastroFornecedorController {
 
-  
     private static Fornecedor alterar;
 
     private static boolean cadastrar;
@@ -189,8 +189,8 @@ public class CadastroFornecedorController {
     }
 
     private void salvar(Fornecedor fornecedor) throws Exception {
+        boolean trava = false;
 
-        fornecedor.setCnpj(txtCnpj.getText());
         fornecedor.setEmail(txtEmail.getText());
         fornecedor.setEndereco(txtEndereco.getText());
         fornecedor.setInscricao_estadual(txtInscricaoEstadual.getText());
@@ -198,7 +198,17 @@ public class CadastroFornecedorController {
         fornecedor.setPessoa_responsavel(txtPessoaResponsavel.getText());
         fornecedor.setRazao_social(txtRazaoSocial.getText());
         fornecedor.setTelefone(txtTelefone.getText());
+        if (Validar.isDigit(txtCnpj.getText().toCharArray())) {
+            fornecedor.setCnpj(txtCnpj.getText());
+        } else {
+            this.lblCnpjObrigatorio.setVisible(true);
+            trava = true;
+        }
 
+        if (trava) {
+            IncompatibilidadeNumero();
+            return;
+        }
         try {
             negocioF.salvar(fornecedor);
             alterar = null;
@@ -215,6 +225,13 @@ public class CadastroFornecedorController {
             Properties prop = ler.getProp();
             alerta(Alert.AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
         }
+    }
+
+    private void IncompatibilidadeNumero() throws Exception {
+        LerProperties ler = new LerProperties();
+        Properties prop = ler.getProp();
+        alerta(Alert.AlertType.ERROR, prop.getProperty("msg.dados.erro"), prop.getProperty("msg.incompatibilidade.numero"));
+
     }
 
     void alerta(Alert.AlertType TipoAviso, String cabecalho, String msg) throws Exception {

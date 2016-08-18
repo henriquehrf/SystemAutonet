@@ -74,6 +74,7 @@
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <children>
                                     <TextField fx:id="txtSecundario" maxWidth="150.0" prefHeight="20.0" />
+                                    <Label fx:id="lblsecundario" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">

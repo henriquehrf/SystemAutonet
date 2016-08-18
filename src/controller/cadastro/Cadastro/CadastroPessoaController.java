@@ -5,6 +5,7 @@
  */
 package controller.cadastro.Cadastro;
 
+import classesAuxiliares.Validar;
 import controller.cadastro.Consulta.ConsultarPessoaController;
 import gui.SystemAutonet;
 import java.io.IOException;
@@ -47,6 +48,9 @@ public class CadastroPessoaController {
 
     @FXML
     private TextField txtEndereco;
+
+    @FXML
+    private Label lblsecundario;
 
     @FXML
     private PasswordField txtRSenha;
@@ -230,20 +234,66 @@ public class CadastroPessoaController {
 
     }
 
+    private void IncompatibilidadeNumero() throws Exception {
+        LerProperties ler = new LerProperties();
+        Properties prop = ler.getProp();
+        alerta(Alert.AlertType.ERROR, prop.getProperty("msg.dados.erro"), prop.getProperty("msg.incompatibilidade.numero"));
+
+    }
+
     private void salvar(Pessoa pessoa) throws Exception {
+        boolean trava = false;
         Date data = new Date();
         pessoa.setNome(txtNome.getText());
-        pessoa.setCpf(txtCpf.getText());
+
         pessoa.setEmail(txtEmail.getText());
         pessoa.setEndereco(txtEndereco.getText());
-        pessoa.setFone_principal(txtPrincipal.getText());
-        pessoa.setFone_secundario(txtSecundario.getText());
+
         pessoa.setUsuario(txtUsuario.getText());
         pessoa.setSenha(txtSenha.getText());
-        pessoa.setNum_matricula(txtNumMatricula.getText());
         pessoa.setUltimo_acesso(data);
         pessoa.setFuncao(cmbFuncao.getValue());
-        pessoa.setRg(txtRg.getText());
+
+        if (Validar.isDigit(txtPrincipal.getText().toCharArray())) {
+            pessoa.setFone_principal(txtPrincipal.getText());
+        } else {
+            this.foneObrigatorio.setVisible(true);
+            trava = true;
+        }
+
+        if (Validar.isDigit(txtSecundario.getText().toCharArray())) {
+
+            pessoa.setFone_secundario(txtSecundario.getText());
+        } else {
+            this.lblsecundario.setVisible(true);
+            trava = true;
+        }
+
+        if (Validar.isDigit(txtCpf.getText().toCharArray())) {
+            pessoa.setCpf(txtCpf.getText());
+        } else {
+            this.cpfObrigatorio.setVisible(true);
+            trava = true;
+        }
+
+        if (Validar.isDigit(txtNumMatricula.getText().toCharArray())) {
+            pessoa.setNum_matricula(txtNumMatricula.getText());
+        } else {
+            this.matriculaObrigatorio.setVisible(true);
+            trava = true;
+        }
+
+        if (Validar.isDigit(txtRg.getText().toCharArray())) {
+            pessoa.setRg(txtRg.getText());
+        } else {
+            this.rgObrigatorio.setVisible(true);
+            trava = true;
+        }
+
+        if (trava) {
+            IncompatibilidadeNumero();
+            return;
+        }
         if (rdbFeminino.isSelected()) {
             pessoa.setSexo(Sexo.F);
         }
@@ -339,6 +389,7 @@ public class CadastroPessoaController {
         usuarioObrigatorio.setVisible(false);
         senhaObrigatorio.setVisible(false);
         repSenhaObrigatorio.setVisible(false);
+        lblsecundario.setVisible(false);
     }
 
     private boolean verificaCampoObrigatorio() {

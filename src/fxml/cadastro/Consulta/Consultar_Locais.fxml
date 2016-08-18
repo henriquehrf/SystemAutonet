@@ -102,7 +102,7 @@
                      <children>
                         <HBox alignment="TOP_CENTER" prefHeight="28.0" prefWidth="413.0">
                            <children>
-                              <RadioButton fx:id="rdbDepartamento" mnemonicParsing="false" text="%rdb.descricao">
+                              <RadioButton fx:id="rdbDescricao" mnemonicParsing="false" text="%rdb.descricao">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>

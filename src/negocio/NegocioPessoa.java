@@ -6,15 +6,10 @@
 package negocio;
 
 import DAO.PessoaDAO;
-import classesAuxiliares.ValidarCpf;
-import classesAuxiliares.ValidarEmail;
-import java.io.IOException;
+import classesAuxiliares.Validar;
 import java.util.List;
 import java.util.Properties;
 import utilitarios.LerProperties;
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
 import vo.Pessoa;
 
 /**
@@ -84,7 +79,7 @@ public class NegocioPessoa {
             erro += prop.getProperty("msg.cadastro.sem.dtNascimento");
         }
 
-        if (!ValidarCpf.isCPF(pessoa.getCpf())) {
+        if (!Validar.isCPF(pessoa.getCpf())) {
             erro += prop.getProperty("msg.cadastro.cpfInvalido");
         }
 
@@ -108,7 +103,7 @@ public class NegocioPessoa {
             erro += prop.getProperty("msg.cadastro.senhaPequena");
         }
         if (!pessoa.getEmail().isEmpty()) {
-            if (!ValidarEmail.validar(pessoa.getEmail())) {
+            if (!Validar.isEmail(pessoa.getEmail())) {
                 erro += prop.getProperty("msg.cadastro.emailInvalido");
             }
         }

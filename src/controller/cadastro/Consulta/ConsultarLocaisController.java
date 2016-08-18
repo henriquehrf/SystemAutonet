@@ -1,9 +1,11 @@
 package controller.cadastro.Consulta;
 
+import classesAuxiliares.Validar;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroSalaBlocoController;
 import gui.SystemAutonet;
 import java.util.List;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -20,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioDepartamento;
 import negocio.NegocioLocal;
+import utilitarios.LerProperties;
 import vo.Departamento;
 import vo.Local;
 
@@ -65,7 +69,7 @@ public class ConsultarLocaisController {
     private Button btnExcluir;
 
     @FXML
-    private RadioButton rdbDepartamento;
+    private RadioButton rdbDescricao;
 
     @FXML
     private TableColumn<Local, String> tbcDescricao;
@@ -138,25 +142,35 @@ public class ConsultarLocaisController {
 
         if (rdbNumero.isSelected()) {
             Local local = new Local();
-            local.setNumero(Integer.parseInt(txtBuscador.getText()));
-            completarTabela(negocioLocal.buscarPorNumero(local));
+            char buscar[] = txtBuscador.getText().toCharArray();
+
+            if (Validar.isDigit(buscar)) {
+                if (txtBuscador.getText().isEmpty()) {
+                    completarTabela(negocioLocal.buscarTodos());
+                } else {
+
+                    local.setNumero(Integer.parseInt(txtBuscador.getText()));
+                    completarTabela(negocioLocal.buscarPorNumero(local));
+                }
+            } else {
+                try {
+                    LerProperties ler = new LerProperties();
+                    Properties prop = ler.getProp();
+                    alerta(Alert.AlertType.ERROR, prop.getProperty("msg.incompatibilidade.numero"), prop.getProperty("msg.incompatibilidade.numero"));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
         }
         if (rdbPessoaResponsavel.isSelected()) {
             Local local = new Local();
             local.setResponsavel(txtBuscador.getText());
             completarTabela(negocioLocal.buscarPorPessoaResponsavel(local));
         }
-        if (rdbDepartamento.isSelected()) {
-            NegocioDepartamento nd = new NegocioDepartamento();
-            Departamento dp = new Departamento();
-            dp.setNome(txtBuscador.getText());
-            List<Departamento> listD = nd.buscarPorNome(dp);
-            if (listD.size() == 1) {
-                Local local = new Local();
-                local.setId_departamento(listD.get(0));
-                completarTabela(negocioLocal.buscarPorDepartamento(local));
-            }
-
+        if (rdbDescricao.isSelected()) {
+            Local local = new Local();
+            local.setDescricao(txtBuscador.getText());
+            completarTabela(negocioLocal.buscarPorPessoaResponsavel(local));
         }
     }
 
@@ -169,6 +183,19 @@ public class ConsultarLocaisController {
         this.tbcNumero.setCellValueFactory(new PropertyValueFactory<Local, Integer>("numero"));
         this.tbcPessoaResponsavel.setCellValueFactory(new PropertyValueFactory<Local, String>("responsavel"));
         this.tblPrincipal.setItems(dado);
+
+    }
+
+    void alerta(Alert.AlertType TipoAviso, String cabecalho, String msg) throws Exception {
+        LerProperties ler = new LerProperties();
+
+        Properties prop = ler.getProp();
+        Alert alert = new Alert(TipoAviso);
+        alert.setTitle(cabecalho);
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+
+        alert.showAndWait();
 
     }
 }

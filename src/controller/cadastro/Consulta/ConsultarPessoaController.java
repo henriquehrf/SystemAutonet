@@ -1,16 +1,21 @@
 package controller.cadastro.Consulta;
 
+import classesAuxiliares.Validar;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroPessoaController;
 import gui.SystemAutonet;
 import java.util.List;
+import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -19,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioPessoa;
+import utilitarios.LerProperties;
 import vo.Pessoa;
 
 public class ConsultarPessoaController {
@@ -154,25 +160,76 @@ public class ConsultarPessoaController {
 
         }
         if (rdbCPF.isSelected()) {
-            Pessoa p = new Pessoa();
-            p.setCpf(txtBuscador.getText());
-            List<Pessoa> lista = pessoa.buscarPorCPF(p);
-            completarTabela(lista);
+            char buscar[] = txtBuscador.getText().toCharArray();
+
+            if (Validar.isDigit(buscar)) {
+                Pessoa p = new Pessoa();
+                p.setCpf(txtBuscador.getText());
+                List<Pessoa> lista = pessoa.buscarPorCPF(p);
+                completarTabela(lista);
+            } else {
+                try {
+                    IncompatibilidadeNumero();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
 
         }
         if (rdbRG.isSelected()) {
-            Pessoa p = new Pessoa();
-            p.setRg(txtBuscador.getText());
-            List<Pessoa> lista = pessoa.buscarPorRG(p);
-            completarTabela(lista);
+            char buscar[] = txtBuscador.getText().toCharArray();
+            if (Validar.isDigit(buscar)) {
+                Pessoa p = new Pessoa();
+                p.setRg(txtBuscador.getText());
+                List<Pessoa> lista = pessoa.buscarPorRG(p);
+                completarTabela(lista);
+            } else {
+                try {
+                    IncompatibilidadeNumero();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
 
         }
         if (rgbNumMatricula.isSelected()) {
-            Pessoa p = new Pessoa();
-            p.setNum_matricula(txtBuscador.getText());
-            List<Pessoa> lista = pessoa.buscarPorMatricula(p);
-            completarTabela(lista);
+            char buscar[] = txtBuscador.getText().toCharArray();
+            if (Validar.isDigit(buscar)) {
+
+                Pessoa p = new Pessoa();
+                p.setNum_matricula(txtBuscador.getText());
+                List<Pessoa> lista = pessoa.buscarPorMatricula(p);
+                completarTabela(lista);
+
+            } else {
+                try {
+                    IncompatibilidadeNumero();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+
         }
+    }
+
+    private void IncompatibilidadeNumero() throws Exception {
+        LerProperties ler = new LerProperties();
+        Properties prop = ler.getProp();
+        alerta(Alert.AlertType.ERROR, prop.getProperty("msg.dados.erro"), prop.getProperty("msg.incompatibilidade.numero"));
+
+    }
+
+    void alerta(Alert.AlertType TipoAviso, String cabecalho, String msg) throws Exception {
+        LerProperties ler = new LerProperties();
+
+        Properties prop = ler.getProp();
+        Alert alert = new Alert(TipoAviso);
+        alert.setTitle(cabecalho);
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+
+        alert.showAndWait();
+
     }
 
 }

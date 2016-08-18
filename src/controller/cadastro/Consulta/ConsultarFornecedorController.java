@@ -1,9 +1,11 @@
 package controller.cadastro.Consulta;
 
+import classesAuxiliares.Validar;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroFornecedorController;
 import gui.SystemAutonet;
 import java.util.List;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -19,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioFornecedor;
+import utilitarios.LerProperties;
 import vo.Fornecedor;
 
 public class ConsultarFornecedorController {
@@ -120,7 +124,7 @@ public class ConsultarFornecedorController {
     @FXML
     void btnAlterar_OnAction(ActionEvent event) {
         Fornecedor f = tblPrincipal.getSelectionModel().getSelectedItem();
-        
+
         CadastroFornecedorController.setCadastrar(false);
         CadastroFornecedorController.setAlterar(f);
 
@@ -141,22 +145,33 @@ public class ConsultarFornecedorController {
 
     @FXML
     void btnBuscar_OnAction(ActionEvent event) {
-          if (rdbCNPJ.isSelected()) {
-            Fornecedor f = new Fornecedor();
-            f.setCnpj(txtBuscador.getText());
-            List<Fornecedor> lista = negocioF.buscarPorCnpj(f);
-            completarTabela(lista);
+        if (rdbCNPJ.isSelected()) {
+
+            char buscar[] = txtBuscador.getText().toCharArray();
+
+            if (Validar.isDigit(buscar)) {
+                Fornecedor f = new Fornecedor();
+                f.setCnpj(txtBuscador.getText());
+                List<Fornecedor> lista = negocioF.buscarPorCnpj(f);
+                completarTabela(lista);
+            } else {
+                try {
+                    IncompatibilidadeNumero();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
 
         }
         if (rdbNomeFantasia.isSelected()) {
-             Fornecedor f = new Fornecedor();
+            Fornecedor f = new Fornecedor();
             f.setNome_fantasia(txtBuscador.getText());
             List<Fornecedor> lista = negocioF.buscarPorNomeFantasia(f);
             completarTabela(lista);
 
         }
         if (rdbPessoaResponsavel.isSelected()) {
-             Fornecedor f = new Fornecedor();
+            Fornecedor f = new Fornecedor();
             f.setPessoa_responsavel(txtBuscador.getText());
             List<Fornecedor> lista = negocioF.buscarPorPessoaResponsavel(f);
             completarTabela(lista);
@@ -168,6 +183,26 @@ public class ConsultarFornecedorController {
             List<Fornecedor> lista = negocioF.buscarPorRazaoSocial(f);
             completarTabela(lista);
         }
+    }
+
+    private void IncompatibilidadeNumero() throws Exception {
+        LerProperties ler = new LerProperties();
+        Properties prop = ler.getProp();
+        alerta(Alert.AlertType.ERROR, prop.getProperty("msg.dados.erro"), prop.getProperty("msg.incompatibilidade.numero"));
+
+    }
+
+    void alerta(Alert.AlertType TipoAviso, String cabecalho, String msg) throws Exception {
+        LerProperties ler = new LerProperties();
+
+        Properties prop = ler.getProp();
+        Alert alert = new Alert(TipoAviso);
+        alert.setTitle(cabecalho);
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+
+        alert.showAndWait();
+
     }
 
 }
