@@ -105,11 +105,9 @@ public class PrincipalController {
     private Menu mnu_Cadastro;
 
     public void initialize() {
-      
+
     }
 
-
-    
     @FXML
     void cad_departamentoOnAction(ActionEvent event) {
         try {
@@ -208,9 +206,21 @@ public class PrincipalController {
 
     @FXML
     void emp_analisarOnAction(ActionEvent event) {
-          try {
+        try {
             Parent root;
             root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/emprestimo/Analisar/AnalisarEmprestimo.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
+
+    @FXML
+    void emp_acompanharOnAction(ActionEvent event) {
+        try {
+            Parent root;
+            root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/emprestimo/Acompanhar/AcompanharEmprestimo.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
