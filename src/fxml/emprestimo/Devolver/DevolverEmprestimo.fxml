@@ -33,42 +33,93 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="pesquisar:" />
+                                    <Label text="pesquisar:">
+                                       <HBox.margin>
+                                          <Insets top="2.0" />
+                                       </HBox.margin></Label>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                              <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="158.0" GridPane.rowIndex="1" />
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
-                                    <TextField />
+                                    <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="397.0">
+                                       <HBox.margin>
+                                          <Insets top="2.0" />
+                                       </HBox.margin></TextField>
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="button-search">
+                                       <HBox.margin>
+                                          <Insets top="2.0" />
+                                       </HBox.margin>
+                                    </Button>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <RadioButton mnemonicParsing="false" text="RadioButton" />
-                                    <RadioButton mnemonicParsing="false" text="RadioButton" />
+                                    <Label text="Data inicial:">
+                                       <HBox.margin>
+                                          <Insets bottom="20.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <DatePicker prefHeight="25.0" prefWidth="120.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </DatePicker>
+                                    <Label text="Data Final:">
+                                       <HBox.margin>
+                                          <Insets bottom="20.0" right="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <DatePicker prefHeight="25.0" prefWidth="120.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </DatePicker>
                                  </children>
                               </HBox>
                            </children>
                         </GridPane>
                      </top>
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView prefHeight="280.0" prefWidth="778.0" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn prefWidth="284.0" text="Pessoa" />
                             <TableColumn prefWidth="127.0" text="Data do Empréstimo" />
                               <TableColumn prefWidth="385.0" text="Finalidade" />
                           </columns>
+                           <BorderPane.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </BorderPane.margin>
                         </TableView>
                      </center>
                      <bottom>
-                        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <GridPane BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
                            <children>
-                              <Button mnemonicParsing="false" text="Button" />
-                              <HBox prefHeight="100.0" prefWidth="200.0" />
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Consultar" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Voltar">
+                                       <HBox.margin>
+                                          <Insets right="50.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
                            </children>
-                        </HBox>
+                        </GridPane>
                      </bottom>
                   </BorderPane>
                </content>
@@ -76,25 +127,6 @@
             <Tab text="Detalhe do Emprestimo">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <bottom>
-                        <GridPane prefHeight="73.0" prefWidth="798.0" BorderPane.alignment="CENTER">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="652.0" minWidth="10.0" prefWidth="618.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Button mnemonicParsing="false" text="baixar todos" />
-                                    <Button mnemonicParsing="false" text="baixa" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </GridPane>
-                     </bottom>
                      <center>
                         <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <columns>
@@ -107,6 +139,42 @@
                            </BorderPane.margin>
                         </TableView>
                      </center>
+                     <bottom>
+                        <GridPane BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Devolver">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" text="Baixar">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Cancelar">
+                                       <HBox.margin>
+                                          <Insets right="50.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </bottom>
                   </BorderPane>
                </content>
             </Tab>
@@ -129,6 +197,47 @@
                            </BorderPane.margin>
                         </TableView>
                      </center>
+                     <bottom>
+                        <GridPane BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Buscar Local">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" text="Alterar Local">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" text="Remover Local">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Cancelar">
+                                       <HBox.margin>
+                                          <Insets right="50.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </bottom>
                   </BorderPane>
                </content>
             </Tab>
@@ -160,7 +269,7 @@
                                  <children>
                                     <Label text="%lbl.pesquisar" />
                                     <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="383.0" />
-                                    <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" styleClass="button-search" />
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" styleClass="button-search" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -184,6 +293,33 @@
                            </rowConstraints>
                         </GridPane>
                      </top>
+                     <bottom>
+                        <GridPane BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Selecionar" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Voltar">
+                                       <HBox.margin>
+                                          <Insets right="50.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </bottom>
                   </BorderPane>
                </content>
             </Tab>
@@ -203,9 +339,9 @@
                                     <RowConstraints maxHeight="337.0" minHeight="10.0" prefHeight="309.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                    <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label text="Material" />
+                                          <Label text="Material: " />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -213,15 +349,23 @@
                                           <Label text="Descriçao" />
                                        </children>
                                     </HBox>
-                                    <Label text="Observação" GridPane.rowIndex="1" />
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label text="Observaçao:" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <TextArea prefHeight="100.0" prefWidth="497.0" />
+                                       </children>
+                                    </HBox>
                                  </children>
                               </GridPane>
                            </children>
                         </HBox>
                      </center>
                      <top>
-                        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
                               <Label text="Adicionar Observação" />
                            </children>
@@ -233,11 +377,4 @@
         </tabs>
       </TabPane>
    </center>
-   <bottom>
-      <HBox prefHeight="38.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" text="Button" />
-         </children>
-      </HBox>
-   </bottom>
 </BorderPane>
