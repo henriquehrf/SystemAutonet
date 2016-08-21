@@ -12,14 +12,14 @@
    <top>
       <HBox alignment="CENTER" prefHeight="67.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Devolver Material" />
+            <Label styleClass="label-head" text="%title.devolver.emprestimo" />
          </children>
       </HBox>
    </top>
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab text="Buscar Empréstimo">
+          <Tab text="%tab.emprestimo.buscarPorEmprestimo">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <top>
@@ -35,7 +35,7 @@
                            <children>
                               <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="pesquisar:">
+                                    <Label text="%lbl.pesquisar">
                                        <HBox.margin>
                                           <Insets top="2.0" />
                                        </HBox.margin></Label>
@@ -57,7 +57,7 @@
                               </HBox>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="Data inicial:">
+                                    <Label text="%lbl.dtInicial">
                                        <HBox.margin>
                                           <Insets bottom="20.0" right="10.0" />
                                        </HBox.margin>
@@ -67,7 +67,7 @@
                                           <Insets bottom="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>
                                     </DatePicker>
-                                    <Label text="Data Final:">
+                                    <Label text="%lbl.dtFinal">
                                        <HBox.margin>
                                           <Insets bottom="20.0" right="10.0" />
                                        </HBox.margin>
@@ -85,9 +85,9 @@
                      <center>
                         <TableView prefHeight="280.0" prefWidth="778.0" BorderPane.alignment="CENTER">
                           <columns>
-                            <TableColumn prefWidth="284.0" text="Pessoa" />
-                            <TableColumn prefWidth="127.0" text="Data do Empréstimo" />
-                              <TableColumn prefWidth="385.0" text="Finalidade" />
+                            <TableColumn prefWidth="284.0" text="%tblColumn.pessoa" />
+                            <TableColumn prefWidth="127.0" text="%tblColumn.dtEmprestimo" />
+                              <TableColumn prefWidth="385.0" text="%tblColumn.finalidade" />
                           </columns>
                            <BorderPane.margin>
                               <Insets left="10.0" right="10.0" />
@@ -106,14 +106,14 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Consultar" />
+                                    <Button mnemonicParsing="false" styleClass="button-consultar" text="%btn.consultar" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Voltar">
+                                    <Button mnemonicParsing="false" styleClass="button-voltar" text="%btn.voltar">
                                        <HBox.margin>
-                                          <Insets right="50.0" />
+                                          <Insets bottom="20.0" right="50.0" />
                                        </HBox.margin>
                                     </Button>
                                  </children>
@@ -124,7 +124,7 @@
                   </BorderPane>
                </content>
           </Tab>
-            <Tab text="Detalhe do Emprestimo">
+            <Tab text="%tab.emprestimo.detalheDoEmprestimo">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
@@ -151,12 +151,12 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Devolver">
+                                    <Button mnemonicParsing="false" text="%btn.devolver">
                                        <HBox.margin>
                                           <Insets left="20.0" right="20.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="Baixar">
+                                    <Button mnemonicParsing="false" text="%btn.baixar">
                                        <HBox.margin>
                                           <Insets left="20.0" right="20.0" />
                                        </HBox.margin>
@@ -165,9 +165,9 @@
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Cancelar">
+                                    <Button mnemonicParsing="false" styleClass="button-voltar" text="%btn.voltar">
                                        <HBox.margin>
-                                          <Insets right="50.0" />
+                                          <Insets bottom="20.0" right="50.0" />
                                        </HBox.margin>
                                     </Button>
                                  </children>
@@ -178,7 +178,7 @@
                   </BorderPane>
                </content>
             </Tab>
-            <Tab text="Localizar o estoque">
+            <Tab text="%tab.informar.estoque">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
@@ -187,8 +187,8 @@
                               <TableColumn prefWidth="344.0" text="%tblColumn.Material" />
                               <TableColumn prefWidth="423.0" text="%tblColumn.local">
                                  <columns>
-                                    <TableColumn prefWidth="145.0" text="qtd Devolvida" />
-                                    <TableColumn prefWidth="295.0" text="descricao do local" />
+                                    <TableColumn prefWidth="145.0" text="%tblColumn.quantidadeDevolvida" />
+                                    <TableColumn prefWidth="295.0" text="%tblColumn.descricaoLocal" />
                                  </columns>
                               </TableColumn>
                            </columns>
@@ -209,17 +209,17 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Buscar Local">
+                                    <Button mnemonicParsing="false" text="%btn.buscarLocal">
                                        <HBox.margin>
                                           <Insets left="20.0" right="20.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="Alterar Local">
+                                    <Button mnemonicParsing="false" text="%btn.alterarLocal">
                                        <HBox.margin>
                                           <Insets left="20.0" right="20.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="Remover Local">
+                                    <Button mnemonicParsing="false" text="%btn.removerLocal">
                                        <HBox.margin>
                                           <Insets left="20.0" right="20.0" />
                                        </HBox.margin>
@@ -228,9 +228,9 @@
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Cancelar">
+                                    <Button mnemonicParsing="false" styleClass="button-cancel" text="%btn.cancelar">
                                        <HBox.margin>
-                                          <Insets right="50.0" />
+                                          <Insets bottom="20.0" right="50.0" />
                                        </HBox.margin>
                                     </Button>
                                  </children>
@@ -241,7 +241,7 @@
                   </BorderPane>
                </content>
             </Tab>
-            <Tab fx:id="tabBuscarMaterial" text="Repor Estoque">
+            <Tab fx:id="tabBuscarMaterial" text="tab.procurar.estoque">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
@@ -250,10 +250,10 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </BorderPane.margin>
                            <columns>
-                              <TableColumn prefWidth="340.0" text="Descrição" />
-                              <TableColumn minWidth="0.0" prefWidth="70.0" text="numero" />
-                              <TableColumn prefWidth="99.0" text="Departamento" />
-                              <TableColumn prefWidth="264.0" text="Responsável" />
+                              <TableColumn prefWidth="340.0" text="%tblColumn.descricao" />
+                              <TableColumn minWidth="0.0" prefWidth="70.0" text="%tblColumn.numero" />
+                              <TableColumn prefWidth="99.0" text="%tblColumn.departamento" />
+                              <TableColumn prefWidth="264.0" text="%tblColumn.pessoa.responsavel" />
                            </columns>
                         </TableView>
                      </center>
@@ -275,8 +275,8 @@
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                                  <children>
                                     <HBox prefHeight="30.0" prefWidth="234.0" />
-                                    <RadioButton mnemonicParsing="false" text="Descrição" />
-                                    <RadioButton mnemonicParsing="false" text="Número" />
+                                    <RadioButton mnemonicParsing="false" text="%rdb.descricao" />
+                                    <RadioButton mnemonicParsing="false" text="rdb.pessoa.responsavel" />
                                     <RadioButton mnemonicParsing="false" text="Departamento" />
                                     <RadioButton mnemonicParsing="false" text="Responsável" />
                                     <HBox prefHeight="30.0" prefWidth="138.0" />
@@ -305,12 +305,12 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Selecionar" />
+                                    <Button mnemonicParsing="false" text="%btn.selecionar" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Voltar">
+                                    <Button mnemonicParsing="false" text="%btn.voltar">
                                        <HBox.margin>
                                           <Insets right="50.0" />
                                        </HBox.margin>
@@ -341,17 +341,17 @@
                                  <children>
                                     <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label text="Material: " />
+                                          <Label text="%lbl.material" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                        <children>
-                                          <Label text="Descriçao" />
+                                          <Label text="descricao" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                        <children>
-                                          <Label text="Observaçao:" />
+                                          <Label text="%lbl.observacao" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -367,7 +367,7 @@
                      <top>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label text="Adicionar Observação" />
+                              <Label styleClass="label-subtitle" text="%subTitle.emprestimo.devolver.observacao" />
                            </children>
                         </HBox>
                      </top>

@@ -34,7 +34,7 @@
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="emp_analisar" mnemonicParsing="false" onAction="#emp_analisarOnAction" text="%mni.Analisar" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="emp_devolver" mnemonicParsing="false" text="%mni.Devolver" />
+                  <MenuItem fx:id="emp_devolver" mnemonicParsing="false" onAction="#emp_devolverOnAction" text="%mni.Devolver" />
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem fx:id="emp_solicitar" mnemonicParsing="false" onAction="#emp_solicitarOnAction" text="%mni.Solicitar" />
             </items>
