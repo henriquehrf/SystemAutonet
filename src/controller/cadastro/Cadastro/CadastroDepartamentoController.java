@@ -5,6 +5,7 @@
  */
 package controller.cadastro.Cadastro;
 
+import classesAuxiliares.NegociosEstaticos;
 import controller.cadastro.Consulta.ConsultarDepartamentoController;
 import controller.cadastro.Consulta.ConsultarPessoaController;
 import gui.SystemAutonet;
@@ -53,7 +54,7 @@ public class CadastroDepartamentoController {
     @FXML
     private TextField txtSigla;
 
-    private NegocioDepartamento NegocioP;
+ //   private NegocioDepartamento NegocioP;
 
     private static Departamento alterar;
 
@@ -61,7 +62,7 @@ public class CadastroDepartamentoController {
 
     public void initialize() {
         setcamposObrigatorio();
-        NegocioP = new NegocioDepartamento();
+       // NegocioP = new NegocioDepartamento();
 
         if (!isCadastrar()) {
             completar();
@@ -114,7 +115,7 @@ public class CadastroDepartamentoController {
     void btnCancelar_OnAction(ActionEvent event) {
         try {
             alterar = null;
-            NegocioP = null;
+           // NegocioP = null;
             Parent root;
             root = FXMLLoader.load(ConsultarDepartamentoController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Departamento.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -180,9 +181,10 @@ public class CadastroDepartamentoController {
         departamento.setSigla(txtSigla.getText());
 
         try {
-            NegocioP.salvar(departamento);
+           // NegocioP.salvar(departamento);
+            NegociosEstaticos.getNegocioDepartamento().salvar(departamento);
             alterar = null;
-            NegocioP = null;
+           // NegocioP = null;
             Parent root;
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();

@@ -5,6 +5,7 @@
  */
 package controller.cadastro.Cadastro;
 
+import classesAuxiliares.NegociosEstaticos;
 import controller.cadastro.Consulta.ConsultarTipoSaidaController;
 import gui.SystemAutonet;
 import java.io.IOException;
@@ -44,7 +45,7 @@ public class CadastroTipoSaidaController {
     @FXML
     private Label lblfinalidadeobrigatorio;
 
-    private NegocioTipoSaida NegocioT;
+ //   private NegocioTipoSaida NegocioT;
 
     private static TipoSaida alterar;
 
@@ -67,7 +68,8 @@ public class CadastroTipoSaidaController {
     }
 
     public void initialize() {
-        NegocioT = new NegocioTipoSaida();
+      //  NegocioT = new NegocioTipoSaida();
+      
         setcamposObrigatorio();
 
         if (!isCadastrar()) {
@@ -104,7 +106,7 @@ public class CadastroTipoSaidaController {
     void btnCancelar_OnAction(ActionEvent event) {
         try {
             Parent root;
-            NegocioT = null;
+           // NegocioT = null;
             alterar = null;
             root = FXMLLoader.load(ConsultarTipoSaidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_TipoSaida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -132,12 +134,14 @@ public class CadastroTipoSaidaController {
         ts.setDescricao(txtfinalidade.getText());
 
         try {
-            NegocioT.salvar(ts);
+           // NegocioT.salvar(ts);
+            NegociosEstaticos.getNegocioTipoSaida().salvar(ts);
             alterar = null;
+           
             Parent root;
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();
-            NegocioT = null;
+         //   NegocioT = null;
             alerta(AlertType.INFORMATION, prop.getProperty("msg.cadastro.confirmacao"), prop.getProperty("msg.cadastro.sucesso"));
             root = FXMLLoader.load(ConsultarTipoSaidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_TipoSaida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);

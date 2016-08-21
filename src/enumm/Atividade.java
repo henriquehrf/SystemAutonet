@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.cadastro.Cadastro;
+package enumm;
 
 /**
  *
- * @author Eduardo
+ * @author Henrique
  */
-class ChoiceBox<T> {
+public enum Atividade {
+    A,I
     
 }

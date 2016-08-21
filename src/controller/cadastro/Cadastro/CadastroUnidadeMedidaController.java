@@ -5,6 +5,7 @@
  */
 package controller.cadastro.Cadastro;
 
+import classesAuxiliares.NegociosEstaticos;
 import controller.cadastro.Consulta.ConsultarUnidadeMedidaController;
 import gui.SystemAutonet;
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class CadastroUnidadeMedidaController {
     @FXML
     private TextField txtsigla;
 
-    private NegocioTipoUnidade NegocioT;
+   // private NegocioTipoUnidade NegocioT;
 
     private static TipoUnidade alterar;
 
@@ -75,7 +76,7 @@ public class CadastroUnidadeMedidaController {
     }
 
     public void initialize() {
-        NegocioT = new NegocioTipoUnidade();
+       // NegocioT = new NegocioTipoUnidade();
         setcamposObrigatorio();
 
         if (!isCadastrar()) {
@@ -125,7 +126,7 @@ public class CadastroUnidadeMedidaController {
     void btnCancelar_OnAction(ActionEvent event) {
         try {
             Parent root;
-            NegocioT = null;
+           // NegocioT = null;
             alterar = null;
             root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_UnidadeMedida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -172,9 +173,10 @@ public class CadastroUnidadeMedidaController {
         ts.setSigla(txtsigla.getText());
 
         try {
-            NegocioT.salvar(ts);
+            NegociosEstaticos.getNegocioTipoUnidade().salvar(ts);
+            //NegocioT.salvar(ts);
             alterar = null;
-            NegocioT = null;
+            //NegocioT = null;
             
             Parent root;
             LerProperties ler = new LerProperties();

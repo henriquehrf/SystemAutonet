@@ -1,5 +1,6 @@
 package controller.cadastro.Consulta;
 
+import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroTipoSaidaController;
 import gui.SystemAutonet;
@@ -49,11 +50,11 @@ public class ConsultarTipoSaidaController {
     @FXML
     private Button btnBuscar;
 
-    private NegocioTipoSaida negocioTS;
+   // private NegocioTipoSaida negocioTS;
 
     public void initialize() {
-        negocioTS = new NegocioTipoSaida();
-        List<TipoSaida> lista = negocioTS.buscarTodos();
+       // negocioTS = new NegocioTipoSaida();
+        List<TipoSaida> lista = NegociosEstaticos.getNegocioTipoSaida().buscarTodos();
 
         completarTabela(lista);
 
@@ -63,7 +64,7 @@ public class ConsultarTipoSaidaController {
     void btnVoltar_OnAction(ActionEvent event) {
         try {
             Parent root;
-            negocioTS = null;
+           // negocioTS = null;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -76,7 +77,7 @@ public class ConsultarTipoSaidaController {
         try {
             CadastroTipoSaidaController.setCadastrar(true);
             Parent root;
-            negocioTS = null;
+           // negocioTS = null;
             root = FXMLLoader.load(CadastroTipoSaidaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Tipo_Saida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -91,7 +92,7 @@ public class ConsultarTipoSaidaController {
             CadastroTipoSaidaController.setCadastrar(false);
             CadastroTipoSaidaController.setAlterar(p);            
             Parent root;
-            negocioTS = null;
+           // negocioTS = null;
             root = FXMLLoader.load(CadastroTipoSaidaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Tipo_Saida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -109,7 +110,7 @@ public class ConsultarTipoSaidaController {
         
         TipoSaida tps = new TipoSaida();
         tps.setDescricao(txtBuscador.getText());
-        completarTabela(negocioTS.buscarPorDescricao(tps));
+        completarTabela(NegociosEstaticos.getNegocioTipoSaida().buscarPorDescricao(tps));
 
     }
 

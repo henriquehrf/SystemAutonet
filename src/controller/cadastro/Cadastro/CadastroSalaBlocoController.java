@@ -5,6 +5,7 @@
  */
 package controller.cadastro.Cadastro;
 
+import classesAuxiliares.NegociosEstaticos;
 import controller.cadastro.Consulta.ConsultarLocaisController;
 import gui.SystemAutonet;
 import java.io.IOException;
@@ -69,21 +70,19 @@ public class CadastroSalaBlocoController {
     @FXML
     private Label lblDescricaoObrigatorio;
 
-    private NegocioLocal NegocioL;
-
+    //private NegocioLocal NegocioL;
     private static Local alterar;
 
     private static boolean cadastrar;
 
-    private NegocioDepartamento negocioDepartamento;
-
+    //  private NegocioDepartamento negocioDepartamento;
     List<Departamento> lista;
 
     public void initialize() {
-        NegocioL = new NegocioLocal();
-        negocioDepartamento = new NegocioDepartamento();
+        //   NegocioL = new NegocioLocal();
+        //  negocioDepartamento = new NegocioDepartamento();
         setcamposObrigatorio();
-        lista = negocioDepartamento.buscarTodos();
+        lista = NegociosEstaticos.getNegocioDepartamento().buscarTodos();
 
         ObservableList<String> dado = FXCollections.observableArrayList();
         for (int i = 0; i < lista.size(); i++) {
@@ -138,9 +137,9 @@ public class CadastroSalaBlocoController {
     void btnCancelar_OnAction(ActionEvent event) {
         try {
             Parent root;
-            NegocioL = null;
+            //NegocioL = null;
             alterar = null;
-            negocioDepartamento = null;
+            //negocioDepartamento = null;
             root = FXMLLoader.load(ConsultarLocaisController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Locais.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -230,11 +229,11 @@ public class CadastroSalaBlocoController {
         }
         local.setId_departamento(dp);
         try {
-            NegocioL.salvar(local);
-
-            NegocioL = null;
+            //NegocioL.salvar(local);
+            NegociosEstaticos.getNegocioLocal().salvar(local);
+            //  NegocioL = null;
             alterar = null;
-            negocioDepartamento = null;
+            //  negocioDepartamento = null;
 
             Parent root;
             LerProperties ler = new LerProperties();

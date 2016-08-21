@@ -1,5 +1,6 @@
 package controller.cadastro.Consulta;
 
+import classesAuxiliares.NegociosEstaticos;
 import classesAuxiliares.Validar;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroSalaBlocoController;
@@ -77,11 +78,11 @@ public class ConsultarLocaisController {
     @FXML
     private Button btnBuscar;
 
-    private NegocioLocal negocioLocal;
+  //  private NegocioLocal negocioLocal;
 
     public void initialize() {
-        negocioLocal = new NegocioLocal();
-        List<Local> lista = negocioLocal.buscarTodos();
+      //  negocioLocal = new NegocioLocal();
+        List<Local> lista = NegociosEstaticos.getNegocioLocal().buscarTodos();
 
         completarTabela(lista);
 
@@ -91,7 +92,7 @@ public class ConsultarLocaisController {
     void btnVoltar_OnAction(ActionEvent event) {
         try {
             Parent root;
-            negocioLocal = null;
+          //  negocioLocal = null;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -104,7 +105,7 @@ public class ConsultarLocaisController {
         try {
             CadastroSalaBlocoController.setCadastrar(true);
             Parent root;
-            negocioLocal = null;
+          //  negocioLocal = null;
             root = FXMLLoader.load(CadastroSalaBlocoController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_SalaBloco.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -119,7 +120,7 @@ public class ConsultarLocaisController {
             CadastroSalaBlocoController.setCadastrar(false);
             CadastroSalaBlocoController.setAlterar(p);
             Parent root;
-            negocioLocal = null;
+         //   negocioLocal = null;
             root = FXMLLoader.load(CadastroSalaBlocoController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_SalaBloco.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -137,7 +138,7 @@ public class ConsultarLocaisController {
         if (rdbBloco.isSelected()) {
             Local local = new Local();
             local.setBloco(txtBuscador.getText());
-            completarTabela(negocioLocal.buscarPorBloco(local));
+            completarTabela(NegociosEstaticos.getNegocioLocal().buscarPorBloco(local));
         }
 
         if (rdbNumero.isSelected()) {
@@ -146,11 +147,11 @@ public class ConsultarLocaisController {
 
             if (Validar.isDigit(buscar)) {
                 if (txtBuscador.getText().isEmpty()) {
-                    completarTabela(negocioLocal.buscarTodos());
+                    completarTabela(NegociosEstaticos.getNegocioLocal().buscarTodos());
                 } else {
 
                     local.setNumero(Integer.parseInt(txtBuscador.getText()));
-                    completarTabela(negocioLocal.buscarPorNumero(local));
+                    completarTabela(NegociosEstaticos.getNegocioLocal().buscarPorNumero(local));
                 }
             } else {
                 try {
@@ -165,12 +166,12 @@ public class ConsultarLocaisController {
         if (rdbPessoaResponsavel.isSelected()) {
             Local local = new Local();
             local.setResponsavel(txtBuscador.getText());
-            completarTabela(negocioLocal.buscarPorPessoaResponsavel(local));
+            completarTabela(NegociosEstaticos.getNegocioLocal().buscarPorPessoaResponsavel(local));
         }
         if (rdbDescricao.isSelected()) {
             Local local = new Local();
             local.setDescricao(txtBuscador.getText());
-            completarTabela(negocioLocal.buscarPorPessoaResponsavel(local));
+            completarTabela(NegociosEstaticos.getNegocioLocal().buscarPorPessoaResponsavel(local));
         }
     }
 

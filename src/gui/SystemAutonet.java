@@ -5,6 +5,7 @@
  */
 package gui;
 
+import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import controller.cadastro.Consulta.ConsultarDepartamentoController;
 import java.util.ResourceBundle;
@@ -29,6 +30,7 @@ public class SystemAutonet extends Application {
     public void start(Stage stage) throws Exception {
 
         Parent pane = null;
+        NegociosEstaticos.iniciar();
              
         try {
 

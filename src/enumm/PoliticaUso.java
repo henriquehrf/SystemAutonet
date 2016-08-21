@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vo;
+package enumm;
 
 /**
  *
  * @author Eduardo
  */
-public enum Sexo {
-    M,
-    F
+public enum PoliticaUso {
+    CONSUMO,
+    EMPRESTIMO,
+    PATRIMÔNIO
 }
