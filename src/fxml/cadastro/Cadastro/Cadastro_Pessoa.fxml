@@ -103,8 +103,12 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="16.0" prefWidth="611.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
                                  <children>
-                                    <CheckBox fx:id="CheckBoxAtivo" mnemonicParsing="false" selected="true" text="%checkbox.ativo" />
-                                    <CheckBox fx:id="CheckBoxInativo" mnemonicParsing="false" text="%checkbox.inativo" />
+                                    <RadioButton fx:id="rdbAtivo" mnemonicParsing="false" text="%rdb.ativo">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Atividade" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="rdbInativo" mnemonicParsing="false" text="%rdb.inativo" toggleGroup="$Atividade" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12">

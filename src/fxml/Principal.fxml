@@ -12,6 +12,7 @@
         <menus>
           <Menu fx:id="mnu_Cadastro" mnemonicParsing="false" text="%mnu.Cadastro">
             <items>
+                  <MenuItem fx:id="cad_Categoria" mnemonicParsing="false" onAction="#cad_Categoria" text="%mni.Categoria" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="cad_departamento" mnemonicParsing="false" onAction="#cad_departamentoOnAction" text="%mni.Departamento" />
                   <SeparatorMenuItem mnemonicParsing="false" />

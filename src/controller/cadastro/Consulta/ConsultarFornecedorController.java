@@ -1,5 +1,6 @@
 package controller.cadastro.Consulta;
 
+import classesAuxiliares.NegociosEstaticos;
 import classesAuxiliares.Validar;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroFornecedorController;
@@ -75,11 +76,11 @@ public class ConsultarFornecedorController {
     @FXML
     private Button btnBuscar;
 
-    private NegocioFornecedor negocioF;
+  //  private NegocioFornecedor negocioF;
 
     public void initialize() {
-        negocioF = new NegocioFornecedor();
-        List<Fornecedor> lista = negocioF.buscarTodos();
+       // negocioF = new NegocioFornecedor();
+        List<Fornecedor> lista = NegociosEstaticos.getNegocioFornecedor().buscarTodos();
         completarTabela(lista);
 
     }
@@ -99,7 +100,7 @@ public class ConsultarFornecedorController {
     @FXML
     void btnVoltar_OnAction(ActionEvent event) {
         try {
-            negocioF = null;
+          //  negocioF = null;
             Parent root;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -112,7 +113,7 @@ public class ConsultarFornecedorController {
     void btnInserir_OnAction(ActionEvent event) {
         try {
             CadastroFornecedorController.setCadastrar(true);
-            negocioF = null;
+          //  negocioF = null;
             Parent root;
             root = FXMLLoader.load(CadastroFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -129,7 +130,7 @@ public class ConsultarFornecedorController {
         CadastroFornecedorController.setAlterar(f);
 
         try {
-            negocioF = null;
+           // negocioF = null;
             Parent root;
             root = FXMLLoader.load(CadastroFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -152,7 +153,7 @@ public class ConsultarFornecedorController {
             if (Validar.isDigit(buscar)) {
                 Fornecedor f = new Fornecedor();
                 f.setCnpj(txtBuscador.getText());
-                List<Fornecedor> lista = negocioF.buscarPorCnpj(f);
+                List<Fornecedor> lista = NegociosEstaticos.getNegocioFornecedor().buscarPorCnpj(f);
                 completarTabela(lista);
             } else {
                 try {
@@ -166,21 +167,21 @@ public class ConsultarFornecedorController {
         if (rdbNomeFantasia.isSelected()) {
             Fornecedor f = new Fornecedor();
             f.setNome_fantasia(txtBuscador.getText());
-            List<Fornecedor> lista = negocioF.buscarPorNomeFantasia(f);
+            List<Fornecedor> lista = NegociosEstaticos.getNegocioFornecedor().buscarPorNomeFantasia(f);
             completarTabela(lista);
 
         }
         if (rdbPessoaResponsavel.isSelected()) {
             Fornecedor f = new Fornecedor();
             f.setPessoa_responsavel(txtBuscador.getText());
-            List<Fornecedor> lista = negocioF.buscarPorPessoaResponsavel(f);
+            List<Fornecedor> lista = NegociosEstaticos.getNegocioFornecedor().buscarPorPessoaResponsavel(f);
             completarTabela(lista);
 
         }
         if (rdbRazaoSocial.isSelected()) {
             Fornecedor f = new Fornecedor();
             f.setRazao_social(txtBuscador.getText());
-            List<Fornecedor> lista = negocioF.buscarPorRazaoSocial(f);
+            List<Fornecedor> lista = NegociosEstaticos.getNegocioFornecedor().buscarPorRazaoSocial(f);
             completarTabela(lista);
         }
     }

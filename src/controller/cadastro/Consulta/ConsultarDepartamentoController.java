@@ -1,5 +1,6 @@
 package controller.cadastro.Consulta;
 
+import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroDepartamentoController;
 import gui.SystemAutonet;
@@ -59,11 +60,11 @@ public class ConsultarDepartamentoController {
     @FXML
     private Button btnBuscar;
 
-    private NegocioDepartamento negocioD;
+   // private NegocioDepartamento negocioD;
 
     public void initialize() {
-        negocioD = new NegocioDepartamento();
-        List<Departamento> lista = negocioD.buscarTodos();
+      //  negocioD = new NegocioDepartamento();
+        List<Departamento> lista = NegociosEstaticos.getNegocioDepartamento().buscarTodos();
 
         completarTabela(lista);
         rdbNome.setSelected(true);
@@ -83,7 +84,7 @@ public class ConsultarDepartamentoController {
     @FXML
     void btnInserir_OnAction(ActionEvent event) {
         try {
-            negocioD = null;
+          //  negocioD = null;
             CadastroDepartamentoController.setCadastrar(true);
             Parent root;
             root = FXMLLoader.load(CadastroDepartamentoController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Departamento.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
@@ -99,7 +100,7 @@ public class ConsultarDepartamentoController {
         CadastroDepartamentoController.setCadastrar(false);
         CadastroDepartamentoController.setAlterar(p);
         try {
-            negocioD = null;
+            //negocioD = null;
             Parent root;
             root = FXMLLoader.load(CadastroDepartamentoController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Departamento.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -118,14 +119,14 @@ public class ConsultarDepartamentoController {
         if (rdbNome.isSelected()) {
             Departamento p = new Departamento();
             p.setNome(txtBuscador.getText());
-            List<Departamento> lista = negocioD.buscarPorNome(p);
+            List<Departamento> lista = NegociosEstaticos.getNegocioDepartamento().buscarPorNome(p);
             completarTabela(lista);
         }
 
         if (rdbSigla.isSelected()) {
             Departamento p = new Departamento();
             p.setSigla(txtBuscador.getText());
-            List<Departamento> lista = negocioD.buscarPorSigla(p);
+            List<Departamento> lista = NegociosEstaticos.getNegocioDepartamento().buscarPorSigla(p);
             completarTabela(lista);
         }
     }
@@ -133,7 +134,7 @@ public class ConsultarDepartamentoController {
     @FXML
     void btnVoltar_OnAction(ActionEvent event) {
         try {
-             negocioD =  null;
+            // negocioD =  null;
             Parent root;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);

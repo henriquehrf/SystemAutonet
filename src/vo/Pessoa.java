@@ -5,6 +5,9 @@
  */
 package vo;
 
+import enumm.Atividade;
+import enumm.Sexo;
+import enumm.PerfilUsuario;
 import DAO.EntidadeBase;
 import java.io.Serializable;
 import java.util.Date;

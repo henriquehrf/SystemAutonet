@@ -8,11 +8,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.cadastro.Cadastro.CadastroMaterialController">
    <center>
       <TabPane prefHeight="455.0" prefWidth="761.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
          <tabs>
-            <Tab text="Dados do Material">
+            <Tab text="%tab.material.dadosMaterial">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -22,40 +22,42 @@
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="350.0" />
+                                    <TextField fx:id="txtdescricao" prefHeight="25.0" prefWidth="350.0" />
+                                    <Label fx:id="lbldescricaoObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2">
                                  <children>
-                                    <TextArea prefHeight="19.0" prefWidth="450.0" />
+                                    <TextArea fx:id="txtDadosTecnicos" prefHeight="19.0" prefWidth="450.0" />
+                                    <Label fx:id="lblDadostecnicosObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2" />
                               <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.rowSpan="2">
                                  <children>
-                                    <ChoiceBox prefWidth="150.0" />
+                                    <ComboBox fx:id="cmbCategoria" prefWidth="150.0" />
+                                    <Label fx:id="lblcategorioobrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children></HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <children>
-                                    <ChoiceBox prefWidth="150.0" />
+                                    <ComboBox fx:id="cmbUnidadeMedida" prefWidth="150.0" />
+                                    <Label fx:id="lblUnidadeMedidaObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children></HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <children>
-                                    <CheckBox mnemonicParsing="false" text="Habilitado para Empréstimo  " />
-                                    <CheckBox mnemonicParsing="false" text="Habilitado para Uso de Qualquer Usuário  " />
-                                    <CheckBox mnemonicParsing="false" text="Patrimônio" />
+                                    <ComboBox fx:id="cmbPoliticaUso" prefWidth="150.0" />
+                                    <Label fx:id="lblPolitacaDeUsoObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children></HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                              <Label text="Descrição: " GridPane.rowIndex="2" />
-                              <Label text="Dados Tecnicos: " GridPane.rowIndex="3" />
-                              <Label text="Categoria: " GridPane.rowIndex="5" />
-                              <Label text="Unidade de Medida" GridPane.rowIndex="6" />
-                              <Label text="Politica de Uso:" GridPane.rowIndex="8" />
+                              <Label text="%lbl.descricao" GridPane.rowIndex="2" />
+                              <Label text="%lbl.DadosTecnicos" GridPane.rowIndex="3" />
+                              <Label text="%lbl.categoria" GridPane.rowIndex="5" />
+                              <Label text="%lbl.UnidadeMedida" GridPane.rowIndex="6" />
+                              <Label text="%lbl.politicaDeUso" GridPane.rowIndex="7" />
                            </children>
                            <columnConstraints>
                               <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="122.0" />
@@ -86,10 +88,13 @@
       </TabPane>
    </center>
    <top>
-      <Label style="-fx-font-size: 20;" text="Cadastro de Material" BorderPane.alignment="CENTER">
+      <Label fx:id="Title" style="-fx-font-size: 20;" styleClass="label-head" text="%title.cadatro.material" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </BorderPane.margin>
       </Label>
    </top>
    <bottom>
@@ -106,7 +111,7 @@
          <children>
             <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Salvar" />
+                  <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#btnSalvar_OnAction" prefWidth="100.0" styleClass="button-save" stylesheets="@../../../utilitarios/teste.css" text="%btn.salvar" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -117,7 +122,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Cancelar">
+                  <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCancelar_OnAction" prefWidth="100.0" styleClass="button-cancel" stylesheets="@../../../utilitarios/teste.css" text="%btn.cancelar">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

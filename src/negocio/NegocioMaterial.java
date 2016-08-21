@@ -26,7 +26,7 @@ public class NegocioMaterial {
     public NegocioMaterial() {
         materialDAO = new MaterialDAO();
         tuDAO = new TipoUnidadeDAO();
-        categoriaDAO = new CategoriaDAO ();
+        categoriaDAO = new CategoriaDAO();
     }
 
     public Material salvar(Material material) throws Exception {
@@ -44,43 +44,58 @@ public class NegocioMaterial {
     }
 
     public Material consultarPorId(Material material) {
+
+        Categoria cat = categoriaDAO.consutarPorId(Categoria.class, material.getId_categoria());
+        TipoUnidade tu = tuDAO.consutarPorId(TipoUnidade.class, material.getId_tipo_unidade());
+        material.setCategoriNome(cat.getDescricao());
+        material.setUnidadeMedida(tu.getDescricao());
+        
         return materialDAO.consutarPorId(Material.class, material);
     }
 
     public List<Material> buscarPorDescricao(Material material) {
-        return materialDAO.buscarPorDescricao(material);
+        return preencher(materialDAO.buscarPorDescricao(material));
     }
 
     public List<Material> buscarPorQuantidade(Material material) {
-        return materialDAO.buscarPorQuantidade(material);
+
+        return preencher(materialDAO.buscarPorQuantidade(material));
     }
-    
+
     public List<Material> buscarTodos() {
-        
+
         List<Material> list = materialDAO.buscarTodos();
-        
-        for(int i =0 ;i<list.size();i++){
-            Categoria cat = categoriaDAO.consutarPorId(Categoria.class, list.get(i).getId_categoria());
-            TipoUnidade tu = tuDAO.consutarPorId(TipoUnidade.class, list.get(i).getId_tipo_unidade());
-            
-            list.get(i).setCategoriNome(cat.getDescricao());
-            list.get(i).setUnidadeMedida(tu.getDescricao());
-        }
-        
-        return list;
+        return preencher(list);
     }
 
     public List<Material> buscarPorCategoria(Categoria categoria) {
-        return materialDAO.buscarPorCategoria(categoria);
+        return preencher(materialDAO.buscarPorCategoria(categoria));
     }
 
     private String validar(Material material) {
         String erro = "";
 
-        if (material.getId_categoria() == null) erro += "Favor selecionar a categoria do material\n";
-    
-        if (material.getId_tipo_unidade() == null) erro += "Favor selecionar a unidade do material";
-    
+        if (material.getId_categoria() == null) {
+            erro += "Favor selecionar a categoria do material\n";
+        }
+
+        if (material.getId_tipo_unidade() == null) {
+            erro += "Favor selecionar a unidade do material";
+        }
+
         return erro;
+    }
+
+    private List<Material> preencher(List<Material> list) {
+
+        for (int i = 0; i < list.size(); i++) {
+            Categoria cat = categoriaDAO.consutarPorId(Categoria.class, list.get(i).getId_categoria());
+            TipoUnidade tu = tuDAO.consutarPorId(TipoUnidade.class, list.get(i).getId_tipo_unidade());
+
+            list.get(i).setCategoriNome(cat.getDescricao());
+            list.get(i).setUnidadeMedida(tu.getDescricao());
+        }
+        return list;
+
     }
 }

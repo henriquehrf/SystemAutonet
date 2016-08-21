@@ -5,6 +5,7 @@
  */
 package controller.cadastro.Cadastro;
 
+import classesAuxiliares.NegociosEstaticos;
 import classesAuxiliares.Validar;
 import controller.cadastro.Consulta.ConsultarFornecedorController;
 import gui.SystemAutonet;
@@ -36,7 +37,7 @@ public class CadastroFornecedorController {
 
     private static boolean cadastrar;
 
-    private NegocioFornecedor negocioF;
+   // private NegocioFornecedor negocioF;
 
     @FXML
     private Label lblCnpjObrigatorio;
@@ -112,7 +113,7 @@ public class CadastroFornecedorController {
     }
 
     public void initialize() {
-        negocioF = new NegocioFornecedor();
+    //    negocioF = new NegocioFornecedor();
         setcamposObrigatorio();
         if (!isCadastrar()) {
             completar();
@@ -159,7 +160,7 @@ public class CadastroFornecedorController {
         try {
             Parent root;
             alterar = null;
-            negocioF = null;
+       //     negocioF = null;
             root = FXMLLoader.load(ConsultarFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -210,9 +211,10 @@ public class CadastroFornecedorController {
             return;
         }
         try {
-            negocioF.salvar(fornecedor);
+            //negocioF.salvar(fornecedor);
+             NegociosEstaticos.getNegocioFornecedor().salvar(fornecedor);
             alterar = null;
-            negocioF = null;
+           // negocioF = null;
             Parent root;
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();

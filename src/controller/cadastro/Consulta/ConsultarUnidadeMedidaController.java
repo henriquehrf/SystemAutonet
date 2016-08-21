@@ -1,5 +1,6 @@
 package controller.cadastro.Consulta;
 
+import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroUnidadeMedidaController;
 import gui.SystemAutonet;
@@ -56,20 +57,20 @@ public class ConsultarUnidadeMedidaController {
     @FXML
     private TableColumn<TipoUnidade, String> tbcDescricao;
 
-    private NegocioTipoUnidade negocioTU;
+    //private NegocioTipoUnidade negocioTU;
     @FXML
     private Button btnBuscar;
 
     public void initialize() {
-        negocioTU = new NegocioTipoUnidade();
-        List<TipoUnidade> lista = negocioTU.buscarTodos();
+       // negocioTU = new NegocioTipoUnidade();
+        List<TipoUnidade> lista =NegociosEstaticos.getNegocioTipoUnidade().buscarTodos();
         completarTabela(lista);
     }
 
     @FXML
     void btnVoltar_OnAction(ActionEvent event) {
         try {
-            negocioTU = null;
+          //  negocioTU = null;
             Parent root;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -83,7 +84,7 @@ public class ConsultarUnidadeMedidaController {
         try {
             CadastroUnidadeMedidaController.setCadastrar(true);
             Parent root;
-            negocioTU = null;
+           // negocioTU = null;
             root = FXMLLoader.load(CadastroUnidadeMedidaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_UnidadeMedida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -98,7 +99,7 @@ public class ConsultarUnidadeMedidaController {
             CadastroUnidadeMedidaController.setCadastrar(false);
             CadastroUnidadeMedidaController.setAlterar(p);
             Parent root;
-            negocioTU = null;
+           // negocioTU = null;
             root = FXMLLoader.load(CadastroUnidadeMedidaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_UnidadeMedida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -117,12 +118,12 @@ public class ConsultarUnidadeMedidaController {
         if (rdbdescricao.isSelected()) {
             TipoUnidade tu = new TipoUnidade();
             tu.setDescricao(txtBuscador.getText());
-            completarTabela(negocioTU.buscarPorDescricao(tu));
+            completarTabela(NegociosEstaticos.getNegocioTipoUnidade().buscarPorDescricao(tu));
         }
         if (rdbsigla.isSelected()) {
             TipoUnidade tu = new TipoUnidade();
             tu.setSigla(txtBuscador.getText());
-            completarTabela(negocioTU.buscarPorSigla(tu));
+            completarTabela(NegociosEstaticos.getNegocioTipoUnidade().buscarPorSigla(tu));
         }
     }
 

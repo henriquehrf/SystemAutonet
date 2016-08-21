@@ -1,5 +1,6 @@
 package controller.cadastro.Consulta;
 
+import classesAuxiliares.NegociosEstaticos;
 import classesAuxiliares.Validar;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroPessoaController;
@@ -7,8 +8,6 @@ import gui.SystemAutonet;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -77,7 +76,7 @@ public class ConsultarPessoaController {
     @FXML
     private RadioButton rdbCPF;
 
-    NegocioPessoa pessoa;
+  //  NegocioPessoa pessoa;
 
     void completarTabela(List<Pessoa> lista) {
         ObservableList<Pessoa> dado = FXCollections.observableArrayList();
@@ -92,8 +91,8 @@ public class ConsultarPessoaController {
     }
 
     public void initialize() {
-        pessoa = new NegocioPessoa();
-        List<Pessoa> lista = pessoa.buscarTodos();
+       // pessoa = new NegocioPessoa();
+        List<Pessoa> lista = NegociosEstaticos.getNegocioPessoa().buscarTodos();
 
         completarTabela(lista);
         rdbNome.setSelected(true);
@@ -103,7 +102,7 @@ public class ConsultarPessoaController {
     @FXML
     void btnVoltarOnAction(ActionEvent event) {
         try {
-            pessoa = null;
+         //   pessoa = null;
             Parent root;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -118,7 +117,7 @@ public class ConsultarPessoaController {
         try {
             CadastroPessoaController.setCadastrar(true);
             Parent root;
-            pessoa = null;
+           // pessoa = null;
             root = FXMLLoader.load(CadastroPessoaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -135,7 +134,7 @@ public class ConsultarPessoaController {
         CadastroPessoaController.setAlterar(p);
         try {
             Parent root;
-            pessoa = null;
+          //  pessoa = null;
             root = FXMLLoader.load(CadastroPessoaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -155,7 +154,7 @@ public class ConsultarPessoaController {
         if (rdbNome.isSelected()) {
             Pessoa p = new Pessoa();
             p.setNome(txtBuscador.getText());
-            List<Pessoa> lista = pessoa.buscarPorNome(p);
+            List<Pessoa> lista = NegociosEstaticos.getNegocioPessoa().buscarPorNome(p);
             completarTabela(lista);
 
         }
@@ -165,7 +164,7 @@ public class ConsultarPessoaController {
             if (Validar.isDigit(buscar)) {
                 Pessoa p = new Pessoa();
                 p.setCpf(txtBuscador.getText());
-                List<Pessoa> lista = pessoa.buscarPorCPF(p);
+                List<Pessoa> lista = NegociosEstaticos.getNegocioPessoa().buscarPorCPF(p);
                 completarTabela(lista);
             } else {
                 try {
@@ -181,7 +180,7 @@ public class ConsultarPessoaController {
             if (Validar.isDigit(buscar)) {
                 Pessoa p = new Pessoa();
                 p.setRg(txtBuscador.getText());
-                List<Pessoa> lista = pessoa.buscarPorRG(p);
+                List<Pessoa> lista = NegociosEstaticos.getNegocioPessoa().buscarPorRG(p);
                 completarTabela(lista);
             } else {
                 try {
@@ -198,7 +197,7 @@ public class ConsultarPessoaController {
 
                 Pessoa p = new Pessoa();
                 p.setNum_matricula(txtBuscador.getText());
-                List<Pessoa> lista = pessoa.buscarPorMatricula(p);
+                List<Pessoa> lista = NegociosEstaticos.getNegocioPessoa().buscarPorMatricula(p);
                 completarTabela(lista);
 
             } else {

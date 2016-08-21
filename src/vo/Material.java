@@ -4,9 +4,12 @@
 package vo;
 
 import DAO.EntidadeBase;
+import enumm.PoliticaUso;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -27,6 +30,7 @@ import javax.persistence.Transient;
 
     @NamedQuery(name = "Material.consultarPorCategoria",
             query = "Select m from Material m where m.id_categoria.id_categoria = :idcategoria"),
+
     @NamedQuery(name = "Material.consultarTodos",
             query = "Select m from Material m ORDER BY (m.descricao)")
 
@@ -36,11 +40,18 @@ public class Material implements Serializable, EntidadeBase {
     @Id
     private Long id_material;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int quantidade;
 
     @Column(length = 200)
     private String descricao;
+
+    @Column(length = 500)
+    private String DadosTecnicos;
+
+    @Column(length = 50)
+    @Enumerated(EnumType.STRING)
+    private PoliticaUso politicaUso;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private TipoUnidade id_tipo_unidade = null;
@@ -109,6 +120,22 @@ public class Material implements Serializable, EntidadeBase {
 
     public void setUnidadeMedida(String unidadeMedida) {
         this.unidadeMedida = unidadeMedida;
+    }
+
+    public String getDadosTecnicos() {
+        return DadosTecnicos;
+    }
+
+    public void setDadosTecnicos(String DadosTecnicos) {
+        this.DadosTecnicos = DadosTecnicos;
+    }
+
+    public PoliticaUso getPoliticaUso() {
+        return politicaUso;
+    }
+
+    public void setPoliticaUso(PoliticaUso politicaUso) {
+        this.politicaUso = politicaUso;
     }
 
 }

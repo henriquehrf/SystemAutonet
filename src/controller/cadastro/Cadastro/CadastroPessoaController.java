@@ -5,6 +5,7 @@
  */
 package controller.cadastro.Cadastro;
 
+import classesAuxiliares.NegociosEstaticos;
 import classesAuxiliares.Validar;
 import controller.cadastro.Consulta.ConsultarPessoaController;
 import gui.SystemAutonet;
@@ -35,10 +36,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import negocio.NegocioPessoa;
 import utilitarios.LerProperties;
-import vo.Atividade;
-import vo.PerfilUsuario;
+import enumm.Atividade;
+import enumm.PerfilUsuario;
 import vo.Pessoa;
-import vo.Sexo;
+import enumm.Sexo;
 
 /**
  *
@@ -82,7 +83,7 @@ public class CadastroPessoaController {
     private Label funcaoObrigatorio;
 
     @FXML
-    private CheckBox CheckBoxInativo;
+    private RadioButton rdbAtivo;
 
     @FXML
     private Label nomeObrigatorio;
@@ -127,7 +128,7 @@ public class CadastroPessoaController {
     private Label enderecoObrigatorio;
 
     @FXML
-    private CheckBox CheckBoxAtivo;
+    private RadioButton rdbInativo;
 
     @FXML
     private TextField txtUsuario;
@@ -150,8 +151,7 @@ public class CadastroPessoaController {
     @FXML
     private RadioButton rdbFeminino;
 
-    private NegocioPessoa NegocioP;
-
+    // private NegocioPessoa NegocioP;
     private static Pessoa alterar;
 
     private static boolean cadastrar;
@@ -176,11 +176,12 @@ public class CadastroPessoaController {
 
     public void initialize() {
 
-        NegocioP = new NegocioPessoa();
+        //NegocioP = new NegocioPessoa();
         setcamposObrigatorio();
         cmbFuncao.setItems(perf);
-        CheckBoxAtivo.setDisable(true);
-        CheckBoxInativo.setDisable(true);
+        rdbAtivo.setDisable(true);
+        rdbInativo.setDisable(true);
+        rdbAtivo.setSelected(true);
         if (!isCadastrar()) {
             completar();
         } else {
@@ -300,10 +301,10 @@ public class CadastroPessoaController {
         if (rdbMasculino.isSelected()) {
             pessoa.setSexo(Sexo.M);
         }
-        if (CheckBoxAtivo.isSelected()) {
+        if (rdbAtivo.isSelected()) {
             pessoa.setAtivo(Atividade.A);
         }
-        if (CheckBoxInativo.isSelected()) {
+        if (rdbInativo.isSelected()) {
             pessoa.setAtivo(Atividade.I);
         }
 
@@ -311,12 +312,15 @@ public class CadastroPessoaController {
         pessoa.setDt_nascimento(Date.from(instant));
 
         try {
-            NegocioP.salvar(pessoa);
+            //   NegocioP.salvar(pessoa);
+            NegociosEstaticos.getNegocioPessoa().salvar(pessoa);
             Parent root;
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();
-            NegocioP = null;
+            // NegocioP = null;
             alterar = null;
+          
+            
             alerta(AlertType.INFORMATION, prop.getProperty("msg.cadastro.confirmacao"), prop.getProperty("msg.cadastro.sucesso"));
             root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -332,7 +336,7 @@ public class CadastroPessoaController {
 
         try {
             Parent root;
-            NegocioP = null;
+            // NegocioP = null;
             alterar = null;
             root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -477,8 +481,8 @@ public class CadastroPessoaController {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        CheckBoxAtivo.setDisable(false);
-        CheckBoxInativo.setDisable(false);
+        rdbAtivo.setDisable(false);
+        rdbInativo.setDisable(false);
         //alterar=null;
     }
 

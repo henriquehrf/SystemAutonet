@@ -1,5 +1,6 @@
 package controller;
 
+import controller.cadastro.Cadastro.CadastroCategoriaController;
 import gui.SystemAutonet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -16,6 +17,9 @@ public class PrincipalController {
 
     @FXML
     private MenuItem cad_material;
+
+    @FXML
+    private MenuItem cad_Categoria;
 
     @FXML
     private Menu mnu_estoque;
@@ -233,6 +237,18 @@ public class PrincipalController {
         try {
             Parent root;
             root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/emprestimo/Devolver/DevolverEmprestimo.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
+
+    @FXML
+    void cad_Categoria(ActionEvent event) {
+        try {
+            Parent root;
+            root = FXMLLoader.load(CadastroCategoriaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Categoria.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
