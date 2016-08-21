@@ -220,6 +220,7 @@ public class CadastroSalaBlocoController {
         local.setDescricao(txtdescricao.getText());
         local.setNumero(Integer.parseInt(txtnumero.getText()));
         local.setResponsavel(txtresponsavel.getText());
+        //local.setBloco(bloco);
         Departamento dp = new Departamento();
         for (Departamento vo : lista) {
             if (vo.getSigla().equals(cmbDepartamento.getValue())) {

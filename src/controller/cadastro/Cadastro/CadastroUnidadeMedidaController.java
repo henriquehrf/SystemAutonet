@@ -92,9 +92,7 @@ public class CadastroUnidadeMedidaController {
         if (verificaCampoObrigatorio()) {
             try {
                 if (alterar != null) {
-
                     salvar(alterar);
-
                 } else {
                     TipoUnidade ts = new TipoUnidade();
                     salvar(ts);

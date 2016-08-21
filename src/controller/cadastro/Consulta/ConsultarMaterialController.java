@@ -76,6 +76,8 @@ public class ConsultarMaterialController {
 
     public void initialize() {
 
+        
+        
         List<Material> lista = NegociosEstaticos.getNegocioMaterial().buscarTodos();
 
         completarTabela(lista);
@@ -134,8 +136,8 @@ public class ConsultarMaterialController {
     void btnAlterar_OnAction(ActionEvent event) {
         try {
             Material p = tblPrincipal.getSelectionModel().getSelectedItem();
-        //    CadastroMaterialController.setCadastrar(false);
-       //     CadastroMaterialController.setAlterar(p);
+            CadastroMaterialController.setCadastrar(false);
+            CadastroMaterialController.setAlterar(p);
             Parent root;
             root = FXMLLoader.load(CadastroMaterialController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Material.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -152,7 +154,7 @@ public class ConsultarMaterialController {
     @FXML
     void btnInserir_OnAction(ActionEvent event) {
         try {
-          //  CadastroMaterialController.setCadastrar(true);
+            CadastroMaterialController.setCadastrar(true);
             Parent root;
             root = FXMLLoader.load(CadastroMaterialController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Material.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);

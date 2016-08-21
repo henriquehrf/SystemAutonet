@@ -10,6 +10,7 @@ import controller.cadastro.Consulta.ConsultarMaterialController;
 import enumm.PoliticaUso;
 import gui.SystemAutonet;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -26,7 +27,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import utilitarios.LerProperties;
+import vo.Categoria;
 import vo.Material;
+import vo.TipoUnidade;
 
 /**
  *
@@ -96,10 +99,16 @@ public class CadastroMaterialController {
     public void initialize() {
 
         ObservableList<PoliticaUso> perf = FXCollections.observableArrayList((PoliticaUso.values()));
-
-        //NegocioP = new NegocioPessoa();
+        List<TipoUnidade> lista = NegociosEstaticos.getNegocioTipoUnidade().buscarTodos();
+        ObservableList<String> dado = FXCollections.observableArrayList();
+        for (int i = 0; i < lista.size(); i++) {
+            dado.add(lista.get(i).getSigla());
+        }
+        
         setcamposObrigatorio();
         cmbPoliticaUso.setItems(perf);
+        cmbUnidadeMedida.setItems(dado);
+        
         if (!isCadastrar()) {
             completar();
         } else {
@@ -142,7 +151,8 @@ public class CadastroMaterialController {
 
         alert.showAndWait();
 
-    }    
+    }
+
     private boolean verificaCampoObrigatorio() {
         setcamposObrigatorio();
         boolean verifica = true;
@@ -150,33 +160,55 @@ public class CadastroMaterialController {
             lblPolitacaDeUsoObrigatorio.setVisible(true);
             verifica = false;
         }
-        if(txtdescricao.getText().isEmpty()){
+        if (txtdescricao.getText().isEmpty()) {
             lbldescricaoObrigatorio.setVisible(true);
             verifica = false;
         }
-        if(cmbCategoria.getValue() == null){
+        if (cmbCategoria.getValue() == null) {
             lblcategorioobrigatorio.setVisible(true);
             verifica = false;
         }
-        if(cmbPoliticaUso.getValue() == null){
+        if (cmbPoliticaUso.getValue() == null) {
             lblPolitacaDeUsoObrigatorio.setVisible(true);
             verifica = false;
         }
-        if(cmbUnidadeMedida.getValue() == null){
+        if (cmbUnidadeMedida.getValue() == null) {
             lblUnidadeMedidaObrigatorio.setVisible(true);
             verifica = false;
-        }       
+        }
         return verifica;
     }
-        
-      private void salvar(Material material) throws Exception {
-       
+
+    private void salvar(Material material) throws Exception {
+
         material.setDescricao(txtdescricao.getText());
         material.setDadosTecnicos(txtDadosTecnicos.getText());
         material.setPoliticaUso(cmbPoliticaUso.getValue());
         material.setQuantidade(0);
 
-           try {
+        Categoria cat = new Categoria();
+        TipoUnidade tu = new TipoUnidade();
+        tu.setDescricao(cmbUnidadeMedida.getValue());
+        cat.setDescricao(cmbCategoria.getValue());
+
+        List<Categoria> categori = NegociosEstaticos.getNegocioCategoria().buscarPorDescricao(cat);
+        List<TipoUnidade> Ltu = NegociosEstaticos.getNegocioTipoUnidade().buscarPorDescricao(tu);
+        
+        if (categori.size() == 1) {
+            material.setId_categoria(categori.get(0));  
+        }else{
+            System.out.println("erro inesperado Categoria");
+            return;
+        }
+        
+        if (Ltu.size() == 1) {
+            material.setId_tipo_unidade(Ltu.get(0));
+        }else{
+            System.out.println("erro inesperado Tipo Unidade");
+            return;
+        }
+
+        try {
             //   NegocioP.salvar(pessoa);
             NegociosEstaticos.getNegocioMaterial().salvar(material);
             Parent root;
@@ -184,7 +216,7 @@ public class CadastroMaterialController {
             Properties prop = ler.getProp();
             // NegocioP = null;
             alterar = null;
-            
+
             alerta(AlertType.INFORMATION, prop.getProperty("msg.cadastro.confirmacao"), prop.getProperty("msg.cadastro.sucesso"));
             root = FXMLLoader.load(ConsultarMaterialController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Material.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -193,7 +225,7 @@ public class CadastroMaterialController {
             Properties prop = ler.getProp();
             alerta(AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
         }
-      }
+    }
 
     @FXML
     void btnSalvar_OnAction(ActionEvent event) {

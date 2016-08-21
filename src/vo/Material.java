@@ -40,7 +40,7 @@ public class Material implements Serializable, EntidadeBase {
     @Id
     private Long id_material;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int quantidade;
 
     @Column(length = 200)
