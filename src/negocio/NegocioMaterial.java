@@ -44,32 +44,27 @@ public class NegocioMaterial {
     }
 
     public Material consultarPorId(Material material) {
-
-        Categoria cat = categoriaDAO.consutarPorId(Categoria.class, material.getId_categoria());
-        TipoUnidade tu = tuDAO.consutarPorId(TipoUnidade.class, material.getId_tipo_unidade());
-        material.setCategoriNome(cat.getDescricao());
-        material.setUnidadeMedida(tu.getDescricao());
-        
+       
         return materialDAO.consutarPorId(Material.class, material);
     }
 
     public List<Material> buscarPorDescricao(Material material) {
-        return preencher(materialDAO.buscarPorDescricao(material));
+        return materialDAO.buscarPorDescricao(material);
     }
 
     public List<Material> buscarPorQuantidade(Material material) {
 
-        return preencher(materialDAO.buscarPorQuantidade(material));
+        return materialDAO.buscarPorQuantidade(material);
     }
 
     public List<Material> buscarTodos() {
 
-        List<Material> list = materialDAO.buscarTodos();
-        return preencher(list);
+        return materialDAO.buscarTodos();
+     
     }
 
     public List<Material> buscarPorCategoria(Categoria categoria) {
-        return preencher(materialDAO.buscarPorCategoria(categoria));
+        return materialDAO.buscarPorCategoria(categoria);
     }
 
     private String validar(Material material) {
@@ -86,16 +81,5 @@ public class NegocioMaterial {
         return erro;
     }
 
-    private List<Material> preencher(List<Material> list) {
 
-        for (int i = 0; i < list.size(); i++) {
-            Categoria cat = categoriaDAO.consutarPorId(Categoria.class, list.get(i).getId_categoria());
-            TipoUnidade tu = tuDAO.consutarPorId(TipoUnidade.class, list.get(i).getId_tipo_unidade());
-
-            list.get(i).setCategoriNome(cat.getDescricao());
-            list.get(i).setUnidadeMedida(tu.getDescricao());
-        }
-        return list;
-
-    }
 }

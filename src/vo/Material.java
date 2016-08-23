@@ -59,11 +59,6 @@ public class Material implements Serializable, EntidadeBase {
     @ManyToOne(fetch = FetchType.EAGER)
     private Categoria id_categoria = null;
 
-    @Transient
-    private String CategoriNome;
-
-    @Transient
-    private String unidadeMedida;
 
     public TipoUnidade getId_tipo_unidade() {
         return id_tipo_unidade;
@@ -105,23 +100,6 @@ public class Material implements Serializable, EntidadeBase {
     public void setDescricao(String descricao) {
         this.descricao = descricao.toUpperCase();
     }
-
-    public String getCategoriNome() {
-        return CategoriNome;
-    }
-
-    public void setCategoriNome(String CategoriNome) {
-        this.CategoriNome = CategoriNome;
-    }
-
-    public String getUnidadeMedida() {
-        return unidadeMedida;
-    }
-
-    public void setUnidadeMedida(String unidadeMedida) {
-        this.unidadeMedida = unidadeMedida;
-    }
-
     public String getDadosTecnicos() {
         return DadosTecnicos;
     }

@@ -64,8 +64,6 @@ public class Local implements Serializable, EntidadeBase {
     @ManyToOne(fetch = FetchType.EAGER)
     private Departamento id_departamento = null;
     
-    @Transient
-    private String DepartamentoNome;
         
 
     public Local() {
@@ -124,13 +122,7 @@ public class Local implements Serializable, EntidadeBase {
 //        this.bloco = bloco;
 //    }
 
-    public String getDepartamentoNome() {
-        return DepartamentoNome;
-    }
-
-    public void setDepartamentoNome(String DepartamentoNome) {
-        this.DepartamentoNome = DepartamentoNome;
-    }
+ 
     
     
 

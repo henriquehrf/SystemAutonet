@@ -128,8 +128,8 @@ public class CadastroMaterialController {
     private void completar() {
         txtDadosTecnicos.setText(alterar.getDadosTecnicos());
         txtdescricao.setText(alterar.getDescricao());
-        cmbCategoria.setValue(alterar.getCategoriNome());
-        cmbUnidadeMedida.setValue(alterar.getUnidadeMedida());
+        cmbCategoria.setValue(alterar.getId_categoria().getDescricao());
+        cmbUnidadeMedida.setValue(alterar.getId_tipo_unidade().getSigla());
         cmbPoliticaUso.setValue(alterar.getPoliticaUso());
         LerProperties ler = new LerProperties();
         try {
