@@ -6,6 +6,7 @@
 package controller.cadastro.Cadastro;
 
 import controller.PrincipalController;
+import controller.cadastro.Consulta.ConsultarCategoriaController;
 import controller.cadastro.Consulta.ConsultarUnidadeMedidaController;
 import gui.SystemAutonet;
 import java.net.URL;
@@ -51,7 +52,7 @@ public class CadastroCategoriaController implements Initializable {
     void btnCancelar_OnAction(ActionEvent event) {
          try {
             Parent root;
-            root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            root = FXMLLoader.load(ConsultarCategoriaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Categoria.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());

@@ -248,7 +248,7 @@ public class PrincipalController {
     void cad_Categoria(ActionEvent event) {
         try {
             Parent root;
-            root = FXMLLoader.load(CadastroCategoriaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Categoria.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            root = FXMLLoader.load(ConsultarCategoriaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Categoria.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());

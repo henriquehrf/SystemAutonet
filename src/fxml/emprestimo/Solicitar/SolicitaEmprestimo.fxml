@@ -197,12 +197,12 @@
                                  <children>
                                     <Button fx:id="btnAdicionar" mnemonicParsing="false" onAction="#btnAdicionarOnAction" styleClass="button-adicionarPedido" text="%btn.adicionarMaterial">
                                        <HBox.margin>
-                                          <Insets left="10.0" right="10.0" />
+                                          <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
                                     </Button>
                                     <Button fx:id="btnVoltar" mnemonicParsing="false" onAction="#btnVoltarOnAction" styleClass="button-voltar" text="%btn.voltar">
                                        <HBox.margin>
-                                          <Insets left="10.0" right="10.0" />
+                                          <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>
                                     </Button>
                                  </children>

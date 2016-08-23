@@ -387,3 +387,39 @@
     -fx-alignment:CENTER;
 
 }
+.button-aprovar{
+    -fx-border-color:darkgrey;
+    -fx-background-color:none;
+    -fx-font-size: 9pt;
+    -fx-font-family: "Arial";
+    -fx-cursor:hand;
+    -fx-background-color: linear-gradient( #ffffff,#8fbc8f);
+    -fx-background-image: url('icones/aprovar.png');
+    -fx-background-size: 20 20 ;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:10; 
+    -fx-max-height:27;
+    -fx-max-width:120;
+    -fx-min-height:27;
+    -fx-min-width:120;
+    -fx-alignment:CENTER;
+
+}
+.button-recusar{
+    -fx-border-color:darkgrey;
+    -fx-background-color:none;
+    -fx-font-size: 9pt;
+    -fx-font-family: "Arial";
+    -fx-cursor:hand;
+    -fx-background-color: linear-gradient(#e6e6fa, #cd5c5c);
+    -fx-background-image: url('icones/recusar.png');
+    -fx-background-size: 20 20 ;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:10; 
+    -fx-max-height:27;
+    -fx-max-width:120;
+    -fx-min-height:27;
+    -fx-min-width:120;
+    -fx-alignment:CENTER;
+
+}
