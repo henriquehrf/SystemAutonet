@@ -5,10 +5,14 @@
  */
 package controller.cadastro.Consulta;
 
+import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroCategoriaController;
 import gui.SystemAutonet;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import vo.Categoria;
 
 /**
  *
@@ -29,7 +35,7 @@ public class ConsultarCategoriaController {
     private Button btnVoltar;
 
     @FXML
-    private TableView<?> tblPrincipal;
+    private TableView<Categoria> tblPrincipal;
 
     @FXML
     private Button btnAlterar;
@@ -47,7 +53,7 @@ public class ConsultarCategoriaController {
     private TextField txtBuscador;
 
     @FXML
-    private TableColumn<?, ?> tbcDescricao;
+    private TableColumn<Categoria, String> tbcDescricao;
 
     @FXML
     private Button btnBuscar;
@@ -66,6 +72,7 @@ public class ConsultarCategoriaController {
 
     @FXML
     void btnInserir_OnAction(ActionEvent event) {
+        CadastroCategoriaController.setCadastrar(true);
 
         try {
             Parent root;
@@ -79,6 +86,17 @@ public class ConsultarCategoriaController {
 
     @FXML
     void btnAlterar_OnAction(ActionEvent event) {
+        Categoria p = tblPrincipal.getSelectionModel().getSelectedItem();
+
+        CadastroCategoriaController.setCadastrar(false);
+        CadastroCategoriaController.setAlterar(p);
+        try {
+            Parent root;
+            root = FXMLLoader.load(CadastroCategoriaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Categoria.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
 
     }
 
@@ -89,10 +107,26 @@ public class ConsultarCategoriaController {
 
     @FXML
     void btnBuscar_OnAction(ActionEvent event) {
-
+        Categoria cat = new Categoria();
+        cat.setDescricao(txtBuscador.getText());
+        completarTabela(NegociosEstaticos.getNegocioCategoria().buscarPorDescricao(cat));
     }
 
     public void initialize() {
+        List<Categoria> lista = NegociosEstaticos.getNegocioCategoria().bucarTodos();
+
+        completarTabela(lista);
+    }
+
+    private void completarTabela(List<Categoria> lista) {
+
+        ObservableList<Categoria> dado = FXCollections.observableArrayList();
+        for (int i = 0; i < lista.size(); i++) {
+            dado.add(lista.get(i));
+        }
+        this.tbcDescricao.setCellValueFactory(new PropertyValueFactory<Categoria, String>("descricao"));
+
+        this.tblPrincipal.setItems(dado);
 
     }
 

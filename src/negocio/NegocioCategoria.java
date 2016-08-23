@@ -35,4 +35,8 @@ public class NegocioCategoria {
     public List<Categoria> buscarPorDescricao(Categoria categoria){
         return categoriaDAO.buscarPorDescricao(categoria);
     }
+    
+    public List<Categoria> bucarTodos(){
+        return categoriaDAO.buscarTodos();
+    }
 }

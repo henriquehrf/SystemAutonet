@@ -33,4 +33,22 @@ public class CategoriaDAO extends GenericoDAO<Categoria> {
         }
         return list;
     }
+    
+      public List<Categoria> buscarTodos() {
+        EntityManager em = getEM();
+        List<Categoria> list;
+        Query query;
+
+        try {
+            query = em.createNamedQuery("Categoria.BuscarTodos");
+            list = query.getResultList();
+        } catch (Exception ex) {
+            list = new ArrayList();
+        } finally {
+            em.close();
+        }
+        return list;
+    }
+    
+    
 }
