@@ -5,6 +5,7 @@
  */
 package controller.emprestimo.solicita;
 
+import controller.PrincipalController;
 import controller.cadastro.Consulta.ConsultarFornecedorController;
 import gui.SystemAutonet;
 import java.net.URL;
@@ -18,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -30,23 +32,20 @@ import javafx.scene.control.TextField;
  */
 public class SolicitaEmprestimoController {
 
-    @FXML
+   @FXML
     private Button btnAdicionar;
 
     @FXML
-    private TableView<?> tblPrincipalListaEmprestimo;
+    private TabPane tabPanePrincipal;
 
     @FXML
-    private TableColumn<?, ?> tbcQuantidade;
-
-    @FXML
-    private Label dtEmprestimoObrigatorio;
+    private TableView<?> tblBuscaMateriais;
 
     @FXML
     private Button btnExclur;
 
     @FXML
-    private TableColumn<?, ?> tbcCategoria;
+    private TableView<?> tblListaMateriais;
 
     @FXML
     private TextField txtFinalidade;
@@ -64,13 +63,7 @@ public class SolicitaEmprestimoController {
     private Tab tabBuscarMaterial;
 
     @FXML
-    private TableView<?> tblPrincipalBuscarMaterial;
-
-    @FXML
-    private TableColumn<?, ?> tbcDescricaoBusca;
-
-    @FXML
-    private TableColumn<?, ?> tbcQuantidadeBusca;
+    private Button btnVoltar;
 
     @FXML
     private Button btnCancelar;
@@ -82,10 +75,10 @@ public class SolicitaEmprestimoController {
     private Label finalidadeObrigatorio;
 
     @FXML
-    private DatePicker dtEmprestimo;
+    private DatePicker dtpDataEmprestimo;
 
     @FXML
-    private TableColumn<?, ?> tbcDescricao;
+    private Label dataObrigatorio;
 
     @FXML
     private Button btnBuscar;
@@ -100,9 +93,10 @@ public class SolicitaEmprestimoController {
 
     @FXML
     void btnCancelarOnAction(ActionEvent event) {
-          try {
+        
+             try {
             Parent root;
-            root = FXMLLoader.load(ConsultarFornecedorController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
@@ -110,14 +104,25 @@ public class SolicitaEmprestimoController {
 
     }
 
+
     @FXML
-    void btnAdicionarOnAction(ActionEvent event) {
-        tabBuscarMaterial.setDisable(false);
+    void btnVoltarOnAction(ActionEvent event) {
         
+        tabBuscarMaterial.setDisable(false);
+        tabListaMaterial.setDisable(true);
+        tabPanePrincipal.getSelectionModel().select(tabBuscarMaterial);
 
     }
 
- 
+    @FXML
+    void btnAdicionarOnAction(ActionEvent event) {
+        tabListaMaterial.setDisable(false);
+        tabPanePrincipal.getSelectionModel().select(tabListaMaterial);
+        tabBuscarMaterial.setDisable(true);
+
+    }
+
+
     @FXML
     void btnEditarOnAction(ActionEvent event) {
 
@@ -134,10 +139,11 @@ public class SolicitaEmprestimoController {
     }
 
     public void initialize() {
+
+        tabListaMaterial.setDisable(true);
+        dataObrigatorio.setVisible(false);
         finalidadeObrigatorio.setVisible(false);
-        dtEmprestimoObrigatorio.setVisible(false);
-        tabBuscarMaterial.setDisable(true);
-        // TODO
+
     }
 
 }
