@@ -64,10 +64,10 @@ public class NegocioLocal {
     public List<Local> buscarTodos() {
         return localDAO.buscarTodos();
     }
-
-    public List<Local> buscarPorBloco(Local local) {
-        return localDAO.buscarPorBloco(local);
-    }
+//
+//    public List<Local> buscarPorBloco(Local local) {
+//        return localDAO.buscarPorBloco(local);
+//    }
     
     public List<Local> buscarPorDepartamento(Local local) {
         return localDAO.buscarPorDepartamento(local);

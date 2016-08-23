@@ -55,8 +55,8 @@ public class Local implements Serializable, EntidadeBase {
     @Column(nullable = false)
     private int numero;
     
-    @Column(length = 10)
-    private String bloco;
+//    @Column(length = 10)
+//    private String bloco;
 
     @Column(length = 100, nullable = false)
     private String responsavel;
@@ -115,14 +115,24 @@ public class Local implements Serializable, EntidadeBase {
     public void setId_departamento(Departamento id_departamento) {
         this.id_departamento = id_departamento;
     }
+//
+//    public String getBloco() {
+//        return bloco;
+//    }
+//
+//    public void setBloco(String bloco) {
+//        this.bloco = bloco;
+//    }
 
-    public String getBloco() {
-        return bloco;
+    public String getDepartamentoNome() {
+        return DepartamentoNome;
     }
 
-    public void setBloco(String bloco) {
-        this.bloco = bloco;
+    public void setDepartamentoNome(String DepartamentoNome) {
+        this.DepartamentoNome = DepartamentoNome;
     }
+    
+    
 
     
     

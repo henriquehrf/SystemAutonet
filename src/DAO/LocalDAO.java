@@ -70,22 +70,22 @@ public class LocalDAO extends GenericoDAO<Local> {
         return list;
     }
 
-    public List<Local> buscarPorBloco(Local local) {
-        EntityManager em = getEM();
-        List<Local> list;
-        try {
-            Query query = em.createNamedQuery("Local.consultarPorBloco");
-            query.setParameter("bloco", "%" + local.getBloco() + "%");
-            list = query.getResultList();
-
-        } catch (Exception ex) {
-            list = new ArrayList();
-
-        } finally {
-            em.close();
-        }
-        return list;
-    }
+//    public List<Local> buscarPorBloco(Local local) {
+//        EntityManager em = getEM();
+//        List<Local> list;
+//        try {
+//            Query query = em.createNamedQuery("Local.consultarPorBloco");
+//            query.setParameter("bloco", "%" + local.getBloco() + "%");
+//            list = query.getResultList();
+//
+//        } catch (Exception ex) {
+//            list = new ArrayList();
+//
+//        } finally {
+//            em.close();
+//        }
+//        return list;
+//    }
 
     public List<Local> buscarTodos() {
         EntityManager em = getEM();

@@ -135,11 +135,11 @@ public class ConsultarLocaisController {
 
     @FXML
     void btnBuscar_OnAction(ActionEvent event) {
-        if (rdbBloco.isSelected()) {
-            Local local = new Local();
-            local.setBloco(txtBuscador.getText());
-            completarTabela(NegociosEstaticos.getNegocioLocal().buscarPorBloco(local));
-        }
+//        if (rdbBloco.isSelected()) {
+//            Local local = new Local();
+////            local.setBloco(txtBuscador.getText());
+//            completarTabela(NegociosEstaticos.getNegocioLocal().buscarPorBloco(local));
+//        }
 
         if (rdbNumero.isSelected()) {
             Local local = new Local();

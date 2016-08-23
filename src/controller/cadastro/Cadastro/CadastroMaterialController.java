@@ -156,6 +156,7 @@ public class CadastroMaterialController {
     private boolean verificaCampoObrigatorio() {
         setcamposObrigatorio();
         boolean verifica = true;
+       
         if (txtdescricao.getText().isEmpty()) {
             lblPolitacaDeUsoObrigatorio.setVisible(true);
             verifica = false;
