@@ -74,14 +74,13 @@ public class ConsultarMaterialController {
     @FXML
     private TableColumn<Material, String> tbcUnidadeMedida;
 
-    public void initialize() {
-
-        
+    public void initialize() {       
         
         List<Material> lista = NegociosEstaticos.getNegocioMaterial().buscarTodos();
 
-        completarTabela(lista);
+      
         rdbDescricao.setSelected(true);
+          completarTabela(lista);
 
     }
 
@@ -93,7 +92,7 @@ public class ConsultarMaterialController {
         this.tbcDescricao.setCellValueFactory(new PropertyValueFactory<Material, String>("descricao"));
         this.tbcQuantidade.setCellValueFactory(new PropertyValueFactory<Material, Integer>("quantidade"));
         this.tbcUnidadeMedida.setCellValueFactory(new PropertyValueFactory<Material, String>("unidadeMedida"));
-        this.tbcCategoria.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriNome"));
+        this.tbcCategoria.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriaNome"));
         this.tblPrincipal.setItems(dado);
     }
 

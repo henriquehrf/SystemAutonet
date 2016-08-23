@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -38,6 +40,7 @@ import javax.persistence.Transient;
 public class Material implements Serializable, EntidadeBase {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id_material;
 
     @Column(nullable = true)
@@ -58,8 +61,31 @@ public class Material implements Serializable, EntidadeBase {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Categoria id_categoria = null;
+    
+    @Transient
+    private String CategoriaNome;
+    
+    @Transient
+    private String unidadeMedida;
 
+    public String getUnidadeMedida() {
+        return unidadeMedida;
+    }
 
+    public void setUnidadeMedida(String unidadeMedida) {
+        this.unidadeMedida = unidadeMedida;
+    }
+    
+    
+
+    public String getCategoriaNome() {
+        return CategoriaNome;
+    }
+
+    public void setCategoriaNome(String CategoriaNome) {
+        this.CategoriaNome = CategoriaNome;
+    }
+    
     public TipoUnidade getId_tipo_unidade() {
         return id_tipo_unidade;
     }

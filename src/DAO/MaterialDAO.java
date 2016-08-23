@@ -80,7 +80,7 @@ public class MaterialDAO extends GenericoDAO<Material> {
         EntityManager em = getEM();
         List<Material> list;
         try {
-            Query query = em.createNamedQuery("Material.consultarPorCategoria");
+            Query query = em.createNamedQuery("Material.consultarTodos");
             list = query.getResultList();
 
         } catch (Exception ex) {

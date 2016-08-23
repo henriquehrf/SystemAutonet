@@ -44,27 +44,27 @@ public class NegocioMaterial {
     }
 
     public Material consultarPorId(Material material) {
-       
-        return materialDAO.consutarPorId(Material.class, material);
+        Material mat = materialDAO.consutarPorId(Material.class, material);
+        mat.setCategoriaNome(mat.getId_categoria().getDescricao());
+        return mat;
     }
 
     public List<Material> buscarPorDescricao(Material material) {
-        return materialDAO.buscarPorDescricao(material);
+        return preencher(materialDAO.buscarPorDescricao(material));
     }
 
     public List<Material> buscarPorQuantidade(Material material) {
 
-        return materialDAO.buscarPorQuantidade(material);
+        return preencher(materialDAO.buscarPorQuantidade(material));
     }
 
     public List<Material> buscarTodos() {
+        return preencher(materialDAO.buscarTodos());
 
-        return materialDAO.buscarTodos();
-     
     }
 
     public List<Material> buscarPorCategoria(Categoria categoria) {
-        return materialDAO.buscarPorCategoria(categoria);
+        return preencher(materialDAO.buscarPorCategoria(categoria));
     }
 
     private String validar(Material material) {
@@ -81,5 +81,13 @@ public class NegocioMaterial {
         return erro;
     }
 
+    private List<Material> preencher(List<Material> buscarTodos) {
+
+        for (int i = 0; i < buscarTodos.size(); i++) {
+            buscarTodos.get(i).setCategoriaNome(buscarTodos.get(i).getId_categoria().getDescricao());
+            buscarTodos.get(i).setUnidadeMedida(buscarTodos.get(i).getId_tipo_unidade().getSigla());
+        }
+        return buscarTodos;
+    }
 
 }

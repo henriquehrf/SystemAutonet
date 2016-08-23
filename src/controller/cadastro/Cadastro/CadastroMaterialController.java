@@ -100,14 +100,23 @@ public class CadastroMaterialController {
 
         ObservableList<PoliticaUso> perf = FXCollections.observableArrayList((PoliticaUso.values()));
         List<TipoUnidade> lista = NegociosEstaticos.getNegocioTipoUnidade().buscarTodos();
+        List<Categoria> lista2 = NegociosEstaticos.getNegocioCategoria().bucarTodos();
+        
         ObservableList<String> dado = FXCollections.observableArrayList();
+        ObservableList<String> dado2 = FXCollections.observableArrayList();
         for (int i = 0; i < lista.size(); i++) {
             dado.add(lista.get(i).getSigla());
         }
         
+        for (int i = 0; i < lista2.size(); i++) {
+            dado2.add(lista2.get(i).getDescricao());
+        }
+        
+        
         setcamposObrigatorio();
         cmbPoliticaUso.setItems(perf);
         cmbUnidadeMedida.setItems(dado);
+        cmbCategoria.setItems(dado2);
         
         if (!isCadastrar()) {
             completar();
