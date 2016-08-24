@@ -28,34 +28,34 @@ public class CriarBancoTeste {
     public static void main(String[] args) {
         EntityManagerFactory fabricaEntityManager = null;
         EntityManager entityManager = null;
-        NegociosEstaticos.iniciar();
+//        NegociosEstaticos.iniciar();
 //        Departamento dp = new Departamento();
 //        dp.setNome("Departamento da Area de Informática");
 //        dp.setSigla("DAI");
-
-        Local local = new Local();
+//
+//        Local local = new Local();
 //        local.setDescricao("Teste");
 //        local.setId_departamento(dp);
 //        local.setNumero(21);
 //        local.setResponsavel("Eduardo");
-        local.setId_local(101L);
-        Local local2 ;
-        try {
-           
-            local2=NegociosEstaticos.getNegocioLocal().consultarPorId(local);
-            System.out.println(local2.getId_departamento().getNome());
+//        local.setId_local(101L);
+//        Local local2 ;
 //        try {
-//            fabricaEntityManager = Persistence.createEntityManagerFactory("SystemAutonetPU");
-//            entityManager = fabricaEntityManager.createEntityManager();
-//            System.out.println("De boa é pra ter criado as tabelas");
-//
-//        } catch (Exception ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//        
+//           
+//            local2=NegociosEstaticos.getNegocioLocal().consultarPorId(local);
+//            System.out.println(local2.getId_departamento().getNome());
+        try {
+            fabricaEntityManager = Persistence.createEntityManagerFactory("SystemAutonetPU");
+            entityManager = fabricaEntityManager.createEntityManager();
+            System.out.println("De boa é pra ter criado as tabelas");
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+//        
+//        } catch (Exception ex) {
+//            System.out.println(ex.getMessage());
+//        }
 
     }
 
