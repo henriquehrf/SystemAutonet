@@ -74,9 +74,7 @@ public class Material implements Serializable, EntidadeBase {
 
     public void setUnidadeMedida(String unidadeMedida) {
         this.unidadeMedida = unidadeMedida;
-    }
-    
-    
+    }   
 
     public String getCategoriaNome() {
         return CategoriaNome;

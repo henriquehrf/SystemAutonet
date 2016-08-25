@@ -62,6 +62,10 @@ public class NegocioPessoa {
         return pessoaDAO.buscarTodos();
     }
 
+    public Pessoa buscarPorUsuario(Pessoa pessoa) {
+        return pessoaDAO.BuscarPorUsuario(pessoa);
+    }
+
     private String validarPessoa(Pessoa pessoa) throws Exception {
         String erro = "";
         LerProperties ler = new LerProperties();
@@ -107,7 +111,7 @@ public class NegocioPessoa {
                 erro += prop.getProperty("msg.cadastro.emailInvalido");
             }
         }
-        if (pessoa.getId() == null || pessoa.getId() ==0) {
+        if (pessoa.getId() == null || pessoa.getId() == 0) {
 
             if (pessoaDAO.EncontrarUsuario(pessoa)) {
                 erro += prop.getProperty("msg.cadastro.usuarioJaCadastrado");

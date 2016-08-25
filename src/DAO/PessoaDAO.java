@@ -27,18 +27,36 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarUsuario");
             query.setParameter("usuario", pessoa.getUsuario().toUpperCase());
-            p =  (Pessoa) query.getSingleResult();
-            
-        }catch(NoResultException ex){
-             p = null;
-        }finally {
+            p = (Pessoa) query.getSingleResult();
+
+        } catch (NoResultException ex) {
+            p = null;
+        } finally {
             em.close();
         }
-        
+
         if (p != null) {
-                encontrou = true;
-            }
+            encontrou = true;
+        }
         return encontrou;
+    }
+
+    public Pessoa BuscarPorUsuario(Pessoa pessoa) {
+       
+        EntityManager em = getEM();
+        Pessoa p = null;
+        try {
+            Query query = em.createNamedQuery("Pessoa.BuscarUsuario");
+            query.setParameter("usuario", pessoa.getUsuario().toUpperCase());
+            p = (Pessoa) query.getSingleResult();
+
+        } catch (NoResultException ex) {
+            p = new Pessoa();
+        } finally {
+            em.close();
+        }
+
+        return p;
     }
 
     public List<Pessoa> buscarPorNome(Pessoa pessoa) {
@@ -58,8 +76,8 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
         return list;
 
     }
-    
-       public List<Pessoa> buscarTodos() {
+
+    public List<Pessoa> buscarTodos() {
         EntityManager em = getEM();
         List<Pessoa> list;
         try {
@@ -78,11 +96,11 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
 
     public List<Pessoa> buscarPorCPF(Pessoa pessoa) {
         EntityManager em = getEM();
-         List<Pessoa> list=null;
+        List<Pessoa> list = null;
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarPorCPF");
-            query.setParameter("cpf", "%"+pessoa.getCpf()+"%");
-            list =  query.getResultList();
+            query.setParameter("cpf", "%" + pessoa.getCpf() + "%");
+            list = query.getResultList();
         } catch (Exception ex) {
             list = new ArrayList();
 
@@ -96,29 +114,11 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
 
     public List<Pessoa> buscarPorRg(Pessoa pessoa) {
         EntityManager em = getEM();
-       List<Pessoa>  list;
+        List<Pessoa> list;
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarPorRg");
-            query.setParameter("rg", "%"+pessoa.getRg()+"%");
-               list =  query.getResultList();
-        } catch (Exception ex) {
-           list = new ArrayList();
-
-        } finally {
-            em.close();
-        }
-
-        return list;
-    }
-    
-        public List<Pessoa>  buscarPorMatricula(Pessoa pessoa) {
-        EntityManager em = getEM();
-         List<Pessoa>  list;
-        try {
-            Query query = em.createNamedQuery("Pessoa.BuscarPorMatricula");
-            query.setParameter("matricula", "%"+pessoa.getNum_matricula()+"%");
-                 list =  query.getResultList();
-           
+            query.setParameter("rg", "%" + pessoa.getRg() + "%");
+            list = query.getResultList();
         } catch (Exception ex) {
             list = new ArrayList();
 
@@ -128,7 +128,23 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
 
         return list;
     }
-        
-        
+
+    public List<Pessoa> buscarPorMatricula(Pessoa pessoa) {
+        EntityManager em = getEM();
+        List<Pessoa> list;
+        try {
+            Query query = em.createNamedQuery("Pessoa.BuscarPorMatricula");
+            query.setParameter("matricula", "%" + pessoa.getNum_matricula() + "%");
+            list = query.getResultList();
+
+        } catch (Exception ex) {
+            list = new ArrayList();
+
+        } finally {
+            em.close();
+        }
+
+        return list;
+    }
 
 }

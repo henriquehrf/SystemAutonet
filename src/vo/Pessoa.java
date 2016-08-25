@@ -88,8 +88,6 @@ public class Pessoa implements EntidadeBase, Serializable {
     @Column(length = 1000, nullable = false)
     private String senha;
 
-    
-    
     @Column(nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ultimo_acesso;
