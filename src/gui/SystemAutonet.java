@@ -5,6 +5,7 @@
  */
 package gui;
 
+import classesAuxiliares.ClasseDoSistemaEstatico;
 import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import controller.cadastro.Consulta.ConsultarDepartamentoController;
@@ -91,17 +92,15 @@ public class SystemAutonet extends Application {
         
         Optional<Pair<String, String>> result = dialog.showAndWait();
         boolean cond = true;
-
+            // Ajustar nesta parte do login
             if (result.isPresent()) {
                 Pessoa user = new Pessoa();
+                Pessoa otherUser= new Pessoa();
                 user.setUsuario(result.get().getKey());
                 user.setSenha(result.get().getValue());
 
-                if (NegociosEstaticos.getNegocioPessoa().buscarPorUsuario(user).getId() == null) {
-
-                } else {
-                    cond = false;
-                }
+             otherUser=NegociosEstaticos.getNegocioPessoa().buscarPorUsuario(user);
+                ClasseDoSistemaEstatico.setPessoa(otherUser);
             }
         Parent pane = null;
 

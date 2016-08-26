@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import vo.Material;
 
 /**
  * FXML Controller class
@@ -39,7 +40,7 @@ public class SolicitaEmprestimoController {
     private TabPane tabPanePrincipal;
 
     @FXML
-    private TableView<?> tblBuscaMateriais;
+    private TableView<Material> tblBuscaMateriais;
 
     @FXML
     private Button btnExclur;
