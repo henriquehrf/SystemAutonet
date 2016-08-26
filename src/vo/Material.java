@@ -4,8 +4,10 @@
 package vo;
 
 import DAO.EntidadeBase;
+import classesAuxiliares.NegociosEstaticos;
 import enumm.PoliticaUso;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -61,10 +63,13 @@ public class Material implements Serializable, EntidadeBase {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Categoria id_categoria = null;
-    
+
     @Transient
     private String CategoriaNome;
-    
+
+    @Transient
+    private int quantidadeDisponivel = -1;
+
     @Transient
     private String unidadeMedida;
 
@@ -74,7 +79,7 @@ public class Material implements Serializable, EntidadeBase {
 
     public void setUnidadeMedida(String unidadeMedida) {
         this.unidadeMedida = unidadeMedida;
-    }   
+    }
 
     public String getCategoriaNome() {
         return CategoriaNome;
@@ -83,7 +88,7 @@ public class Material implements Serializable, EntidadeBase {
     public void setCategoriaNome(String CategoriaNome) {
         this.CategoriaNome = CategoriaNome;
     }
-    
+
     public TipoUnidade getId_tipo_unidade() {
         return id_tipo_unidade;
     }
@@ -124,6 +129,7 @@ public class Material implements Serializable, EntidadeBase {
     public void setDescricao(String descricao) {
         this.descricao = descricao.toUpperCase();
     }
+
     public String getDadosTecnicos() {
         return DadosTecnicos;
     }
@@ -138,6 +144,14 @@ public class Material implements Serializable, EntidadeBase {
 
     public void setPoliticaUso(PoliticaUso politicaUso) {
         this.politicaUso = politicaUso;
+    }
+
+    public int getQuantidadeDisponivel(){        
+        return quantidadeDisponivel;
+    }
+
+    public void setQuantidadeDisponivel(int quantidadeDisponivel) {
+        this.quantidadeDisponivel = quantidadeDisponivel;
     }
 
 }

@@ -17,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,6 +27,12 @@ import javax.persistence.TemporalType;
  * @author Eduardo
  */
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Emprestimo.BuscarTodos",query = "Select e from Emprestimo e "),
+        @NamedQuery(name = "Emprestimo.BuscarPorIdPessoa",
+                query ="Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoaSolicita")
+
+})
 public class Emprestimo implements Serializable, EntidadeBase {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -42,10 +50,10 @@ public class Emprestimo implements Serializable, EntidadeBase {
     @Column(length = 200, nullable = false)
     private String observacao;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa id_pessoa_solicita = null;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa id_pessoa_autoriza = null;
     
 

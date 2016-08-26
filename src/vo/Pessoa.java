@@ -9,19 +9,24 @@ import enumm.Atividade;
 import enumm.Sexo;
 import enumm.PerfilUsuario;
 import DAO.EntidadeBase;
+import classesAuxiliares.NegociosEstaticos;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -79,7 +84,7 @@ public class Pessoa implements EntidadeBase, Serializable {
     private String num_matricula;
 
     @Column(length = 1, nullable = false)
-      @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Atividade ativo;
 
     @Column(length = 20, nullable = false)
@@ -91,6 +96,7 @@ public class Pessoa implements EntidadeBase, Serializable {
     @Column(nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ultimo_acesso;
+
 
     @Override
     public Long getId() {
@@ -197,7 +203,6 @@ public class Pessoa implements EntidadeBase, Serializable {
         this.ativo = ativo;
     }
 
-   
     public String getUsuario() {
         return usuario;
     }
@@ -222,7 +227,5 @@ public class Pessoa implements EntidadeBase, Serializable {
         this.ultimo_acesso = ultimo_acesso;
     }
 
-     
-    
 
 }

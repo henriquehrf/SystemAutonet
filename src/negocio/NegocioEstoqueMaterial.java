@@ -6,7 +6,9 @@
 package negocio;
 
 import DAO.EstoqueMaterialDAO;
+import java.util.List;
 import vo.EstoqueMaterial;
+import vo.Material;
 
 /**
  *
@@ -36,6 +38,14 @@ public class NegocioEstoqueMaterial {
 
     public EstoqueMaterial consultarPorId(EstoqueMaterial estoqueMaterial) {
         return emDAO.consutarPorId(EstoqueMaterial.class, estoqueMaterial);
+    }
+    
+    public List<EstoqueMaterial> buscarPorIdMaterial(Material material){
+        return emDAO.buscarPorIdMaterial(material);
+    }
+    
+    public int QtdDisponivelDoMaterial(Material material){
+        return emDAO.QtdDisponivelDoMaterial(material);
     }
 
     private String validar(EstoqueMaterial estoqueMaterial) {
