@@ -109,6 +109,7 @@ public class PrincipalController {
     private Menu mnu_Cadastro;
 
     public void initialize() {
+        System.out.println("oi");
 
     }
 
