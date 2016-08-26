@@ -10,5 +10,8 @@ package enumm;
  * @author Eduardo
  */
 public enum StatusEmprestimo {
-    
+    APROVADO,
+    ESPERANDO_ANALISE,
+    FINALIZADO,
+    RECUSADO
 }

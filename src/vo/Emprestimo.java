@@ -6,12 +6,13 @@
 package vo;
 
 import DAO.EntidadeBase;
+import enumm.StatusEmprestimo;
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -42,7 +42,8 @@ public class Emprestimo implements Serializable, EntidadeBase {
     private Date dt_emprestimo;
     
     @Column(length = 1, nullable = false)
-    private String status_emprestimo;
+    @Enumerated(EnumType.STRING)
+    private StatusEmprestimo status_emprestimo;
     
     @Column(length = 100, nullable = false)
     private String finalidade;
@@ -54,6 +55,7 @@ public class Emprestimo implements Serializable, EntidadeBase {
     private Pessoa id_pessoa_solicita = null;
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @Column(nullable = true)
     private Pessoa id_pessoa_autoriza = null;
     
 
@@ -74,11 +76,11 @@ public class Emprestimo implements Serializable, EntidadeBase {
     }
 
 
-    public String getStatus_emprestimo() {
+    public StatusEmprestimo getStatus_emprestimo() {
         return status_emprestimo;
     }
 
-    public void setStatus_emprestimo(String status_emprestimo) {
+    public void setStatus_emprestimo(StatusEmprestimo status_emprestimo) {
         this.status_emprestimo = status_emprestimo;
     }
 

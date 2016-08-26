@@ -72,6 +72,9 @@ public class Material implements Serializable, EntidadeBase {
 
     @Transient
     private String unidadeMedida;
+    
+    @Transient
+    private int QuantidadeSolicitada;
 
     public String getUnidadeMedida() {
         return unidadeMedida;
@@ -154,4 +157,13 @@ public class Material implements Serializable, EntidadeBase {
         this.quantidadeDisponivel = quantidadeDisponivel;
     }
 
+    public int getQuantidadeSolicitada() {
+        return QuantidadeSolicitada;
+    }
+
+    public void setQuantidadeSolicitada(int QuantidadeSolicitada) {
+        this.QuantidadeSolicitada = QuantidadeSolicitada;
+    }
+
+    
 }
