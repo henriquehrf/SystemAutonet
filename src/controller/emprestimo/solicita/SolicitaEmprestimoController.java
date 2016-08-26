@@ -33,7 +33,7 @@ import vo.Material;
  */
 public class SolicitaEmprestimoController {
 
-   @FXML
+    @FXML
     private Button btnAdicionar;
 
     @FXML
@@ -46,7 +46,7 @@ public class SolicitaEmprestimoController {
     private Button btnExclur;
 
     @FXML
-    private TableView<?> tblListaMateriais;
+    private TableView<Material> tblListaMateriais;
 
     @FXML
     private TextField txtFinalidade;
@@ -94,8 +94,8 @@ public class SolicitaEmprestimoController {
 
     @FXML
     void btnCancelarOnAction(ActionEvent event) {
-        
-             try {
+
+        try {
             Parent root;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -105,10 +105,9 @@ public class SolicitaEmprestimoController {
 
     }
 
-
     @FXML
     void btnVoltarOnAction(ActionEvent event) {
-        
+
         tabBuscarMaterial.setDisable(false);
         tabListaMaterial.setDisable(true);
         tabPanePrincipal.getSelectionModel().select(tabBuscarMaterial);
@@ -122,7 +121,6 @@ public class SolicitaEmprestimoController {
         tabBuscarMaterial.setDisable(true);
 
     }
-
 
     @FXML
     void btnEditarOnAction(ActionEvent event) {
