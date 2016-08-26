@@ -45,8 +45,6 @@ public class SystemAutonet extends Application {
     public void start(Stage stage) throws Exception {
         NegociosEstaticos.iniciar();
 
-        NegociosEstaticos.iniciar();
-
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Bem vindo ao SystemAutonet");
         dialog.setHeaderText("Seja bem vindo ao sistema SystemAutonet");
