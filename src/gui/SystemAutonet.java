@@ -42,6 +42,8 @@ public class SystemAutonet extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
+        NegociosEstaticos.iniciar();
+
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Bem vindo ao SystemAutonet");
         dialog.setHeaderText("Seja bem vindo ao sistema SystemAutonet");
@@ -56,7 +58,6 @@ public class SystemAutonet extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
-        
 
         TextField username = new TextField();
         username.setPromptText("Usuário");
@@ -85,13 +86,13 @@ public class SystemAutonet extends Application {
             System.exit(0);
             return null;
         });
+        
         Optional<Pair<String, String>> result = dialog.showAndWait();
         result.ifPresent(usernamePassword -> {
             System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
         });
 
         Parent pane = null;
-        NegociosEstaticos.iniciar();
 
         try {
 

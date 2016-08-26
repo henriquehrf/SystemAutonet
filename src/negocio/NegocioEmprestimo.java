@@ -6,7 +6,9 @@
 package negocio;
 
 import DAO.EmprestimoDAO;
+import java.util.List;
 import vo.Emprestimo;
+import vo.Pessoa;
 
 /**
  *
@@ -38,6 +40,11 @@ public class NegocioEmprestimo {
         return empDAO.consutarPorId(Emprestimo.class, emp);
     }
     
+    public List<Emprestimo> buscarPorIdPessoa(Pessoa pessoa){
+        return empDAO.buscarPorIdUsuario(pessoa);
+    }
+    
+
     
     private String validar(Emprestimo emp){
         String erro = "";

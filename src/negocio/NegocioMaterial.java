@@ -8,8 +8,10 @@ package negocio;
 import DAO.CategoriaDAO;
 import DAO.MaterialDAO;
 import DAO.TipoUnidadeDAO;
+import classesAuxiliares.NegociosEstaticos;
 import java.util.List;
 import vo.Categoria;
+import vo.EstoqueMaterial;
 import vo.Material;
 import vo.TipoUnidade;
 
@@ -46,6 +48,7 @@ public class NegocioMaterial {
     public Material consultarPorId(Material material) {
         Material mat = materialDAO.consutarPorId(Material.class, material);
         mat.setCategoriaNome(mat.getId_categoria().getDescricao());
+        mat.setQuantidadeDisponivel(NegociosEstaticos.getNegocioEstoqueMateria().QtdDisponivelDoMaterial(material));
         return mat;
     }
 
@@ -86,6 +89,7 @@ public class NegocioMaterial {
         for (int i = 0; i < buscarTodos.size(); i++) {
             buscarTodos.get(i).setCategoriaNome(buscarTodos.get(i).getId_categoria().getDescricao());
             buscarTodos.get(i).setUnidadeMedida(buscarTodos.get(i).getId_tipo_unidade().getSigla());
+            buscarTodos.get(i).setQuantidadeDisponivel(NegociosEstaticos.getNegocioEstoqueMateria().QtdDisponivelDoMaterial( buscarTodos.get(i)));
         }
         return buscarTodos;
     }

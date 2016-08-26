@@ -5,12 +5,33 @@
  */
 package DAO;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.EntityManager;
 import vo.Emprestimo;
+import vo.Pessoa;
 
 /**
  *
  * @author Eduardo
  */
-public class EmprestimoDAO extends GenericoDAO<Emprestimo>{
-    
+public class EmprestimoDAO extends GenericoDAO<Emprestimo> {
+
+    public List<Emprestimo> buscarPorIdUsuario(Pessoa pessoa) {
+        EntityManager em = getEM();
+        Query query;
+        List<Emprestimo> listaEmprestimo;
+        try {
+            query = em.createNamedQuery("Emprestimo.BuscarPorIdPessoa");
+            query.setParameter("idPessoaSolicita", pessoa.getId());
+            listaEmprestimo = query.getResultList();
+        }catch(Exception ex){
+            listaEmprestimo = new ArrayList();
+        }finally{
+            em.close();
+        }
+        return listaEmprestimo;
+
+    }
 }

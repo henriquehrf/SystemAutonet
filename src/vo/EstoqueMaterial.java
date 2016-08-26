@@ -14,12 +14,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Eduardo
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "EstoqueMaterial.BuscarPorIdMaterial",
+            query = "select e from EstoqueMaterial e where e.id_material.id_material = :idMaterial"),
+    @NamedQuery(name = "EstoqueMaterial.QtdDisponivelDoMaterial",
+            query = "select SUM(e.quantidade_disponivel) from EstoqueMaterial e where e.id_material.id_material = :idMaterial")
+
+})
 public class EstoqueMaterial implements Serializable, EntidadeBase {
 
     @Id
@@ -30,7 +39,7 @@ public class EstoqueMaterial implements Serializable, EntidadeBase {
     private int quantidade_emprestada;
 
     @Column(nullable = false)
-    private int quantidade;
+    private int quantidade_disponivel;
 
     public Local getId_departamento() {
         return id_departamento;
@@ -72,11 +81,11 @@ public class EstoqueMaterial implements Serializable, EntidadeBase {
     }
 
     public int getQuantidade() {
-        return quantidade;
+        return quantidade_disponivel;
     }
 
     public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+        this.quantidade_disponivel = quantidade;
     }
 
 }
