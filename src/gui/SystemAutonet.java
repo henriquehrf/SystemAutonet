@@ -30,6 +30,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import vo.Pessoa;
 
 /**
  *
@@ -41,6 +42,7 @@ public class SystemAutonet extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        NegociosEstaticos.iniciar();
 
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Bem vindo ao SystemAutonet");
@@ -56,7 +58,6 @@ public class SystemAutonet extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
-        
 
         TextField username = new TextField();
         username.setPromptText("Usuário");
@@ -86,12 +87,20 @@ public class SystemAutonet extends Application {
             return null;
         });
         Optional<Pair<String, String>> result = dialog.showAndWait();
-        result.ifPresent(usernamePassword -> {
-            System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
-        });
+        boolean cond = true;
 
+            if (result.isPresent()) {
+                Pessoa user = new Pessoa();
+                user.setUsuario(result.get().getKey());
+                user.setSenha(result.get().getValue());
+
+                if (NegociosEstaticos.getNegocioPessoa().buscarPorUsuario(user).getId() == null) {
+
+                } else {
+                    cond = false;
+                }
+            }
         Parent pane = null;
-        NegociosEstaticos.iniciar();
 
         try {
 
