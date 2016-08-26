@@ -11,9 +11,7 @@ import DAO.TipoUnidadeDAO;
 import classesAuxiliares.NegociosEstaticos;
 import java.util.List;
 import vo.Categoria;
-import vo.EstoqueMaterial;
 import vo.Material;
-import vo.TipoUnidade;
 
 /**
  *
