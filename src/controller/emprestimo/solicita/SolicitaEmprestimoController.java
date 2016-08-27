@@ -5,11 +5,16 @@
  */
 package controller.emprestimo.solicita;
 
+import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import controller.cadastro.Consulta.ConsultarFornecedorController;
 import gui.SystemAutonet;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +29,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import vo.Emprestimo;
+import vo.EmprestimoEstoqueMaterial;
 import vo.Material;
 
 /**
@@ -37,6 +45,9 @@ public class SolicitaEmprestimoController {
     private Button btnAdicionar;
 
     @FXML
+    private Button btnAdicionarMaterial;
+
+    @FXML
     private TabPane tabPanePrincipal;
 
     @FXML
@@ -46,10 +57,19 @@ public class SolicitaEmprestimoController {
     private Button btnExclur;
 
     @FXML
+    private TableColumn<Material, String> tbcCategoriaListaMaterial;
+
+    @FXML
     private TableView<Material> tblListaMateriais;
 
     @FXML
     private TextField txtFinalidade;
+
+    @FXML
+    private TableColumn<Material, String> tbcMaterialBuscaMaterial;
+
+    @FXML
+    private TableColumn<Material, String> tbcDescricaoListaMaterial;
 
     @FXML
     private TextField txtBuscador;
@@ -59,6 +79,12 @@ public class SolicitaEmprestimoController {
 
     @FXML
     private Tab tabListaMaterial;
+
+    @FXML
+    private TableColumn<Material, Integer> tbcQuantidadeDisponivelBuscaMaterial;
+
+    @FXML
+    private TableColumn<Material, Integer> tbcQuantidadeSolicitadaListaMaterial;
 
     @FXML
     private Tab tabBuscarMaterial;
@@ -82,13 +108,26 @@ public class SolicitaEmprestimoController {
     private Label dataObrigatorio;
 
     @FXML
+    private TableColumn<Material, String> tbcCategoriaBuscaMaterial;
+
+    @FXML
     private Button btnBuscar;
 
     @FXML
     private Button btnSolicitar;
 
+    ObservableList<Material> altertab = FXCollections.observableArrayList();
+
     @FXML
     void btnSolicitarOnAction(ActionEvent event) {
+        
+        if(tblListaMateriais.getItems() == null) return;
+        
+//        NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().salvar(eem);
+//        EmprestimoEstoqueMaterial emp = new EmprestimoEstoqueMaterial();
+        
+       
+        
 
     }
 
@@ -123,6 +162,26 @@ public class SolicitaEmprestimoController {
     }
 
     @FXML
+    void btnAdicionarMaterialOnAction(ActionEvent event) {
+
+        // fazer o tratamento da seleção
+        altertab.add(tblBuscaMateriais.getSelectionModel().getSelectedItem());
+
+        tblListaMateriais.setItems(altertab);
+        completar_ListaMaterial(altertab);
+        btnVoltarOnAction(event);
+
+    }
+
+    void completar_ListaMaterial(List<Material> list) {
+
+        this.tbcCategoriaListaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriaNome"));
+        this.tbcDescricaoListaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("descricao"));
+        this.tbcQuantidadeSolicitadaListaMaterial.setCellValueFactory(new PropertyValueFactory<Material, Integer>("quantidadeDisponivel"));
+        tblListaMateriais.setItems(altertab);
+    }
+
+    @FXML
     void btnEditarOnAction(ActionEvent event) {
 
     }
@@ -137,12 +196,26 @@ public class SolicitaEmprestimoController {
 
     }
 
+    private void completarTabela(List<Material> lista) {
+
+        ObservableList<Material> dado = FXCollections.observableArrayList();
+        for (int i = 0; i < lista.size(); i++) {
+            dado.add(lista.get(i));
+        }
+        this.tbcCategoriaBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriaNome"));
+        this.tbcMaterialBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("descricao"));
+        this.tbcQuantidadeDisponivelBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, Integer>("quantidadeDisponivel"));
+        this.tblBuscaMateriais.setItems(dado);
+
+    }
+
     public void initialize() {
+        List<Material> lista = NegociosEstaticos.getNegocioMaterial().buscarTodos();
+        completarTabela(lista);
 
         tabListaMaterial.setDisable(true);
         dataObrigatorio.setVisible(false);
         finalidadeObrigatorio.setVisible(false);
-
     }
 
 }
