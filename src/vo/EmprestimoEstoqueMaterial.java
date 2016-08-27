@@ -41,6 +41,9 @@ public class EmprestimoEstoqueMaterial implements Serializable, EntidadeBase {
     @Column(length = 200)
     private String observacao;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Material id_material;
+    
     @Basic
     private Integer qtd_devolvida;
     
@@ -102,8 +105,14 @@ public class EmprestimoEstoqueMaterial implements Serializable, EntidadeBase {
     public void setQtd_emprestada(Integer qtd_emprestada) {
         this.qtd_emprestada = qtd_emprestada;
     }
-    
-    
-    
+
+    public Material getId_material() {
+        return id_material;
+    }
+
+    public void setId_material(Material id_material) {
+        this.id_material = id_material;
+    }
+      
     
 }
