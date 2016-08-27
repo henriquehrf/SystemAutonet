@@ -30,10 +30,10 @@ public class EmprestimoEstoqueMaterial implements Serializable, EntidadeBase {
     private Long id_emprestimoestoquematerial;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private EstoqueMaterial id_estoquematerial = null;
+    private EstoqueMaterial id_estoquematerial ;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Emprestimo id_emprestimo = null;
+    private Emprestimo id_emprestimo ;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dt_devolucao;

@@ -41,7 +41,7 @@ public class Emprestimo implements Serializable, EntidadeBase {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dt_emprestimo;
     
-    @Column(length = 1, nullable = false)
+    @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusEmprestimo status_emprestimo;
     

@@ -5,14 +5,19 @@
  */
 package controller.emprestimo.solicita;
 
+import classesAuxiliares.ClasseDoSistemaEstatico;
 import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import controller.cadastro.Consulta.ConsultarFornecedorController;
+import enumm.StatusEmprestimo;
 import gui.SystemAutonet;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,6 +37,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import vo.Emprestimo;
 import vo.EmprestimoEstoqueMaterial;
+import vo.EstoqueMaterial;
 import vo.Material;
 
 /**
@@ -120,15 +126,50 @@ public class SolicitaEmprestimoController {
 
     @FXML
     void btnSolicitarOnAction(ActionEvent event) {
-        
-        if(tblListaMateriais.getItems() == null) return;
-        
+
+        if (tblListaMateriais.getItems() == null) {
+            return;
+        }
+
+        Date data = new Date();
+        Emprestimo emp = new Emprestimo();
+        emp.setDt_emprestimo(data);
+        emp.setFinalidade("sei lá");
+        emp.setObservacao("juju Delicia sqn");
+        emp.setStatus_emprestimo(StatusEmprestimo.APROVADO);
+
+        emp.setId_pessoa_solicita(ClasseDoSistemaEstatico.getPessoa());
+        System.out.println("O Nome aqui Carai" + ClasseDoSistemaEstatico.getPessoa().getNome());
+        try {
+            emp = NegociosEstaticos.getNegocioEmprestimo().salvar(emp);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        System.out.println(emp.getId());
+
+        for (int i = 0; i < altertab.size(); i++) {
+            EmprestimoEstoqueMaterial eem = new EmprestimoEstoqueMaterial();
+            eem.setDt_devolucao(data);// obs rever este ponto
+            eem.setId_emprestimo(emp);
+            eem.setObservacao("dsada");
+            eem.setQtd_emprestada(2);
+            eem.setQtd_devolvida(2);
+            eem.setId_material(altertab.get(i));
+            eem.setId_emprestimo(emp);
+            
+            EstoqueMaterial est = new EstoqueMaterial();
+      
+            
+            try {
+                NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().salvar(eem);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
+
 //        NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().salvar(eem);
 //        EmprestimoEstoqueMaterial emp = new EmprestimoEstoqueMaterial();
-        
-       
-        
-
     }
 
     @FXML
