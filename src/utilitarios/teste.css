@@ -313,7 +313,7 @@
 .button-remover{
     -fx-border-color:none;
     -fx-background-color:white;
-    -fx-background-color: linear-gradient( #ffffff,   #f08080);
+    -fx-background-color: linear-gradient( #ffffff,   #cd5c5c);
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
     -fx-cursor:hand;
