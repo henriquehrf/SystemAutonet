@@ -5,11 +5,21 @@
  */
 package controller.emprestimo.solicita;
 
+import classesAuxiliares.ClasseDoSistemaEstatico;
+import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import controller.cadastro.Consulta.ConsultarFornecedorController;
+import enumm.StatusEmprestimo;
 import gui.SystemAutonet;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +34,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import vo.Emprestimo;
+import vo.EmprestimoEstoqueMaterial;
+import vo.EstoqueMaterial;
 import vo.Material;
 
 /**
@@ -37,6 +51,9 @@ public class SolicitaEmprestimoController {
     private Button btnAdicionar;
 
     @FXML
+    private Button btnAdicionarMaterial;
+
+    @FXML
     private TabPane tabPanePrincipal;
 
     @FXML
@@ -46,10 +63,19 @@ public class SolicitaEmprestimoController {
     private Button btnExclur;
 
     @FXML
+    private TableColumn<Material, String> tbcCategoriaListaMaterial;
+
+    @FXML
     private TableView<Material> tblListaMateriais;
 
     @FXML
     private TextField txtFinalidade;
+
+    @FXML
+    private TableColumn<Material, String> tbcMaterialBuscaMaterial;
+
+    @FXML
+    private TableColumn<Material, String> tbcDescricaoListaMaterial;
 
     @FXML
     private TextField txtBuscador;
@@ -59,6 +85,12 @@ public class SolicitaEmprestimoController {
 
     @FXML
     private Tab tabListaMaterial;
+
+    @FXML
+    private TableColumn<Material, Integer> tbcQuantidadeDisponivelBuscaMaterial;
+
+    @FXML
+    private TableColumn<Material, Integer> tbcQuantidadeSolicitadaListaMaterial;
 
     @FXML
     private Tab tabBuscarMaterial;
@@ -82,14 +114,62 @@ public class SolicitaEmprestimoController {
     private Label dataObrigatorio;
 
     @FXML
+    private TableColumn<Material, String> tbcCategoriaBuscaMaterial;
+
+    @FXML
     private Button btnBuscar;
 
     @FXML
     private Button btnSolicitar;
 
+    ObservableList<Material> altertab = FXCollections.observableArrayList();
+
     @FXML
     void btnSolicitarOnAction(ActionEvent event) {
 
+        if (tblListaMateriais.getItems() == null) {
+            return;
+        }
+
+        Date data = new Date();
+        Emprestimo emp = new Emprestimo();
+        emp.setDt_emprestimo(data);
+        emp.setFinalidade("sei lá");
+        emp.setObservacao("juju Delicia sqn");
+        emp.setStatus_emprestimo(StatusEmprestimo.APROVADO);
+
+        emp.setId_pessoa_solicita(ClasseDoSistemaEstatico.getPessoa());
+        System.out.println("O Nome aqui Carai" + ClasseDoSistemaEstatico.getPessoa().getNome());
+        try {
+            emp = NegociosEstaticos.getNegocioEmprestimo().salvar(emp);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        System.out.println(emp.getId());
+
+        for (int i = 0; i < altertab.size(); i++) {
+            EmprestimoEstoqueMaterial eem = new EmprestimoEstoqueMaterial();
+            eem.setDt_devolucao(data);// obs rever este ponto
+            eem.setId_emprestimo(emp);
+            eem.setObservacao("dsada");
+            eem.setQtd_emprestada(2);
+            eem.setQtd_devolvida(2);
+            eem.setId_material(altertab.get(i));
+            eem.setId_emprestimo(emp);
+            
+            EstoqueMaterial est = new EstoqueMaterial();
+      
+            
+            try {
+                NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().salvar(eem);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
+
+//        NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().salvar(eem);
+//        EmprestimoEstoqueMaterial emp = new EmprestimoEstoqueMaterial();
     }
 
     @FXML
@@ -123,6 +203,26 @@ public class SolicitaEmprestimoController {
     }
 
     @FXML
+    void btnAdicionarMaterialOnAction(ActionEvent event) {
+
+        // fazer o tratamento da seleção
+        altertab.add(tblBuscaMateriais.getSelectionModel().getSelectedItem());
+
+        tblListaMateriais.setItems(altertab);
+        completar_ListaMaterial(altertab);
+        btnVoltarOnAction(event);
+
+    }
+
+    void completar_ListaMaterial(List<Material> list) {
+
+        this.tbcCategoriaListaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriaNome"));
+        this.tbcDescricaoListaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("descricao"));
+        this.tbcQuantidadeSolicitadaListaMaterial.setCellValueFactory(new PropertyValueFactory<Material, Integer>("quantidadeDisponivel"));
+        tblListaMateriais.setItems(altertab);
+    }
+
+    @FXML
     void btnEditarOnAction(ActionEvent event) {
 
     }
@@ -137,12 +237,26 @@ public class SolicitaEmprestimoController {
 
     }
 
+    private void completarTabela(List<Material> lista) {
+
+        ObservableList<Material> dado = FXCollections.observableArrayList();
+        for (int i = 0; i < lista.size(); i++) {
+            dado.add(lista.get(i));
+        }
+        this.tbcCategoriaBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriaNome"));
+        this.tbcMaterialBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("descricao"));
+        this.tbcQuantidadeDisponivelBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, Integer>("quantidadeDisponivel"));
+        this.tblBuscaMateriais.setItems(dado);
+
+    }
+
     public void initialize() {
+        List<Material> lista = NegociosEstaticos.getNegocioMaterial().buscarTodos();
+        completarTabela(lista);
 
         tabListaMaterial.setDisable(true);
         dataObrigatorio.setVisible(false);
         finalidadeObrigatorio.setVisible(false);
-
     }
 
 }

@@ -32,9 +32,9 @@
                      <center>
                         <TableView fx:id="tblListaMateriais" prefHeight="336.0" prefWidth="778.0" BorderPane.alignment="CENTER">
                           <columns>
-                            <TableColumn prefWidth="355.0" text="%tblColumn.descricao" />
-                            <TableColumn prefWidth="113.0" text="%tblColumn.quantidade" />
-                              <TableColumn prefWidth="288.0" text="%tblColumn.Categoria" />
+                            <TableColumn fx:id="tbcDescricaoListaMaterial" prefWidth="355.0" text="%tblColumn.descricao" />
+                            <TableColumn fx:id="tbcQuantidadeSolicitadaListaMaterial" prefWidth="113.0" text="%tblColumn.quantidade" />
+                              <TableColumn fx:id="tbcCategoriaListaMaterial" prefWidth="288.0" text="%tblColumn.Categoria" />
                           </columns>
                            <BorderPane.margin>
                               <Insets left="20.0" right="20.0" />
@@ -175,9 +175,9 @@
                      <center>
                         <TableView fx:id="tblBuscaMateriais" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                           <columns>
-                            <TableColumn prefWidth="374.0" text="%tblColumn.material" />
-                            <TableColumn prefWidth="166.0" text="%tblColumn.quantidadeDisponivel" />
-                              <TableColumn prefWidth="216.0" text="%tblColumn.categoria" />
+                            <TableColumn fx:id="tbcMaterialBuscaMaterial" prefWidth="374.0" text="%tblColumn.material" />
+                            <TableColumn fx:id="tbcQuantidadeDisponivelBuscaMaterial" prefWidth="166.0" text="%tblColumn.quantidadeDisponivel" />
+                              <TableColumn fx:id="tbcCategoriaBuscaMaterial" prefWidth="216.0" text="%tblColumn.categoria" />
                           </columns>
                            <BorderPane.margin>
                               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
@@ -195,7 +195,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="btnAdicionar" mnemonicParsing="false" onAction="#btnAdicionarOnAction" styleClass="button-adicionarPedido" text="%btn.adicionarMaterial">
+                                    <Button fx:id="btnAdicionarMaterial" mnemonicParsing="false" onAction="#btnAdicionarMaterialOnAction" styleClass="button-adicionarPedido" text="%btn.adicionarMaterial">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </HBox.margin>

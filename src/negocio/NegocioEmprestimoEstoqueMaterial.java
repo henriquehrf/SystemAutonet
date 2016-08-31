@@ -40,7 +40,7 @@ public class NegocioEmprestimoEstoqueMaterial {
     public String validar(EmprestimoEstoqueMaterial eem){
         String erro = "";
         if(eem.getId_emprestimo() == null)erro+= "Erro: falto referencia o emprestimo";
-        if(eem.getId_estoquematerial() == null)erro+="\nErro: Falto referenciar um estoque";
+//        if(eem.getId_estoquematerial() == null)erro+="\nErro: Falto referenciar um estoque";
         
         return erro;
     }

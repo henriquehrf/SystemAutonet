@@ -43,9 +43,7 @@ public class SystemAutonet extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        //NegociosEstaticos.iniciar();
-
-       NegociosEstaticos.iniciar();
+        NegociosEstaticos.iniciar();
 
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Bem vindo ao SystemAutonet");
@@ -98,8 +96,8 @@ public class SystemAutonet extends Application {
                 Pessoa otherUser= new Pessoa();
                 user.setUsuario(result.get().getKey());
                 user.setSenha(result.get().getValue());
-
-             otherUser=NegociosEstaticos.getNegocioPessoa().buscarPorUsuario(user);
+                user.setId_pessoa(1L);
+             otherUser=NegociosEstaticos.getNegocioPessoa().consultarPorId(user);
                 ClasseDoSistemaEstatico.setPessoa(otherUser);
             }
         Parent pane = null;
