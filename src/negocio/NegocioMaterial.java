@@ -87,7 +87,7 @@ public class NegocioMaterial {
         for (int i = 0; i < buscarTodos.size(); i++) {
             buscarTodos.get(i).setCategoriaNome(buscarTodos.get(i).getId_categoria().getDescricao());
             buscarTodos.get(i).setUnidadeMedida(buscarTodos.get(i).getId_tipo_unidade().getSigla());
-            buscarTodos.get(i).setQuantidadeDisponivel(NegociosEstaticos.getNegocioEstoqueMateria().QtdDisponivelDoMaterial( buscarTodos.get(i)));
+            buscarTodos.get(i).setQuantidadeDisponivel(NegociosEstaticos.getNegocioEstoqueMateria().QtdDisponivelDoMaterial(buscarTodos.get(i)));
         }
         return buscarTodos;
     }

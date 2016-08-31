@@ -37,22 +37,23 @@ public class EstoqueMaterialDAO extends GenericoDAO<EstoqueMaterial> {
         return lista;
     }
 
-    public int QtdDisponivelDoMaterial(Material material) {
+    public Number QtdDisponivelDoMaterial(Material material) {
         EntityManager em = getEM();
         Query query;
-        int qtd;
-
+        Number qtd;
+        
         try {
             query = em.createNamedQuery("EstoqueMaterial.QtdDisponivelDoMaterial");
             query.setParameter("idMaterial", material.getId());
-            qtd = (int) query.getSingleResult();
+            qtd = (Number) query.getSingleResult();
 
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             qtd = -1;
         } finally {
             em.close();
         }
-
+        System.out.println(qtd);
         return qtd;
     }
 }

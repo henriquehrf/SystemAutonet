@@ -87,7 +87,7 @@ public class SolicitaEmprestimoController {
     private Tab tabListaMaterial;
 
     @FXML
-    private TableColumn<Material, Integer> tbcQuantidadeDisponivelBuscaMaterial;
+    private TableColumn<Material, Number> tbcQuantidadeDisponivelBuscaMaterial;
 
     @FXML
     private TableColumn<Material, Integer> tbcQuantidadeSolicitadaListaMaterial;
@@ -245,7 +245,7 @@ public class SolicitaEmprestimoController {
         }
         this.tbcCategoriaBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriaNome"));
         this.tbcMaterialBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("descricao"));
-        this.tbcQuantidadeDisponivelBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, Integer>("quantidadeDisponivel"));
+        this.tbcQuantidadeDisponivelBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, Number>("quantidadeDisponivel"));
         this.tblBuscaMateriais.setItems(dado);
 
     }
