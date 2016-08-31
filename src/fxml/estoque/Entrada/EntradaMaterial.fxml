@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../../utilitarios/teste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../../utilitarios/teste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.estoque.entrada.EntradaMaterialController">
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -17,11 +17,11 @@
       </HBox>
    </top>
    <center>
-      <HBox prefHeight="395.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="395.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
             <TabPane prefHeight="500.0" prefWidth="808.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Entrada de Materiais">
+                <Tab fx:id="tabEntrada" text="Entrada de Materiais">
                      <content>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <bottom>
@@ -45,13 +45,13 @@
                                                             <Insets left="10.0" />
                                                          </HBox.margin>
                                                       </Label>
-                                                      <TextField disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="137.0">
+                                                      <TextField fx:id="txtValorMaterialTotalGeral" disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="137.0">
                                                          <HBox.margin>
                                                             <Insets left="2.0" />
                                                          </HBox.margin>
                                                       </TextField>
                                                       <Label text="Qtd. Materiais" />
-                                                      <TextField disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="68.0">
+                                                      <TextField fx:id="txtQtdMaterial" disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="68.0">
                                                          <HBox.margin>
                                                             <Insets left="2.0" />
                                                          </HBox.margin>
@@ -60,12 +60,12 @@
                                                 </HBox>
                                                 <HBox alignment="TOP_RIGHT" prefHeight="35.0" prefWidth="300.0">
                                                    <children>
-                                                      <Button mnemonicParsing="false" styleClass="button-adicionar" text="Button">
+                                                      <Button fx:id="btnAdicionarTabela" mnemonicParsing="false" onAction="#btnAdicionarTabelaOnAction" styleClass="button-adicionar" text="Button">
                                                          <HBox.margin>
                                                             <Insets left="5.0" />
                                                          </HBox.margin>
                                                       </Button>
-                                                      <Button mnemonicParsing="false" styleClass="button-remover" text="Button">
+                                                      <Button fx:id="btnRemoverTabela" mnemonicParsing="false" onAction="#btnRemoverTabelaOnAction" styleClass="button-remover" text="Button">
                                                          <HBox.margin>
                                                             <Insets left="5.0" right="10.0" />
                                                          </HBox.margin>
@@ -76,11 +76,11 @@
                                           </HBox>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Adicionar">
+                                                <Button fx:id="btnDarEntrada" mnemonicParsing="false" onAction="#btnDarEntradaOnAction" text="Adicionar">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin></Button>
-                                                <Button mnemonicParsing="false" text="Cancelar">
+                                                <Button mnemonicParsing="false" styleClass="button-cancel" text="Cancelar">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin></Button>
@@ -101,27 +101,27 @@
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin></Label>
-                                                <TextField disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="257.0" promptText="LEGO MINDSTORM">
+                                                <TextField fx:id="txtMaterial" disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="257.0" promptText="LEGO MINDSTORM">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
-                                                <Button mnemonicParsing="false" styleClass="button-adicionar" text="Button">
+                                                <Button fx:id="btnAdicionarMaterial" mnemonicParsing="false" onAction="#btnAdicionarMaterialOnAction" styleClass="button-adicionar" text="Button">
                                                    <HBox.margin>
                                                       <Insets right="5.0" />
                                                    </HBox.margin>
                                                 </Button>
-                                                <Button disable="true" mnemonicParsing="false" styleClass="button-editar" text="Button">
+                                                <Button fx:id="btnEditarMaterial" disable="true" mnemonicParsing="false" onAction="#btnEditarMaterialOnAction" styleClass="button-editar" text="Button">
                                                    <HBox.margin>
                                                       <Insets right="5.0" />
                                                    </HBox.margin>
                                                 </Button>
                                                 <Label text="Quantidade" />
-                                                <TextField disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="60.0" promptText="1 UN">
+                                                <TextField fx:id="txtQuantidadeMaterial" disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="60.0" promptText="1 UN">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
                                                 <Label text="Categoria" />
-                                                <TextField disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="178.0" promptText="ROBÓTICA">
+                                                <TextField fx:id="txtCategoria" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="178.0" promptText="ROBÓTICA">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
@@ -133,22 +133,22 @@
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin></Label>
-                                                <TextField disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="330.0">
+                                                <TextField fx:id="txtFornecedor" disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="330.0">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
-                                                <Button mnemonicParsing="false" styleClass="button-adicionar" text="Button">
+                                                <Button fx:id="btnAdicionarFornecedor" mnemonicParsing="false" onAction="#btnAdicionarFornecedorOnAction" styleClass="button-adicionar" text="Button">
                                                    <HBox.margin>
                                                       <Insets right="5.0" />
                                                    </HBox.margin>
                                                 </Button>
-                                                <Button disable="true" mnemonicParsing="false" styleClass="button-editar" text="Button">
+                                                <Button fx:id="btnEditarFornecedor" disable="true" mnemonicParsing="false" onAction="#btnEditarFornecedorOnAction" styleClass="button-editar" text="Button">
                                                    <HBox.margin>
                                                       <Insets right="5.0" />
                                                    </HBox.margin>
                                                 </Button>
                                                 <Label text="CNPJ" />
-                                                <TextField disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="155.0">
+                                                <TextField fx:id="txtCNPJ" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="155.0">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
@@ -160,7 +160,7 @@
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin></Label>
-                                                <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="207.0">
+                                                <TextField fx:id="txtNumNF" maxHeight="25.0" prefHeight="25.0" prefWidth="207.0">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
@@ -168,12 +168,12 @@
                                                    <HBox.margin>
                                                       <Insets left="5.0" />
                                                    </HBox.margin></Label>
-                                                <DatePicker prefHeight="25.0" prefWidth="122.0">
+                                                <DatePicker fx:id="dtEntrada" prefHeight="25.0" prefWidth="122.0">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></DatePicker>
                                                 <Label text="Valor da NF" />
-                                                <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="131.0">
+                                                <TextField fx:id="txtValorNF" maxHeight="25.0" prefHeight="25.0" prefWidth="131.0">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
@@ -185,7 +185,7 @@
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin></Label>
-                                                <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="99.0">
+                                                <TextField fx:id="txtQtdEntrada" maxHeight="25.0" prefHeight="25.0" prefWidth="99.0">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
@@ -194,10 +194,20 @@
                                                    <HBox.margin>
                                                       <Insets left="5.0" />
                                                    </HBox.margin></Label>
-                                                <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="122.0">
+                                                <TextField fx:id="txtValorMaterial" maxHeight="25.0" prefHeight="25.0" prefWidth="122.0">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
+                                                <Label text="Valor Total">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <TextField fx:id="btnValorTotalMaterialUnitario" maxHeight="25.0" prefHeight="25.0" prefWidth="128.0">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" />
+                                                   </HBox.margin>
+                                                </TextField>
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
@@ -206,27 +216,27 @@
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin></Label>
-                                                <TextField disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="275.0" promptText="LABORATORIO PET">
+                                                <TextField fx:id="txtLocal" disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="275.0" promptText="LABORATORIO PET">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
-                                                <Button mnemonicParsing="false" styleClass="button-adicionar">
+                                                <Button fx:id="btnAdicionarLocal" mnemonicParsing="false" onAction="#btnAdicionarLocalOnAction" styleClass="button-adicionar">
                                                    <HBox.margin>
                                                       <Insets right="5.0" />
                                                    </HBox.margin>
                                                 </Button>
-                                                <Button disable="true" mnemonicParsing="false" styleClass="button-editar">
+                                                <Button fx:id="btnEditarLocal" disable="true" mnemonicParsing="false" onAction="#btnEditarLocalOnAction" styleClass="button-editar">
                                                    <HBox.margin>
                                                       <Insets right="5.0" />
                                                    </HBox.margin>
                                                 </Button>
-                                                <Label text="Numero" />
-                                                <TextField disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="66.0" promptText="302">
+                                                <Label text="Número" />
+                                                <TextField fx:id="txtNumero" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="66.0" promptText="302">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
                                                 <Label text="Departamento" />
-                                                <TextField disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="90.0" promptText="DAEE">
+                                                <TextField fx:id="txtDepartamento" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="90.0" promptText="DAEE">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
@@ -246,12 +256,16 @@
                                     </GridPane>
                                     <VBox prefHeight="259.0" prefWidth="798.0">
                                        <children>
-                                          <TableView prefHeight="238.0" prefWidth="778.0">
+                                          <TableView fx:id="tblEntradaMaterial" prefHeight="238.0" prefWidth="778.0">
                                             <columns>
-                                              <TableColumn prefWidth="279.0" text="Material" />
-                                              <TableColumn prefWidth="87.0" text="Qtd.Entrada" />
-                                                <TableColumn prefWidth="94.0" text="Valor Material" />
-                                                <TableColumn prefWidth="316.0" text="Local" />
+                                              <TableColumn fx:id="tbcMaterial" prefWidth="279.0" text="Material" />
+                                              <TableColumn fx:id="tbcQtd" prefWidth="87.0" text="Qtd.Entrada" />
+                                                <TableColumn fx:id="tbcValorMaterial" prefWidth="94.0" text="Valor Material">
+                                                   <columns>
+                                                      <TableColumn fx:id="tbcValorUnitario" prefWidth="75.0" text="Unitário" />
+                                                      <TableColumn fx:id="tbcValorTotal" prefWidth="75.0" text="Total" />
+                                                   </columns></TableColumn>
+                                                <TableColumn fx:id="tbcLocal" prefWidth="316.0" text="Local" />
                                             </columns>
                                              <VBox.margin>
                                                 <Insets left="10.0" right="10.0" top="5.0" />
@@ -265,7 +279,7 @@
                         </BorderPane>
                      </content>
                   </Tab>
-                <Tab text="Material">
+                <Tab fx:id="tabMaterial" text="Material">
                      <content>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <top>
@@ -288,8 +302,8 @@
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                              <children>
                                                 <Label text="Pesquisar:" />
-                                                <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="365.0" />
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" styleClass="button-search" />
+                                                <TextField fx:id="txtBuscador" maxHeight="25.0" prefHeight="25.0" prefWidth="365.0" />
+                                                <Button fx:id="btnBuscar" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" styleClass="button-search" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -300,11 +314,11 @@
                            <center>
                               <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <TableView prefHeight="267.0" prefWidth="806.0">
+                                    <TableView fx:id="tblBuscaMaterial" prefHeight="267.0" prefWidth="806.0">
                                       <columns>
-                                        <TableColumn prefWidth="372.0" text="Material" />
-                                        <TableColumn prefWidth="105.0" text="Quantidade" />
-                                          <TableColumn prefWidth="319.0" text="Categoria" />
+                                        <TableColumn fx:id="tbcMaterialBuscaMaterial" prefWidth="372.0" text="Material" />
+                                        <TableColumn fx:id="tbcQuantidadeBuscaMaterial" prefWidth="105.0" text="Quantidade" />
+                                          <TableColumn fx:id="tbcCategoriaBuscaMaterial" prefWidth="319.0" text="Categoria" />
                                       </columns>
                                        <HBox.margin>
                                           <Insets left="10.0" right="10.0" />
@@ -326,11 +340,11 @@
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Adicionar">
+                                                <Button fx:id="btnAdicionarBuscaMaterial" mnemonicParsing="false" onAction="#btnAdicionarBuscaMaterialOnAction" text="Adicionar">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin></Button>
-                                                <Button mnemonicParsing="false" text="Voltar">
+                                                <Button fx:id="btnVoltarBuscaMaterial" mnemonicParsing="false" onAction="#btnVoltarBuscaMaterialOnAction" styleClass="button-voltar" text="Voltar">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin></Button>
@@ -344,7 +358,7 @@
                         </BorderPane>
                      </content>
                   </Tab>
-                  <Tab text="Fornecedor">
+                  <Tab fx:id="tabFornecedor" text="Fornecedor">
                      <content>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <bottom>
@@ -354,12 +368,12 @@
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Adicionar">
+                                                <Button fx:id="btnAdicionarBuscarFornecedor" mnemonicParsing="false" onAction="#btnAdicionarBuscarFornecedorOnAction" text="Adicionar">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Button>
-                                                <Button mnemonicParsing="false" text="Voltar">
+                                                <Button fx:id="btnVoltarBuscarFornecedor" mnemonicParsing="false" onAction="#btnVoltarBuscarFornecedorOnAction" styleClass="button-voltar" text="Voltar">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
@@ -380,12 +394,12 @@
                            <center>
                               <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <TableView prefHeight="267.0" prefWidth="806.0">
+                                    <TableView fx:id="tblBuscarFornecedor" prefHeight="267.0" prefWidth="806.0">
                                        <columns>
-                                          <TableColumn prefWidth="250.0" text="Nome Fantasia" />
-                                          <TableColumn prefWidth="158.0" text="Razão Social" />
-                                          <TableColumn maxWidth="300.0" prefWidth="120.0" text="CNPJ" />
-                                          <TableColumn maxWidth="248.0" prefWidth="248.0" text="Pessoa Responsável" />
+                                          <TableColumn fx:id="tbcNomeFantasia" prefWidth="250.0" text="Nome Fantasia" />
+                                          <TableColumn fx:id="tbcRazaoSocial" prefWidth="158.0" text="Razão Social" />
+                                          <TableColumn fx:id="tbcCNPJ" maxWidth="300.0" prefWidth="120.0" text="CNPJ" />
+                                          <TableColumn fx:id="tbcPessoaResponsavel" maxWidth="248.0" prefWidth="248.0" text="Pessoa Responsável" />
                                        </columns>
                                        <HBox.margin>
                                           <Insets left="10.0" right="10.0" />
@@ -407,13 +421,13 @@
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                              <children>
                                                 <Label text="Pesquisar:" />
-                                                <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="365.0" />
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" styleClass="button-search" />
+                                                <TextField fx:id="txtBuscador" maxHeight="25.0" prefHeight="25.0" prefWidth="365.0" />
+                                                <Button fx:id="btnBuscar" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" styleClass="button-search" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" text="Nome Fantasia">
+                                                <RadioButton fx:id="rdbNomeFantasia" mnemonicParsing="false" text="Nome Fantasia">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" top="2.0" />
                                                    </HBox.margin>
@@ -421,17 +435,17 @@
                                                       <ToggleGroup fx:id="Filtro" />
                                                    </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton mnemonicParsing="false" text="Razão Social" toggleGroup="$Filtro">
+                                                <RadioButton fx:id="rdbRazaoSocial" mnemonicParsing="false" text="Razão Social" toggleGroup="$Filtro">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" top="2.0" />
                                                    </HBox.margin>
                                                 </RadioButton>
-                                                <RadioButton mnemonicParsing="false" text="CNPJ" toggleGroup="$Filtro">
+                                                <RadioButton fx:id="rdbCNPJ" mnemonicParsing="false" text="CNPJ" toggleGroup="$Filtro">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" top="2.0" />
                                                    </HBox.margin>
                                                 </RadioButton>
-                                                <RadioButton mnemonicParsing="false" text="Pessoa Responsável" toggleGroup="$Filtro">
+                                                <RadioButton fx:id="rdbPessoaResponsavel" mnemonicParsing="false" text="Pessoa Responsável" toggleGroup="$Filtro">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" top="2.0" />
                                                    </HBox.margin>
@@ -454,7 +468,7 @@
                         </BorderPane>
                      </content>
                   </Tab>
-                  <Tab text="Local">
+                  <Tab fx:id="tabLocal" text="Local">
                      <content>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <bottom>
@@ -464,12 +478,12 @@
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Adicionar">
+                                                <Button fx:id="btnAdicionarBuscarLocal" mnemonicParsing="false" text="Adicionar">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
                                                 </Button>
-                                                <Button mnemonicParsing="false" text="Voltar">
+                                                <Button fx:id="btnVoltarBuscarLocal" mnemonicParsing="false" styleClass="button-voltar" text="Voltar">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" />
                                                    </HBox.margin>
@@ -490,11 +504,11 @@
                            <center>
                               <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <TableView prefHeight="267.0" prefWidth="806.0">
+                                    <TableView fx:id="tblBuscarLocal" prefHeight="267.0" prefWidth="806.0">
                                        <columns>
-                                          <TableColumn prefWidth="372.0" text="Descrição" />
-                                          <TableColumn prefWidth="105.0" text="Número" />
-                                          <TableColumn prefWidth="319.0" text="Pessoa Responsável" />
+                                          <TableColumn fx:id="tbcDescricaoBuscarLocal" prefWidth="372.0" text="Descrição" />
+                                          <TableColumn fx:id="tbcNumeroBuscarLocal" prefWidth="105.0" text="Número" />
+                                          <TableColumn fx:id="tbcPessoaResponsavelBuscarLocal" prefWidth="319.0" text="Pessoa Responsável" />
                                        </columns>
                                        <HBox.margin>
                                           <Insets left="10.0" right="10.0" />
@@ -516,23 +530,26 @@
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                              <children>
                                                 <Label text="Pesquisar:" />
-                                                <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="365.0" />
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" styleClass="button-search" />
+                                                <TextField fx:id="txtBuscador" maxHeight="25.0" prefHeight="25.0" prefWidth="365.0" />
+                                                <Button fx:id="btnBuscar" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" styleClass="button-search" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                                              <children>
-                                                <RadioButton mnemonicParsing="false" text="Descrição">
+                                                <RadioButton fx:id="rdbDescricao" mnemonicParsing="false" text="Descrição">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" right="5.0" top="2.0" />
+                                                   </HBox.margin>
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="FiltroLocal" />
+                                                   </toggleGroup>
+                                                </RadioButton>
+                                                <RadioButton fx:id="rdbNumero" mnemonicParsing="false" text="Número" toggleGroup="$FiltroLocal">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" top="2.0" />
                                                    </HBox.margin>
                                                 </RadioButton>
-                                                <RadioButton mnemonicParsing="false" text="Número">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" top="2.0" />
-                                                   </HBox.margin>
-                                                </RadioButton>
-                                                <RadioButton mnemonicParsing="false" text="Pessoa Responsável">
+                                                <RadioButton fx:id="rdbPessoaRespBuscaLocal" mnemonicParsing="false" text="Pessoa Responsável" toggleGroup="$FiltroLocal">
                                                    <HBox.margin>
                                                       <Insets left="5.0" right="5.0" top="2.0" />
                                                    </HBox.margin>

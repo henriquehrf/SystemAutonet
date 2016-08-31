@@ -52,7 +52,7 @@ public class EstoqueMaterialDAO extends GenericoDAO<EstoqueMaterial> {
         } finally {
             em.close();
         }
-
+        
         return qtd;
     }
 }
