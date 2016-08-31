@@ -256,5 +256,16 @@ public class PrincipalController {
         }
 
     }
+    @FXML
+    void est_entradaMaterial_OnAction(ActionEvent event){
+         try {
+            Parent root;
+            root = FXMLLoader.load(ConsultarCategoriaController.class.getClassLoader().getResource("fxml/estoque/Entrada/EntradaMaterial.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+        
+    }
 
 }

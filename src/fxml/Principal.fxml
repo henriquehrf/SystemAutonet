@@ -44,7 +44,7 @@
                <items>
                   <MenuItem fx:id="est_baixarMaterial" mnemonicParsing="false" text="%mni.BaixarMaterial" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                <MenuItem fx:id="est_entradaMaterial" mnemonicParsing="false" text="%mni.EntradaMaterial" />
+                <MenuItem fx:id="est_entradaMaterial" mnemonicParsing="false" onAction="#est_entradaMaterial_OnAction" text="%mni.EntradaMaterial" />
                </items>
             </Menu>
           <Menu fx:id="mnu_consulta" mnemonicParsing="false" text="%mnu.Consulta">

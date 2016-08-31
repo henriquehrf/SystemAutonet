@@ -134,12 +134,12 @@ public class SolicitaEmprestimoController {
         Date data = new Date();
         Emprestimo emp = new Emprestimo();
         emp.setDt_emprestimo(data);
-        emp.setFinalidade("sei lá");
-        emp.setObservacao("juju Delicia sqn");
+        emp.setFinalidade("Teste Finalidade");
+        emp.setObservacao("Teste Obs");
         emp.setStatus_emprestimo(StatusEmprestimo.APROVADO);
 
         emp.setId_pessoa_solicita(ClasseDoSistemaEstatico.getPessoa());
-        System.out.println("O Nome aqui Carai" + ClasseDoSistemaEstatico.getPessoa().getNome());
+        System.out.println("Solicitado" + ClasseDoSistemaEstatico.getPessoa().getNome());
         try {
             emp = NegociosEstaticos.getNegocioEmprestimo().salvar(emp);
         } catch (Exception ex) {

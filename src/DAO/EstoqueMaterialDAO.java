@@ -53,7 +53,6 @@ public class EstoqueMaterialDAO extends GenericoDAO<EstoqueMaterial> {
         } finally {
             em.close();
         }
-        System.out.println(qtd);
         return qtd;
     }
 }
