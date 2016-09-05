@@ -37,7 +37,7 @@ public class EstoqueMaterialDAO extends GenericoDAO<EstoqueMaterial> {
         return lista;
     }
 
-    public Number QtdDisponivelDoMaterial(Material material) {
+    public Number QtdDisponivelDoMaterial(Material material) throws Exception{
         EntityManager em = getEM();
         Query query;
         Number qtd;
@@ -48,8 +48,8 @@ public class EstoqueMaterialDAO extends GenericoDAO<EstoqueMaterial> {
             qtd = (Number) query.getSingleResult();
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            qtd = -1;
+            throw new Exception("Erro na classe EstoqueMaterialDAO pode explodi o seu pc "+ex.getMessage());
+         
         } finally {
             em.close();
         }

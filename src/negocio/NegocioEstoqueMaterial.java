@@ -44,7 +44,7 @@ public class NegocioEstoqueMaterial {
         return emDAO.buscarPorIdMaterial(material);
     }
     
-    public Number QtdDisponivelDoMaterial(Material material){
+    public Number QtdDisponivelDoMaterial(Material material) throws Exception{
         
         return emDAO.QtdDisponivelDoMaterial(material);
     }

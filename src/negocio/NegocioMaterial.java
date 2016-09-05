@@ -10,6 +10,8 @@ import DAO.MaterialDAO;
 import DAO.TipoUnidadeDAO;
 import classesAuxiliares.NegociosEstaticos;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import vo.Categoria;
 import vo.Material;
 
@@ -43,7 +45,7 @@ public class NegocioMaterial {
         materialDAO.remover(Material.class, material);
     }
 
-    public Material consultarPorId(Material material) {
+    public Material consultarPorId(Material material) throws Exception {
         Material mat = materialDAO.consutarPorId(Material.class, material);
         mat.setCategoriaNome(mat.getId_categoria().getDescricao());
         mat.setQuantidadeDisponivel(NegociosEstaticos.getNegocioEstoqueMateria().QtdDisponivelDoMaterial(material));
@@ -87,7 +89,11 @@ public class NegocioMaterial {
         for (int i = 0; i < buscarTodos.size(); i++) {
             buscarTodos.get(i).setCategoriaNome(buscarTodos.get(i).getId_categoria().getDescricao());
             buscarTodos.get(i).setUnidadeMedida(buscarTodos.get(i).getId_tipo_unidade().getSigla());
-            buscarTodos.get(i).setQuantidadeDisponivel(NegociosEstaticos.getNegocioEstoqueMateria().QtdDisponivelDoMaterial(buscarTodos.get(i)));
+            try {
+                buscarTodos.get(i).setQuantidadeDisponivel(NegociosEstaticos.getNegocioEstoqueMateria().QtdDisponivelDoMaterial(buscarTodos.get(i)));
+            } catch (Exception ex) {
+                Logger.getLogger(NegocioMaterial.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return buscarTodos;
     }
