@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -22,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -39,6 +41,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
+import utilitarios.LerProperties;
 import utilitarios.mock.auxiliar.EntradaMaterial;
 import vo.Fornecedor;
 import vo.Local;
@@ -53,6 +56,15 @@ public class EntradaMaterialController implements Initializable {
 
     @FXML
     private TabPane TabPai;
+
+    @FXML
+    private Label numNFObrigatorio;
+
+    @FXML
+    private Label dtEntradaObrigatorio;
+
+    @FXML
+    private Label valorNFObrigatorio;
 
     @FXML
     private RadioButton rdbPessoaResponsavelFornecedor;
@@ -239,12 +251,31 @@ public class EntradaMaterialController implements Initializable {
     void btnDarEntradaOnAction(ActionEvent event) {
 
         // habilitar o banco de dados
-        try {
-            Parent root;
-            root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
-            SystemAutonet.SCENE.setRoot(root);
-        } catch (Exception ex) {
-            System.err.println(ex.getMessage());
+        if (!txtNumNF.getText().isEmpty() && dtEntrada.getValue() != null && !txtValorNF.getText().isEmpty() && Float.parseFloat(txtValorNF.getText()) == Float.parseFloat(txtValorMaterialTotalGeral.getText())) {
+
+            try {
+                Parent root;
+                root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        } else {
+            numNFObrigatorio.setVisible(false);
+            dtEntradaObrigatorio.setVisible(false);
+            valorNFObrigatorio.setVisible(false);
+            if (txtNumNF.getText().isEmpty()) {
+                numNFObrigatorio.setVisible(true);
+            }
+            if (dtEntrada.getValue() == null) {
+                dtEntradaObrigatorio.setVisible(true);
+            }
+            if (txtValorNF.getText().isEmpty()) {
+                valorNFObrigatorio.setVisible(true);
+            }
+            if (Float.parseFloat(txtValorNF.getText()) != Float.parseFloat(txtValorMaterialTotalGeral.getText())) {
+                valorNFObrigatorio.setVisible(true);
+            }
         }
 
     }
@@ -252,10 +283,14 @@ public class EntradaMaterialController implements Initializable {
     @FXML
     void btnAdicionarFornecedorOnAction(ActionEvent event) {
 
-        tabFornecedor.setDisable(false);
-        tabEntrada.setDisable(true);
-        TabPai.getSelectionModel().select(tabFornecedor);
+        if (txtNumNF.getText().isEmpty() || dtEntrada.getValue() == null || txtValorNF.getText().isEmpty()) {
+            System.out.println(" forneca os dados anteriores");
+        } else {
 
+            tabFornecedor.setDisable(false);
+            tabEntrada.setDisable(true);
+            TabPai.getSelectionModel().select(tabFornecedor);
+        }
     }
 
     @FXML
@@ -267,10 +302,14 @@ public class EntradaMaterialController implements Initializable {
     @FXML
     void btnAdicionarTabelaEntradaOnAction(ActionEvent event) {
 
-        TabPai.getSelectionModel().select(tabMaterial);
-        tabEntrada.setDisable(true);
-        tabMaterial.setDisable(false);
+        if (txtFornecedor.getText().isEmpty() && txtCNPJ.getText().isEmpty()) {
+            System.out.println("forneca os dados anteriores");
+        } else {
 
+            TabPai.getSelectionModel().select(tabMaterial);
+            tabEntrada.setDisable(true);
+            tabMaterial.setDisable(false);
+        }
     }
 
     private boolean DadosEntrada() {
@@ -326,7 +365,7 @@ public class EntradaMaterialController implements Initializable {
         //   result.ifPresent(usernamePassword 
         if (result.isPresent()) {
             ent.setQtd_entrada(Integer.parseInt(result.get().getKey()));
-            ent.setValor_unitario(Integer.parseInt(result.get().getValue()));
+            ent.setValor_unitario(Float.parseFloat(result.get().getValue()));
 
             if (result.get().getValue() != null && result.get().getValue() != null) {
                 return true;
@@ -341,11 +380,20 @@ public class EntradaMaterialController implements Initializable {
 
     @FXML
     void btnEditarTabelaEntradaOnAction(ActionEvent event) {
+        
+        if(tblEntradaMaterial.getSelectionModel().getSelectedItem() == null)return;
+        
+        
 
     }
 
     @FXML
     void btnRemoverTabelaEntradaOnAction(ActionEvent event) {
+        
+        if(tblEntradaMaterial.getSelectionModel().getSelectedItem() == null)return;
+        
+        Itens.remove(tblEntradaMaterial.getSelectionModel().getSelectedItem());
+        completarTabela(Itens);
 
     }
 
@@ -441,10 +489,8 @@ public class EntradaMaterialController implements Initializable {
     void btnBuscarLocalOnAction(ActionEvent event) {
 
     }
+
     @FXML
-    void txtValorNFOnAction(ActionEvent event){
-        
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -456,6 +502,9 @@ public class EntradaMaterialController implements Initializable {
         rdbNomeFantasiaFornecedor.setSelected(true);
         rdbDescricaoLocal.setSelected(true);
         btnDarEntrada.setDisable(true);
+        valorNFObrigatorio.setVisible(false);
+        dtEntradaObrigatorio.setVisible(false);
+        numNFObrigatorio.setVisible(false);
 
         mockTabelas();
 
@@ -559,6 +608,19 @@ public class EntradaMaterialController implements Initializable {
                 }
             }
         }
+
+    }
+
+    void alerta(Alert.AlertType TipoAviso, String cabecalho, String msg) throws Exception {
+        LerProperties ler = new LerProperties();
+
+        Properties prop = ler.getProp();
+        Alert alert = new Alert(TipoAviso);
+        alert.setTitle(cabecalho);
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+
+        alert.showAndWait();
 
     }
 

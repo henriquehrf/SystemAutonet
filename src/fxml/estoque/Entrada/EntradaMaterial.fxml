@@ -119,6 +119,7 @@
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
+                                                <Label fx:id="numNFObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" />
                                                 <Label text="Data da Entrada">
                                                    <HBox.margin>
                                                       <Insets left="5.0" />
@@ -127,11 +128,13 @@
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></DatePicker>
+                                                <Label fx:id="dtEntradaObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" />
                                                 <Label text="Valor da NF" />
-                                                <TextField fx:id="txtValorNF" maxHeight="25.0" onAction="#txtValorNFOnAction" prefHeight="25.0" prefWidth="131.0">
+                                                <TextField fx:id="txtValorNF" maxHeight="25.0" prefHeight="25.0" prefWidth="131.0">
                                                    <HBox.margin>
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
+                                                <Label fx:id="valorNFObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
