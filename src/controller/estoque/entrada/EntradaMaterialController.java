@@ -5,10 +5,15 @@
  */
 package controller.estoque.entrada;
 
+import classesAuxiliares.NegociosEstaticos;
+import classesAuxiliares.Validar;
 import controller.PrincipalController;
 import gui.SystemAutonet;
 import java.net.URL;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
@@ -42,7 +47,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import utilitarios.LerProperties;
-import utilitarios.mock.auxiliar.EntradaMaterial;
+import vo.Entrada;
+import vo.EntradaMaterial;
+import vo.EstoqueMaterial;
 import vo.Fornecedor;
 import vo.Local;
 import vo.Material;
@@ -246,12 +253,46 @@ public class EntradaMaterialController implements Initializable {
     // Ajusta este campo para o VO
     ArrayList<EntradaMaterial> Itens = new ArrayList<>();
     EntradaMaterial ent = new EntradaMaterial();
+    Entrada entrada;
 
     @FXML
     void btnDarEntradaOnAction(ActionEvent event) {
-
+        EstoqueMaterial estoqueMaterial = new EstoqueMaterial();
         // habilitar o banco de dados
-        if (!txtNumNF.getText().isEmpty() && dtEntrada.getValue() != null && !txtValorNF.getText().isEmpty() && Float.parseFloat(txtValorNF.getText()) == Float.parseFloat(txtValorMaterialTotalGeral.getText())) {
+        if (!txtNumNF.getText().isEmpty() && dtEntrada.getValue() != null && !txtValorNF.getText().isEmpty() && Float.parseFloat(txtValorNF.getText())
+                == Float.parseFloat(txtValorMaterialTotalGeral.getText())) {
+
+            entrada.setNumero_nf(Integer.parseInt(txtNumNF.getText()));
+
+            Instant instant = dtEntrada.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            entrada.setDt_entrada(Date.from(instant));
+            entrada.setValor_total(Float.parseFloat(txtValorMaterialTotalGeral.getText()));
+
+            try {
+                Entrada entrada2 = NegociosEstaticos.getNegocioEntrada().salvar(entrada);
+
+                for (EntradaMaterial vo : Itens) {
+                    vo.setId_entrada(entrada2);
+                    NegociosEstaticos.getNegocioEntradaMaterial().salvar(vo);
+
+                    estoqueMaterial.setId_material(vo.getId_material());
+                    estoqueMaterial.setId_departamento(vo.getLocal());
+
+                    estoqueMaterial = NegociosEstaticos.getNegocioEstoqueMateria().BuscarPorIdMaterialIdLocal(estoqueMaterial);
+                    estoqueMaterial.setQuantidade(vo.getQuantidade_material());
+
+                    NegociosEstaticos.getNegocioEstoqueMateria().salvar(estoqueMaterial);
+                    
+                    vo.getId_material().setQuantidade(vo.getId_material().getQuantidade() + vo.getQuantidade_material());
+                    NegociosEstaticos.getNegocioMaterial().salvar(vo.getId_material());
+                }
+                estoqueMaterial = null;
+                
+                
+
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
 
             try {
                 Parent root;
@@ -364,8 +405,8 @@ public class EntradaMaterialController implements Initializable {
 
         //   result.ifPresent(usernamePassword 
         if (result.isPresent()) {
-            ent.setQtd_entrada(Integer.parseInt(result.get().getKey()));
-            ent.setValor_unitario(Float.parseFloat(result.get().getValue()));
+            ent.setQuantidade_material(Integer.parseInt(result.get().getKey()));
+            ent.setValor_unitario_material(Float.parseFloat(result.get().getValue()));
 
             if (result.get().getValue() != null && result.get().getValue() != null) {
                 return true;
@@ -380,18 +421,20 @@ public class EntradaMaterialController implements Initializable {
 
     @FXML
     void btnEditarTabelaEntradaOnAction(ActionEvent event) {
-        
-        if(tblEntradaMaterial.getSelectionModel().getSelectedItem() == null)return;
-        
-        
+
+        if (tblEntradaMaterial.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
 
     }
 
     @FXML
     void btnRemoverTabelaEntradaOnAction(ActionEvent event) {
-        
-        if(tblEntradaMaterial.getSelectionModel().getSelectedItem() == null)return;
-        
+
+        if (tblEntradaMaterial.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+
         Itens.remove(tblEntradaMaterial.getSelectionModel().getSelectedItem());
         completarTabela(Itens);
 
@@ -405,6 +448,7 @@ public class EntradaMaterialController implements Initializable {
         btnAdicionarFornecedor.setDisable(true);
         btnEditarFornecedor.setDisable(false);
         btnVoltarBuscarFornecedorOnAction(event);
+        entrada.setId_fornecedor(tblBuscarFornecedor.getSelectionModel().getSelectedItem());
 
     }
 
@@ -426,7 +470,7 @@ public class EntradaMaterialController implements Initializable {
     void btnAdicionarBuscaMaterialOnAction(ActionEvent event) {
 
         if (tblBuscaMaterial.getSelectionModel().getSelectedItem() != null) {
-            ent.setMaterial(tblBuscaMaterial.getSelectionModel().getSelectedItem().getDescricao());
+            ent.setId_material(tblBuscaMaterial.getSelectionModel().getSelectedItem());
             if (DadosEntrada()) {
                 TabPai.getSelectionModel().select(tabLocal);
                 tabMaterial.setDisable(true);
@@ -448,13 +492,60 @@ public class EntradaMaterialController implements Initializable {
     @FXML
     void btnBuscarMaterialOnAction(ActionEvent event) {
 
+        Material material = new Material();
+        material.setDescricao(txtBuscadorMaterial.getText());
+        completarTabelaMaterial(NegociosEstaticos.getNegocioMaterial().buscarPorDescricao(material));
+
+    }
+
+    @FXML
+    void btnBuscaOnAction(ActionEvent event) {
+
+        if (rdbCNPJFornecedor.isSelected()) {
+
+            char buscar[] = txtBuscadorFornecedor.getText().toCharArray();
+
+            if (Validar.isDigit(buscar)) {
+                Fornecedor f = new Fornecedor();
+                f.setCnpj(txtBuscadorFornecedor.getText());
+                List<Fornecedor> lista = NegociosEstaticos.getNegocioFornecedor().buscarPorCnpj(f);
+                completarTabelaFornecedor(lista);
+            } else {
+                try {
+                    IncompatibilidadeNumero();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+
+        }
+        if (rdbNomeFantasiaFornecedor.isSelected()) {
+            Fornecedor f = new Fornecedor();
+            f.setNome_fantasia(txtBuscadorFornecedor.getText());
+            List<Fornecedor> lista = NegociosEstaticos.getNegocioFornecedor().buscarPorNomeFantasia(f);
+            completarTabelaFornecedor(lista);
+
+        }
+        if (rdbPessoaResponsavelFornecedor.isSelected()) {
+            Fornecedor f = new Fornecedor();
+            f.setPessoa_responsavel(txtBuscadorFornecedor.getText());
+            List<Fornecedor> lista = NegociosEstaticos.getNegocioFornecedor().buscarPorPessoaResponsavel(f);
+            completarTabelaFornecedor(lista);
+
+        }
+        if (rdbRazaoSocialFornecedor.isSelected()) {
+            Fornecedor f = new Fornecedor();
+            f.setRazao_social(txtBuscadorFornecedor.getText());
+            List<Fornecedor> lista = NegociosEstaticos.getNegocioFornecedor().buscarPorRazaoSocial(f);
+            completarTabelaFornecedor(lista);
+        }
     }
 
     @FXML
     void btnAdicionarBuscarLocalOnAction(ActionEvent event) {
 
         if (tblBuscarLocal.getSelectionModel().getSelectedItem() != null) {
-            ent.setLocal(tblBuscarLocal.getSelectionModel().getSelectedItem().getDescricao());
+            ent.setLocal(tblBuscarLocal.getSelectionModel().getSelectedItem());
             Itens.add(ent);
             completarTabela(Itens);
             ent = new EntradaMaterial();
@@ -487,7 +578,38 @@ public class EntradaMaterialController implements Initializable {
 
     @FXML
     void btnBuscarLocalOnAction(ActionEvent event) {
+        if (rdbNumeroLocal.isSelected()) {
+            Local local = new Local();
+            char buscar[] = txtBuscadorLocal.getText().toCharArray();
 
+            if (Validar.isDigit(buscar)) {
+                if (txtBuscadorLocal.getText().isEmpty()) {
+                    completarTabelaLocal(NegociosEstaticos.getNegocioLocal().buscarTodos());
+                } else {
+
+                    local.setNumero(Integer.parseInt(txtBuscadorLocal.getText()));
+                    completarTabelaLocal(NegociosEstaticos.getNegocioLocal().buscarPorNumero(local));
+                }
+            } else {
+                try {
+                    LerProperties ler = new LerProperties();
+                    Properties prop = ler.getProp();
+                    alerta(Alert.AlertType.ERROR, prop.getProperty("msg.incompatibilidade.numero"), prop.getProperty("msg.incompatibilidade.numero"));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+        if (rdbPessoaRespBuscaLocal.isSelected()) {
+            Local local = new Local();
+            local.setResponsavel(txtBuscadorLocal.getText());
+            completarTabelaLocal(NegociosEstaticos.getNegocioLocal().buscarPorPessoaResponsavel(local));
+        }
+        if (rdbDescricaoLocal.isSelected()) {
+            Local local = new Local();
+            local.setDescricao(txtBuscadorLocal.getText());
+            completarTabelaLocal(NegociosEstaticos.getNegocioLocal().buscarPorPessoaResponsavel(local));
+        }
     }
 
     @FXML
@@ -495,19 +617,101 @@ public class EntradaMaterialController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        entrada = new Entrada();
+
         TabPai.getSelectionModel().select(tabEntrada);
         tabFornecedor.setDisable(true);
         tabLocal.setDisable(true);
         tabMaterial.setDisable(true);
         rdbNomeFantasiaFornecedor.setSelected(true);
         rdbDescricaoLocal.setSelected(true);
-        btnDarEntrada.setDisable(true);
+        //   btnDarEntrada.setDisable(true);
         valorNFObrigatorio.setVisible(false);
         dtEntradaObrigatorio.setVisible(false);
         numNFObrigatorio.setVisible(false);
 
-        mockTabelas();
+        //mockTabelas();
+        completarTabelaTodas();
 
+    }
+
+    void completarTabelaFornecedor(List<Fornecedor> lista) {
+        ObservableList<Fornecedor> fornecedor = FXCollections.observableArrayList();
+
+        for (int i = 0; i < lista.size(); i++) {
+            fornecedor.add(lista.get(i));
+        }
+
+        this.tbcCNPJ.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("cnpj"));
+        this.tbcRazaoSocial.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("razao_social"));
+        this.tbcNomeFantasia.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("nome_fantasia"));
+        this.tbcPessoaResponsavel.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("pessoa_responsavel"));
+        tblBuscarFornecedor.setItems(fornecedor);
+    }
+
+    void completarTabelaMaterial(List<Material> lista) {
+        ObservableList<Material> material = FXCollections.observableArrayList();
+
+        for (int i = 0; i < lista.size(); i++) {
+            material.add(lista.get(i));
+        }
+
+        this.tbcMaterialBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("descricao"));
+        this.tbcCategoriaBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriaNome"));
+        this.tbcQuantidadeBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, Integer>("quantidade"));
+        tblBuscaMaterial.setItems(material);
+    }
+
+    void completarTabelaLocal(List<Local> lista) {
+        ObservableList<Local> local = FXCollections.observableArrayList();
+
+        for (int i = 0; i < lista.size(); i++) {
+            local.add(lista.get(i));
+        }
+
+        this.tbcPessoaResponsavelBuscarLocal.setCellValueFactory(new PropertyValueFactory<Local, String>("responsavel"));
+        this.tbcNumeroBuscarLocal.setCellValueFactory(new PropertyValueFactory<Local, Integer>("numero"));
+        this.tbcDescricaoBuscarLocal.setCellValueFactory(new PropertyValueFactory<Local, String>("descricao"));
+        tblBuscarLocal.setItems(local);
+    }
+
+    void completarTabelaTodas() {
+        List<Fornecedor> listFornecedor = NegociosEstaticos.getNegocioFornecedor().buscarTodos();
+        List<Material> listMaterial = NegociosEstaticos.getNegocioMaterial().buscarTodos();
+        List<Local> listLocal = NegociosEstaticos.getNegocioLocal().buscarTodos();
+
+        ObservableList<Fornecedor> fornecedor = FXCollections.observableArrayList();
+        ObservableList<Material> material = FXCollections.observableArrayList();
+        ObservableList<Local> local = FXCollections.observableArrayList();
+
+        for (int i = 0; i < listFornecedor.size(); i++) {
+            fornecedor.add(listFornecedor.get(i));
+        }
+
+        this.tbcCNPJ.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("cnpj"));
+        this.tbcRazaoSocial.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("razao_social"));
+        this.tbcNomeFantasia.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("nome_fantasia"));
+        this.tbcPessoaResponsavel.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("pessoa_responsavel"));
+        tblBuscarFornecedor.setItems(fornecedor);
+
+        //------------------------------------------------------------------------------------
+        for (int i = 0; i < listMaterial.size(); i++) {
+            material.add(listMaterial.get(i));
+        }
+
+        this.tbcMaterialBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("descricao"));
+        this.tbcCategoriaBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriaNome"));
+        this.tbcQuantidadeBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, Integer>("quantidade"));
+        tblBuscaMaterial.setItems(material);
+        //------------------------------------------------------------------------------------
+
+        for (int i = 0; i < listLocal.size(); i++) {
+            local.add(listLocal.get(i));
+        }
+        this.tbcPessoaResponsavelBuscarLocal.setCellValueFactory(new PropertyValueFactory<Local, String>("responsavel"));
+        this.tbcNumeroBuscarLocal.setCellValueFactory(new PropertyValueFactory<Local, Integer>("numero"));
+        this.tbcDescricaoBuscarLocal.setCellValueFactory(new PropertyValueFactory<Local, String>("descricao"));
+        tblBuscarLocal.setItems(local);
     }
 
     void mockTabelas() {
@@ -576,18 +780,18 @@ public class EntradaMaterialController implements Initializable {
         EntradaMaterial aux = new EntradaMaterial();
         for (int i = 0; i < lista.size(); i++) {
             aux = lista.get(i);
-            aux.setValor_total(aux.getQtd_entrada() * aux.getValor_unitario());
+            aux.setValor_total(aux.getQuantidade_material() * aux.getValor_unitario_material());
             sum = aux.getValor_total() + sum;
             lista.set(i, aux);
             qtdItens++;
             dado.add(lista.get(i));
         }
         // this.tbcCategoriaBuscaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriaNome"));
-        this.tbcMaterial.setCellValueFactory(new PropertyValueFactory<EntradaMaterial, String>("material"));
-        this.tbcQtd.setCellValueFactory(new PropertyValueFactory<EntradaMaterial, Integer>("qtd_entrada"));
-        this.tbcValorUnitario.setCellValueFactory(new PropertyValueFactory<EntradaMaterial, Float>("valor_unitario"));
+        this.tbcMaterial.setCellValueFactory(new PropertyValueFactory<EntradaMaterial, String>("MaterialNome"));
+        this.tbcQtd.setCellValueFactory(new PropertyValueFactory<EntradaMaterial, Integer>("quantidade_material"));
+        this.tbcValorUnitario.setCellValueFactory(new PropertyValueFactory<EntradaMaterial, Float>("valor_unitario_material"));
         this.tbcValorTotal.setCellValueFactory(new PropertyValueFactory<EntradaMaterial, Float>("valor_total"));
-        this.tbcLocal.setCellValueFactory(new PropertyValueFactory<EntradaMaterial, String>("local"));
+        this.tbcLocal.setCellValueFactory(new PropertyValueFactory<EntradaMaterial, String>("LocalNome"));
 
         this.tblEntradaMaterial.setItems(dado);
 
@@ -621,6 +825,13 @@ public class EntradaMaterialController implements Initializable {
         alert.setContentText(msg);
 
         alert.showAndWait();
+
+    }
+
+    private void IncompatibilidadeNumero() throws Exception {
+        LerProperties ler = new LerProperties();
+        Properties prop = ler.getProp();
+        alerta(Alert.AlertType.ERROR, prop.getProperty("msg.dados.erro"), prop.getProperty("msg.incompatibilidade.numero"));
 
     }
 

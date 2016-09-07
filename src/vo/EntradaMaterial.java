@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 /**
  *
@@ -24,23 +25,29 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 
-public class EntradaMaterial implements Serializable, EntidadeBase{
+public class EntradaMaterial implements Serializable, EntidadeBase {
 
     @Id
-     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id_entradaMaterial;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Material id_material = null;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Entrada id_entrada = null;
-    
+
     @Basic
-    private Integer quantidade_material;
-    
+    private int quantidade_material;
+
     @Column(scale = 8, precision = 2)
-    private int valor_unitario_material;
+    private float valor_unitario_material;
+
+    @Transient
+    private Local local;
+
+    @Transient
+    private float Valor_total;
 
     @Override
     public Long getId() {
@@ -53,6 +60,10 @@ public class EntradaMaterial implements Serializable, EntidadeBase{
 
     public Material getId_material() {
         return id_material;
+    }
+    
+    public String getMaterialNome(){
+        return id_material.getDescricao();
     }
 
     public void setId_material(Material id_material) {
@@ -67,23 +78,42 @@ public class EntradaMaterial implements Serializable, EntidadeBase{
         this.id_entrada = id_entrada;
     }
 
-    public Integer getQuantidade_material() {
+    public int getQuantidade_material() {
         return quantidade_material;
     }
 
-    public void setQuantidade_material(Integer quantidade_material) {
+    public void setQuantidade_material(int quantidade_material) {
         this.quantidade_material = quantidade_material;
     }
 
-    public int getValor_unitario_material() {
+    public float getValor_unitario_material() {
         return valor_unitario_material;
     }
 
-    public void setValor_unitario_material(int valor_unitario_material) {
+    public void setValor_unitario_material(float valor_unitario_material) {
         this.valor_unitario_material = valor_unitario_material;
     }
 
+    public Local getLocal() {
+        return local;
+    }
+
+    public String getLocalNome() {
+        return local.getDescricao();
+    }
     
     
-    
+
+    public void setLocal(Local local) {
+        this.local = local;
+    }
+
+    public float getValor_total() {
+        return Valor_total;
+    }
+
+    public void setValor_total(float Valor_total) {
+        this.Valor_total = Valor_total;
+    }
+
 }

@@ -5,14 +5,17 @@ package vo;
 
 import DAO.EntidadeBase;
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author Eduardo
@@ -21,19 +24,21 @@ import javax.persistence.ManyToOne;
 public class Entrada implements Serializable, EntidadeBase {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id_entrada;
 
     @Basic
     private int numero_nf;
 
-    @Basic
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dt_entrada;
 
-    @Basic
-    private Integer valor_total;
+    @Column(scale = 8, precision = 2)
+    private float valor_total;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Fornecedor id_fornecedor = null;
+    private Fornecedor id_fornecedor;
 
     @Override
     public Long getId() {
@@ -60,11 +65,11 @@ public class Entrada implements Serializable, EntidadeBase {
         this.dt_entrada = dt_entrada;
     }
 
-    public Integer getValor_total() {
+    public float getValor_total() {
         return this.valor_total;
     }
 
-    public void setValor_total(Integer valor_total) {
+    public void setValor_total(float valor_total) {
         this.valor_total = valor_total;
     }
 
@@ -76,5 +81,4 @@ public class Entrada implements Serializable, EntidadeBase {
         this.id_fornecedor = id_fornecedor;
     }
 
-  
 }

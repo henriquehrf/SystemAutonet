@@ -39,14 +39,18 @@ public class NegocioEstoqueMaterial {
     public EstoqueMaterial consultarPorId(EstoqueMaterial estoqueMaterial) {
         return emDAO.consutarPorId(EstoqueMaterial.class, estoqueMaterial);
     }
-    
-    public List<EstoqueMaterial> buscarPorIdMaterial(Material material){
+
+    public List<EstoqueMaterial> buscarPorIdMaterial(Material material) {
         return emDAO.buscarPorIdMaterial(material);
     }
-    
-    public Number QtdDisponivelDoMaterial(Material material) throws Exception{
-        
+
+    public Number QtdDisponivelDoMaterial(Material material) throws Exception {
+
         return emDAO.QtdDisponivelDoMaterial(material);
+    }
+
+    public EstoqueMaterial BuscarPorIdMaterialIdLocal(EstoqueMaterial estoqueMaterial) throws Exception {
+        return emDAO.buscarPorIdMaterialIdLocal(estoqueMaterial);
     }
 
     private String validar(EstoqueMaterial estoqueMaterial) {

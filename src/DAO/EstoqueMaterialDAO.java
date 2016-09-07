@@ -8,6 +8,7 @@ package DAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import vo.EstoqueMaterial;
 import vo.Material;
@@ -54,5 +55,26 @@ public class EstoqueMaterialDAO extends GenericoDAO<EstoqueMaterial> {
             em.close();
         }
         return qtd;
+    }
+    
+     public EstoqueMaterial buscarPorIdMaterialIdLocal(EstoqueMaterial estoqueMaterial) throws Exception {
+        EntityManager em = getEM();
+        Query query;
+        EstoqueMaterial lista;
+
+        try {
+            
+            query = em.createNamedQuery("EstoqueMaterial.BuscarPorIdMaterialIdMaterial");
+            query.setParameter("idMaterial",estoqueMaterial.getId_material().getId());
+            query.setParameter("idLocal",estoqueMaterial.getId_departamento().getId());
+            lista = (EstoqueMaterial) query.getSingleResult();
+
+        } catch (NoResultException ex) {
+            lista = salvar(EstoqueMaterial.class, estoqueMaterial);
+        } finally {
+            em.close();
+        }
+
+        return lista;
     }
 }

@@ -26,7 +26,9 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "EstoqueMaterial.BuscarPorIdMaterial",
             query = "select e from EstoqueMaterial e where e.id_material.id_material = :idMaterial"),
     @NamedQuery(name = "EstoqueMaterial.QtdDisponivelDoMaterial",
-            query = "select SUM(e.quantidade_disponivel) from EstoqueMaterial e where e.id_material.id_material = :idMaterial")
+            query = "select SUM(e.quantidade_disponivel) from EstoqueMaterial e where e.id_material.id_material = :idMaterial"),
+     @NamedQuery(name = "EstoqueMaterial.BuscarPorIdMaterialIdMaterial",
+            query = "select e from EstoqueMaterial e where e.id_material.id_material = :idMaterial AND e.id_local.id_local = :idLocal")
 
 })
 public class EstoqueMaterial implements Serializable, EntidadeBase {
@@ -40,13 +42,20 @@ public class EstoqueMaterial implements Serializable, EntidadeBase {
 
     @Column(nullable = false)
     private int quantidade_disponivel;
+    
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Local id_local = null;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Material id_material = null;
 
     public Local getId_departamento() {
-        return id_departamento;
+        return id_local;
     }
 
     public void setId_departamento(Local id_departamento) {
-        this.id_departamento = id_departamento;
+        this.id_local = id_departamento;
     }
 
     public Material getId_material() {
@@ -57,11 +66,6 @@ public class EstoqueMaterial implements Serializable, EntidadeBase {
         this.id_material = id_material;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Local id_departamento = null;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Material id_material = null;
 
     @Override
     public Long getId() {
