@@ -85,6 +85,7 @@ public class ConsultarLocaisController {
         List<Local> lista = NegociosEstaticos.getNegocioLocal().buscarTodos();
 
         completarTabela(lista);
+        rdbDescricao.setSelected(true);
 
     }
 

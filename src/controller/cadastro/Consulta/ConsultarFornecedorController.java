@@ -82,6 +82,7 @@ public class ConsultarFornecedorController {
        // negocioF = new NegocioFornecedor();
         List<Fornecedor> lista = NegociosEstaticos.getNegocioFornecedor().buscarTodos();
         completarTabela(lista);
+        rdbNomeFantasia.setSelected(true);
 
     }
 

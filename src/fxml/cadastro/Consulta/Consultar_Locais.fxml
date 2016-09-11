@@ -106,18 +106,16 @@
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="Filtro" />
+                                 </toggleGroup>
                               </RadioButton>
-                              <RadioButton fx:id="rdbNumero" mnemonicParsing="false" text="%rdb.numero">
+                              <RadioButton fx:id="rdbNumero" mnemonicParsing="false" text="%rdb.numero" toggleGroup="$Filtro">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </RadioButton>
-                              <RadioButton fx:id="rdbBloco" mnemonicParsing="false" text="%rdb.bloco">
-                                 <HBox.margin>
-                                    <Insets right="5.0" />
-                                 </HBox.margin>
-                              </RadioButton>
-                              <RadioButton fx:id="rdbPessoaResponsavel" mnemonicParsing="false" text="%rdb.pessoa.responsavel">
+                              <RadioButton fx:id="rdbPessoaResponsavel" mnemonicParsing="false" text="%rdb.pessoa.responsavel" toggleGroup="$Filtro">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
@@ -146,10 +144,9 @@
          <children>
             <TableView fx:id="tblPrincipal" prefHeight="286.0" prefWidth="735.0">
               <columns>
-                <TableColumn fx:id="tbcDescricao" prefWidth="314.0" text="%tblColumn.descricao" />
-                <TableColumn fx:id="tbcNumero" minWidth="0.0" prefWidth="127.0" text="%tblColumn.numero" />
-                  <TableColumn fx:id="tbcBloco" prefWidth="141.0" text="%tblColumn.bloco" />
-                  <TableColumn fx:id="tbcPessoaResponsavel" prefWidth="151.0" text="%tblColumn.pessoa.responsavel" />
+                <TableColumn fx:id="tbcDescricao" prefWidth="374.0" text="%tblColumn.descricao" />
+                <TableColumn fx:id="tbcNumero" minWidth="0.0" prefWidth="92.0" text="%tblColumn.numero" />
+                  <TableColumn fx:id="tbcPessoaResponsavel" prefWidth="267.0" text="%tblColumn.pessoa.responsavel" />
               </columns>
             </TableView>
          </children>

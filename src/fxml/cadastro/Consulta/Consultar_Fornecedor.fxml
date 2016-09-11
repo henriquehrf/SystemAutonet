@@ -106,18 +106,21 @@
                                  <HBox.margin>
                                     <Insets right="2.0" />
                                  </HBox.margin>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="Filtro" />
+                                 </toggleGroup>
                               </RadioButton>
-                              <RadioButton fx:id="rdbRazaoSocial" mnemonicParsing="false" text="%rdb.razao.social">
+                              <RadioButton fx:id="rdbRazaoSocial" mnemonicParsing="false" text="%rdb.razao.social" toggleGroup="$Filtro">
                                  <HBox.margin>
                                     <Insets right="2.0" />
                                  </HBox.margin>
                               </RadioButton>
-                              <RadioButton fx:id="rdbCNPJ" mnemonicParsing="false" text="%rdb.cnpj">
+                              <RadioButton fx:id="rdbCNPJ" mnemonicParsing="false" text="%rdb.cnpj" toggleGroup="$Filtro">
                                  <HBox.margin>
                                     <Insets right="2.0" />
                                  </HBox.margin>
                               </RadioButton>
-                              <RadioButton fx:id="rdbPessoaResponsavel" mnemonicParsing="false" prefHeight="25.0" prefWidth="145.0" text="%rdb.pessoa.responsavel">
+                              <RadioButton fx:id="rdbPessoaResponsavel" mnemonicParsing="false" prefHeight="25.0" prefWidth="145.0" text="%rdb.pessoa.responsavel" toggleGroup="$Filtro">
                                  <HBox.margin>
                                     <Insets right="2.0" />
                                  </HBox.margin>

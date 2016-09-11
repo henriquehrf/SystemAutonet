@@ -65,6 +65,7 @@ public class ConsultarUnidadeMedidaController {
        // negocioTU = new NegocioTipoUnidade();
         List<TipoUnidade> lista =NegociosEstaticos.getNegocioTipoUnidade().buscarTodos();
         completarTabela(lista);
+        rdbdescricao.setSelected(true);
     }
 
     @FXML

@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.cadastro.Cadastro.CadastroMaterialController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../../../utilitarios/teste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.cadastro.Cadastro.CadastroMaterialController">
    <center>
       <TabPane prefHeight="455.0" prefWidth="761.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
          <tabs>
@@ -132,8 +132,4 @@
          </children>
       </GridPane>
    </bottom>
-   <stylesheets>
-      <URL value="@../../../../../Desktop/teste/teste.css" />
-      <URL value="@teste/teste.css" />
-   </stylesheets>
 </BorderPane>

@@ -106,8 +106,11 @@
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="Filtro" />
+                                 </toggleGroup>
                               </RadioButton>
-                              <RadioButton fx:id="rdbQuantidade" mnemonicParsing="false" text="%rdb.quantidade">
+                              <RadioButton fx:id="rdbQuantidade" mnemonicParsing="false" text="%rdb.quantidade" toggleGroup="$Filtro">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>

@@ -134,9 +134,9 @@ public class SolicitaEmprestimoController {
         Date data = new Date();
         Emprestimo emp = new Emprestimo();
         emp.setDt_emprestimo(data);
-        emp.setFinalidade("Teste Finalidade");
-        emp.setObservacao("Teste Obs");
-        emp.setStatus_emprestimo(StatusEmprestimo.APROVADO);
+        emp.setFinalidade(txtFinalidade.getText());
+        emp.setObservacao(txtObservacao.getText());
+        emp.setStatus_emprestimo(StatusEmprestimo.ESPERANDO_ANALISE);
 
         emp.setId_pessoa_solicita(ClasseDoSistemaEstatico.getPessoa());
         System.out.println("Solicitado" + ClasseDoSistemaEstatico.getPessoa().getNome());
@@ -149,11 +149,11 @@ public class SolicitaEmprestimoController {
 
         for (int i = 0; i < altertab.size(); i++) {
             EmprestimoEstoqueMaterial eem = new EmprestimoEstoqueMaterial();
-            eem.setDt_devolucao(data);// obs rever este ponto
+           // eem.setDt_devolucao(data);// obs rever este ponto
             eem.setId_emprestimo(emp);
-            eem.setObservacao("dsada");
+         //   eem.setObservacao("dsada");
             eem.setQtd_emprestada(2);
-            eem.setQtd_devolvida(2);
+            eem.setQtd_devolvida(0);
             eem.setId_material(altertab.get(i));
             eem.setId_emprestimo(emp);
             
