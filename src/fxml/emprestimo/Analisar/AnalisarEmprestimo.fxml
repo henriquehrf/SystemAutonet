@@ -20,15 +20,15 @@
    <center>
       <TabPane fx:id="TabPanePrincipal" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-            <Tab text="%tab.emprestimo.analise.listaParaAnalise">
+            <Tab fx:id="tabListaEmprestimo" text="%tab.emprestimo.analise.listaParaAnalise">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tblAguardandoAnalise" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                           <columns>
-                              <TableColumn prefWidth="292.0" text="%tblColumn.pessoa" />
-                              <TableColumn prefWidth="135.0" text="%tblColumn.dtEmprestimo" />
-                              <TableColumn prefWidth="349.0" text="%tblColumn.finalidade" />
+                              <TableColumn fx:id="tbcPessoa" prefWidth="292.0" text="%tblColumn.pessoa" />
+                              <TableColumn fx:id="tbcDtEmprestimo" prefWidth="135.0" text="%tblColumn.dtEmprestimo" />
+                              <TableColumn fx:id="tbcFinalidade" prefWidth="349.0" text="%tblColumn.finalidade" />
                           </columns>
                            <BorderPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -47,7 +47,7 @@
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button fx:id="btnVoltar" mnemonicParsing="false" onAction="#btnCancelarOnAction" styleClass="button-voltar" text="%btn.voltar">
+                                          <Button fx:id="btnVoltarLista" mnemonicParsing="false" onAction="#btnVoltarListaOnAction" styleClass="button-voltar" text="%btn.voltar">
                                              <HBox.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </HBox.margin>
@@ -68,16 +68,16 @@
                   </BorderPane>
                </content>
             </Tab>
-            <Tab text="%tab.emprestimo.analise.analisarEmprestimo">
+            <Tab fx:id="tabAnaliseEmprestimo" text="%tab.emprestimo.analise.analisarEmprestimo">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
                         <TableView prefHeight="310.0" prefWidth="778.0" BorderPane.alignment="CENTER">
                            <columns>
-                              <TableColumn prefWidth="355.0" text="%tblColumn.descricao" />
-                              <TableColumn prefWidth="96.0" text="%tblColumn.quantidade" />
-                              <TableColumn prefWidth="207.0" text="%tblColumn.Categoria" />
-                              <TableColumn prefWidth="118.0" text="%tblColumn.disponibilidade" />
+                              <TableColumn fx:id="tbcMaterialAnalise" prefWidth="355.0" text="%tblColumn.Material" />
+                              <TableColumn fx:id="tbcQuantidadeAnalise" prefWidth="96.0" text="%tblColumn.quantidade" />
+                              <TableColumn fx:id="tbcCategoriaAnalise" prefWidth="207.0" text="%tblColumn.Categoria" />
+                              <TableColumn fx:id="tbcDisponibilidadeAnalise" prefWidth="118.0" text="%tblColumn.disponibilidade" />
                            </columns>
                            <BorderPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -101,7 +101,7 @@
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                        <children>
-                                          <Label text="dd/MM/yyyy">
+                                          <Label fx:id="lblDtEmprestimo" text="dd/MM/yyyy">
                                              <HBox.margin>
                                                 <Insets right="20.0" />
                                              </HBox.margin>
@@ -111,7 +111,7 @@
                                                 <Insets right="20.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <Label text="Minha finalidade">
+                                          <Label fx:id="lblFinalidade" text="Minha finalidade">
                                              <HBox.margin>
                                                 <Insets right="20.0" />
                                              </HBox.margin>
@@ -120,7 +120,7 @@
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
-                                          <Label text="Minha Observacao" />
+                                          <Label fx:id="lblObservacao" text="Minha Observacao" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -144,12 +144,12 @@
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="47.0" prefWidth="798.0">
                                        <children>
-                                          <Button mnemonicParsing="false" styleClass="button-aprovar" text="Aprovar">
+                                          <Button fx:id="btnAprovar" mnemonicParsing="false" onAction="#btnAprovarOnAction" styleClass="button-aprovar" text="Aprovar">
                                              <HBox.margin>
                                                 <Insets left="10.0" right="10.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button mnemonicParsing="false" styleClass="button-recusar" text="Recusar">
+                                          <Button fx:id="btnRecusar" mnemonicParsing="false" onAction="#btnRecusarOnAction" styleClass="button-recusar" text="Recusar">
                                              <HBox.margin>
                                                 <Insets left="10.0" right="10.0" />
                                              </HBox.margin>
@@ -158,7 +158,7 @@
                                     </HBox>
                                     <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                        <children>
-                                          <Button mnemonicParsing="false" styleClass="button-voltar" text="Voltar">
+                                          <Button fx:id="btnVoltarAnalise" mnemonicParsing="false" onAction="#btnVoltarAnaliseOnAction" styleClass="button-voltar" text="Voltar">
                                              <HBox.margin>
                                                 <Insets right="50.0" />
                                              </HBox.margin>
@@ -173,18 +173,18 @@
                   </BorderPane>
                </content>
             </Tab>
-            <Tab text="%tab.emprestimo.analise.disponibilidade">
+            <Tab fx:id="tabItensSeparado" text="%tab.emprestimo.analise.disponibilidade">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
                         <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <columns>
-                              <TableColumn prefWidth="278.0" text="%tblColumn.Material" />
-                              <TableColumn prefWidth="99.0" text="%tblColumn.quantidadeSolicitada" />
+                              <TableColumn fx:id="tbcMaterialSeparado" prefWidth="278.0" text="%tblColumn.Material" />
+                              <TableColumn fx:id="tbcQuantidadeDisponivelSeparado" prefWidth="99.0" text="%tblColumn.quantidadeSolicitada" />
                               <TableColumn prefWidth="435.0" text="%tblColumn.local">
                                  <columns>
-                                    <TableColumn prefWidth="145.0" text="%tblColumn.quantidadeDisponivel" />
-                                    <TableColumn prefWidth="295.0" text="%tblColumn.descricao" />
+                                    <TableColumn fx:id="tbcQuantidadeSolicitadaSeparado" prefWidth="145.0" text="%tblColumn.quantidadeDisponivel" />
+                                    <TableColumn fx:id="tbcDescricaoSeparado" prefWidth="295.0" text="%tblColumn.descricao" />
                                  </columns>
                               </TableColumn>
                            </columns>
@@ -193,6 +193,52 @@
                            </BorderPane.margin>
                         </TableView>
                      </center>
+                     <top>
+                        <VBox prefHeight="22.0" prefWidth="798.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="label-subtitle">
+                                 <children>
+                                    <Label text="Separar os Materiáis" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="798.0">
+                                 <children>
+                                    <Button fx:id="btnAdicionarLocal" mnemonicParsing="false" onAction="#btnAdicionarLocalOnAction" styleClass="button-adicionar" text="Button">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="btnEditarLocal" mnemonicParsing="false" onAction="#btnEditarLocalOnAction" styleClass="button-editar" text="Button">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="btnRemoverLocal" mnemonicParsing="false" onAction="#btnRemoverLocalOnAction" styleClass="button-remover" text="Button">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </top>
+                     <bottom>
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="798.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#btnSalvarOnAction" styleClass="button-save" text="Salvar">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#btnCancelarOnAction" styleClass="button-cancel" text="Cancelar">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </bottom>
                   </BorderPane>
                </content>
             </Tab>
@@ -206,8 +252,8 @@
                               <TableColumn fx:id="tbcQuantidadeBusca" prefWidth="98.0" text="%tblColumn.quantidadeSolicitada" />
                               <TableColumn prefWidth="438.0" text="%tblColumn.local">
                                  <columns>
-                                    <TableColumn prefWidth="134.0" text="%tblColumn.quantidadeDisponivel" />
-                                    <TableColumn prefWidth="306.0" text="%tblColumn.descricao" />
+                                    <TableColumn fx:id="tbcQtdSolicitadaBusca" prefWidth="134.0" text="%tblColumn.quantidadeDisponivel" />
+                                    <TableColumn fx:id="tbcDescricaoBusca" prefWidth="306.0" text="%tblColumn.descricao" />
                                  </columns>
                               </TableColumn>
                            </columns>
@@ -226,9 +272,14 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="%lbl.pesquisar" />
-                                    <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="383.0" />
-                                    <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" styleClass="button-search" />
+                                    <Label text="Material:" />
+                                    <TextField fx:id="txtMaterial" disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="366.0" />
+                                    <Label text="Quantidade Solicitada:">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="txtQtdSolicitada" disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="93.0" />
                                  </children>
                               </HBox>
                            </children>
@@ -241,6 +292,22 @@
                            </rowConstraints>
                         </GridPane>
                      </top>
+                     <bottom>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="798.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="btnSelecionar" mnemonicParsing="false" onAction="#btnSelecionarOnAction" styleClass="button-adicionarItem" text="Selecionar">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnVoltarBuscar" mnemonicParsing="false" onAction="#btnVoltarBuscarOnAction" styleClass="button-voltar" text="Voltar">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </bottom>
                   </BorderPane>
                </content>
             </Tab>
