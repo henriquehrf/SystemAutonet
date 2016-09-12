@@ -41,7 +41,7 @@ public class NegocioEmprestimo {
     }
     
     public List<Emprestimo> buscarPorIdPessoa(Pessoa pessoa){
-        return empDAO.buscarPorIdUsuario(pessoa);
+        return empDAO.buscarPorIdPessoa(pessoa);
     }
     
 

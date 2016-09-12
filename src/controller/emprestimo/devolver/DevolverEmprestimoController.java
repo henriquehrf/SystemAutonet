@@ -5,7 +5,10 @@
  */
 package controller.emprestimo.devolver;
 
+import classesAuxiliares.ClasseDoSistemaEstatico;
+import classesAuxiliares.NegociosEstaticos;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,15 +24,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import vo.Emprestimo;
+import vo.EmprestimoEstoqueMaterial;
 
 /**
  * FXML Controller class
  *
  * @author Henrique
  */
-public class DevolverEmprestimoController  {
+public class DevolverEmprestimoController {
 
-     @FXML
+    @FXML
     private Button btnBaixarItensEmprestimo;
 
     @FXML
@@ -263,8 +268,13 @@ public class DevolverEmprestimoController  {
     void btnVoltarObservacaoOnAction(ActionEvent event) {
 
     }
+
     public void initialize() {
+
+        List<Emprestimo> emp = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(ClasseDoSistemaEstatico.getPessoa());
+        List<EmprestimoEstoqueMaterial> empm = NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarPorNaoDevolvido(emp.get(0));
+
         // TODO
-    }    
-    
+    }
+
 }

@@ -18,7 +18,7 @@ import vo.Pessoa;
  */
 public class EmprestimoDAO extends GenericoDAO<Emprestimo> {
 
-    public List<Emprestimo> buscarPorIdUsuario(Pessoa pessoa) {
+    public List<Emprestimo> buscarPorIdPessoa(Pessoa pessoa) {
         EntityManager em = getEM();
         Query query;
         List<Emprestimo> listaEmprestimo;

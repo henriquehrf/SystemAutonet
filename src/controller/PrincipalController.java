@@ -1,5 +1,7 @@
 package controller;
 
+import classesAuxiliares.ClasseDoSistemaEstatico;
+import classesAuxiliares.NegociosEstaticos;
 import controller.cadastro.Cadastro.CadastroCategoriaController;
 import gui.SystemAutonet;
 import java.util.ResourceBundle;
@@ -11,7 +13,10 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import controller.cadastro.Consulta.*;
+import java.util.List;
 import javafx.scene.Parent;
+import vo.Emprestimo;
+import vo.EmprestimoEstoqueMaterial;
 
 public class PrincipalController {
 
@@ -109,6 +114,14 @@ public class PrincipalController {
     private Menu mnu_Cadastro;
 
     public void initialize() {
+//           List<Emprestimo> emp = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(ClasseDoSistemaEstatico.getPessoa());
+//            List<EmprestimoEstoqueMaterial> empm = NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarPorNaoDevolvido(emp.get(0));
+//            System.out.println("Inicio");
+//            
+//            for(EmprestimoEstoqueMaterial vo: empm){
+//                System.out.println(vo.getObservacao());
+//            }
+//             System.out.println("Fim");
         System.out.println("oi");
 
     }
