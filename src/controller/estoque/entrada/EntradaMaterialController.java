@@ -257,7 +257,7 @@ public class EntradaMaterialController implements Initializable {
 
     @FXML
     void btnDarEntradaOnAction(ActionEvent event) {
-        EstoqueMaterial estoqueMaterial = new EstoqueMaterial();
+      
         // habilitar o banco de dados
         if (!txtNumNF.getText().isEmpty() && dtEntrada.getValue() != null && !txtValorNF.getText().isEmpty() && Float.parseFloat(txtValorNF.getText())
                 == Float.parseFloat(txtValorMaterialTotalGeral.getText())) {
@@ -270,8 +270,9 @@ public class EntradaMaterialController implements Initializable {
 
             try {
                 Entrada entrada2 = NegociosEstaticos.getNegocioEntrada().salvar(entrada);
-
+                
                 for (EntradaMaterial vo : Itens) {
+                    EstoqueMaterial estoqueMaterial = new EstoqueMaterial();
                     vo.setId_entrada(entrada2);
                     NegociosEstaticos.getNegocioEntradaMaterial().salvar(vo);
 
@@ -285,8 +286,9 @@ public class EntradaMaterialController implements Initializable {
                     
                     vo.getId_material().setQuantidade(vo.getId_material().getQuantidade() + vo.getQuantidade_material());
                     NegociosEstaticos.getNegocioMaterial().salvar(vo.getId_material());
+                       estoqueMaterial = null;
                 }
-                estoqueMaterial = null;
+             
                 
                 
 

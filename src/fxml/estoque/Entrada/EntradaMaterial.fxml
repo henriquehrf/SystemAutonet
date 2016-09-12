@@ -258,7 +258,7 @@
                                              <children>
                                                 <Label text="Pesquisar:" />
                                                 <TextField fx:id="txtBuscadorFornecedor" maxHeight="25.0" onAction="#txtBuscadorFornecedorOnAction" prefHeight="25.0" prefWidth="365.0" />
-                                                <Button fx:id="btnBuscar" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" styleClass="button-search" />
+                                                <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#btnBuscaOnAction" prefHeight="25.0" prefWidth="24.0" styleClass="button-search" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
