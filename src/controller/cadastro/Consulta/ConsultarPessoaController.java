@@ -148,8 +148,12 @@ public class ConsultarPessoaController {
     @FXML
     void btnExcluirOnAction(ActionEvent event) {
         try {
-            NegociosEstaticos.getNegocioPessoa().remover(tblPrincipal.getSelectionModel().getSelectedItem());
-
+            Alertas alert = new Alertas();
+            Properties prop;
+            prop = LerProperties.getProp();
+            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"), "Sim", "Não")) {
+                NegociosEstaticos.getNegocioPessoa().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+            }
         } catch (Exception ex) {
 
             try {
@@ -158,8 +162,7 @@ public class ConsultarPessoaController {
             } catch (Exception ex1) {
                 Alertas alert = new Alertas();
                 alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex1.getMessage());
-                System.out.println(ex.getMessage());
-                System.out.println(ex1.getMessage());
+               
             }
 
         }

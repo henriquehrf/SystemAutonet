@@ -121,10 +121,15 @@ public class ConsultarDepartamentoController {
         Properties prop;
         try {
             prop = LerProperties.getProp();
-            alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"));
+           if(alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"),"Sim","Não")){
+               NegociosEstaticos.getNegocioDepartamento().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+               completarTabela(NegociosEstaticos.getNegocioDepartamento().buscarTodos());
+           }
             
         } catch (IOException ex) {
             Logger.getLogger(ConsultarDepartamentoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+           alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex.getMessage());
         }
     }
 

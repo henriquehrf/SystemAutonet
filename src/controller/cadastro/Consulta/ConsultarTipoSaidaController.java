@@ -5,6 +5,7 @@ import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroTipoSaidaController;
 import gui.SystemAutonet;
 import java.util.List;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -19,6 +21,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioTipoSaida;
+import utilitarios.Alertas;
+import utilitarios.LerProperties;
 import vo.TipoSaida;
 
 public class ConsultarTipoSaidaController {
@@ -102,7 +106,18 @@ public class ConsultarTipoSaidaController {
 
     @FXML
     void btnExcluir_OnAction(ActionEvent event) {
-
+         try {
+            Alertas alert = new Alertas();
+            Properties prop;
+            prop = LerProperties.getProp();
+            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"), "Sim", "Não")) {
+                NegociosEstaticos.getNegocioTipoSaida().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+                completarTabela(NegociosEstaticos.getNegocioTipoSaida().buscarTodos());
+            }
+        } catch (Exception ex) {
+            Alertas alert = new Alertas();
+            alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex.getMessage());
+        }
     }
 
     @FXML

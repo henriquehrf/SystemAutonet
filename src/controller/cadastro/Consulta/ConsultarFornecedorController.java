@@ -23,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioFornecedor;
+import utilitarios.Alertas;
 import utilitarios.LerProperties;
 import vo.Fornecedor;
 
@@ -76,10 +77,9 @@ public class ConsultarFornecedorController {
     @FXML
     private Button btnBuscar;
 
-  //  private NegocioFornecedor negocioF;
-
+    //  private NegocioFornecedor negocioF;
     public void initialize() {
-       // negocioF = new NegocioFornecedor();
+        // negocioF = new NegocioFornecedor();
         List<Fornecedor> lista = NegociosEstaticos.getNegocioFornecedor().buscarTodos();
         completarTabela(lista);
         rdbNomeFantasia.setSelected(true);
@@ -101,7 +101,7 @@ public class ConsultarFornecedorController {
     @FXML
     void btnVoltar_OnAction(ActionEvent event) {
         try {
-          //  negocioF = null;
+            //  negocioF = null;
             Parent root;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -114,7 +114,7 @@ public class ConsultarFornecedorController {
     void btnInserir_OnAction(ActionEvent event) {
         try {
             CadastroFornecedorController.setCadastrar(true);
-          //  negocioF = null;
+            //  negocioF = null;
             Parent root;
             root = FXMLLoader.load(CadastroFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -131,7 +131,7 @@ public class ConsultarFornecedorController {
         CadastroFornecedorController.setAlterar(f);
 
         try {
-           // negocioF = null;
+            // negocioF = null;
             Parent root;
             root = FXMLLoader.load(CadastroFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -142,7 +142,18 @@ public class ConsultarFornecedorController {
 
     @FXML
     void btnExcluir_OnAction(ActionEvent event) {
-
+        try {
+            Alertas alert = new Alertas();
+            Properties prop;
+            prop = LerProperties.getProp();
+            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"), "Sim", "Não")) {
+                NegociosEstaticos.getNegocioFornecedor().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+                completarTabela(NegociosEstaticos.getNegocioFornecedor().buscarTodos());
+            }
+        } catch (Exception ex) {
+            Alertas alert = new Alertas();
+            alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex.getMessage());
+        }
     }
 
     @FXML
