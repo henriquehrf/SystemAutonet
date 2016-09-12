@@ -62,7 +62,7 @@ public class MaterialDAO extends GenericoDAO<Material> {
         List<Material> list;
         try {
             Query query = em.createNamedQuery("Material.consultarPorCategoria");
-            query.setParameter("dcategoria", categoria.getId());
+            query.setParameter("idcategoria", categoria.getId());
             list = query.getResultList();
 
         } catch (Exception ex) {

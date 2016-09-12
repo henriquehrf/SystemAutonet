@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioPessoa;
 import utilitarios.LerProperties;
+import vo.Categoria;
 import vo.Material;
 
 public class ConsultarMaterialController {
@@ -33,7 +34,7 @@ public class ConsultarMaterialController {
     private RadioButton rdbQuantidade;
 
     @FXML
-    private TableColumn<Material, Integer> tbcQuantidade;
+    private TableColumn<Material, Number> tbcQuantidade;
 
     @FXML
     private TableView<Material> tblPrincipal;
@@ -74,14 +75,28 @@ public class ConsultarMaterialController {
     @FXML
     private TableColumn<Material, String> tbcUnidadeMedida;
 
-    public void initialize() {       
-        
+    public void initialize() {
+
         List<Material> lista = NegociosEstaticos.getNegocioMaterial().buscarTodos();
+        List<Categoria> lista2 = NegociosEstaticos.getNegocioCategoria().bucarTodos();
+        ObservableList<String> dado2 = FXCollections.observableArrayList();
 
-      
+        for (int i = 0; i < lista2.size(); i++) {
+            dado2.add(lista2.get(i).getDescricao());
+        }
+
+        cmbCategoria.setItems(dado2);
+       
         rdbDescricao.setSelected(true);
-          completarTabela(lista);
+        completarTabela(lista);
 
+    }
+
+    @FXML
+    void cmbCategoria_OnAction(ActionEvent event) {
+         Categoria cat = new Categoria();
+         cat.setDescricao(cmbCategoria.getValue());
+         completarTabela(NegociosEstaticos.getNegocioMaterial().buscarPorCategoria( NegociosEstaticos.getNegocioCategoria().buscarPorDescricao(cat).get(0)));
     }
 
     void completarTabela(List<Material> lista) {
@@ -90,7 +105,7 @@ public class ConsultarMaterialController {
             dado.add(lista.get(i));
         }
         this.tbcDescricao.setCellValueFactory(new PropertyValueFactory<Material, String>("descricao"));
-        this.tbcQuantidade.setCellValueFactory(new PropertyValueFactory<Material, Integer>("quantidade"));
+        this.tbcQuantidade.setCellValueFactory(new PropertyValueFactory<Material, Number>("quantidade"));
         this.tbcUnidadeMedida.setCellValueFactory(new PropertyValueFactory<Material, String>("unidadeMedida"));
         this.tbcCategoria.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriaNome"));
         this.tblPrincipal.setItems(dado);

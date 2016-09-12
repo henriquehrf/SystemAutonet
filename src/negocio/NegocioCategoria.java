@@ -14,29 +14,49 @@ import vo.Categoria;
  * @author Eduardo
  */
 public class NegocioCategoria {
+
     private final CategoriaDAO categoriaDAO;
-    
-    public NegocioCategoria(){
+
+    public NegocioCategoria() {
         categoriaDAO = new CategoriaDAO();
     }
-    
-    public Categoria salvar(Categoria categoria) throws Exception{
-        return categoriaDAO.salvar(Categoria.class, categoria);
+
+    public Categoria salvar(Categoria categoria) throws Exception {
+        String erro = validar(categoria);
+
+        if (erro.equals("")) {
+            return categoriaDAO.salvar(Categoria.class, categoria);
+        } else {
+            throw new Exception(erro);
+        }
+
     }
-    
-    public void remover(Categoria categoria) throws Exception{
+
+    public void remover(Categoria categoria) throws Exception {
         categoriaDAO.remover(Categoria.class, categoria);
     }
-    
-    public Categoria consultarPorId(Categoria categoria){
+
+    public Categoria consultarPorId(Categoria categoria) {
         return categoriaDAO.consutarPorId(Categoria.class, categoria);
     }
-    
-    public List<Categoria> buscarPorDescricao(Categoria categoria){
+
+    public List<Categoria> buscarPorDescricao(Categoria categoria) {
         return categoriaDAO.buscarPorDescricao(categoria);
     }
-    
-    public List<Categoria> bucarTodos(){
+
+    public List<Categoria> bucarTodos() {
         return categoriaDAO.buscarTodos();
+    }
+    
+    public String validar(Categoria cat){
+        String erro = "";
+        
+        if(buscarPorDescricao(cat).size() > 0){
+            erro = "Esse nome ja existe";
+        }
+        
+        
+        return erro;       
+        
     }
 }

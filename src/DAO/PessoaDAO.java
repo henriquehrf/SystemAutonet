@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import enumm.Atividade;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -82,6 +83,7 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
         List<Pessoa> list;
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarTodos");
+            query.setParameter("ativo", Atividade.A);
             list = query.getResultList();
         } catch (Exception ex) {
             list = new ArrayList();
