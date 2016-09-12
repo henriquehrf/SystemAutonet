@@ -196,7 +196,30 @@ public class DevolverEmprestimoController {
 
     @FXML
     void btnBuscarEmprestimoOnAction(ActionEvent event) {
+        List<Pessoa> listpessoa = new ArrayList();
+        Pessoa p = new Pessoa();
+        p.setNome(txtBuscadorEmprestimo.getText());
 
+        listpessoa = NegociosEstaticos.getNegocioPessoa().buscarPorNome(p);
+        List<EmprestimoEstoqueMaterial> empm = new ArrayList();
+
+        for (Pessoa vo : listpessoa) {
+            List<Emprestimo> emp = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(vo);
+            for (Emprestimo voEmp : emp) {
+                empm = NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarPorNaoDevolvido(voEmp);
+                if (empm.size() > 0) {
+                    TblPessoaEmprestimo tb = new TblPessoaEmprestimo();
+                    tb.setEmprestimo(voEmp);
+                    tb.setPessoa(vo);
+                    ListaOf.add(tb);
+                    // listEmprestimoNaoDevolvido.add(voEmp);
+
+                }
+            }
+
+        }
+
+        completarTabelaTblPrincipalBuscarEmprestimo(ListaOf);
     }
 
     @FXML
@@ -286,7 +309,7 @@ public class DevolverEmprestimoController {
         for (TblPessoaEmprestimo vo : ListaOf) {
             if (vo.getEmprestimo() == tblPrincipalBuscarEmprestimo.getSelectionModel().getSelectedItem().getEmprestimo()) {
                 List<EmprestimoEstoqueMaterial> list = NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarPorNaoDevolvido(vo.getEmprestimo());
-               
+
                 for (EmprestimoEstoqueMaterial voe : list) {
                     TblEmprestimoEstoque EE = new TblEmprestimoEstoque();
                     EE.setEmp(vo.getEmprestimo());
@@ -297,19 +320,29 @@ public class DevolverEmprestimoController {
             }
         }
         completartblPrincipalItensEmprestimo(ListaPessoaMaterial);
+        tabBuscarEmprestimo.setDisable(true);
+        tabItensEmprestimo.setDisable(false);       
+        tabInformarEstoque.setDisable(true);
+        tabBuscarMaterial.setDisable(true);
+        tabObservacao.setDisable(true);
+         PanePrincipal.getSelectionModel().select(tabItensEmprestimo);
 
     }
 
     public void initialize() {
+        PanePrincipal.getSelectionModel().select(tabBuscarEmprestimo);
+        tabBuscarEmprestimo.setDisable(false);
+        tabItensEmprestimo.setDisable(true);
+        tabInformarEstoque.setDisable(true);
+        tabBuscarMaterial.setDisable(true);
+        tabObservacao.setDisable(true);
 
 //        List<Emprestimo> listEmprestimoNaoDevolvido = new ArrayList();
         List<EmprestimoEstoqueMaterial> empm = new ArrayList();
 
         List<Pessoa> listpessoa = NegociosEstaticos.getNegocioPessoa().buscarTodos();
         for (Pessoa vo : listpessoa) {
-
             List<Emprestimo> emp = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(vo);
-
             for (Emprestimo voEmp : emp) {
                 empm = NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarPorNaoDevolvido(voEmp);
                 if (empm.size() > 0) {
