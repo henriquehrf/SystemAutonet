@@ -27,7 +27,7 @@ import javafx.scene.control.ToggleGroup;
  *
  * @author Henrique
  */
-public class DevolverEmprestimoController implements Initializable {
+public class DevolverEmprestimoController  {
 
      @FXML
     private Button btnBaixarItensEmprestimo;
@@ -180,11 +180,6 @@ public class DevolverEmprestimoController implements Initializable {
     private TableView<?> tblPrincipalInformarEstoque;
 
     @FXML
-    void txtBuscadorEmprestimoOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void btnBuscarEmprestimoOnAction(ActionEvent event) {
 
     }
@@ -268,8 +263,7 @@ public class DevolverEmprestimoController implements Initializable {
     void btnVoltarObservacaoOnAction(ActionEvent event) {
 
     }
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize() {
         // TODO
     }    
     
