@@ -7,6 +7,8 @@ package negocio;
 
 import DAO.TipoUnidadeDAO;
 import java.util.List;
+import java.util.Properties;
+import utilitarios.LerProperties;
 import vo.TipoUnidade;
 
 /**
@@ -27,7 +29,14 @@ public class NegocioTipoUnidade {
     }
 
     public void remover(TipoUnidade tu) throws Exception {
-        tuDAO.remover(TipoUnidade.class, tu);
+
+        try {
+            tuDAO.remover(TipoUnidade.class, tu);
+
+        } catch (Exception ex) {
+            Properties prop = LerProperties.getProp();
+            throw new Exception(prop.getProperty("msg.remover"));
+        }
     }
 
     public TipoUnidade consultarPorId(TipoUnidade tu) {
@@ -41,8 +50,8 @@ public class NegocioTipoUnidade {
     public List<TipoUnidade> buscarTodos() {
         return tuDAO.buscarTodos();
     }
-    
-    public List<TipoUnidade> buscarPorSigla(TipoUnidade tu){
+
+    public List<TipoUnidade> buscarPorSigla(TipoUnidade tu) {
         return tuDAO.buscarPorSigla(tu);
     }
 

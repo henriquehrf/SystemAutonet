@@ -8,6 +8,8 @@ import gui.SystemAutonet;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioPessoa;
+import utilitarios.Alertas;
 import utilitarios.LerProperties;
 import vo.Pessoa;
 
@@ -76,8 +79,7 @@ public class ConsultarPessoaController {
     @FXML
     private RadioButton rdbCPF;
 
-  //  NegocioPessoa pessoa;
-
+    //  NegocioPessoa pessoa;
     void completarTabela(List<Pessoa> lista) {
         ObservableList<Pessoa> dado = FXCollections.observableArrayList();
         for (int i = 0; i < lista.size(); i++) {
@@ -91,7 +93,7 @@ public class ConsultarPessoaController {
     }
 
     public void initialize() {
-       // pessoa = new NegocioPessoa();
+        // pessoa = new NegocioPessoa();
         List<Pessoa> lista = NegociosEstaticos.getNegocioPessoa().buscarTodos();
 
         completarTabela(lista);
@@ -102,7 +104,7 @@ public class ConsultarPessoaController {
     @FXML
     void btnVoltarOnAction(ActionEvent event) {
         try {
-         //   pessoa = null;
+            //   pessoa = null;
             Parent root;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -117,7 +119,7 @@ public class ConsultarPessoaController {
         try {
             CadastroPessoaController.setCadastrar(true);
             Parent root;
-           // pessoa = null;
+            // pessoa = null;
             root = FXMLLoader.load(CadastroPessoaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -134,7 +136,7 @@ public class ConsultarPessoaController {
         CadastroPessoaController.setAlterar(p);
         try {
             Parent root;
-          //  pessoa = null;
+            //  pessoa = null;
             root = FXMLLoader.load(CadastroPessoaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -145,7 +147,22 @@ public class ConsultarPessoaController {
 
     @FXML
     void btnExcluirOnAction(ActionEvent event) {
+        try {
+            NegociosEstaticos.getNegocioPessoa().remover(tblPrincipal.getSelectionModel().getSelectedItem());
 
+        } catch (Exception ex) {
+
+            try {
+                NegociosEstaticos.getNegocioPessoa().Inativar(tblPrincipal.getSelectionModel().getSelectedItem());
+                completarTabela(NegociosEstaticos.getNegocioPessoa().buscarTodos());
+            } catch (Exception ex1) {
+                Alertas alert = new Alertas();
+                alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex1.getMessage());
+                System.out.println(ex.getMessage());
+                System.out.println(ex1.getMessage());
+            }
+
+        }
     }
 
     @FXML

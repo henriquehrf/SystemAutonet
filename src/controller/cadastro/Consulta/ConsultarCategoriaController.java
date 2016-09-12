@@ -11,18 +11,22 @@ import controller.cadastro.Cadastro.CadastroCategoriaController;
 import gui.SystemAutonet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import utilitarios.Alertas;
 import vo.Categoria;
 
 /**
@@ -102,7 +106,13 @@ public class ConsultarCategoriaController {
 
     @FXML
     void btnExcluir_OnAction(ActionEvent event) {
-
+        try {
+            NegociosEstaticos.getNegocioCategoria().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+            completarTabela(NegociosEstaticos.getNegocioCategoria().bucarTodos());
+        } catch (Exception ex) {
+            Alertas alert = new Alertas();
+            alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex.getMessage());
+        }
     }
 
     @FXML

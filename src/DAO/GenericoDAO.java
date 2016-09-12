@@ -50,7 +50,7 @@ public class GenericoDAO<T extends EntidadeBase> {
         try {
             em.getTransaction().begin();
             em.remove(t);  // executa o delete
-            em.getTransaction().commit();
+            em.getTransaction().commit();        
         } finally {
             em.close();
         }

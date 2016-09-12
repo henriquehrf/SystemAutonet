@@ -6,10 +6,14 @@
 package negocio;
 
 import DAO.PessoaDAO;
+import classesAuxiliares.NegociosEstaticos;
 import classesAuxiliares.Validar;
+import enumm.Atividade;
 import java.util.List;
 import java.util.Properties;
 import utilitarios.LerProperties;
+import vo.Emprestimo;
+import vo.EmprestimoEstoqueMaterial;
 import vo.Pessoa;
 
 /**
@@ -34,13 +38,26 @@ public class NegocioPessoa {
         }
     }
 
-    public void remover(Pessoa pessoa) {
-        try {
+    public void remover(Pessoa pessoa) throws Exception {
+        pessoaDAO.remover(Pessoa.class, pessoa);
 
-            pessoaDAO.remover(Pessoa.class, pessoa);
-        } catch (Exception ex) {
+    }
 
+    public void Inativar(Pessoa pessoa) throws Exception {
+        List<Emprestimo> listaEmprestimo = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(pessoa);
+       
+        Properties prop = LerProperties.getProp();
+        for (Emprestimo vo : listaEmprestimo) {
+            List<EmprestimoEstoqueMaterial> listaEmprestimoEstoqueMaterial = NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarPorNaoDevolvido(vo);
+
+            if (listaEmprestimoEstoqueMaterial.size() > 0) {
+                throw new Exception(prop.getProperty("msg.cadastro.remover.pendenteEmprestimo"));                
+            }
         }
+    
+        pessoa.setAtivo(Atividade.I);
+        salvar(pessoa);
+
     }
 
     public Pessoa consultarPorId(Pessoa pessoa) {

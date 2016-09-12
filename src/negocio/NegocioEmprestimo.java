@@ -7,6 +7,8 @@ package negocio;
 
 import DAO.EmprestimoDAO;
 import java.util.List;
+import java.util.Properties;
+import utilitarios.LerProperties;
 import vo.Emprestimo;
 import vo.Pessoa;
 
@@ -15,42 +17,49 @@ import vo.Pessoa;
  * @author Eduardo
  */
 public class NegocioEmprestimo {
+
     private EmprestimoDAO empDAO;
-    
-    public NegocioEmprestimo(){
+
+    public NegocioEmprestimo() {
         empDAO = new EmprestimoDAO();
     }
-    
-    public Emprestimo salvar(Emprestimo emp) throws Exception{
+
+    public Emprestimo salvar(Emprestimo emp) throws Exception {
         String erro = validar(emp);
-        
-        if(erro.equals("")){
+
+        if (erro.equals("")) {
             return empDAO.salvar(Emprestimo.class, emp);
-        }else{
+        } else {
             throw new Exception(erro);
         }
-        
+
     }
-    
-    public void remover(Emprestimo emp) throws Exception{
-        empDAO.remover(Emprestimo.class, emp);
+
+    public void remover(Emprestimo emp) throws Exception {
+        try {
+            empDAO.remover(Emprestimo.class, emp);
+
+        } catch (Exception ex) {
+            Properties prop = LerProperties.getProp();
+            throw new Exception(prop.getProperty("msg.remover"));
+        }
     }
-    
-    public Emprestimo consultarPorId(Emprestimo emp){
+
+    public Emprestimo consultarPorId(Emprestimo emp) {
         return empDAO.consutarPorId(Emprestimo.class, emp);
     }
-    
-    public List<Emprestimo> buscarPorIdPessoa(Pessoa pessoa){
+
+    public List<Emprestimo> buscarPorIdPessoa(Pessoa pessoa) {
         return empDAO.buscarPorIdPessoa(pessoa);
     }
-    
 
-    
-    private String validar(Emprestimo emp){
+    private String validar(Emprestimo emp) {
         String erro = "";
-        
-        if(emp.getId_pessoa_solicita() == null) erro += "A pessoa que solicita não pode ser nulo";       
-        
+
+        if (emp.getId_pessoa_solicita() == null) {
+            erro += "A pessoa que solicita não pode ser nulo";
+        }
+
         return erro;
     }
 }

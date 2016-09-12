@@ -7,6 +7,8 @@ package negocio;
 
 import DAO.FornecedorDAO;
 import java.util.List;
+import java.util.Properties;
+import utilitarios.LerProperties;
 import vo.Fornecedor;
 
 /**
@@ -24,16 +26,23 @@ public class NegocioFornecedor {
     public Fornecedor salvar(Fornecedor fornecedor) throws Exception {
         //Faltando as validações
         String erro = validar(fornecedor);
-        if(erro.equals("")){
+        if (erro.equals("")) {
             return fornecedorDAO.salvar(Fornecedor.class, fornecedor);
-        }else{
-            throw new  Exception(erro);
+        } else {
+            throw new Exception(erro);
         }
- 
+
     }
 
     public void remover(Fornecedor fornecedor) throws Exception {
-        fornecedorDAO.remover(Fornecedor.class, fornecedor);
+        try {
+
+            fornecedorDAO.remover(Fornecedor.class, fornecedor);
+
+        } catch (Exception ex) {
+            Properties prop = LerProperties.getProp();
+            throw new Exception(prop.getProperty("msg.remover"));
+        }
     }
 
     public Fornecedor consultarPorId(Fornecedor fornecedor) {
@@ -55,20 +64,19 @@ public class NegocioFornecedor {
     public List<Fornecedor> buscarPorPessoaResponsavel(Fornecedor fornecedor) {
         return fornecedorDAO.buscarPorPessoaResponsavel(fornecedor);
     }
-    
-     public List<Fornecedor> buscarTodos() {
+
+    public List<Fornecedor> buscarTodos() {
         return fornecedorDAO.buscarTodos();
     }
-    
-    
-    public String validar(Fornecedor fornecedor){
-        String erro ="";
-        
-        if(fornecedor.getId() == null || fornecedor.getId() == 0){
-            if (!buscarPorCnpj(fornecedor).isEmpty()){
+
+    public String validar(Fornecedor fornecedor) {
+        String erro = "";
+
+        if (fornecedor.getId() == null || fornecedor.getId() == 0) {
+            if (!buscarPorCnpj(fornecedor).isEmpty()) {
                 erro += "Erro: CNPJ já cadastrado";
             }
-        }         
+        }
         return erro;
     }
 

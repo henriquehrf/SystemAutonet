@@ -7,6 +7,10 @@ package negocio;
 
 import DAO.CategoriaDAO;
 import java.util.List;
+import java.util.Properties;
+import javax.persistence.PersistenceException;
+import javax.persistence.TransactionRequiredException;
+import utilitarios.LerProperties;
 import vo.Categoria;
 
 /**
@@ -30,16 +34,23 @@ public class NegocioCategoria {
             throw new Exception(erro);
         }
 
-    }
+    } 
 
     public void remover(Categoria categoria) throws Exception {
-        categoriaDAO.remover(Categoria.class, categoria);
+        try {
+           categoriaDAO.remover(Categoria.class, categoria);
+            
+        }catch(Exception ex){
+             Properties prop = LerProperties.getProp();
+            throw new Exception(prop.getProperty("msg.remover"));
+        }
     }
 
     public Categoria consultarPorId(Categoria categoria) {
         return categoriaDAO.consutarPorId(Categoria.class, categoria);
     }
-
+    
+    
     public List<Categoria> buscarPorDescricao(Categoria categoria) {
         return categoriaDAO.buscarPorDescricao(categoria);
     }

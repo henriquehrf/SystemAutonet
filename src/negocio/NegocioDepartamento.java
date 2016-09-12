@@ -7,6 +7,8 @@ package negocio;
 
 import DAO.DepartamentoDAO;
 import java.util.List;
+import java.util.Properties;
+import utilitarios.LerProperties;
 import vo.Departamento;
 
 /**
@@ -32,7 +34,14 @@ public class NegocioDepartamento {
     }
 
     public void remover(Departamento dp) throws Exception {
-        departamentoDAO.remover(Departamento.class, dp);
+        
+        try {
+            departamentoDAO.remover(Departamento.class, dp);
+
+        } catch (Exception ex) {
+            Properties prop = LerProperties.getProp();
+            throw new Exception(prop.getProperty("msg.remover"));
+        }
     }
 
     public Departamento consultarPorId(Departamento dp) {
