@@ -30,7 +30,8 @@ import javax.persistence.Temporal;
 @NamedQueries({
         @NamedQuery(name = "Emprestimo.BuscarTodos",query = "Select e from Emprestimo e "),
         @NamedQuery(name = "Emprestimo.BuscarPorIdPessoa",
-                query ="Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoaSolicita")
+                query ="Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoaSolicita"),
+        @NamedQuery(name = "Emprestimo.consultarPorCodigoPessoa",query = "Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoa")
 
 })
 public class Emprestimo implements Serializable, EntidadeBase {
