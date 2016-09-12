@@ -34,8 +34,13 @@ public class NegocioPessoa {
         }
     }
 
-    public void remover(Pessoa pessoa) throws Exception {
-        pessoaDAO.remover(Pessoa.class, pessoa);
+    public void remover(Pessoa pessoa) {
+        try {
+
+            pessoaDAO.remover(Pessoa.class, pessoa);
+        } catch (Exception ex) {
+
+        }
     }
 
     public Pessoa consultarPorId(Pessoa pessoa) {

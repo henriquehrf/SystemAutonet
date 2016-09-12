@@ -118,6 +118,10 @@ public class CadastroMaterialController {
         cmbUnidadeMedida.setItems(dado);
         cmbCategoria.setItems(dado2);
         
+        cmbUnidadeMedida.getSelectionModel().select(0);
+        cmbPoliticaUso.getSelectionModel().select(0);
+        cmbCategoria.getSelectionModel().select(0);
+        
         if (!isCadastrar()) {
             completar();
         } else {
