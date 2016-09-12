@@ -10,6 +10,8 @@ import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import enumm.StatusEmprestimo;
 import gui.SystemAutonet;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -129,13 +131,16 @@ public class SolicitaEmprestimoController {
 
         Date data = new Date();
         Emprestimo emp = new Emprestimo();
-        emp.setDt_emprestimo(data);
+
+        Instant instant = dtpDataEmprestimo.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+        emp.setDt_emprestimo(Date.from(instant));
+
         emp.setFinalidade(txtFinalidade.getText());
         emp.setObservacao(txtObservacao.getText());
         emp.setStatus_emprestimo(StatusEmprestimo.ESPERANDO_ANALISE);
 
         emp.setId_pessoa_solicita(ClasseDoSistemaEstatico.getPessoa());
-        System.out.println("Solicitado" + ClasseDoSistemaEstatico.getPessoa().getNome());
+        System.out.println("Solicitado " + ClasseDoSistemaEstatico.getPessoa().getNome());
         try {
             emp = NegociosEstaticos.getNegocioEmprestimo().salvar(emp);
         } catch (Exception ex) {
@@ -148,19 +153,27 @@ public class SolicitaEmprestimoController {
             // eem.setDt_devolucao(data);// obs rever este ponto
             eem.setId_emprestimo(emp);
             //   eem.setObservacao("dsada");
-            eem.setQtd_emprestada(2);
+            eem.setQtd_emprestada(altertab.get(i).getQuantidadeSolicitada());
             eem.setQtd_devolvida(0);
             eem.setId_material(altertab.get(i));
-            eem.setId_emprestimo(emp);
-
-            EstoqueMaterial est = new EstoqueMaterial();
 
             try {
                 NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().salvar(eem);
+                eem = null;
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
 
+        }
+
+        emp = null;
+
+        try {
+            Parent root;
+            root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
 
 //        NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().salvar(eem);
@@ -207,9 +220,9 @@ public class SolicitaEmprestimoController {
                         //altertab.get(i).setQuantidadeSolicitada(mat.getQuantidadeSolicitada() + altertab.get(i).getQuantidadeSolicitada());
                         mat.setQuantidadeSolicitada(mat.getQuantidadeSolicitada() + altertab.get(i).getQuantidadeSolicitada());
                         altertab.set(i, mat);
-                      
+
                     }
-                      return;
+                    return;
                 }
             }
         }
@@ -218,7 +231,7 @@ public class SolicitaEmprestimoController {
 
     boolean set_quantidade() {
         Material mat = new Material();
-        mat=tblBuscaMateriais.getSelectionModel().getSelectedItem();
+        mat = tblBuscaMateriais.getSelectionModel().getSelectedItem();
 //
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Informe a quantidade");

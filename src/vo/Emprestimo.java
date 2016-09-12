@@ -52,7 +52,7 @@ public class Emprestimo implements Serializable, EntidadeBase {
     private String observacao;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    private Pessoa id_pessoa_solicita = null;
+    private Pessoa id_pessoa_solicita;
     
     @ManyToOne(fetch = FetchType.LAZY)  
     private Pessoa id_pessoa_autoriza = null;
