@@ -198,7 +198,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="label-subtitle">
                                  <children>
-                                    <Label text="Separar os Materiáis" />
+                                    <Label text="Separar os Materiais" />
                                  </children>
                               </HBox>
                               <HBox alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="798.0">
