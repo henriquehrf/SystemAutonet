@@ -35,8 +35,9 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Pessoa.BuscarPorCPF", query = "Select p from Pessoa p where p.cpf like :cpf"),
     @NamedQuery(name = "Pessoa.BuscarPorRg", query = "Select p from Pessoa p where p.rg like :rg"),
     @NamedQuery(name = "Pessoa.BuscarPorMatricula", query = "Select p from Pessoa p where p.num_matricula like :matricula"),
-    @NamedQuery(name = "Pessoa.BuscarTodos", query = "Select p from Pessoa p WHERE(p.ativo = :ativo) ORDER BY (p.nome) ")    
-
+    @NamedQuery(name = "Pessoa.BuscarTodos", query = "Select p from Pessoa p WHERE(p.ativo = :ativo) ORDER BY (p.nome) "),
+//    @NamedQuery(name = "Pessoa.BuscarPendencia",query = 
+    
 })
 
 public class Pessoa implements EntidadeBase, Serializable {

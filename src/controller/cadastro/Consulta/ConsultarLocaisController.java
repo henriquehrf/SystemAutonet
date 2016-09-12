@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioDepartamento;
 import negocio.NegocioLocal;
+import utilitarios.Alertas;
 import utilitarios.LerProperties;
 import vo.Departamento;
 import vo.Local;
@@ -131,7 +132,18 @@ public class ConsultarLocaisController {
 
     @FXML
     void btnExcluir_OnAction(ActionEvent event) {
-
+         try {
+            Alertas alert = new Alertas();
+            Properties prop;
+            prop = LerProperties.getProp();
+            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"), "Sim", "Não")) {
+                NegociosEstaticos.getNegocioLocal().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+                completarTabela(NegociosEstaticos.getNegocioLocal().buscarTodos());
+            }
+        } catch (Exception ex) {
+            Alertas alert = new Alertas();
+            alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex.getMessage());
+        }
     }
 
     @FXML

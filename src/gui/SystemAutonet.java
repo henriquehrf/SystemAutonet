@@ -9,6 +9,7 @@ import classesAuxiliares.ClasseDoSistemaEstatico;
 import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import controller.cadastro.Consulta.ConsultarDepartamentoController;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Application;
@@ -31,6 +32,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import vo.Emprestimo;
+import vo.EmprestimoEstoqueMaterial;
 import vo.Pessoa;
 
 /**
@@ -103,7 +106,7 @@ public class SystemAutonet extends Application {
         Parent pane = null;
 
         try {
-
+            
             pane = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
 
         } catch (Exception ex) {

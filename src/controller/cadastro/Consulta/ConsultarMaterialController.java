@@ -24,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioPessoa;
+import utilitarios.Alertas;
 import utilitarios.LerProperties;
 import vo.Categoria;
 import vo.Material;
@@ -162,7 +163,18 @@ public class ConsultarMaterialController {
 
     @FXML
     void btnExcluir_OnAction(ActionEvent event) {
-
+         try {
+            Alertas alert = new Alertas();
+            Properties prop;
+            prop = LerProperties.getProp();
+            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"), "Sim", "Não")) {
+                NegociosEstaticos.getNegocioMaterial().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+                completarTabela(NegociosEstaticos.getNegocioMaterial().buscarTodos());
+            }
+        } catch (Exception ex) {
+            Alertas alert = new Alertas();
+            alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex.getMessage());
+        }
     }
 
     @FXML

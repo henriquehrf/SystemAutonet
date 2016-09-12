@@ -37,6 +37,7 @@ import javax.persistence.Transient;
 
     @NamedQuery(name = "Material.consultarTodos",
             query = "Select m from Material m ORDER BY (m.descricao)")
+    
 
 })
 public class Material implements Serializable, EntidadeBase {

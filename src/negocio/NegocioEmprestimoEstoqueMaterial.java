@@ -6,6 +6,8 @@
 package negocio;
 
 import DAO.EmprestimoEstoqueMaterialDAO;
+import java.util.List;
+import vo.Emprestimo;
 import vo.EmprestimoEstoqueMaterial;
 
 /**
@@ -37,6 +39,9 @@ public class NegocioEmprestimoEstoqueMaterial {
         return eemDAO.consutarPorId(EmprestimoEstoqueMaterial.class, eem);
     }
     
+    public List<EmprestimoEstoqueMaterial> consultarPorNaoDevolvido(Emprestimo emp){
+        return eemDAO.consultarPorNaoDevolvido(emp);
+    }
     public String validar(EmprestimoEstoqueMaterial eem){
         String erro = "";
         if(eem.getId_emprestimo() == null)erro+= "Erro: falto referencia o emprestimo";

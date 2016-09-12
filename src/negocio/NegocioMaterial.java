@@ -10,8 +10,10 @@ import DAO.MaterialDAO;
 import DAO.TipoUnidadeDAO;
 import classesAuxiliares.NegociosEstaticos;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utilitarios.LerProperties;
 import vo.Categoria;
 import vo.Material;
 
@@ -42,7 +44,13 @@ public class NegocioMaterial {
     }
 
     public void remover(Material material) throws Exception {
-        materialDAO.remover(Material.class, material);
+        try {
+            materialDAO.remover(Material.class, material);
+
+        } catch (Exception ex) {
+            Properties prop = LerProperties.getProp();
+            throw new Exception(prop.getProperty("msg.remover"));
+        }
     }
 
     public Material consultarPorId(Material material) throws Exception {

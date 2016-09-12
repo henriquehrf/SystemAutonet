@@ -7,6 +7,8 @@ package negocio;
 
 import DAO.LocalDAO;
 import java.util.List;
+import java.util.Properties;
+import utilitarios.LerProperties;
 import vo.Local;
 
 /**
@@ -32,7 +34,13 @@ public class NegocioLocal {
     }
 
     public void remover(Local local) throws Exception {
-        localDAO.remover(Local.class, local);
+        try {
+            localDAO.remover(Local.class, local);
+
+        } catch (Exception ex) {
+            Properties prop = LerProperties.getProp();
+            throw new Exception(prop.getProperty("msg.remover"));
+        }
     }
 
     public Local consultarPorId(Local local) {
@@ -68,10 +76,9 @@ public class NegocioLocal {
 //    public List<Local> buscarPorBloco(Local local) {
 //        return localDAO.buscarPorBloco(local);
 //    }
-    
+
     public List<Local> buscarPorDepartamento(Local local) {
         return localDAO.buscarPorDepartamento(local);
     }
-    
 
 }
