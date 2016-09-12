@@ -15,9 +15,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -26,52 +31,119 @@ import javafx.scene.control.TableView;
  */
 public class AcompanharEmprestimoController implements Initializable {
 
-    @FXML
-    private Button btnAnalisar;
+     @FXML
+    private Button btnImprimir;
 
     @FXML
-    private Tab tabBuscarMaterial;
+    private Button btnVoltarDescricao;
+
+    @FXML
+    private DatePicker dtpFinal;
+
+    @FXML
+    private ComboBox<?> cbmStatus;
+
+    @FXML
+    private TableColumn<?, ?> tbcQuantidade;
+
+    @FXML
+    private TableView<?> tblPrincipal;
+
+    @FXML
+    private TableColumn<?, ?> tbcCategoria;
+
+    @FXML
+    private Button btnConsultar;
+
+    @FXML
+    private TabPane tabPrincipal;
+
+    @FXML
+    private TextField txtBuscador;
+
+    @FXML
+    private Label lblData;
+
+    @FXML
+    private Label lblFinalidade;
+
+    @FXML
+    private Tab tabListaEmprestimo;
+
+    @FXML
+    private TableView<?> tblDescricao;
 
     @FXML
     private Button btnVoltar;
 
     @FXML
-    private TableView<?> tblPrincipalBuscarMaterial;
+    private TableColumn<?, ?> tbcStatus;
 
     @FXML
-    private TableColumn<?, ?> tbcDescricaoBusca;
+    private TableColumn<?, ?> tbcDtEmprestimo;
 
     @FXML
-    private TableColumn<?, ?> tbcQuantidadeBusca;
+    private TableColumn<?, ?> tbcPessoa;
 
     @FXML
-    void btnAnalisarOnAction(ActionEvent event) {
+    private Tab tabDescricaoEmprestimo;
+
+    @FXML
+    private DatePicker dtpInicial;
+
+    @FXML
+    private Button btnBuscar;
+
+    @FXML
+    private Label lblObservacao;
+
+    @FXML
+    private TableColumn<?, ?> tbcMaterial;
+
+    @FXML
+    void btnConsultarOnAction(ActionEvent event) {
 
     }
 
     @FXML
-    void btnCancelarOnAction(ActionEvent event) {
+    void btnVoltarOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnBuscarOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void dtpInicialOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void dtpFinalOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void cbmStatusOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnImprimirOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnVoltarDescricaoOnAction(ActionEvent event) {
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog with Custom Actions");
-        alert.setHeaderText("Look, a Confirmation Dialog with Custom Actions");
-        alert.setContentText("Choose your option.");
-
-        ButtonType buttonTypeOne = new ButtonType("One");
-        ButtonType buttonTypeTwo = new ButtonType("Two");
-
-        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeOne) {
-            // ... user chose "One"
-        } else if (result.get() == buttonTypeTwo) {
-        }
+        
         
             // TODO
         }
