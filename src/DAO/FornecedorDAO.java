@@ -75,7 +75,7 @@ public class FornecedorDAO extends GenericoDAO<Fornecedor> {
         EntityManager em = getEM();
         List<Fornecedor> list;
         try {
-            Query query = em.createNamedQuery("Fornecedor.consultarPorNomeFantasia");
+            Query query = em.createNamedQuery("Fornecedor.consultarPorPessoaResponsavel");
             query.setParameter("nomePessoaResponsavel", "%" + fornecedor.getPessoa_responsavel().toUpperCase() + "%");
             list = query.getResultList();
 
