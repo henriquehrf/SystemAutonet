@@ -5,11 +5,11 @@
  */
 package controller.emprestimo.devolver;
 
-import classesAuxiliares.ClasseDoSistemaEstatico;
 import classesAuxiliares.NegociosEstaticos;
 import classesAuxiliares.TblEmprestimoEstoque;
 import classesAuxiliares.TblPessoaEmprestimo;
-import java.net.URL;
+import controller.PrincipalController;
+import gui.SystemAutonet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,7 +17,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -218,7 +219,6 @@ public class DevolverEmprestimoController {
             }
 
         }
-
         completarTabelaTblPrincipalBuscarEmprestimo(ListaOf);
     }
 
@@ -244,7 +244,12 @@ public class DevolverEmprestimoController {
 
     @FXML
     void btnVoltarItensEmprestimoOnAction(ActionEvent event) {
-
+        PanePrincipal.getSelectionModel().select(tabBuscarEmprestimo);
+        tabBuscarEmprestimo.setDisable(false);
+        tabItensEmprestimo.setDisable(true);
+        tabInformarEstoque.setDisable(true);
+        tabBuscarMaterial.setDisable(true);
+        tabObservacao.setDisable(true);
     }
 
     @FXML
@@ -254,6 +259,18 @@ public class DevolverEmprestimoController {
 
     @FXML
     void btnImprimirInformarEstoqueOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnVoltarBuscarEmprestimo_onAction(ActionEvent event) {
+        try {
+            Parent root;
+            root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
 
     }
 
@@ -321,11 +338,11 @@ public class DevolverEmprestimoController {
         }
         completartblPrincipalItensEmprestimo(ListaPessoaMaterial);
         tabBuscarEmprestimo.setDisable(true);
-        tabItensEmprestimo.setDisable(false);       
+        tabItensEmprestimo.setDisable(false);
         tabInformarEstoque.setDisable(true);
         tabBuscarMaterial.setDisable(true);
         tabObservacao.setDisable(true);
-         PanePrincipal.getSelectionModel().select(tabItensEmprestimo);
+        PanePrincipal.getSelectionModel().select(tabItensEmprestimo);
 
     }
 

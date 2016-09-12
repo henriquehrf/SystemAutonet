@@ -90,23 +90,23 @@ public class SystemAutonet extends Application {
             System.exit(0);
             return null;
         });
-        
+
         Optional<Pair<String, String>> result = dialog.showAndWait();
         boolean cond = true;
-            // Ajustar nesta parte do login
-            if (result.isPresent()) {
-                Pessoa user = new Pessoa();
-                Pessoa otherUser= new Pessoa();
-                user.setUsuario(result.get().getKey());
-                user.setSenha(result.get().getValue());
-                user.setId_pessoa(1L);
-                otherUser=NegociosEstaticos.getNegocioPessoa().consultarPorId(user);
-                ClasseDoSistemaEstatico.setPessoa(otherUser);
-            }
+        // Ajustar nesta parte do login
+        if (result.isPresent()) {
+            Pessoa user = new Pessoa();
+            Pessoa otherUser = new Pessoa();
+            user.setUsuario(result.get().getKey());
+            user.setSenha(result.get().getValue());
+            user.setId_pessoa(1L);
+            otherUser = NegociosEstaticos.getNegocioPessoa().consultarPorId(user);
+            ClasseDoSistemaEstatico.setPessoa(otherUser);
+        }
         Parent pane = null;
 
         try {
-            
+
             pane = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
 
         } catch (Exception ex) {
