@@ -17,13 +17,13 @@
       </HBox>
    </top>
    <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane fx:id="PanePrincipal" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab text="%tab.emprestimo.buscarPorEmprestimo">
+          <Tab fx:id="tabBuscarEmprestimo" text="%tab.emprestimo.buscarPorEmprestimo">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <top>
-                        <GridPane BorderPane.alignment="CENTER">
+                        <GridPane prefHeight="78.0" prefWidth="798.0" BorderPane.alignment="CENTER">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="159.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="641.0" minWidth="10.0" prefWidth="641.0" />
@@ -33,48 +33,48 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Label text="%lbl.pesquisar">
                                        <HBox.margin>
-                                          <Insets top="2.0" />
+                                          <Insets top="5.0" />
                                        </HBox.margin></Label>
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="158.0" GridPane.rowIndex="1" />
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
-                                    <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="397.0">
+                                    <TextField fx:id="txtBuscadorEmprestimo" maxHeight="25.0" onAction="#txtBuscadorEmprestimoOnAction" prefHeight="25.0" prefWidth="397.0">
                                        <HBox.margin>
-                                          <Insets top="2.0" />
+                                          <Insets top="5.0" />
                                        </HBox.margin></TextField>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="button-search">
+                                    <Button fx:id="btnBuscarEmprestimo" mnemonicParsing="false" onAction="#btnBuscarEmprestimoOnAction" prefHeight="25.0" prefWidth="25.0" styleClass="button-search">
                                        <HBox.margin>
-                                          <Insets top="2.0" />
+                                          <Insets top="5.0" />
                                        </HBox.margin>
                                     </Button>
                                  </children>
                               </HBox>
-                              <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="640.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
                                     <Label text="%lbl.dtInicial">
                                        <HBox.margin>
-                                          <Insets bottom="20.0" right="10.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </Label>
-                                    <DatePicker prefHeight="25.0" prefWidth="120.0">
+                                    <DatePicker fx:id="dtpDtInicial" onAction="#dtpDtInicialOnAction" prefHeight="25.0" prefWidth="120.0">
                                        <HBox.margin>
-                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                          <Insets top="5.0" />
                                        </HBox.margin>
                                     </DatePicker>
                                     <Label text="%lbl.dtFinal">
                                        <HBox.margin>
-                                          <Insets bottom="20.0" right="10.0" />
+                                          <Insets left="10.0" top="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <DatePicker prefHeight="25.0" prefWidth="120.0">
+                                    <DatePicker fx:id="dtpDtFinal" onAction="#dtpDtFinalOnAction" prefHeight="25.0" prefWidth="120.0">
                                        <HBox.margin>
-                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                          <Insets top="5.0" />
                                        </HBox.margin>
                                     </DatePicker>
                                  </children>
@@ -83,11 +83,11 @@
                         </GridPane>
                      </top>
                      <center>
-                        <TableView prefHeight="387.0" prefWidth="778.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tblPrincipalBuscarEmprestimo" prefHeight="343.0" prefWidth="778.0" BorderPane.alignment="CENTER">
                           <columns>
-                            <TableColumn prefWidth="284.0" text="%tblColumn.pessoa" />
-                            <TableColumn prefWidth="127.0" text="%tblColumn.dtEmprestimo" />
-                              <TableColumn prefWidth="385.0" text="%tblColumn.finalidade" />
+                            <TableColumn fx:id="tbcPessoaBuscarEmprestimo" prefWidth="284.0" text="%tblColumn.pessoa" />
+                            <TableColumn fx:id="tbcDtEmprestimoBuscarEmprestimo" prefWidth="127.0" text="%tblColumn.dtEmprestimo" />
+                              <TableColumn fx:id="tbcFinalidadeBuscarPorEmprestimo" prefWidth="385.0" text="%tblColumn.finalidade" />
                           </columns>
                            <BorderPane.margin>
                               <Insets left="10.0" right="10.0" />
@@ -105,11 +105,11 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" styleClass="button-consultar" text="%btn.consultar">
+                                    <Button fx:id="btnConsultarBuscarEmprestimo" mnemonicParsing="false" styleClass="button-consultar" text="%btn.consultar">
                                        <HBox.margin>
                                           <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
                                        </HBox.margin></Button>
-                                    <Button mnemonicParsing="false" styleClass="button-voltar" text="%btn.voltar">
+                                    <Button fx:id="btnVoltarBuscarEmprestimo" mnemonicParsing="false" styleClass="button-voltar" text="%btn.voltar">
                                        <HBox.margin>
                                           <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>
@@ -122,15 +122,15 @@
                   </BorderPane>
                </content>
           </Tab>
-            <Tab text="%tab.emprestimo.detalheDoEmprestimo">
+            <Tab fx:id="tabItensEmprestimo" text="%tab.emprestimo.detalheDoEmprestimo">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tblPrincipalItensEmprestimo" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <columns>
-                              <TableColumn prefWidth="355.0" text="%tblColumn.material" />
-                              <TableColumn prefWidth="141.0" text="%tblColumn.quantidade" />
-                              <TableColumn prefWidth="280.0" text="%tblColumn.Categoria" />
+                              <TableColumn fx:id="tbcMaterialItensEmprestimo" prefWidth="355.0" text="%tblColumn.material" />
+                              <TableColumn fx:id="tbcQtdItensEmprestimo" prefWidth="141.0" text="%tblColumn.quantidade" />
+                              <TableColumn fx:id="tbcCategoriaItensEmprestimo" prefWidth="280.0" text="%tblColumn.Categoria" />
                            </columns>
                            <BorderPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -149,12 +149,12 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="%btn.devolver">
+                                    <Button fx:id="btnDevolverItensEmprestimo" mnemonicParsing="false" onAction="#btnDevolverItensEmprestimoOnAction" styleClass="button-devolver" text="%btn.devolver">
                                        <HBox.margin>
                                           <Insets left="20.0" right="20.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="%btn.baixar">
+                                    <Button fx:id="btnBaixarItensEmprestimo" mnemonicParsing="false" onAction="#btnBaixarItensEmprestimoOnAction" styleClass="button-baixar" text="%btn.baixar">
                                        <HBox.margin>
                                           <Insets left="20.0" right="20.0" />
                                        </HBox.margin>
@@ -163,7 +163,7 @@
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <Button mnemonicParsing="false" styleClass="button-voltar" text="%btn.voltar">
+                                    <Button fx:id="btnVoltarItensEmprestimo" mnemonicParsing="false" onAction="#btnVoltarItensEmprestimoOnAction" styleClass="button-voltar" text="%btn.voltar">
                                        <HBox.margin>
                                           <Insets bottom="20.0" right="50.0" />
                                        </HBox.margin>
@@ -173,20 +173,27 @@
                            </children>
                         </GridPane>
                      </bottom>
+                     <top>
+                        <HBox alignment="CENTER" prefHeight="52.0" prefWidth="798.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label styleClass="label-subtitle" text="Selecione os materiais para a operação desejada" />
+                           </children>
+                        </HBox>
+                     </top>
                   </BorderPane>
                </content>
             </Tab>
-            <Tab text="%tab.informar.estoque">
+            <Tab fx:id="tabInformarEstoque" text="%tab.informar.estoque">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tblPrincipalInformarEstoque" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <columns>
-                              <TableColumn prefWidth="344.0" text="%tblColumn.Material" />
+                              <TableColumn fx:id="tbcMaterialInformarEstoque" prefWidth="344.0" text="%tblColumn.Material" />
                               <TableColumn prefWidth="423.0" text="%tblColumn.local">
                                  <columns>
-                                    <TableColumn prefWidth="145.0" text="%tblColumn.quantidadeDevolvida" />
-                                    <TableColumn prefWidth="295.0" text="%tblColumn.descricaoLocal" />
+                                    <TableColumn fx:id="tbcQtdInformarEstoque" prefWidth="145.0" text="%tblColumn.quantidadeDevolvida" />
+                                    <TableColumn fx:id="tbcDescricaoLocalInformarEstoque" prefWidth="295.0" text="%tblColumn.descricaoLocal" />
                                  </columns>
                               </TableColumn>
                            </columns>
@@ -207,17 +214,12 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="%btn.buscarLocal">
+                                    <Button fx:id="btnSalvarInformarEstoque" mnemonicParsing="false" onAction="#btnSalvarInformarEstoqueOnAction" styleClass="button-save" text="Salvar">
                                        <HBox.margin>
                                           <Insets left="20.0" right="20.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="%btn.alterarLocal">
-                                       <HBox.margin>
-                                          <Insets left="20.0" right="20.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button mnemonicParsing="false" text="%btn.removerLocal">
+                                    <Button fx:id="btnImprimirInformarEstoque" mnemonicParsing="false" onAction="#btnImprimirInformarEstoqueOnAction" styleClass="button-imprimir" text="Imprimir">
                                        <HBox.margin>
                                           <Insets left="20.0" right="20.0" />
                                        </HBox.margin>
@@ -226,7 +228,7 @@
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <Button mnemonicParsing="false" styleClass="button-cancel" text="%btn.cancelar">
+                                    <Button fx:id="btnCancelarInformarEstoque" mnemonicParsing="false" onAction="#btnCancelarInformarEstoqueOnAction" styleClass="button-cancel" text="%btn.cancelar">
                                        <HBox.margin>
                                           <Insets bottom="20.0" right="50.0" />
                                        </HBox.margin>
@@ -236,6 +238,36 @@
                            </children>
                         </GridPane>
                      </bottom>
+                     <top>
+                        <VBox prefHeight="57.0" prefWidth="798.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label styleClass="label-subtitle" text="Selecionar o Local" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="BOTTOM_RIGHT" prefHeight="42.0" prefWidth="798.0">
+                                 <children>
+                                    <Button fx:id="btnAdicionarLocal" mnemonicParsing="false" onAction="#btnAdicionarLocalOnAction" styleClass="button-adicionar" text="Button">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="btnEditarLocal" mnemonicParsing="false" onAction="#btnEditarLocalOnAction" styleClass="button-editar" text="Button">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="btnRemoverLocal" mnemonicParsing="false" onAction="#btnRemoverLocalOnAction" styleClass="button-remover" text="Button">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </top>
                   </BorderPane>
                </content>
             </Tab>
@@ -243,15 +275,15 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="tblPrincipalBuscarMaterial" prefHeight="336.0" prefWidth="709.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tblPrincipalBuscarMaterial" prefHeight="336.0" prefWidth="778.0" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </BorderPane.margin>
                            <columns>
-                              <TableColumn prefWidth="340.0" text="%tblColumn.descricao" />
-                              <TableColumn minWidth="0.0" prefWidth="70.0" text="%tblColumn.numero" />
-                              <TableColumn prefWidth="99.0" text="%tblColumn.departamento" />
-                              <TableColumn prefWidth="264.0" text="%tblColumn.pessoa.responsavel" />
+                              <TableColumn fx:id="tbcDescricaoLocalizarEstoque" prefWidth="340.0" text="%tblColumn.descricao" />
+                              <TableColumn fx:id="tbcNumeroLocalizarEstoque" minWidth="0.0" prefWidth="70.0" text="%tblColumn.numero" />
+                              <TableColumn fx:id="tbcDepartamentoLocalizarEstoque" prefWidth="99.0" text="%tblColumn.departamento" />
+                              <TableColumn fx:id="tbcResponsavelLocalizarEstoque" prefWidth="264.0" text="%tblColumn.pessoa.responsavel" />
                            </columns>
                         </TableView>
                      </center>
@@ -266,18 +298,32 @@
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
                                     <Label text="%lbl.pesquisar" />
-                                    <TextField maxHeight="25.0" prefHeight="25.0" prefWidth="383.0" />
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" styleClass="button-search" />
+                                    <TextField fx:id="txtBuscadorLocalizarEstoque" maxHeight="25.0" prefHeight="25.0" prefWidth="383.0" />
+                                    <Button fx:id="btnBuscarLocalizarEstoque" mnemonicParsing="false" onAction="#btnBuscarLocalizarEstoqueOnAction" prefHeight="25.0" prefWidth="29.0" styleClass="button-search" />
                                  </children>
                               </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                                  <children>
-                                    <HBox prefHeight="30.0" prefWidth="234.0" />
-                                    <RadioButton mnemonicParsing="false" text="%rdb.descricao" />
-                                    <RadioButton mnemonicParsing="false" text="rdb.pessoa.responsavel" />
-                                    <RadioButton mnemonicParsing="false" text="Departamento" />
-                                    <RadioButton mnemonicParsing="false" text="Responsável" />
-                                    <HBox prefHeight="30.0" prefWidth="138.0" />
+                                    <RadioButton fx:id="rdbDescricao" mnemonicParsing="false" text="%rdb.descricao">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Filtro" />
+                                       </toggleGroup>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin></RadioButton>
+                                    <RadioButton fx:id="rdbNumero" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="%rdb.numero" toggleGroup="$Filtro">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin></RadioButton>
+                                    <RadioButton mnemonicParsing="false" text="%rdb.departamento">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </RadioButton>
+                                    <RadioButton fx:id="rdbPessoaResponsavel" mnemonicParsing="false" text="rdb.pessoa.responsavel" toggleGroup="$Filtro">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin></RadioButton>
                                  </children>
                               </HBox>
                            </children>
@@ -292,25 +338,23 @@
                         </GridPane>
                      </top>
                      <bottom>
-                        <GridPane BorderPane.alignment="CENTER">
+                        <GridPane prefHeight="50.0" prefWidth="798.0" BorderPane.alignment="CENTER">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <HBox alignment="CENTER" prefHeight="54.0" prefWidth="798.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="%btn.selecionar" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                 <children>
-                                    <Button mnemonicParsing="false" text="%btn.voltar">
+                                    <Button fx:id="btnSelecionarLocalizarEstoque" mnemonicParsing="false" onAction="#btnSelecionarLocalizarEstoqueOnAction" styleClass="button-adicionarItem" text="%btn.selecionar">
                                        <HBox.margin>
-                                          <Insets right="50.0" />
+                                          <Insets bottom="10.0" left="10.0" />
+                                       </HBox.margin></Button>
+                                    <Button fx:id="btnVoltarLocalizarEstoque" mnemonicParsing="false" onAction="#btnVoltarLocalizarEstoqueOnAction" styleClass="button-voltar" text="%btn.voltar">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" />
                                        </HBox.margin>
                                     </Button>
                                  </children>
@@ -321,7 +365,7 @@
                   </BorderPane>
                </content>
             </Tab>
-            <Tab text="Observaçao">
+            <Tab fx:id="tabObservacao" text="Observaçao">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
@@ -334,7 +378,7 @@
                                 </columnConstraints>
                                 <rowConstraints>
                                     <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="337.0" minHeight="10.0" prefHeight="309.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="337.0" minHeight="10.0" prefHeight="327.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
@@ -344,7 +388,7 @@
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                        <children>
-                                          <Label text="descricao" />
+                                          <Label fx:id="lblDescricao" text="descricao" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -354,7 +398,7 @@
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
-                                          <TextArea prefHeight="100.0" prefWidth="497.0" />
+                                          <TextArea fx:id="txtObservacao" prefHeight="100.0" prefWidth="497.0" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -369,6 +413,22 @@
                            </children>
                         </HBox>
                      </top>
+                     <bottom>
+                        <HBox alignment="CENTER" prefHeight="59.0" prefWidth="798.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="btnSalvarObservacao" mnemonicParsing="false" onAction="#btnSalvarObservacaoOnAction" styleClass="button-save" text="Salvar">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnVoltarObservacao" mnemonicParsing="false" onAction="#btnVoltarObservacaoOnAction" styleClass="button-voltar" text="Voltar">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </bottom>
                   </BorderPane>
                </content>
             </Tab>
