@@ -43,12 +43,12 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
     }
 
     public Pessoa BuscarPorUsuario(Pessoa pessoa) {
-       
+
         EntityManager em = getEM();
-        Pessoa p ;
+        Pessoa p;
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarUsuario");
-            query.setParameter("usuario", "%"+pessoa.getUsuario().toUpperCase()+"%");
+            query.setParameter("usuario", "%" + pessoa.getUsuario().toUpperCase() + "%");
             p = (Pessoa) query.getSingleResult();
 
         } catch (NoResultException ex) {
@@ -113,6 +113,8 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
         return list;
 
     }
+
+   
 
     public List<Pessoa> buscarPorRg(Pessoa pessoa) {
         EntityManager em = getEM();

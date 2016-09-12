@@ -10,7 +10,9 @@ import enumm.Sexo;
 import enumm.PerfilUsuario;
 import DAO.EntidadeBase;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,11 +24,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
- * @author Eduardo
- * WHERE(p.ativo = :ativo)
+ * @author Eduardo WHERE(p.ativo = :ativo)
  */
 @Entity
 @NamedQueries({
@@ -35,9 +37,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Pessoa.BuscarPorCPF", query = "Select p from Pessoa p where p.cpf like :cpf"),
     @NamedQuery(name = "Pessoa.BuscarPorRg", query = "Select p from Pessoa p where p.rg like :rg"),
     @NamedQuery(name = "Pessoa.BuscarPorMatricula", query = "Select p from Pessoa p where p.num_matricula like :matricula"),
-    @NamedQuery(name = "Pessoa.BuscarTodos", query = "Select p from Pessoa p WHERE(p.ativo = :ativo) ORDER BY (p.nome) "),
-//    @NamedQuery(name = "Pessoa.BuscarPendencia",query = 
-    
+    @NamedQuery(name = "Pessoa.BuscarTodos", query = "Select p from Pessoa p WHERE(p.ativo = :ativo) ORDER BY (p.nome) ")
+
 })
 
 public class Pessoa implements EntidadeBase, Serializable {
@@ -96,6 +97,7 @@ public class Pessoa implements EntidadeBase, Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ultimo_acesso;
 
+  
 
     @Override
     public Long getId() {

@@ -42,7 +42,8 @@ public class NegocioPessoa {
         pessoaDAO.remover(Pessoa.class, pessoa);
 
     }
-
+  
+    
     public void Inativar(Pessoa pessoa) throws Exception {
         List<Emprestimo> listaEmprestimo = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(pessoa);
        

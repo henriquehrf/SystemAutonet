@@ -87,7 +87,8 @@ public class ConsultarMaterialController {
         }
 
         cmbCategoria.setItems(dado2);
-       
+        cmbCategoria.setValue("TODOS");
+        cmbCategoria.getSelectionModel().select(cmbCategoria.getItems().size()-1);
         rdbDescricao.setSelected(true);
         completarTabela(lista);
 
@@ -95,9 +96,14 @@ public class ConsultarMaterialController {
 
     @FXML
     void cmbCategoria_OnAction(ActionEvent event) {
-         Categoria cat = new Categoria();
-         cat.setDescricao(cmbCategoria.getValue());
-         completarTabela(NegociosEstaticos.getNegocioMaterial().buscarPorCategoria( NegociosEstaticos.getNegocioCategoria().buscarPorDescricao(cat).get(0)));
+        Categoria cat = new Categoria();
+        cat.setDescricao(cmbCategoria.getValue());
+        if (cmbCategoria.getValue().equals("TODOS")) {
+            completarTabela(NegociosEstaticos.getNegocioMaterial().buscarTodos());
+        } else {
+
+            completarTabela(NegociosEstaticos.getNegocioMaterial().buscarPorCategoria(NegociosEstaticos.getNegocioCategoria().buscarPorDescricao(cat).get(0)));
+        }
     }
 
     void completarTabela(List<Material> lista) {
@@ -163,7 +169,7 @@ public class ConsultarMaterialController {
 
     @FXML
     void btnExcluir_OnAction(ActionEvent event) {
-         try {
+        try {
             Alertas alert = new Alertas();
             Properties prop;
             prop = LerProperties.getProp();
