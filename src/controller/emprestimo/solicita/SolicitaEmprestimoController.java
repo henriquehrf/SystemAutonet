@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +35,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import vo.Emprestimo;
 import vo.EmprestimoEstoqueMaterial;
@@ -149,17 +151,16 @@ public class SolicitaEmprestimoController {
 
         for (int i = 0; i < altertab.size(); i++) {
             EmprestimoEstoqueMaterial eem = new EmprestimoEstoqueMaterial();
-           // eem.setDt_devolucao(data);// obs rever este ponto
+            // eem.setDt_devolucao(data);// obs rever este ponto
             eem.setId_emprestimo(emp);
-         //   eem.setObservacao("dsada");
+            //   eem.setObservacao("dsada");
             eem.setQtd_emprestada(2);
             eem.setQtd_devolvida(0);
             eem.setId_material(altertab.get(i));
             eem.setId_emprestimo(emp);
-            
+
             EstoqueMaterial est = new EstoqueMaterial();
-      
-            
+
             try {
                 NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().salvar(eem);
             } catch (Exception ex) {
@@ -202,15 +203,63 @@ public class SolicitaEmprestimoController {
 
     }
 
+    void verificaLista(Material mat) {
+
+        if (altertab.size() > 0) {
+
+            for (int i = 0; i < altertab.size(); i++) {
+                if (mat.getDescricao() == altertab.get(i).getDescricao()) {
+                    if ((mat.getQuantidadeSolicitada() + altertab.get(i).getQuantidadeSolicitada()) <= mat.getQuantidadeDisponivel().intValue()) {
+                        //altertab.get(i).setQuantidadeSolicitada(mat.getQuantidadeSolicitada() + altertab.get(i).getQuantidadeSolicitada());
+                        mat.setQuantidadeSolicitada(mat.getQuantidadeSolicitada() + altertab.get(i).getQuantidadeSolicitada());
+                        altertab.set(i, mat);
+                      
+                    }
+                      return;
+                }
+            }
+        }
+        altertab.add(mat);
+    }
+
+    boolean set_quantidade() {
+        Material mat = new Material();
+        mat=tblBuscaMateriais.getSelectionModel().getSelectedItem();
+//
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Informe a quantidade");
+//        // dialog.setHeaderText("Look, a Text Input Dialog");
+        dialog.setContentText("Informe a quantidade de material:");
+
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            int resultado = Integer.parseInt(result.get());
+            if (resultado <= mat.getQuantidadeDisponivel().intValue() && resultado > 0) {
+                mat.setQuantidadeSolicitada(resultado);
+                verificaLista(mat);
+                //altertab.add(mat);
+                return true;
+            } else {
+                return false;
+            }
+
+        }
+        return false;
+    }
+
     @FXML
     void btnAdicionarMaterialOnAction(ActionEvent event) {
 
         // fazer o tratamento da seleção
-        altertab.add(tblBuscaMateriais.getSelectionModel().getSelectedItem());
+        if (set_quantidade()) {
+            tblListaMateriais.setItems(altertab);
+            completar_ListaMaterial(altertab);
+            btnVoltarOnAction(event);
 
-        tblListaMateriais.setItems(altertab);
-        completar_ListaMaterial(altertab);
-        btnVoltarOnAction(event);
+        } else {
+            return;
+        }
+        // altertab.add(tblBuscaMateriais.getSelectionModel().getSelectedItem());
 
     }
 
@@ -218,7 +267,7 @@ public class SolicitaEmprestimoController {
 
         this.tbcCategoriaListaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriaNome"));
         this.tbcDescricaoListaMaterial.setCellValueFactory(new PropertyValueFactory<Material, String>("descricao"));
-        this.tbcQuantidadeSolicitadaListaMaterial.setCellValueFactory(new PropertyValueFactory<Material, Integer>("quantidadeDisponivel"));
+        this.tbcQuantidadeSolicitadaListaMaterial.setCellValueFactory(new PropertyValueFactory<Material, Integer>("quantidadeSolicitada"));
         tblListaMateriais.setItems(altertab);
     }
 
