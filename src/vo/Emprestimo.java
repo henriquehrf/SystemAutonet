@@ -8,6 +8,12 @@ package vo;
 import DAO.EntidadeBase;
 import enumm.StatusEmprestimo;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,36 +34,33 @@ import javax.persistence.Temporal;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Emprestimo.BuscarTodos",query = "Select e from Emprestimo e "),
-        @NamedQuery(name = "Emprestimo.BuscarPorIdPessoa",
-                query ="Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoaSolicita"),
-        
-
-})
+    @NamedQuery(name = "Emprestimo.BuscarTodos", query = "Select e from Emprestimo e "),
+    @NamedQuery(name = "Emprestimo.BuscarPorIdPessoa",
+            query = "Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoaSolicita"),})
 public class Emprestimo implements Serializable, EntidadeBase {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id_emprestimo;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dt_emprestimo;
-    
+
     @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusEmprestimo status_emprestimo;
-    
+
     @Column(length = 100, nullable = false)
     private String finalidade;
-    
+
     @Column(length = 200, nullable = false)
     private String observacao;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa id_pessoa_solicita;
-    
-    @ManyToOne(fetch = FetchType.LAZY)  
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa id_pessoa_autoriza = null;
-    
 
     public Long getId() {
         return id_emprestimo;
@@ -71,10 +74,14 @@ public class Emprestimo implements Serializable, EntidadeBase {
         return dt_emprestimo;
     }
 
+    public String getDt_emprestimoString() {
+        SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy");
+        return dt.format(dt_emprestimo);
+    }
+
     public void setDt_emprestimo(Date dt_emprestimo) {
         this.dt_emprestimo = dt_emprestimo;
     }
-
 
     public StatusEmprestimo getStatus_emprestimo() {
         return status_emprestimo;
@@ -104,6 +111,10 @@ public class Emprestimo implements Serializable, EntidadeBase {
         return id_pessoa_solicita;
     }
 
+    public String getId_pessoa_solicitaNome() {
+        return id_pessoa_solicita.getNome();
+    }
+
     public void setId_pessoa_solicita(Pessoa id_pessoa_solicita) {
         this.id_pessoa_solicita = id_pessoa_solicita;
     }
@@ -116,7 +127,4 @@ public class Emprestimo implements Serializable, EntidadeBase {
         this.id_pessoa_autoriza = id_pessoa_autoriza;
     }
 
-    
-    
-    
 }

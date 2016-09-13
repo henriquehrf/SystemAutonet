@@ -26,11 +26,13 @@ import javax.persistence.Temporal;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "EmprestimoEstoqueMaterial.consultarPorNaoDevolvido",
+     @NamedQuery(name = "EmprestimoEstoqueMaterial.consultarPorNaoDevolvido",
             query = "select m from EmprestimoEstoqueMaterial m WHERE m.dt_devolucao IS NULL AND m.id_emprestimo.id_emprestimo = :id_emprestimo"),
 
     @NamedQuery(name = "EmprestimoEstoqueMaterial.consultarTodos",
-            query = "Select m from EmprestimoEstoqueMaterial m")   
+            query = "Select m from EmprestimoEstoqueMaterial m"),   
+    @NamedQuery(name= "EmprestimoEstoqueMaterial.consultarMaterial",
+            query="Select q from EmprestimoEstoqueMaterial q WHERE q.id_emprestimo.id_emprestimo = :id_emprestimo")
 
 })
 public class EmprestimoEstoqueMaterial implements Serializable, EntidadeBase {

@@ -9,6 +9,7 @@ import DAO.EmprestimoEstoqueMaterialDAO;
 import java.util.List;
 import vo.Emprestimo;
 import vo.EmprestimoEstoqueMaterial;
+import vo.Material;
 
 /**
  *
@@ -41,6 +42,9 @@ public class NegocioEmprestimoEstoqueMaterial {
     
     public List<EmprestimoEstoqueMaterial> consultarPorNaoDevolvido(Emprestimo emp){
         return eemDAO.consultarPorNaoDevolvido(emp);
+    }
+    public List<EmprestimoEstoqueMaterial> consultarListaMaterialEmprestimo(Emprestimo emp){
+        return eemDAO.consultaPorMateriaisEmprestimo(emp);
     }
     public String validar(EmprestimoEstoqueMaterial eem){
         String erro = "";

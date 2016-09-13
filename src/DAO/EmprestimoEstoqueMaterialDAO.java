@@ -11,14 +11,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import vo.Emprestimo;
 import vo.EmprestimoEstoqueMaterial;
+import vo.Material;
 
 /**
  *
  * @author Eduardo
  */
-public class EmprestimoEstoqueMaterialDAO extends GenericoDAO<EmprestimoEstoqueMaterial>{
-    
-       public List<EmprestimoEstoqueMaterial> consultarPorNaoDevolvido(Emprestimo emp) {
+public class EmprestimoEstoqueMaterialDAO extends GenericoDAO<EmprestimoEstoqueMaterial> {
+
+    public List<EmprestimoEstoqueMaterial> consultarPorNaoDevolvido(Emprestimo emp) {
         EntityManager em = getEM();
         List<EmprestimoEstoqueMaterial> list;
         Query query;
@@ -35,5 +36,24 @@ public class EmprestimoEstoqueMaterialDAO extends GenericoDAO<EmprestimoEstoqueM
         }
         return list;
     }
-    
+
+    public List<EmprestimoEstoqueMaterial> consultaPorMateriaisEmprestimo(Emprestimo emp) {
+        EntityManager em = getEM();
+        List<EmprestimoEstoqueMaterial> list;
+        Query query;
+
+        try {
+
+            query = em.createNamedQuery("EmprestimoEstoqueMaterial.consultarMaterial");
+            query.setParameter("id_emprestimo", emp.getId());
+            list = query.getResultList();
+        }catch(Exception ex){
+            System.err.println(ex.getMessage());
+            list = new ArrayList();
+        }finally{
+            em.close();
+        }
+        return list;
+    }
+
 }

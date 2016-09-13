@@ -99,9 +99,10 @@ public class SystemAutonet extends Application {
             Pessoa otherUser = new Pessoa();
             user.setUsuario(result.get().getKey());
             user.setSenha(result.get().getValue());
-            user.setId_pessoa(1L);
-            otherUser = NegociosEstaticos.getNegocioPessoa().consultarPorId(user);
+           // user.setId_pessoa(301L);
+            otherUser = NegociosEstaticos.getNegocioPessoa().buscarPorUsuario(user);
             ClasseDoSistemaEstatico.setPessoa(otherUser);
+            System.out.println(otherUser.getNome());
         }
         Parent pane = null;
 
