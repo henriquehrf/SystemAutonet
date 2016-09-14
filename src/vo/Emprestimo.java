@@ -8,6 +8,12 @@ package vo;
 import DAO.EntidadeBase;
 import enumm.StatusEmprestimo;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -74,6 +80,11 @@ public class Emprestimo implements Serializable, EntidadeBase {
         return dt_emprestimo;
     }
 
+    public String getDt_emprestimoString() {
+        SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy");
+        return dt.format(dt_emprestimo);
+    }
+
     public void setDt_emprestimo(Date dt_emprestimo) {
         this.dt_emprestimo = dt_emprestimo;
     }
@@ -104,6 +115,10 @@ public class Emprestimo implements Serializable, EntidadeBase {
 
     public Pessoa getId_pessoa_solicita() {
         return id_pessoa_solicita;
+    }
+
+    public String getId_pessoa_solicitaNome() {
+        return id_pessoa_solicita.getNome();
     }
 
     public void setId_pessoa_solicita(Pessoa id_pessoa_solicita) {

@@ -9,6 +9,7 @@ import DAO.EmprestimoEstoqueMaterialDAO;
 import java.util.List;
 import vo.Emprestimo;
 import vo.EmprestimoEstoqueMaterial;
+import vo.Material;
 
 /**
  *

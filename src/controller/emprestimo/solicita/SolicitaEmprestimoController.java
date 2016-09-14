@@ -142,8 +142,9 @@ public class SolicitaEmprestimoController {
         emp.setStatus_emprestimo(StatusEmprestimo.ESPERANDO_ANALISE);
 
         emp.setId_pessoa_solicita(ClasseDoSistemaEstatico.getPessoa());
-        System.out.println("Solicitado " + ClasseDoSistemaEstatico.getPessoa().getNome());
+        
         try {
+            System.out.println("Solicitado " + ClasseDoSistemaEstatico.getPessoa().getNome());
             emp = NegociosEstaticos.getNegocioEmprestimo().salvar(emp);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

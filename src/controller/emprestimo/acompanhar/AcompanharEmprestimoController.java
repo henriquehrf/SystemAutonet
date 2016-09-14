@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,6 +43,10 @@ import utilitarios.Alertas;
 import utilitarios.LerProperties;
 import vo.Emprestimo;
 import vo.EmprestimoEstoqueMaterial;
+import vo.Emprestimo;
+import vo.EmprestimoEstoqueMaterial;
+import vo.Material;
+import vo.Pessoa;
 
 /**
  * FXML Controller class
@@ -53,13 +60,13 @@ public class AcompanharEmprestimoController implements Initializable {
 
     @FXML
     private Button btnImprimir;
-
+    
     @FXML
     private Button btnVoltarDescricao;
-
+    
     @FXML
     private DatePicker dtpFinal;
-
+    
     @FXML
     private ComboBox<String> cbmStatus;
 
@@ -74,28 +81,28 @@ public class AcompanharEmprestimoController implements Initializable {
 
     @FXML
     private Button btnConsultar;
-
+    
     @FXML
     private TabPane tabPrincipal;
-
+    
     @FXML
     private TextField txtBuscador;
-
+    
     @FXML
     private Label lblData;
-
+    
     @FXML
     private Label lblFinalidade;
-
+    
     @FXML
     private Tab tabListaEmprestimo;
-
+    
     @FXML
     private TableView<EmprestimoEstoqueMaterial> tblDescricao;
 
     @FXML
     private Button btnVoltar;
-
+    
     @FXML
     private TableColumn<Emprestimo, StatusEmprestimo> tbcStatus;
 
@@ -107,16 +114,16 @@ public class AcompanharEmprestimoController implements Initializable {
 
     @FXML
     private Tab tabDescricaoEmprestimo;
-
+    
     @FXML
     private DatePicker dtpInicial;
-
+    
     @FXML
     private Button btnBuscar;
-
+    
     @FXML
     private Label lblObservacao;
-
+    
     @FXML
     private TableColumn<EmprestimoEstoqueMaterial, String> tbcMaterial;
 
@@ -139,7 +146,7 @@ public class AcompanharEmprestimoController implements Initializable {
         }
 
     }
-
+    
     @FXML
     void btnVoltarOnAction(ActionEvent event) {
         try {
@@ -151,22 +158,22 @@ public class AcompanharEmprestimoController implements Initializable {
         }
 
     }
-
+    
     @FXML
     void btnBuscarOnAction(ActionEvent event) {
-
+        
     }
-
+    
     @FXML
     void dtpInicialOnAction(ActionEvent event) {
-
+        
     }
-
+    
     @FXML
     void dtpFinalOnAction(ActionEvent event) {
-
+        
     }
-
+    
     @FXML
     void cbmStatusOnAction(ActionEvent event) {
         Emprestimo emp = new Emprestimo();
@@ -194,12 +201,12 @@ public class AcompanharEmprestimoController implements Initializable {
         }
         completarTabela(list);
     }
-
+    
     @FXML
     void btnImprimirOnAction(ActionEvent event) {
-
+        
     }
-
+    
     @FXML
     void btnVoltarDescricaoOnAction(ActionEvent event) {
         tabListaEmprestimo.setDisable(false);
@@ -230,7 +237,9 @@ public class AcompanharEmprestimoController implements Initializable {
         this.tblPrincipal.setItems(dado);
 
     }
-
+    
+    List<Emprestimo> altertab = FXCollections.observableArrayList();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         StatusEmprestimo a[] = StatusEmprestimo.values();
