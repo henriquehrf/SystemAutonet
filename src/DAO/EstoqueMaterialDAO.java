@@ -64,7 +64,7 @@ public class EstoqueMaterialDAO extends GenericoDAO<EstoqueMaterial> {
 
         try {
             
-            query = em.createNamedQuery("EstoqueMaterial.BuscarPorIdMaterialIdMaterial");
+            query = em.createNamedQuery("EstoqueMaterial.BuscarPorIdMaterialIdlocal");
             query.setParameter("idMaterial",estoqueMaterial.getId_material().getId());
             query.setParameter("idLocal",estoqueMaterial.getId_departamento().getId());
             lista = (EstoqueMaterial) query.getSingleResult();

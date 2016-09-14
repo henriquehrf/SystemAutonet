@@ -27,7 +27,7 @@ import javax.persistence.NamedQuery;
             query = "select e from EstoqueMaterial e where e.id_material.id_material = :idMaterial"),
     @NamedQuery(name = "EstoqueMaterial.QtdDisponivelDoMaterial",
             query = "select SUM(e.quantidade_disponivel) from EstoqueMaterial e where e.id_material.id_material = :idMaterial"),
-     @NamedQuery(name = "EstoqueMaterial.BuscarPorIdMaterialIdMaterial",
+     @NamedQuery(name = "EstoqueMaterial.BuscarPorIdMaterialIdlocal",
             query = "select e from EstoqueMaterial e where e.id_material.id_material = :idMaterial AND e.id_local.id_local = :idLocal")
 
 })

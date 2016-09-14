@@ -52,6 +52,22 @@ public class NegocioEmprestimo {
     public List<Emprestimo> buscarPorIdPessoa(Pessoa pessoa) {
         return empDAO.buscarPorIdPessoa(pessoa);
     }
+    
+       public List<Emprestimo> buscarPorIdPessoaStatusetirado(Pessoa pessoa) {
+        return empDAO.buscarPorIdPessoaStatusRetirado(pessoa);
+    }
+
+    public List<Emprestimo> buscarPorStatusEmprestimoTodos(Emprestimo emprestimo) {
+        return empDAO.buscarPorStatusEmprestimoTodos(emprestimo);
+    }
+    
+    public List<Emprestimo> buscarPorStatusEmprestimoPessoa(Emprestimo emprestimo) {
+        return empDAO.buscarPorStatusEmprestimoPessoa(emprestimo);
+    }
+    
+     public List<Emprestimo> buscarPorTodos() {
+        return empDAO.buscarPorTodos();
+    }
 
     private String validar(Emprestimo emp) {
         String erro = "";

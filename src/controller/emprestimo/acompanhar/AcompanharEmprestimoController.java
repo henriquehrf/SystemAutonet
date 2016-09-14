@@ -5,16 +5,28 @@
  */
 package controller.emprestimo.acompanhar;
 
+import classesAuxiliares.ClasseDoSistemaEstatico;
+import classesAuxiliares.NegociosEstaticos;
+import controller.PrincipalController;
+import enumm.PerfilUsuario;
+import enumm.StatusEmprestimo;
+import gui.SystemAutonet;
+import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -23,6 +35,11 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import utilitarios.Alertas;
+import utilitarios.LerProperties;
+import vo.Emprestimo;
+import vo.EmprestimoEstoqueMaterial;
 
 /**
  * FXML Controller class
@@ -31,7 +48,10 @@ import javafx.scene.control.TextField;
  */
 public class AcompanharEmprestimoController implements Initializable {
 
-     @FXML
+    @FXML
+    private Label lblPesquisar;
+
+    @FXML
     private Button btnImprimir;
 
     @FXML
@@ -41,16 +61,16 @@ public class AcompanharEmprestimoController implements Initializable {
     private DatePicker dtpFinal;
 
     @FXML
-    private ComboBox<?> cbmStatus;
+    private ComboBox<String> cbmStatus;
 
     @FXML
-    private TableColumn<?, ?> tbcQuantidade;
+    private TableColumn<EmprestimoEstoqueMaterial, Number> tbcQuantidade;
 
     @FXML
-    private TableView<?> tblPrincipal;
+    private TableView<Emprestimo> tblPrincipal;
 
     @FXML
-    private TableColumn<?, ?> tbcCategoria;
+    private TableColumn<EmprestimoEstoqueMaterial, String> tbcCategoria;
 
     @FXML
     private Button btnConsultar;
@@ -71,19 +91,19 @@ public class AcompanharEmprestimoController implements Initializable {
     private Tab tabListaEmprestimo;
 
     @FXML
-    private TableView<?> tblDescricao;
+    private TableView<EmprestimoEstoqueMaterial> tblDescricao;
 
     @FXML
     private Button btnVoltar;
 
     @FXML
-    private TableColumn<?, ?> tbcStatus;
+    private TableColumn<Emprestimo, StatusEmprestimo> tbcStatus;
 
     @FXML
-    private TableColumn<?, ?> tbcDtEmprestimo;
+    private TableColumn<Emprestimo, Date> tbcDtEmprestimo;
 
     @FXML
-    private TableColumn<?, ?> tbcPessoa;
+    private TableColumn<Emprestimo, String> tbcPessoa;
 
     @FXML
     private Tab tabDescricaoEmprestimo;
@@ -98,15 +118,37 @@ public class AcompanharEmprestimoController implements Initializable {
     private Label lblObservacao;
 
     @FXML
-    private TableColumn<?, ?> tbcMaterial;
+    private TableColumn<EmprestimoEstoqueMaterial, String> tbcMaterial;
 
     @FXML
-    void btnConsultarOnAction(ActionEvent event) {
+    void btnConsultarOnAction(ActionEvent event) throws IOException {
+
+        if (!tblPrincipal.getSelectionModel().isEmpty()) {
+
+            tabListaEmprestimo.setDisable(true);
+            tabDescricaoEmprestimo.setDisable(false);
+            tabPrincipal.getSelectionModel().select(tabDescricaoEmprestimo);
+            lblFinalidade.setText(tblPrincipal.getSelectionModel().getSelectedItem().getFinalidade());
+            lblData.setText(tblPrincipal.getSelectionModel().getSelectedItem().getDataFormatado());
+            lblObservacao.setText(tblPrincipal.getSelectionModel().getSelectedItem().getObservacao());
+            completarTabelaDetalhe(NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarTodosIdEmprestimo(tblPrincipal.getSelectionModel().getSelectedItem()));
+        } else {
+            Alertas alert = new Alertas();
+            Properties ler = LerProperties.getProp();
+            alert.alerta(Alert.AlertType.ERROR, "Selecionar", ler.getProperty("msg.erro.naoselecionado"));
+        }
 
     }
 
     @FXML
     void btnVoltarOnAction(ActionEvent event) {
+        try {
+            Parent root;
+            root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+            SystemAutonet.SCENE.setRoot(root);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
 
     }
 
@@ -127,7 +169,30 @@ public class AcompanharEmprestimoController implements Initializable {
 
     @FXML
     void cbmStatusOnAction(ActionEvent event) {
+        Emprestimo emp = new Emprestimo();
+        List<Emprestimo> list = new ArrayList();
+        if (cbmStatus.getValue().equals("TODOS")) {
+            if (ClasseDoSistemaEstatico.getPessoa().getFuncao().equals(PerfilUsuario.ADMINISTRADOR)) {
+                list = NegociosEstaticos.getNegocioEmprestimo().buscarPorTodos();
 
+            } else {
+                list = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(ClasseDoSistemaEstatico.getPessoa());
+
+            }
+        } else {
+            emp.setStatus_emprestimo(StatusEmprestimo.valueOf(cbmStatus.getValue()));
+
+            if (ClasseDoSistemaEstatico.getPessoa().getFuncao().equals(PerfilUsuario.ADMINISTRADOR)) {
+
+                list = NegociosEstaticos.getNegocioEmprestimo().buscarPorStatusEmprestimoTodos(emp);
+
+            } else {
+
+                emp.setId_pessoa_solicita(ClasseDoSistemaEstatico.getPessoa());
+                list = NegociosEstaticos.getNegocioEmprestimo().buscarPorStatusEmprestimoPessoa(emp);
+            }
+        }
+        completarTabela(list);
     }
 
     @FXML
@@ -137,15 +202,63 @@ public class AcompanharEmprestimoController implements Initializable {
 
     @FXML
     void btnVoltarDescricaoOnAction(ActionEvent event) {
+        tabListaEmprestimo.setDisable(false);
+        tabDescricaoEmprestimo.setDisable(true);
+        tabPrincipal.getSelectionModel().select(tabListaEmprestimo);
+    }
+
+    private void completarTabelaDetalhe(List<EmprestimoEstoqueMaterial> lista) {
+        ObservableList<EmprestimoEstoqueMaterial> dado = FXCollections.observableArrayList();
+        for (int i = 0; i < lista.size(); i++) {
+            dado.add(lista.get(i));
+        }
+        this.tbcMaterial.setCellValueFactory(new PropertyValueFactory<EmprestimoEstoqueMaterial, String>("NomeMaterial"));
+        this.tbcQuantidade.setCellValueFactory(new PropertyValueFactory<EmprestimoEstoqueMaterial, Number>("Qtd"));
+        this.tbcCategoria.setCellValueFactory(new PropertyValueFactory<EmprestimoEstoqueMaterial, String>("NomeCategoria"));
+        this.tblDescricao.setItems(dado);
+
+    }
+
+    private void completarTabela(List<Emprestimo> lista) {
+        ObservableList<Emprestimo> dado = FXCollections.observableArrayList();
+        for (int i = 0; i < lista.size(); i++) {
+            dado.add(lista.get(i));
+        }
+        this.tbcDtEmprestimo.setCellValueFactory(new PropertyValueFactory<Emprestimo, Date>("DataFormatado"));
+        this.tbcStatus.setCellValueFactory(new PropertyValueFactory<Emprestimo, StatusEmprestimo>("Status_emprestimo"));
+        this.tbcPessoa.setCellValueFactory(new PropertyValueFactory<Emprestimo, String>("NomePessoaSolicita"));
+        this.tblPrincipal.setItems(dado);
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        StatusEmprestimo a[] = StatusEmprestimo.values();
 
-        
-        
-            // TODO
+        ObservableList<String> dado2 = FXCollections.observableArrayList();
+
+        for (int i = 0; i < a.length; i++) {
+            dado2.add(a[i].name());
+        }
+        dado2.add("TODOS");
+        cbmStatus.setItems(dado2);
+        cbmStatus.getSelectionModel().select(cbmStatus.getItems().size() - 1);
+        tabDescricaoEmprestimo.setDisable(true);
+
+        if (ClasseDoSistemaEstatico.getPessoa().getFuncao().equals(PerfilUsuario.ALUNO) || ClasseDoSistemaEstatico.getPessoa().getFuncao().equals(PerfilUsuario.TESTE)) {
+
+            txtBuscador.setVisible(false);
+            btnBuscar.setVisible(false);
+            lblPesquisar.setVisible(false);
+            tbcPessoa.setVisible(false);
+            tbcDtEmprestimo.setPrefWidth(167 + 146);
+            tbcStatus.setPrefWidth(317 + 146 + 8);
+            completarTabela(NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(ClasseDoSistemaEstatico.getPessoa()));
+        } else {
+            completarTabela(NegociosEstaticos.getNegocioEmprestimo().buscarPorTodos());
         }
 
+        // TODO
     }
+
+}

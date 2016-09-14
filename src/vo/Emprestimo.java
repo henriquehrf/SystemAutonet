@@ -28,36 +28,39 @@ import javax.persistence.Temporal;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Emprestimo.BuscarTodos",query = "Select e from Emprestimo e "),
-        @NamedQuery(name = "Emprestimo.BuscarPorIdPessoa",
-                query ="Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoaSolicita"),
-        
+    @NamedQuery(name = "Emprestimo.BuscarTodos", query = "Select e from Emprestimo e ORDER BY(e.dt_emprestimo)"),
+    @NamedQuery(name = "Emprestimo.BuscarPorStatusTodos", query = "Select e from Emprestimo e WHERE e.status_emprestimo = :Status"),
+    @NamedQuery(name = "Emprestimo.BuscarPorStatusPessoa", query = "Select e from Emprestimo e WHERE e.status_emprestimo = :Status AND e.id_pessoa_solicita.id_pessoa = :idpessoa ORDER BY(e.dt_emprestimo)"),
+    @NamedQuery(name = "Emprestimo.BuscarPorIdPessoa",
+            query = "Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoaSolicita"),
+      @NamedQuery(name = "Emprestimo.BuscarPorIdPessoaStatusRetirado",
+            query = "Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoaSolicita AND e.status_emprestimo like 'RETIRADO'")
 
 })
 public class Emprestimo implements Serializable, EntidadeBase {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id_emprestimo;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dt_emprestimo;
-    
+
     @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusEmprestimo status_emprestimo;
-    
+
     @Column(length = 100, nullable = false)
     private String finalidade;
-    
+
     @Column(length = 200, nullable = false)
     private String observacao;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa id_pessoa_solicita;
-    
-    @ManyToOne(fetch = FetchType.LAZY)  
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa id_pessoa_autoriza = null;
-    
 
     public Long getId() {
         return id_emprestimo;
@@ -74,7 +77,6 @@ public class Emprestimo implements Serializable, EntidadeBase {
     public void setDt_emprestimo(Date dt_emprestimo) {
         this.dt_emprestimo = dt_emprestimo;
     }
-
 
     public StatusEmprestimo getStatus_emprestimo() {
         return status_emprestimo;
@@ -115,8 +117,14 @@ public class Emprestimo implements Serializable, EntidadeBase {
     public void setId_pessoa_autoriza(Pessoa id_pessoa_autoriza) {
         this.id_pessoa_autoriza = id_pessoa_autoriza;
     }
+    
+    public String getDataFormatado(){
+        String data = dt_emprestimo.toString();        
+        return data;
+    }
 
-    
-    
-    
+    public String getNomePessoaSolicita() {
+        return this.id_pessoa_solicita.getNome();
+    }
+
 }

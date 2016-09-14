@@ -96,12 +96,17 @@ public class SystemAutonet extends Application {
         // Ajustar nesta parte do login
         if (result.isPresent()) {
             Pessoa user = new Pessoa();
-            Pessoa otherUser = new Pessoa();
+            Pessoa otherUser = null;
             user.setUsuario(result.get().getKey());
             user.setSenha(result.get().getValue());
-            user.setId_pessoa(1L);
-            otherUser = NegociosEstaticos.getNegocioPessoa().consultarPorId(user);
-            ClasseDoSistemaEstatico.setPessoa(otherUser);
+
+            otherUser = NegociosEstaticos.getNegocioPessoa().buscarPorUsuario(user);
+            if (otherUser != null) {
+
+                ClasseDoSistemaEstatico.setPessoa(otherUser);
+            } else {
+                System.out.println("erro");
+            }
         }
         Parent pane = null;
 

@@ -359,7 +359,7 @@ public class DevolverEmprestimoController {
 
         List<Pessoa> listpessoa = NegociosEstaticos.getNegocioPessoa().buscarTodos();
         for (Pessoa vo : listpessoa) {
-            List<Emprestimo> emp = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(vo);
+            List<Emprestimo> emp = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoaStatusetirado(vo);
             for (Emprestimo voEmp : emp) {
                 empm = NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarPorNaoDevolvido(voEmp);
                 if (empm.size() > 0) {

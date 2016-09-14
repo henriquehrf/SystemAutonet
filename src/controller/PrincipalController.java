@@ -13,8 +13,10 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import controller.cadastro.Consulta.*;
+import enumm.PerfilUsuario;
 import java.util.List;
 import javafx.scene.Parent;
+import javafx.scene.control.SeparatorMenuItem;
 import vo.Emprestimo;
 import vo.EmprestimoEstoqueMaterial;
 
@@ -113,6 +115,12 @@ public class PrincipalController {
     @FXML
     private Menu mnu_Cadastro;
 
+    @FXML
+    private SeparatorMenuItem SeparadoDevolverSoliticar;
+
+    @FXML
+    private SeparatorMenuItem SeparadoAcompanharAnalisar;
+
     public void initialize() {
 //           List<Emprestimo> emp = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(ClasseDoSistemaEstatico.getPessoa());
 //            List<EmprestimoEstoqueMaterial> empm = NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarPorNaoDevolvido(emp.get(0));
@@ -122,8 +130,16 @@ public class PrincipalController {
 //                System.out.println(vo.getObservacao());
 //            }
 //             System.out.println("Fim");
-        System.out.println("oi");
 
+        if (ClasseDoSistemaEstatico.getPessoa().getFuncao().equals(PerfilUsuario.ALUNO) || ClasseDoSistemaEstatico.getPessoa().getFuncao().equals(PerfilUsuario.TESTE)) {
+            mnu_Cadastro.setVisible(false);
+            emp_analisar.setVisible(false);
+            emp_devolver.setVisible(false);
+            mnu_estoque.setVisible(false);
+            SeparadoDevolverSoliticar.setVisible(false);
+            SeparadoAcompanharAnalisar.setVisible(false);
+        }
+        
     }
 
     @FXML
@@ -269,16 +285,17 @@ public class PrincipalController {
         }
 
     }
+
     @FXML
-    void est_entradaMaterial_OnAction(ActionEvent event){
-         try {
+    void est_entradaMaterial_OnAction(ActionEvent event) {
+        try {
             Parent root;
             root = FXMLLoader.load(ConsultarCategoriaController.class.getClassLoader().getResource("fxml/estoque/Entrada/EntradaMaterial.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
-        
+
     }
 
 }

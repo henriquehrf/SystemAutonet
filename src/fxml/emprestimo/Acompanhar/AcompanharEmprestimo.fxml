@@ -40,7 +40,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="45.0" prefWidth="798.0">
                                  <children>
-                                    <Label text="Pesquisar:" />
+                                    <Label fx:id="lblPesquisar" text="Pesquisar:" />
                                     <TextField fx:id="txtBuscador" maxHeight="25.0" prefHeight="25.0" prefWidth="340.0" />
                                     <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#btnBuscarOnAction" prefHeight="25.0" prefWidth="29.0" styleClass="button-search" />
                                  </children>

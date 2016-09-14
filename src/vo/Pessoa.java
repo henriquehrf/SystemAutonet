@@ -32,7 +32,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Pessoa.BuscarUsuario", query = "Select p from Pessoa p where UPPER (p.usuario) like :usuario"),
+    @NamedQuery(name = "Pessoa.BuscarUsuario", query = "Select p from Pessoa p WHERE UPPER (p.usuario) like :usuario"),
     @NamedQuery(name = "Pessoa.BuscarPorNome", query = "Select p from Pessoa p where UPPER (p.nome) like :nome"),
     @NamedQuery(name = "Pessoa.BuscarPorCPF", query = "Select p from Pessoa p where p.cpf like :cpf"),
     @NamedQuery(name = "Pessoa.BuscarPorRg", query = "Select p from Pessoa p where p.rg like :rg"),

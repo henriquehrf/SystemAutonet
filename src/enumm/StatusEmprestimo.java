@@ -13,5 +13,6 @@ public enum StatusEmprestimo {
     APROVADO,
     ESPERANDO_ANALISE,
     FINALIZADO,
-    RECUSADO
+    RECUSADO,
+    RETIRADO
 }

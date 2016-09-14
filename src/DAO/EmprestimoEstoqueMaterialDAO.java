@@ -16,9 +16,9 @@ import vo.EmprestimoEstoqueMaterial;
  *
  * @author Eduardo
  */
-public class EmprestimoEstoqueMaterialDAO extends GenericoDAO<EmprestimoEstoqueMaterial>{
-    
-       public List<EmprestimoEstoqueMaterial> consultarPorNaoDevolvido(Emprestimo emp) {
+public class EmprestimoEstoqueMaterialDAO extends GenericoDAO<EmprestimoEstoqueMaterial> {
+
+    public List<EmprestimoEstoqueMaterial> consultarPorNaoDevolvido(Emprestimo emp) {
         EntityManager em = getEM();
         List<EmprestimoEstoqueMaterial> list;
         Query query;
@@ -35,5 +35,40 @@ public class EmprestimoEstoqueMaterialDAO extends GenericoDAO<EmprestimoEstoqueM
         }
         return list;
     }
+
+    public List<EmprestimoEstoqueMaterial> consultarTodosIdEmprestimo(Emprestimo emp) {
+        EntityManager em = getEM();
+        List<EmprestimoEstoqueMaterial> list;
+        Query query;
+
+        try {
+            query = em.createNamedQuery("EmprestimoEstoqueMaterial.consultarTodosIdEmprestimo");
+            query.setParameter("id_emprestimo", emp.getId());
+            list = query.getResultList();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            list = new ArrayList();
+        } finally {
+            em.close();
+        }
+        return list;
+    }
     
+        public List<EmprestimoEstoqueMaterial> consultarTodos() {
+        EntityManager em = getEM();
+        List<EmprestimoEstoqueMaterial> list;
+        Query query;
+
+        try {
+            query = em.createNamedQuery("EmprestimoEstoqueMaterial.consultarTodos");
+            list = query.getResultList();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            list = new ArrayList();
+        } finally {
+            em.close();
+        }
+        return list;
+    }
+
 }

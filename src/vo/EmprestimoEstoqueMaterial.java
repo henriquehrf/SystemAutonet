@@ -28,9 +28,10 @@ import javax.persistence.Temporal;
 @NamedQueries({
     @NamedQuery(name = "EmprestimoEstoqueMaterial.consultarPorNaoDevolvido",
             query = "select m from EmprestimoEstoqueMaterial m WHERE m.dt_devolucao IS NULL AND m.id_emprestimo.id_emprestimo = :id_emprestimo"),
-
+    @NamedQuery(name = "EmprestimoEstoqueMaterial.consultarTodosIdEmprestimo",
+            query = "Select m from EmprestimoEstoqueMaterial m WHERE m.id_emprestimo.id_emprestimo = :id_emprestimo"),
     @NamedQuery(name = "EmprestimoEstoqueMaterial.consultarTodos",
-            query = "Select m from EmprestimoEstoqueMaterial m")   
+            query = "Select m from EmprestimoEstoqueMaterial m")
 
 })
 public class EmprestimoEstoqueMaterial implements Serializable, EntidadeBase {
@@ -40,23 +41,23 @@ public class EmprestimoEstoqueMaterial implements Serializable, EntidadeBase {
     private Long id_emprestimoestoquematerial;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private EstoqueMaterial id_estoquematerial ;
+    private EstoqueMaterial id_estoquematerial;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Emprestimo id_emprestimo ;
-    
+    private Emprestimo id_emprestimo;
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dt_devolucao;
-    
+
     @Column(length = 200)
     private String observacao;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Material id_material;
-    
+
     @Basic
     private Integer qtd_devolvida;
-    
+
     @Basic
     private Integer qtd_emprestada;
 
@@ -123,6 +124,17 @@ public class EmprestimoEstoqueMaterial implements Serializable, EntidadeBase {
     public void setId_material(Material id_material) {
         this.id_material = id_material;
     }
-      
     
+    public String getNomeMaterial(){
+        return id_material.getDescricao();
+    }
+    
+    public String getNomeCategoria(){
+        return id_material.getId_categoria().getDescricao();
+    }
+    
+    public Number getQtd(){
+        return qtd_emprestada;
+    }
+
 }

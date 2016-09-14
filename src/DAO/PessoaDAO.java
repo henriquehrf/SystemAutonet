@@ -48,7 +48,7 @@ public class PessoaDAO extends GenericoDAO<Pessoa> {
         Pessoa p;
         try {
             Query query = em.createNamedQuery("Pessoa.BuscarUsuario");
-            query.setParameter("usuario", "%" + pessoa.getUsuario().toUpperCase() + "%");
+            query.setParameter("usuario", pessoa.getUsuario().toUpperCase());
             p = (Pessoa) query.getSingleResult();
 
         } catch (NoResultException ex) {
