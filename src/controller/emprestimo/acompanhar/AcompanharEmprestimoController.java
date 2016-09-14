@@ -13,11 +13,16 @@ import enumm.StatusEmprestimo;
 import gui.SystemAutonet;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -53,20 +58,20 @@ import vo.Pessoa;
  *
  * @author Henrique
  */
-public class AcompanharEmprestimoController implements Initializable {
+public class AcompanharEmprestimoController {
 
     @FXML
     private Label lblPesquisar;
 
     @FXML
     private Button btnImprimir;
-    
+
     @FXML
     private Button btnVoltarDescricao;
-    
+
     @FXML
     private DatePicker dtpFinal;
-    
+
     @FXML
     private ComboBox<String> cbmStatus;
 
@@ -81,28 +86,28 @@ public class AcompanharEmprestimoController implements Initializable {
 
     @FXML
     private Button btnConsultar;
-    
+
     @FXML
     private TabPane tabPrincipal;
-    
+
     @FXML
     private TextField txtBuscador;
-    
+
     @FXML
     private Label lblData;
-    
+
     @FXML
     private Label lblFinalidade;
-    
+
     @FXML
     private Tab tabListaEmprestimo;
-    
+
     @FXML
     private TableView<EmprestimoEstoqueMaterial> tblDescricao;
 
     @FXML
     private Button btnVoltar;
-    
+
     @FXML
     private TableColumn<Emprestimo, StatusEmprestimo> tbcStatus;
 
@@ -114,16 +119,16 @@ public class AcompanharEmprestimoController implements Initializable {
 
     @FXML
     private Tab tabDescricaoEmprestimo;
-    
+
     @FXML
     private DatePicker dtpInicial;
-    
+
     @FXML
     private Button btnBuscar;
-    
+
     @FXML
     private Label lblObservacao;
-    
+
     @FXML
     private TableColumn<EmprestimoEstoqueMaterial, String> tbcMaterial;
 
@@ -136,7 +141,7 @@ public class AcompanharEmprestimoController implements Initializable {
             tabDescricaoEmprestimo.setDisable(false);
             tabPrincipal.getSelectionModel().select(tabDescricaoEmprestimo);
             lblFinalidade.setText(tblPrincipal.getSelectionModel().getSelectedItem().getFinalidade());
-            lblData.setText(tblPrincipal.getSelectionModel().getSelectedItem().getDataFormatado());
+            lblData.setText(tblPrincipal.getSelectionModel().getSelectedItem().getDt_emprestimoString());
             lblObservacao.setText(tblPrincipal.getSelectionModel().getSelectedItem().getObservacao());
             completarTabelaDetalhe(NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarTodosIdEmprestimo(tblPrincipal.getSelectionModel().getSelectedItem()));
         } else {
@@ -146,7 +151,7 @@ public class AcompanharEmprestimoController implements Initializable {
         }
 
     }
-    
+
     @FXML
     void btnVoltarOnAction(ActionEvent event) {
         try {
@@ -158,55 +163,56 @@ public class AcompanharEmprestimoController implements Initializable {
         }
 
     }
-    
+
     @FXML
     void btnBuscarOnAction(ActionEvent event) {
-        
+        filtro();
     }
-    
+
     @FXML
     void dtpInicialOnAction(ActionEvent event) {
-        
+        filtro();
     }
-    
+
     @FXML
     void dtpFinalOnAction(ActionEvent event) {
-        
+        filtro();
     }
-    
+
     @FXML
     void cbmStatusOnAction(ActionEvent event) {
-        Emprestimo emp = new Emprestimo();
-        List<Emprestimo> list = new ArrayList();
-        if (cbmStatus.getValue().equals("TODOS")) {
-            if (ClasseDoSistemaEstatico.getPessoa().getFuncao().equals(PerfilUsuario.ADMINISTRADOR)) {
-                list = NegociosEstaticos.getNegocioEmprestimo().buscarPorTodos();
-
-            } else {
-                list = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(ClasseDoSistemaEstatico.getPessoa());
-
-            }
-        } else {
-            emp.setStatus_emprestimo(StatusEmprestimo.valueOf(cbmStatus.getValue()));
-
-            if (ClasseDoSistemaEstatico.getPessoa().getFuncao().equals(PerfilUsuario.ADMINISTRADOR)) {
-
-                list = NegociosEstaticos.getNegocioEmprestimo().buscarPorStatusEmprestimoTodos(emp);
-
-            } else {
-
-                emp.setId_pessoa_solicita(ClasseDoSistemaEstatico.getPessoa());
-                list = NegociosEstaticos.getNegocioEmprestimo().buscarPorStatusEmprestimoPessoa(emp);
-            }
-        }
-        completarTabela(list);
+//        Emprestimo emp = new Emprestimo();
+//        List<Emprestimo> list = new ArrayList();
+//        if (cbmStatus.getValue().equals("TODOS")) {
+//            if (ClasseDoSistemaEstatico.getPessoa().getFuncao().equals(PerfilUsuario.ADMINISTRADOR)) {
+//                list = NegociosEstaticos.getNegocioEmprestimo().buscarPorTodos();
+//
+//            } else {
+//                list = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(ClasseDoSistemaEstatico.getPessoa());
+//
+//            }
+//        } else {
+//            emp.setStatus_emprestimo(StatusEmprestimo.valueOf(cbmStatus.getValue()));
+//
+//            if (ClasseDoSistemaEstatico.getPessoa().getFuncao().equals(PerfilUsuario.ADMINISTRADOR)) {
+//
+//                list = NegociosEstaticos.getNegocioEmprestimo().buscarPorStatusEmprestimoTodos(emp);
+//
+//            } else {
+//
+//                emp.setId_pessoa_solicita(ClasseDoSistemaEstatico.getPessoa());
+//                list = NegociosEstaticos.getNegocioEmprestimo().buscarPorStatusEmprestimoPessoa(emp);
+//            }
+//        }
+//        completarTabela(list);
+        filtro();
     }
-    
+
     @FXML
     void btnImprimirOnAction(ActionEvent event) {
-        
+
     }
-    
+
     @FXML
     void btnVoltarDescricaoOnAction(ActionEvent event) {
         tabListaEmprestimo.setDisable(false);
@@ -231,17 +237,92 @@ public class AcompanharEmprestimoController implements Initializable {
         for (int i = 0; i < lista.size(); i++) {
             dado.add(lista.get(i));
         }
-        this.tbcDtEmprestimo.setCellValueFactory(new PropertyValueFactory<Emprestimo, Date>("DataFormatado"));
+        this.tbcDtEmprestimo.setCellValueFactory(new PropertyValueFactory<Emprestimo, Date>("Dt_emprestimoString"));
         this.tbcStatus.setCellValueFactory(new PropertyValueFactory<Emprestimo, StatusEmprestimo>("Status_emprestimo"));
         this.tbcPessoa.setCellValueFactory(new PropertyValueFactory<Emprestimo, String>("NomePessoaSolicita"));
         this.tblPrincipal.setItems(dado);
 
     }
-    
+
+    private void filtro() {
+        List<Emprestimo> alterAux = FXCollections.observableArrayList();
+
+        if (txtBuscador.getText().isEmpty()
+                && dtpFinal.getValue() == null && dtpInicial.getValue() == null && cbmStatus.getSelectionModel().getSelectedItem().equals("TODOS")) {
+            alterAux = altertab;
+            // completarTabela(altertab);
+        } else {
+
+            for (int i = 0; i < altertab.size(); i++) {
+                if (altertab.get(i).getId_pessoa_solicitaNome().toUpperCase().indexOf(txtBuscador.getText().toUpperCase()) >= 0) {
+                    alterAux.add(altertab.get(i));
+                }
+            }
+            //  completarTabela(alterAux);
+        }
+
+        if (dtpFinal.getValue() == null && dtpInicial.getValue() == null && cbmStatus.getValue().equals("TODOS")) {
+
+            completarTabela(alterAux);
+            return;
+        }
+        if (!cbmStatus.getValue().equals("TODOS")) {
+            List<Emprestimo> comparator = FXCollections.observableArrayList();
+            for (int i = 0; i < alterAux.size(); i++) {
+                if (alterAux.get(i).getStatus_emprestimo().toString().toUpperCase().equals(cbmStatus.getValue().toUpperCase())) {
+                    comparator.add(alterAux.get(i));
+                }
+            }
+            alterAux = comparator;
+            completarTabela(alterAux);
+        }
+
+        List<Emprestimo> aux = FXCollections.observableArrayList();
+
+        if (dtpFinal.getValue() == null && dtpInicial.getValue() != null) {
+
+            for (int i = 0; i < alterAux.size(); i++) {
+
+                if (alterAux.get(i).getDt_emprestimoLocalDate().isAfter(dtpInicial.getValue())
+                        || alterAux.get(i).getDt_emprestimoLocalDate().isEqual(dtpInicial.getValue())) {
+                    aux.add(alterAux.get(i));
+                }
+            }
+            completarTabela(aux);
+            return;
+        }
+        if (dtpFinal.getValue() != null && dtpInicial.getValue() == null) {
+
+            for (int i = 0; i < alterAux.size(); i++) {
+
+                if (alterAux.get(i).getDt_emprestimoLocalDate().isBefore(dtpFinal.getValue())
+                        || alterAux.get(i).getDt_emprestimoLocalDate().isEqual(dtpFinal.getValue())) {
+                    aux.add(alterAux.get(i));
+                }
+            }
+            completarTabela(aux);
+            return;
+        }
+
+        if (dtpFinal.getValue() != null && dtpInicial.getValue() != null) {
+
+            for (int i = 0; i < alterAux.size(); i++) {
+
+                if (alterAux.get(i).getDt_emprestimoLocalDate().isBefore(dtpFinal.getValue())
+                        || alterAux.get(i).getDt_emprestimoLocalDate().isEqual(dtpInicial.getValue())
+                        && alterAux.get(i).getDt_emprestimoLocalDate().isBefore(dtpFinal.getValue())
+                        || alterAux.get(i).getDt_emprestimoLocalDate().isEqual(dtpFinal.getValue())) {
+                    aux.add(alterAux.get(i));
+                }
+            }
+            completarTabela(aux);
+            return;
+        }
+
+    }
     List<Emprestimo> altertab = FXCollections.observableArrayList();
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+
+    public void initialize() {
         StatusEmprestimo a[] = StatusEmprestimo.values();
 
         ObservableList<String> dado2 = FXCollections.observableArrayList();
@@ -262,9 +343,11 @@ public class AcompanharEmprestimoController implements Initializable {
             tbcPessoa.setVisible(false);
             tbcDtEmprestimo.setPrefWidth(167 + 146);
             tbcStatus.setPrefWidth(317 + 146 + 8);
-            completarTabela(NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(ClasseDoSistemaEstatico.getPessoa()));
+            altertab = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(ClasseDoSistemaEstatico.getPessoa());
+            completarTabela(altertab);
         } else {
-            completarTabela(NegociosEstaticos.getNegocioEmprestimo().buscarPorTodos());
+            altertab = NegociosEstaticos.getNegocioEmprestimo().buscarPorTodos();
+            completarTabela(altertab);
         }
 
         // TODO

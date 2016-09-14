@@ -84,6 +84,11 @@ public class Emprestimo implements Serializable, EntidadeBase {
         SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy");
         return dt.format(dt_emprestimo);
     }
+    public LocalDate getDt_emprestimoLocalDate(){
+        Instant instant = Instant.ofEpochMilli(dt_emprestimo.getTime());
+        LocalDate localDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+        return localDate;
+    }
 
     public void setDt_emprestimo(Date dt_emprestimo) {
         this.dt_emprestimo = dt_emprestimo;
@@ -133,10 +138,6 @@ public class Emprestimo implements Serializable, EntidadeBase {
         this.id_pessoa_autoriza = id_pessoa_autoriza;
     }
     
-    public String getDataFormatado(){
-        String data = dt_emprestimo.toString();        
-        return data;
-    }
 
     public String getNomePessoaSolicita() {
         return this.id_pessoa_solicita.getNome();
