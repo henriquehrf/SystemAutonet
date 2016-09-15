@@ -68,9 +68,8 @@ public class LoginController {
         user.setSenha(txtSenha.getText());
         try {
             otherUser = NegociosEstaticos.getNegocioPessoa().buscarPorUsuario(user);
-            if (otherUser != null) {
+            if (otherUser.getId() != null) {
                 if (otherUser.getSenha().equals(txtSenha.getText())) {
-
                     ClasseDoSistemaEstatico.setPessoa(otherUser);
                     return true;
                 } else {
@@ -79,6 +78,11 @@ public class LoginController {
                     lblautenticacao.setVisible(true);
                     return false;
                 }
+            } else {
+                lblautenticacao.setText("Usuário não encontrado");
+                labelSenhaAlerta.setVisible(true);
+                lblautenticacao.setVisible(true);
+                return false;
             }
 
         } catch (Exception ex) {
@@ -92,7 +96,7 @@ public class LoginController {
     }
 
     @FXML
-    void btnLoginOnAction(ActionEvent event){
+    void btnLoginOnAction(ActionEvent event) {
         if (autenticar()) {
 
             BorderPane root = null;
@@ -116,6 +120,9 @@ public class LoginController {
     @FXML
     void txtUsuarioOnKeyPressed(KeyEvent event) {
         habilitarLogin();
+        labelUsuarioAlerta.setVisible(false);
+        lblautenticacao.setVisible(false);
+        labelSenhaAlerta.setVisible(false);
     }
 
     void habilitarLogin() {
@@ -132,6 +139,9 @@ public class LoginController {
     @FXML
     void txtSenhaonKeyPressed(KeyEvent event) {
         habilitarLogin();
+            labelUsuarioAlerta.setVisible(false);
+            lblautenticacao.setVisible(false);
+            labelSenhaAlerta.setVisible(false);
     }
 
     public void initialize() {

@@ -52,20 +52,24 @@ public class NegocioEmprestimo {
     public List<Emprestimo> buscarPorIdPessoa(Pessoa pessoa) {
         return empDAO.buscarPorIdPessoa(pessoa);
     }
-    
-       public List<Emprestimo> buscarPorIdPessoaStatusetirado(Pessoa pessoa) {
+
+    public List<Emprestimo> buscarPorIdPessoaStatusRetirado(Pessoa pessoa) {
         return empDAO.buscarPorIdPessoaStatusRetirado(pessoa);
+    }
+
+    public List<Emprestimo> buscarPorIdPessoaStatusESPERANDO_ANALISE(Pessoa pessoa) {
+        return empDAO.buscarPorIdPessoaStatusESPERANDO_ANALISE(pessoa);
     }
 
     public List<Emprestimo> buscarPorStatusEmprestimoTodos(Emprestimo emprestimo) {
         return empDAO.buscarPorStatusEmprestimoTodos(emprestimo);
     }
-    
+
     public List<Emprestimo> buscarPorStatusEmprestimoPessoa(Emprestimo emprestimo) {
         return empDAO.buscarPorStatusEmprestimoPessoa(emprestimo);
     }
-    
-     public List<Emprestimo> buscarPorTodos() {
+
+    public List<Emprestimo> buscarPorTodos() {
         return empDAO.buscarPorTodos();
     }
 

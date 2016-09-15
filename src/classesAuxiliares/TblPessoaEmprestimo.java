@@ -5,6 +5,7 @@
  */
 package classesAuxiliares;
 
+import java.text.SimpleDateFormat;
 import vo.Emprestimo;
 import vo.EmprestimoEstoqueMaterial;
 import vo.Pessoa;
@@ -37,7 +38,9 @@ public class TblPessoaEmprestimo {
 
   
     public String getEmprestimoDt() {
-        return emprestimo.getDt_emprestimo().toString();
+        SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy");
+        return dt.format(emprestimo.getDt_emprestimo());
+      
     }
 
     public String getFinalidade() {

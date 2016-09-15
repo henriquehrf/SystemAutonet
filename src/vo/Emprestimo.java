@@ -39,8 +39,10 @@ import javax.persistence.Temporal;
     @NamedQuery(name = "Emprestimo.BuscarPorStatusPessoa", query = "Select e from Emprestimo e WHERE e.status_emprestimo = :Status AND e.id_pessoa_solicita.id_pessoa = :idpessoa ORDER BY(e.dt_emprestimo)"),
     @NamedQuery(name = "Emprestimo.BuscarPorIdPessoa",
             query = "Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoaSolicita"),
-      @NamedQuery(name = "Emprestimo.BuscarPorIdPessoaStatusRetirado",
-            query = "Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoaSolicita AND e.status_emprestimo like 'RETIRADO'")
+    @NamedQuery(name = "Emprestimo.BuscarPorIdPessoaStatusRetirado",
+            query = "Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoaSolicita AND e.status_emprestimo like 'RETIRADO'"),
+    @NamedQuery(name = "Emprestimo.BuscarPorIdPessoaStatusESPERANDO_ANALISE",
+            query = "Select e from Emprestimo e WHERE e.id_pessoa_solicita.id_pessoa = :idPessoaSolicita AND e.status_emprestimo like 'ESPERANDO_ANALISE'")
 
 })
 public class Emprestimo implements Serializable, EntidadeBase {
@@ -84,7 +86,8 @@ public class Emprestimo implements Serializable, EntidadeBase {
         SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy");
         return dt.format(dt_emprestimo);
     }
-    public LocalDate getDt_emprestimoLocalDate(){
+
+    public LocalDate getDt_emprestimoLocalDate() {
         Instant instant = Instant.ofEpochMilli(dt_emprestimo.getTime());
         LocalDate localDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
         return localDate;
@@ -137,7 +140,6 @@ public class Emprestimo implements Serializable, EntidadeBase {
     public void setId_pessoa_autoriza(Pessoa id_pessoa_autoriza) {
         this.id_pessoa_autoriza = id_pessoa_autoriza;
     }
-    
 
     public String getNomePessoaSolicita() {
         return this.id_pessoa_solicita.getNome();

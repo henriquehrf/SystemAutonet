@@ -34,15 +34,15 @@ public class EmprestimoDAO extends GenericoDAO<Emprestimo> {
         return listaEmprestimo;
 
     }
-    
-     public List<Emprestimo> buscarPorIdPessoaStatusRetirado(Pessoa pessoa) {
+
+    public List<Emprestimo> buscarPorIdPessoaStatusRetirado(Pessoa pessoa) {
         EntityManager em = getEM();
         Query query;
         List<Emprestimo> listaEmprestimo;
         try {
             query = em.createNamedQuery("Emprestimo.BuscarPorIdPessoaStatusRetirado");
             query.setParameter("idPessoaSolicita", pessoa.getId());
-            
+
             listaEmprestimo = query.getResultList();
         } catch (Exception ex) {
             listaEmprestimo = new ArrayList();
@@ -69,8 +69,8 @@ public class EmprestimoDAO extends GenericoDAO<Emprestimo> {
         return listaEmprestimo;
 
     }
-    
-      public List<Emprestimo> buscarPorStatusEmprestimoPessoa(Emprestimo emprestimo) {
+
+    public List<Emprestimo> buscarPorStatusEmprestimoPessoa(Emprestimo emprestimo) {
         EntityManager em = getEM();
         Query query;
         List<Emprestimo> listaEmprestimo;
@@ -87,8 +87,8 @@ public class EmprestimoDAO extends GenericoDAO<Emprestimo> {
         return listaEmprestimo;
 
     }
-      
-       public List<Emprestimo> buscarPorTodos() {
+
+    public List<Emprestimo> buscarPorTodos() {
         EntityManager em = getEM();
         Query query;
         List<Emprestimo> listaEmprestimo;
@@ -103,4 +103,23 @@ public class EmprestimoDAO extends GenericoDAO<Emprestimo> {
         return listaEmprestimo;
 
     }
+
+    public List<Emprestimo> buscarPorIdPessoaStatusESPERANDO_ANALISE(Pessoa pessoa) {
+        EntityManager em = getEM();
+        Query query;
+        List<Emprestimo> listaEmprestimo;
+        try {
+            query = em.createNamedQuery("Emprestimo.BuscarPorIdPessoaStatusESPERANDO_ANALISE");
+            query.setParameter("idPessoaSolicita", pessoa.getId());
+
+            listaEmprestimo = query.getResultList();
+        } catch (Exception ex) {
+            listaEmprestimo = new ArrayList();
+        } finally {
+            em.close();
+        }
+        return listaEmprestimo;
+
+    }
+
 }
