@@ -80,7 +80,7 @@ public class LoginController {
                 }
             } else {
                 lblautenticacao.setText("Usuário não encontrado");
-                labelSenhaAlerta.setVisible(true);
+                labelUsuarioAlerta.setVisible(true);
                 lblautenticacao.setVisible(true);
                 return false;
             }
@@ -119,37 +119,29 @@ public class LoginController {
 
     @FXML
     void txtUsuarioOnKeyPressed(KeyEvent event) {
-        habilitarLogin();
+        //   habilitarLogin();
+
         labelUsuarioAlerta.setVisible(false);
         lblautenticacao.setVisible(false);
         labelSenhaAlerta.setVisible(false);
     }
 
-    void habilitarLogin() {
-        if (!txtSenha.getText().isEmpty()) {
-            if (!txtUsuario.getText().isEmpty()) {
-                btnLogin.setDisable(false);
-                btnLogin.setDefaultButton(true);
-            }
-        } else {
-            btnLogin.setDisable(true);
-        }
-    }
 
     @FXML
     void txtSenhaonKeyPressed(KeyEvent event) {
-        habilitarLogin();
-            labelUsuarioAlerta.setVisible(false);
-            lblautenticacao.setVisible(false);
-            labelSenhaAlerta.setVisible(false);
+        //      habilitarLogin();
+        labelUsuarioAlerta.setVisible(false);
+        lblautenticacao.setVisible(false);
+        labelSenhaAlerta.setVisible(false);
     }
 
     public void initialize() {
         NegociosEstaticos.iniciar();
         labelSenhaAlerta.setVisible(false);
         labelUsuarioAlerta.setVisible(false);
-        btnLogin.setDisable(true);
+        btnLogin.setDefaultButton(true);
         lblautenticacao.setVisible(false);
+
     }
 
 }
