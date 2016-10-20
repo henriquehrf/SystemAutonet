@@ -14,9 +14,13 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import controller.cadastro.Consulta.*;
 import enumm.PerfilUsuario;
+import gui.LoginController;
 import java.util.List;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.layout.Pane;
 import vo.Emprestimo;
 import vo.EmprestimoEstoqueMaterial;
 
@@ -121,7 +125,16 @@ public class PrincipalController {
     @FXML
     private SeparatorMenuItem SeparadoAcompanharAnalisar;
 
+    @FXML
+    private Label txtDadosPessoais;
+
+    private String msg = "Olá ";
+
     public void initialize() {
+
+        msg += ClasseDoSistemaEstatico.getPessoa().getNome();
+
+        txtDadosPessoais.setText(msg);
 //           List<Emprestimo> emp = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(ClasseDoSistemaEstatico.getPessoa());
 //            List<EmprestimoEstoqueMaterial> empm = NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarPorNaoDevolvido(emp.get(0));
 //            System.out.println("Inicio");
@@ -139,7 +152,7 @@ public class PrincipalController {
             SeparadoDevolverSoliticar.setVisible(false);
             SeparadoAcompanharAnalisar.setVisible(false);
         }
-        
+
     }
 
     @FXML
@@ -295,6 +308,23 @@ public class PrincipalController {
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
+
+    }
+
+    @FXML
+    void btnLogoffOnAction(ActionEvent event) {
+        ClasseDoSistemaEstatico.setPessoa(null);
+        BorderPane root = null;
+        try {
+
+            root = FXMLLoader.load(LoginController.class.getClassLoader().getResource("gui/Login.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+        Scene scene = new Scene(root);
+        SystemAutonet.SCENE = scene;
+        SystemAutonet.login.setScene(scene);
+        SystemAutonet.login.centerOnScreen();
 
     }
 

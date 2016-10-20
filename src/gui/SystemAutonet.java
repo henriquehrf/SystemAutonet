@@ -5,36 +5,14 @@
  */
 package gui;
 
-import classesAuxiliares.ClasseDoSistemaEstatico;
-import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
-import controller.cadastro.Consulta.ConsultarDepartamentoController;
-import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.util.Pair;
-import vo.Emprestimo;
-import vo.EmprestimoEstoqueMaterial;
-import vo.Pessoa;
 
 /**
  *
