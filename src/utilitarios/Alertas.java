@@ -32,7 +32,8 @@ public class Alertas {
             alert.showAndWait();
 
         } catch (Exception ex) {
-            alerta(Alert.AlertType.ERROR, ex.getMessage(), "ERRO");
+          //  alerta(Alert.AlertType.ERROR, ex.getMessage(), "ERRO");
+            System.out.println(ex.getMessage());
         }
 
     }

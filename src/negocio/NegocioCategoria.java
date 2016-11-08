@@ -54,6 +54,9 @@ public class NegocioCategoria {
     public List<Categoria> buscarPorDescricao(Categoria categoria) {
         return categoriaDAO.buscarPorDescricao(categoria);
     }
+    public boolean compararPorDescricao(Categoria categoria) {
+        return categoriaDAO.compararPorDescricao(categoria);
+    }
 
     public List<Categoria> bucarTodos() {
         return categoriaDAO.buscarTodos();
@@ -62,8 +65,11 @@ public class NegocioCategoria {
     public String validar(Categoria cat){
         String erro = "";
         
-        if(buscarPorDescricao(cat).size() > 0){
-            erro = "Esse nome ja existe";
+        if(!compararPorDescricao(cat)){
+            erro = "Esse nome ja existe\n";
+        }
+        if(cat.getDescricao().length()>50){
+            erro += "\n Estorou o limite de caracteres ";
         }
         
         

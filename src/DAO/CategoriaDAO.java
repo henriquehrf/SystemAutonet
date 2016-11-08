@@ -33,8 +33,32 @@ public class CategoriaDAO extends GenericoDAO<Categoria> {
         }
         return list;
     }
+
+    public boolean compararPorDescricao(Categoria categoria) {
+
+        EntityManager em = getEM();
+        Categoria cat = null;
+        Query query;
+        try {
+            query = em.createNamedQuery("Categoria.buscarPorDescricao");
+            query.setParameter("descricao", categoria.getDescricao().toUpperCase());
+            cat = (Categoria) query.getSingleResult();
+
+            System.out.println(cat.getDescricao());
+
+        } catch (Exception ex) {
+            cat = null;
+        } finally {
+            em.close();
+        }
+        if (cat != null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     
-      public List<Categoria> buscarTodos() {
+    public List<Categoria> buscarTodos() {
         EntityManager em = getEM();
         List<Categoria> list;
         Query query;
@@ -49,6 +73,5 @@ public class CategoriaDAO extends GenericoDAO<Categoria> {
         }
         return list;
     }
-    
-    
+
 }

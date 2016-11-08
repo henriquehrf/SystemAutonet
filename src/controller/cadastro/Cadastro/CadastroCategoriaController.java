@@ -76,9 +76,11 @@ public class CadastroCategoriaController implements Initializable {
 
             try {
                 if (alterar != null) {
+                    System.out.println("caso 1");
                     salvar(alterar);
                 } else {
                     Categoria categoria = new Categoria();
+                    System.out.println("caso 2");
                     salvar(categoria);
 
                 }
@@ -188,6 +190,7 @@ public class CadastroCategoriaController implements Initializable {
         } catch (Exception ex) {
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();
+            System.out.println("estou aqui ");
             alerta(AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
         }
 
