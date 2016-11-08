@@ -19,75 +19,71 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
                                     <TextField fx:id="txtNomeFantasia" prefWidth="350.0" />
                                     <Label fx:id="lblnomefantasiaObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
                                     <TextField fx:id="txtRazaoSocial" prefWidth="350.0" />
                                     <Label fx:id="lblrazaoSocialObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
                                     <TextField fx:id="txtCnpj" prefWidth="150.0" />
                                     <Label fx:id="lblCnpjObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" stylesheets="@../../../utilitarios/teste.css" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" stylesheets="@../../../utilitarios/teste.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
                                     <TextField fx:id="txtInscricaoEstadual" prefWidth="200.0" />
                                     <Label fx:id="lblInscricaoObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <children>
                                     <TextField fx:id="txtTelefone" prefWidth="150.0" />
                                     <Label fx:id="lblTelefoneObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <children>
                                     <TextField fx:id="txtEmail" prefWidth="350.0" />
                                     <Label fx:id="lblEmailObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                  <children>
                                     <TextArea fx:id="txtEndereco" prefHeight="200.0" prefWidth="350.0" />
                                     <Label fx:id="lblEnderecoObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
                                  <children>
                                     <TextField fx:id="txtPessoaResponsavel" prefWidth="350.0" />
                                     <Label fx:id="lblPessoaResponsavelObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                              <Label text="%lbl.razaosocial" GridPane.rowIndex="4" />
-                              <Label text="%lbl.nomefantasia" GridPane.rowIndex="5" />
-                              <Label text="%lbl.cnpj" GridPane.rowIndex="6" />
-                              <Label text="%lbl.inscricaoestadual" GridPane.rowIndex="7" />
-                              <Label text="%lbl.telefone" GridPane.rowIndex="8" />
-                              <Label text="%lbl.email" GridPane.rowIndex="9" />
-                              <Label text="%lbl.endereco" GridPane.rowIndex="10" />
-                              <Label text="%lbl.pessoaresponsavel" GridPane.rowIndex="11" />
+                              <Label text="%lbl.razaosocial" GridPane.rowIndex="2" />
+                              <Label text="%lbl.nomefantasia" GridPane.rowIndex="3" />
+                              <Label text="%lbl.cnpj" GridPane.rowIndex="4" />
+                              <Label text="%lbl.inscricaoestadual" GridPane.rowIndex="5" />
+                              <Label text="%lbl.telefone" GridPane.rowIndex="6" />
+                              <Label text="%lbl.email" GridPane.rowIndex="7" />
+                              <Label text="%lbl.endereco" GridPane.rowIndex="8" />
+                              <Label text="%lbl.pessoaresponsavel" GridPane.rowIndex="9" />
                            </children>
                            <columnConstraints>
                               <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="122.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="631.0" minWidth="10.0" prefWidth="611.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -115,6 +111,9 @@
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </BorderPane.margin>
       </Label>
    </top>
    <bottom>

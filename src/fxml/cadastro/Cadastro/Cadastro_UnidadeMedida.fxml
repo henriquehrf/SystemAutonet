@@ -75,10 +75,13 @@
       </TabPane>
    </center>
    <top>
-      <Label id="label-header" fx:id="Title" styleClass="label-header" text="%title.cadastro.tipounidade" BorderPane.alignment="CENTER">
+      <Label id="label-header" fx:id="Title" styleClass="label-head" text="%title.cadastro.tipounidade" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </BorderPane.margin>
       </Label>
    </top>
    <bottom>

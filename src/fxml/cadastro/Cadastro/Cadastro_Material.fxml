@@ -88,7 +88,7 @@
       </TabPane>
    </center>
    <top>
-      <Label fx:id="Title" style="-fx-font-size: 20;" styleClass="label-head" text="%title.cadatro.material" BorderPane.alignment="CENTER">
+      <Label fx:id="Title" styleClass="label-head" text="%title.cadatro.material" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

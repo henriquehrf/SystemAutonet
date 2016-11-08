@@ -67,7 +67,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="Title" alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 20; -fx-font-family: Arial;" text="%title.consulta.tipo.saida" textAlignment="CENTER">
+                  <Label fx:id="Title" alignment="CENTER" contentDisplay="CENTER" styleClass="label-head" text="%title.consulta.tipo.saida" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
