@@ -183,7 +183,7 @@ public class CadastroFornecedorController {
         try {
             Properties prop = ler.getProp();
             Title.setText(prop.getProperty("title.alterar.fornecedor"));
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
 

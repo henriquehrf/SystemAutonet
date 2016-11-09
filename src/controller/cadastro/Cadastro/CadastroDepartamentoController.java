@@ -206,7 +206,7 @@ public class CadastroDepartamentoController {
         try {
             Properties prop = ler.getProp();
             Title.setText(prop.getProperty("title.alterar.pessoa"));
-        } catch (IOException ex) {
+        } catch (Exception ex) {
 
             System.out.println(ex.getMessage());
         }

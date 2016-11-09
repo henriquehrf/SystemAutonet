@@ -142,7 +142,7 @@ public class CadastroCategoriaController implements Initializable {
         try {
             Properties prop = ler.getProp();
             Title.setText(prop.getProperty("title.alterar.categoria"));
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }

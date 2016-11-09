@@ -197,7 +197,7 @@ public class CadastroSalaBlocoController {
             LerProperties ler = new LerProperties();
             Properties prop = ler.getProp();
             Title.setText(prop.getProperty("title.alterar.TipoSaida"));
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }

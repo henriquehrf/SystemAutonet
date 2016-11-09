@@ -478,7 +478,7 @@ public class CadastroPessoaController {
         try {
             Properties prop = ler.getProp();
             Title.setText(prop.getProperty("title.alterar.departamento"));
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         rdbAtivo.setDisable(false);
