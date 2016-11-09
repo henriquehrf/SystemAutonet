@@ -5,22 +5,32 @@
  */
 package DAO;
 
+import javafx.scene.control.Alert;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import utilitarios.Alertas;
 
 /**
  *
  * @author Eduardo
  */
 public class GenericoDAO<T extends EntidadeBase> {
-    
+
     public EntityManager getEM() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("SystemAutonetPU");
-        return factory.createEntityManager();
+        EntityManagerFactory factory;
+        try {
+            factory = Persistence.createEntityManagerFactory("SystemAutonetPU");
+            return factory.createEntityManager();
+        } catch (Exception ex) {
+            Alertas alert = new Alertas();
+            alert.alerta(Alert.AlertType.ERROR, "Erro de Conexão com Banco de Dados", "Não foi possivel conectar com o Banco de Dados");
+        }
+        return null;
+
     }
 
-    public T salvar(Class<T> clazz , T t) throws Exception {
+    public T salvar(Class<T> clazz, T t) throws Exception {
         EntityManager em = getEM();
 
         try {
@@ -36,13 +46,16 @@ public class GenericoDAO<T extends EntidadeBase> {
                 t = em.merge(t); // executa update
             }
             em.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println("Erro ao salvar");
+            System.out.println(ex.getMessage());
         } finally {
             em.close();
         }
         return t;
     }
 
-    public void remover(Class<T> clazz,T tt) throws Exception{
+    public void remover(Class<T> clazz, T tt) throws Exception {
         EntityManager em = getEM();
 
         T t = em.find(clazz, tt.getId());
@@ -50,20 +63,26 @@ public class GenericoDAO<T extends EntidadeBase> {
         try {
             em.getTransaction().begin();
             em.remove(t);  // executa o delete
-            em.getTransaction().commit();        
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println("Erro ao remover");
+            System.out.println(ex.getMessage());
         } finally {
             em.close();
         }
     }
-    
-    public  T consutarPorId(Class<T> clazz,T tt){
+
+    public T consutarPorId(Class<T> clazz, T tt) {
         EntityManager em = getEM();
-        T t = null; 
-        
-        try{
+        T t = null;
+
+        try {
             t = em.find(clazz, tt.getId()); // execulta o select no banco de dados
-            
-        }finally{
+
+        } catch (Exception ex) {
+            System.out.println("Erro ao consultar");
+            System.out.println(ex.getMessage());
+        } finally {
             em.close();
         }
         return t;
