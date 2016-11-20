@@ -9,7 +9,6 @@ import classesAuxiliares.NegociosEstaticos;
 import controller.cadastro.Consulta.ConsultarCategoriaController;
 import gui.SystemAutonet;
 import java.net.URL;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -118,6 +117,7 @@ public class CadastroCategoriaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        btnCancelar.setFocusTraversable(false);
         setcamposObrigatorio();
 
         if (!isCadastrar()) {

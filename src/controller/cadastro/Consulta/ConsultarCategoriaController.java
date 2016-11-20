@@ -10,15 +10,13 @@ import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroCategoriaController;
 import gui.SystemAutonet;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -27,6 +25,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import utilitarios.Alertas;
 import utilitarios.LerMessage;
 import vo.Categoria;
@@ -127,8 +127,27 @@ public class ConsultarCategoriaController {
         cat.setDescricao(txtBuscador.getText());
         completarTabela(NegociosEstaticos.getNegocioCategoria().buscarPorDescricao(cat));
     }
+       @FXML
+    void btnBuscar_OnActionKey(KeyEvent event) {
+        Categoria cat = new Categoria();
+        cat.setDescricao(txtBuscador.getText());
+        completarTabela(NegociosEstaticos.getNegocioCategoria().buscarPorDescricao(cat));
+    }
+    @FXML
+    void txtBuscadorOnKeyPressed(KeyEvent event){
+        
+        if(event.getCode() == KeyCode.ENTER){
+            btnBuscar_OnActionKey(event);
+        }
+    }
 
     public void initialize() {
+//          
+//        btnAlterar.setFocusTraversable(false);
+//        btnBuscar.setFocusTraversable(false);
+//        btnExcluir.setFocusTraversable(false);
+//        btnInserir.setFocusTraversable(false);
+//        btnVoltar.setFocusTraversable(false);
         List<Categoria> lista = NegociosEstaticos.getNegocioCategoria().bucarTodos();
 
         completarTabela(lista);

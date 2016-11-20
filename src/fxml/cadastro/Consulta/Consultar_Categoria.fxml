@@ -21,21 +21,6 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-               <children>
-                  <Button fx:id="btnVoltar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnVoltar_OnAction" prefWidth="100.0" styleClass="button-voltar" text="%btn.voltar">
-                     <HBox.margin>
-                        <Insets right="50.0" top="30.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="35.0" prefWidth="816.0">
@@ -57,6 +42,21 @@
                         </Button>
                      </children>
                   </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <children>
+                  <Button fx:id="btnVoltar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnVoltar_OnAction" prefWidth="100.0" styleClass="button-voltar" text="%btn.voltar">
+                     <HBox.margin>
+                        <Insets right="50.0" top="30.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
          </children>
@@ -86,7 +86,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <TextField fx:id="txtBuscador" maxHeight="25.0" prefHeight="25.0" prefWidth="379.0">
+                        <TextField fx:id="txtBuscador" maxHeight="25.0" onKeyPressed="#txtBuscadorOnKeyPressed" prefHeight="25.0" prefWidth="379.0">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

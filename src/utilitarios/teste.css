@@ -14,19 +14,20 @@
 }
 
 .button{
-    -fx-border-color:darkgrey;
+    -fx-border-color:none;
+    -fx-border-width: 1px;
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
     -fx-cursor:hand;
     -fx-background-color: linear-gradient( #ffffff, #808080);
-
 }
+
 .button:hover{
-    -fx-background-color:seashell ;
-    -fx-background-color: linear-gradient( #ffffff, #778899);
-
-
+    -fx-background-color: linear-gradient( #b0c4de,  #20b2aa);
+}
+.button:focused{
+    -fx-background-color: linear-gradient( #b0c4de,  #20b2aa);
 }
 .text-field{
     -fx-border-color:darkgrey;
@@ -283,15 +284,14 @@
     -fx-min-width:120;
     -fx-alignment:CENTER;
 
-
 }
 .button-adicionar{
-    -fx-border-color:none;
-    -fx-background-color:white;
-    -fx-background-color: linear-gradient( #f0ffff, #90ee90);
+    -fx-border-color:darkgrey;
+    -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
     -fx-cursor:hand;
+    -fx-background-color: linear-gradient( #f0ffff, #90ee90);
     -fx-background-image: url('icones/adicionar.png');
     -fx-background-size: 20 20 ;
     -fx-background-repeat: no-repeat;

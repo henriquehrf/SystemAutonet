@@ -1,8 +1,6 @@
 package controller;
 
 import classesAuxiliares.ClasseDoSistemaEstatico;
-import classesAuxiliares.NegociosEstaticos;
-import controller.cadastro.Cadastro.CadastroCategoriaController;
 import gui.SystemAutonet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -15,14 +13,11 @@ import javafx.scene.layout.BorderPane;
 import controller.cadastro.Consulta.*;
 import enumm.PerfilUsuario;
 import gui.LoginController;
-import java.util.List;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.layout.Pane;
-import vo.Emprestimo;
-import vo.EmprestimoEstoqueMaterial;
 
 public class PrincipalController {
 
@@ -128,9 +123,12 @@ public class PrincipalController {
     @FXML
     private Label txtDadosPessoais;
 
+    @FXML
+    private Button btnLogoff;
     private String msg = "Olá ";
 
     public void initialize() {
+           btnLogoff.setFocusTraversable(false);
 
         msg += ClasseDoSistemaEstatico.getPessoa().getNome();
 
