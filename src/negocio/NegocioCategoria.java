@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Properties;
 import javax.persistence.PersistenceException;
 import javax.persistence.TransactionRequiredException;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.Categoria;
 
 /**
@@ -41,8 +41,8 @@ public class NegocioCategoria {
            categoriaDAO.remover(Categoria.class, categoria);
             
         }catch(Exception ex){
-             Properties prop = LerProperties.getProp();
-            throw new Exception(prop.getProperty("msg.remover"));
+             LerMessage ler = new LerMessage();
+            throw new Exception(ler.getMessage("msg.remover"));
         }
     }
 

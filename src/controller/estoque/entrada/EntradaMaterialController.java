@@ -46,7 +46,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
-import utilitarios.LerProperties;
+import utilitarios.Alertas;
+import utilitarios.LerMessage;
 import vo.Entrada;
 import vo.EntradaMaterial;
 import vo.EstoqueMaterial;
@@ -594,9 +595,9 @@ public class EntradaMaterialController implements Initializable {
                 }
             } else {
                 try {
-                    LerProperties ler = new LerProperties();
-                    Properties prop = ler.getProp();
-                    alerta(Alert.AlertType.ERROR, prop.getProperty("msg.incompatibilidade.numero"), prop.getProperty("msg.incompatibilidade.numero"));
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso =  new Alertas();
+                    aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.incompatibilidade.numero"), ler.getMessage("msg.incompatibilidade.numero"));
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -817,23 +818,12 @@ public class EntradaMaterialController implements Initializable {
 
     }
 
-    void alerta(Alert.AlertType TipoAviso, String cabecalho, String msg) throws Exception {
-        LerProperties ler = new LerProperties();
 
-        Properties prop = ler.getProp();
-        Alert alert = new Alert(TipoAviso);
-        alert.setTitle(cabecalho);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-
-        alert.showAndWait();
-
-    }
 
     private void IncompatibilidadeNumero() throws Exception {
-        LerProperties ler = new LerProperties();
-        Properties prop = ler.getProp();
-        alerta(Alert.AlertType.ERROR, prop.getProperty("msg.dados.erro"), prop.getProperty("msg.incompatibilidade.numero"));
+        LerMessage ler = new LerMessage();
+        Alertas aviso =  new Alertas();
+        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.dados.erro"), ler.getMessage("msg.incompatibilidade.numero"));
 
     }
 

@@ -5,11 +5,8 @@
  */
 package utilitarios;
 
-import java.io.IOException;
 import java.util.Optional;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -21,9 +18,7 @@ public class Alertas {
 
     public void alerta(Alert.AlertType TipoAviso, String cabecalho, String msg) {
         try {
-            LerProperties ler = new LerProperties();
 
-            Properties prop = ler.getProp();
             Alert alert = new Alert(TipoAviso);
             alert.setTitle(cabecalho);
             alert.setHeaderText(null);

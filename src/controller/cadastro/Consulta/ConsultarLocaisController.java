@@ -25,7 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioDepartamento;
 import negocio.NegocioLocal;
 import utilitarios.Alertas;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.Departamento;
 import vo.Local;
 
@@ -134,9 +134,8 @@ public class ConsultarLocaisController {
     void btnExcluir_OnAction(ActionEvent event) {
          try {
             Alertas alert = new Alertas();
-            Properties prop;
-            prop = LerProperties.getProp();
-            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"), "Sim", "Não")) {
+            LerMessage ler =  new LerMessage();
+            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
                 NegociosEstaticos.getNegocioLocal().remover(tblPrincipal.getSelectionModel().getSelectedItem());
                 completarTabela(NegociosEstaticos.getNegocioLocal().buscarTodos());
             }
@@ -168,9 +167,9 @@ public class ConsultarLocaisController {
                 }
             } else {
                 try {
-                    LerProperties ler = new LerProperties();
-                    Properties prop = ler.getProp();
-                    alerta(Alert.AlertType.ERROR, prop.getProperty("msg.incompatibilidade.numero"), prop.getProperty("msg.incompatibilidade.numero"));
+                    LerMessage ler = new LerMessage();
+                   Alertas aviso =  new Alertas();
+                    aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.incompatibilidade.numero"), ler.getMessage("msg.incompatibilidade.numero"));
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -200,16 +199,5 @@ public class ConsultarLocaisController {
 
     }
 
-    void alerta(Alert.AlertType TipoAviso, String cabecalho, String msg) throws Exception {
-        LerProperties ler = new LerProperties();
 
-        Properties prop = ler.getProp();
-        Alert alert = new Alert(TipoAviso);
-        alert.setTitle(cabecalho);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-
-        alert.showAndWait();
-
-    }
 }

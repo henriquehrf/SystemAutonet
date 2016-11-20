@@ -8,7 +8,7 @@ package negocio;
 import DAO.TipoSaidaDAO;
 import java.util.List;
 import java.util.Properties;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.TipoSaida;
 
 /**
@@ -32,8 +32,8 @@ public class NegocioTipoSaida {
            tsDAO.remover(TipoSaida.class, ts);
 
         } catch (Exception ex) {
-            Properties prop = LerProperties.getProp();
-            throw new Exception(prop.getProperty("msg.remover"));
+            LerMessage ler = new LerMessage();
+            throw new Exception(ler.getMessage("msg.remover"));
         }
        
     }

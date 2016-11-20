@@ -24,7 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioFornecedor;
 import utilitarios.Alertas;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.Fornecedor;
 
 public class ConsultarFornecedorController {
@@ -144,9 +144,8 @@ public class ConsultarFornecedorController {
     void btnExcluir_OnAction(ActionEvent event) {
         try {
             Alertas alert = new Alertas();
-            Properties prop;
-            prop = LerProperties.getProp();
-            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"), "Sim", "Não")) {
+            LerMessage ler = new LerMessage();
+            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
                 NegociosEstaticos.getNegocioFornecedor().remover(tblPrincipal.getSelectionModel().getSelectedItem());
                 completarTabela(NegociosEstaticos.getNegocioFornecedor().buscarTodos());
             }
@@ -199,23 +198,12 @@ public class ConsultarFornecedorController {
     }
 
     private void IncompatibilidadeNumero() throws Exception {
-        LerProperties ler = new LerProperties();
-        Properties prop = ler.getProp();
-        alerta(Alert.AlertType.ERROR, prop.getProperty("msg.dados.erro"), prop.getProperty("msg.incompatibilidade.numero"));
+        LerMessage ler = new LerMessage();
+        Alertas aviso = new Alertas();
+        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.dados.erro"), ler.getMessage("msg.incompatibilidade.numero"));
 
     }
 
-    void alerta(Alert.AlertType TipoAviso, String cabecalho, String msg) throws Exception {
-        LerProperties ler = new LerProperties();
 
-        Properties prop = ler.getProp();
-        Alert alert = new Alert(TipoAviso);
-        alert.setTitle(cabecalho);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-
-        alert.showAndWait();
-
-    }
 
 }

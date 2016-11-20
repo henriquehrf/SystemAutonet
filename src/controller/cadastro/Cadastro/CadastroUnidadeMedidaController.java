@@ -8,11 +8,8 @@ package controller.cadastro.Cadastro;
 import classesAuxiliares.NegociosEstaticos;
 import controller.cadastro.Consulta.ConsultarUnidadeMedidaController;
 import gui.SystemAutonet;
-import java.io.IOException;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +19,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import negocio.NegocioTipoUnidade;
-import utilitarios.LerProperties;
+import utilitarios.Alertas;
+import utilitarios.LerMessage;
 import vo.TipoUnidade;
 
 /**
@@ -98,11 +95,11 @@ public class CadastroUnidadeMedidaController {
                     salvar(ts);
                 }
             } catch (Exception ex) {
-                LerProperties ler = new LerProperties();
-                Properties prop;
+                LerMessage ler = new LerMessage();
+                Alertas aviso = new Alertas();
                 try {
-                    prop = ler.getProp();
-                    alerta(AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
+                    
+                    aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
                 } catch (Exception ex1) {
                     System.out.println(ex1.getMessage());
                 }
@@ -110,9 +107,9 @@ public class CadastroUnidadeMedidaController {
             }
         } else {
             try {
-                LerProperties ler = new LerProperties();
-                Properties prop = ler.getProp();
-                alerta(AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), prop.getProperty("msg.cadastro.incompleto"));
+                LerMessage ler = new LerMessage();
+             Alertas aviso = new Alertas();
+                aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
 
@@ -144,26 +141,14 @@ public class CadastroUnidadeMedidaController {
         txtsigla.setText(alterar.getSigla());
 
         try {
-            LerProperties ler = new LerProperties();
-            Properties prop = ler.getProp();
-            Title.setText(prop.getProperty("title.alterar.tipounidade"));
+            LerMessage ler = new LerMessage();
+           
+            Title.setText(ler.getMessage("title.alterar.tipounidade"));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    void alerta(Alert.AlertType TipoAviso, String cabecalho, String msg) throws Exception {
-        LerProperties ler = new LerProperties();
-
-        Properties prop = ler.getProp();
-        Alert alert = new Alert(TipoAviso);
-        alert.setTitle(cabecalho);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-
-        alert.showAndWait();
-
-    }
 
     private void salvar(TipoUnidade ts) throws Exception {
 
@@ -177,16 +162,16 @@ public class CadastroUnidadeMedidaController {
             //NegocioT = null;
             
             Parent root;
-            LerProperties ler = new LerProperties();
-            Properties prop = ler.getProp();
+            LerMessage ler = new LerMessage();
+            Alertas aviso = new Alertas();
 
-            alerta(AlertType.INFORMATION, prop.getProperty("msg.cadastro.confirmacao"), prop.getProperty("msg.cadastro.sucesso"));
+            aviso.alerta(AlertType.INFORMATION, ler.getMessage("msg.cadastro.confirmacao"), ler.getMessage("msg.cadastro.sucesso"));
             root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_UnidadeMedida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
-            LerProperties ler = new LerProperties();
-            Properties prop = ler.getProp();
-            alerta(AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
+            LerMessage ler = new LerMessage();
+            Alertas aviso = new Alertas();
+            aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
         }
     }
 

@@ -35,11 +35,12 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import negocio.NegocioPessoa;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import enumm.Atividade;
 import enumm.PerfilUsuario;
 import vo.Pessoa;
 import enumm.Sexo;
+import utilitarios.Alertas;
 
 /**
  *
@@ -204,11 +205,11 @@ public class CadastroPessoaController {
 
                 }
             } catch (Exception ex) {
-                LerProperties ler = new LerProperties();
-                Properties prop;
+                LerMessage ler = new LerMessage();
+                Alertas aviso = new Alertas();
                 try {
-                    prop = ler.getProp();
-                    alerta(Alert.AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
+                    
+                    aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
                 } catch (Exception ex1) {
                     System.out.println(ex1.getMessage());
                 }
@@ -216,9 +217,9 @@ public class CadastroPessoaController {
 
         } else {
             try {
-                LerProperties ler = new LerProperties();
-                Properties prop = ler.getProp();
-                alerta(AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), prop.getProperty("msg.cadastro.incompleto"));
+                LerMessage ler = new LerMessage();
+               Alertas aviso =  new Alertas();
+                aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
 
@@ -236,9 +237,9 @@ public class CadastroPessoaController {
     }
 
     private void IncompatibilidadeNumero() throws Exception {
-        LerProperties ler = new LerProperties();
-        Properties prop = ler.getProp();
-        alerta(Alert.AlertType.ERROR, prop.getProperty("msg.dados.erro"), prop.getProperty("msg.incompatibilidade.numero"));
+        LerMessage ler = new LerMessage();
+        Alertas aviso = new Alertas();
+        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.dados.erro"), ler.getMessage("msg.incompatibilidade.numero"));
 
     }
 
@@ -315,19 +316,19 @@ public class CadastroPessoaController {
             //   NegocioP.salvar(pessoa);
             NegociosEstaticos.getNegocioPessoa().salvar(pessoa);
             Parent root;
-            LerProperties ler = new LerProperties();
-            Properties prop = ler.getProp();
+            LerMessage ler = new LerMessage();
+            Alertas aviso = new Alertas();
             // NegocioP = null;
             alterar = null;
           
             
-            alerta(AlertType.INFORMATION, prop.getProperty("msg.cadastro.confirmacao"), prop.getProperty("msg.cadastro.sucesso"));
+            aviso.alerta(AlertType.INFORMATION, ler.getMessage("msg.cadastro.confirmacao"), ler.getMessage("msg.cadastro.sucesso"));
             root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
-            LerProperties ler = new LerProperties();
-            Properties prop = ler.getProp();
-            alerta(AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
+            LerMessage ler = new LerMessage();
+            Alertas aviso = new Alertas();
+            aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
         }
     }
 
@@ -366,18 +367,7 @@ public class CadastroPessoaController {
 
     }
 
-    void alerta(AlertType TipoAviso, String cabecalho, String msg) throws Exception {
-        LerProperties ler = new LerProperties();
 
-        Properties prop = ler.getProp();
-        Alert alert = new Alert(TipoAviso);
-        alert.setTitle(cabecalho);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-
-        alert.showAndWait();
-
-    }
 
     private void setcamposObrigatorio() {
         nomeObrigatorio.setVisible(false);
@@ -474,10 +464,10 @@ public class CadastroPessoaController {
         } else {
             rdbMasculino.setSelected(true);
         }
-        LerProperties ler = new LerProperties();
+        LerMessage ler = new LerMessage();
         try {
-            Properties prop = ler.getProp();
-            Title.setText(prop.getProperty("title.alterar.departamento"));
+       
+            Title.setText(ler.getMessage("title.alterar.departamento"));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

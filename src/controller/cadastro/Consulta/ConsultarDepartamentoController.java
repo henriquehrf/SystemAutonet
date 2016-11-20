@@ -26,7 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioDepartamento;
 import utilitarios.Alertas;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.Departamento;
 
 public class ConsultarDepartamentoController {
@@ -118,10 +118,10 @@ public class ConsultarDepartamentoController {
     @FXML
     void btnExcluir_OnAction(ActionEvent event) {
         Alertas alert = new Alertas();
-        Properties prop;
+        LerMessage ler = new LerMessage();
         try {
-            prop = LerProperties.getProp();
-           if(alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"),"Sim","Não")){
+            
+           if(alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"),"Sim","Não")){
                NegociosEstaticos.getNegocioDepartamento().remover(tblPrincipal.getSelectionModel().getSelectedItem());
                completarTabela(NegociosEstaticos.getNegocioDepartamento().buscarTodos());
            }

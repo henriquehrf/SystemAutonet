@@ -9,11 +9,8 @@ import classesAuxiliares.NegociosEstaticos;
 import classesAuxiliares.Validar;
 import controller.cadastro.Consulta.ConsultarFornecedorController;
 import gui.SystemAutonet;
-import java.io.IOException;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +20,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import negocio.NegocioFornecedor;
-import utilitarios.LerProperties;
+import utilitarios.Alertas;
+import utilitarios.LerMessage;
 import vo.Fornecedor;
 
 /**
@@ -134,20 +131,20 @@ public class CadastroFornecedorController {
                     salvar(fornecedor);
                 }
             } catch (Exception ex) {
-                LerProperties ler = new LerProperties();
-                Properties prop;
+                LerMessage ler = new LerMessage();
+                Alertas aviso = new Alertas();
                 try {
-                    prop = ler.getProp();
-                    alerta(Alert.AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
+                   
+                    aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
                 } catch (Exception ex1) {
                     System.out.println(ex1.getMessage());
                 }
             }
         } else {
             try {
-                LerProperties ler = new LerProperties();
-                Properties prop = ler.getProp();
-                alerta(Alert.AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), prop.getProperty("msg.cadastro.incompleto"));
+                LerMessage ler = new LerMessage();
+                Alertas aviso = new Alertas();
+                aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
 
@@ -178,11 +175,11 @@ public class CadastroFornecedorController {
         txtPessoaResponsavel.setText(alterar.getPessoa_responsavel());
         txtRazaoSocial.setText(alterar.getRazao_social());
         txtTelefone.setText(alterar.getTelefone());
-        LerProperties ler = new LerProperties();
+        LerMessage ler = new LerMessage();
 
         try {
-            Properties prop = ler.getProp();
-            Title.setText(prop.getProperty("title.alterar.fornecedor"));
+      
+            Title.setText(ler.getMessage("title.alterar.fornecedor"));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -216,38 +213,26 @@ public class CadastroFornecedorController {
             alterar = null;
            // negocioF = null;
             Parent root;
-            LerProperties ler = new LerProperties();
-            Properties prop = ler.getProp();
-            alerta(Alert.AlertType.INFORMATION, prop.getProperty("msg.cadastro.confirmacao"), prop.getProperty("msg.cadastro.sucesso"));
+            LerMessage ler = new LerMessage();
+            Alertas aviso = new Alertas();
+            aviso.alerta(Alert.AlertType.INFORMATION, ler.getMessage("msg.cadastro.confirmacao"), ler.getMessage("msg.cadastro.sucesso"));
 
             root = FXMLLoader.load(ConsultarFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
-            LerProperties ler = new LerProperties();
-            Properties prop = ler.getProp();
-            alerta(Alert.AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
+            LerMessage ler = new LerMessage();
+            Alertas aviso = new Alertas();
+            aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
         }
     }
 
     private void IncompatibilidadeNumero() throws Exception {
-        LerProperties ler = new LerProperties();
-        Properties prop = ler.getProp();
-        alerta(Alert.AlertType.ERROR, prop.getProperty("msg.dados.erro"), prop.getProperty("msg.incompatibilidade.numero"));
+        LerMessage ler = new LerMessage();
+        Alertas aviso = new Alertas();
+        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.dados.erro"), ler.getMessage("msg.incompatibilidade.numero"));
 
     }
 
-    void alerta(Alert.AlertType TipoAviso, String cabecalho, String msg) throws Exception {
-        LerProperties ler = new LerProperties();
-
-        Properties prop = ler.getProp();
-        Alert alert = new Alert(TipoAviso);
-        alert.setTitle(cabecalho);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-
-        alert.showAndWait();
-
-    }
 
     private void setcamposObrigatorio() {
         lblCnpjObrigatorio.setVisible(false);

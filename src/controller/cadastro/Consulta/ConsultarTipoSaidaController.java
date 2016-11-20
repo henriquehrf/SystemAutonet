@@ -22,7 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioTipoSaida;
 import utilitarios.Alertas;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.TipoSaida;
 
 public class ConsultarTipoSaidaController {
@@ -108,9 +108,8 @@ public class ConsultarTipoSaidaController {
     void btnExcluir_OnAction(ActionEvent event) {
          try {
             Alertas alert = new Alertas();
-            Properties prop;
-            prop = LerProperties.getProp();
-            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"), "Sim", "Não")) {
+            LerMessage ler = new LerMessage();
+            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
                 NegociosEstaticos.getNegocioTipoSaida().remover(tblPrincipal.getSelectionModel().getSelectedItem());
                 completarTabela(NegociosEstaticos.getNegocioTipoSaida().buscarTodos());
             }

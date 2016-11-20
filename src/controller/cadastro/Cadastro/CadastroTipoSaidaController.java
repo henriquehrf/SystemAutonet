@@ -21,7 +21,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import negocio.NegocioTipoSaida;
-import utilitarios.LerProperties;
+import utilitarios.Alertas;
+import utilitarios.LerMessage;
 import vo.TipoSaida;
 
 /**
@@ -92,9 +93,9 @@ public class CadastroTipoSaidaController {
 
         } else {
             try {
-                LerProperties ler = new LerProperties();
-                Properties prop = ler.getProp();
-                alerta(AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), prop.getProperty("msg.cadastro.incompleto"));
+                LerMessage ler = new LerMessage();
+                Alertas aviso =  new Alertas();
+                aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
 
@@ -139,39 +140,28 @@ public class CadastroTipoSaidaController {
             alterar = null;
            
             Parent root;
-            LerProperties ler = new LerProperties();
-            Properties prop = ler.getProp();
+            LerMessage ler = new LerMessage();
+            Alertas aviso =  new Alertas();
          //   NegocioT = null;
-            alerta(AlertType.INFORMATION, prop.getProperty("msg.cadastro.confirmacao"), prop.getProperty("msg.cadastro.sucesso"));
+            aviso.alerta(AlertType.INFORMATION, ler.getMessage("msg.cadastro.confirmacao"), ler.getMessage("msg.cadastro.sucesso"));
             root = FXMLLoader.load(ConsultarTipoSaidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_TipoSaida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
-            LerProperties ler = new LerProperties();
-            Properties prop = ler.getProp();
-            alerta(AlertType.ERROR, prop.getProperty("msg.cadastro.erro"), ex.getMessage());
+            LerMessage ler = new LerMessage();
+            Alertas aviso =  new Alertas();
+            aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
         }
     }
 
-    void alerta(AlertType TipoAviso, String cabecalho, String msg) throws Exception {
-        LerProperties ler = new LerProperties();
 
-        Properties prop = ler.getProp();
-        Alert alert = new Alert(TipoAviso);
-        alert.setTitle(cabecalho);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-
-        alert.showAndWait();
-
-    }
 
     private void completar() {
         txtfinalidade.setText(alterar.getDescricao());
 
         try {
-            LerProperties ler = new LerProperties();
-            Properties prop = ler.getProp();
-            Title.setText(prop.getProperty("title.alterar.TipoSaida"));
+            LerMessage ler = new LerMessage();
+            
+            Title.setText(ler.getMessage("title.alterar.TipoSaida"));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

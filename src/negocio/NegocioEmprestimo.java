@@ -8,7 +8,7 @@ package negocio;
 import DAO.EmprestimoDAO;
 import java.util.List;
 import java.util.Properties;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.Emprestimo;
 import vo.Pessoa;
 
@@ -40,8 +40,8 @@ public class NegocioEmprestimo {
             empDAO.remover(Emprestimo.class, emp);
 
         } catch (Exception ex) {
-            Properties prop = LerProperties.getProp();
-            throw new Exception(prop.getProperty("msg.remover"));
+            LerMessage ler = new LerMessage();
+            throw new Exception(ler.getMessage("msg.remover"));
         }
     }
 

@@ -8,8 +8,6 @@ import gui.SystemAutonet;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,9 +22,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import negocio.NegocioPessoa;
 import utilitarios.Alertas;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.Pessoa;
 
 public class ConsultarPessoaController {
@@ -149,9 +146,8 @@ public class ConsultarPessoaController {
     void btnExcluirOnAction(ActionEvent event) {
         try {
             Alertas alert = new Alertas();
-            Properties prop;
-            prop = LerProperties.getProp();
-            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"), "Sim", "Não")) {
+            LerMessage ler = new LerMessage();
+            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
                 NegociosEstaticos.getNegocioPessoa().remover(tblPrincipal.getSelectionModel().getSelectedItem());
             }
         } catch (Exception ex) {
@@ -162,7 +158,7 @@ public class ConsultarPessoaController {
             } catch (Exception ex1) {
                 Alertas alert = new Alertas();
                 alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex1.getMessage());
-               
+
             }
 
         }
@@ -232,22 +228,9 @@ public class ConsultarPessoaController {
     }
 
     private void IncompatibilidadeNumero() throws Exception {
-        LerProperties ler = new LerProperties();
-        Properties prop = ler.getProp();
-        alerta(Alert.AlertType.ERROR, prop.getProperty("msg.dados.erro"), prop.getProperty("msg.incompatibilidade.numero"));
-
-    }
-
-    void alerta(Alert.AlertType TipoAviso, String cabecalho, String msg) throws Exception {
-        LerProperties ler = new LerProperties();
-
-        Properties prop = ler.getProp();
-        Alert alert = new Alert(TipoAviso);
-        alert.setTitle(cabecalho);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-
-        alert.showAndWait();
+        LerMessage ler = new LerMessage();
+        Alertas aviso = new Alertas();
+        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.dados.erro"), ler.getMessage("msg.incompatibilidade.numero"));
 
     }
 

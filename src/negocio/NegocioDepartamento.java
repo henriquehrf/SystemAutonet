@@ -8,7 +8,7 @@ package negocio;
 import DAO.DepartamentoDAO;
 import java.util.List;
 import java.util.Properties;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.Departamento;
 
 /**
@@ -39,8 +39,8 @@ public class NegocioDepartamento {
             departamentoDAO.remover(Departamento.class, dp);
 
         } catch (Exception ex) {
-            Properties prop = LerProperties.getProp();
-            throw new Exception(prop.getProperty("msg.remover"));
+            LerMessage ler = new LerMessage();
+            throw new Exception(ler.getMessage("msg.remover"));
         }
     }
 

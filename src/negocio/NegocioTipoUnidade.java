@@ -8,7 +8,7 @@ package negocio;
 import DAO.TipoUnidadeDAO;
 import java.util.List;
 import java.util.Properties;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.TipoUnidade;
 
 /**
@@ -34,8 +34,8 @@ public class NegocioTipoUnidade {
             tuDAO.remover(TipoUnidade.class, tu);
 
         } catch (Exception ex) {
-            Properties prop = LerProperties.getProp();
-            throw new Exception(prop.getProperty("msg.remover"));
+            LerMessage ler = new LerMessage();
+            throw new Exception(ler.getMessage("msg.remover"));
         }
     }
 

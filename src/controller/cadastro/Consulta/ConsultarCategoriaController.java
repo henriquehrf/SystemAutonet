@@ -28,7 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import utilitarios.Alertas;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.Categoria;
 
 /**
@@ -110,9 +110,8 @@ public class ConsultarCategoriaController {
     void btnExcluir_OnAction(ActionEvent event) {
         try {
             Alertas alert = new Alertas();
-            Properties prop;
-            prop = LerProperties.getProp();
-            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"), "Sim", "Não")) {
+            LerMessage ler =  new LerMessage();
+            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
                 NegociosEstaticos.getNegocioCategoria().remover(tblPrincipal.getSelectionModel().getSelectedItem());
                 completarTabela(NegociosEstaticos.getNegocioCategoria().bucarTodos());
             }

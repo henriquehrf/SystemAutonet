@@ -8,7 +8,7 @@ package negocio;
 import DAO.LocalDAO;
 import java.util.List;
 import java.util.Properties;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.Local;
 
 /**
@@ -38,8 +38,8 @@ public class NegocioLocal {
             localDAO.remover(Local.class, local);
 
         } catch (Exception ex) {
-            Properties prop = LerProperties.getProp();
-            throw new Exception(prop.getProperty("msg.remover"));
+            LerMessage ler = new LerMessage();
+            throw new Exception(ler.getMessage("msg.remover"));
         }
     }
 

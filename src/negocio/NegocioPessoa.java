@@ -11,7 +11,7 @@ import classesAuxiliares.Validar;
 import enumm.Atividade;
 import java.util.List;
 import java.util.Properties;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.Emprestimo;
 import vo.EmprestimoEstoqueMaterial;
 import vo.Pessoa;
@@ -47,12 +47,12 @@ public class NegocioPessoa {
     public void Inativar(Pessoa pessoa) throws Exception {
         List<Emprestimo> listaEmprestimo = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(pessoa);
        
-        Properties prop = LerProperties.getProp();
+        LerMessage ler = new LerMessage();
         for (Emprestimo vo : listaEmprestimo) {
             List<EmprestimoEstoqueMaterial> listaEmprestimoEstoqueMaterial = NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarPorNaoDevolvido(vo);
 
             if (listaEmprestimoEstoqueMaterial.size() > 0) {
-                throw new Exception(prop.getProperty("msg.cadastro.remover.pendenteEmprestimo"));                
+                throw new Exception(ler.getMessage("msg.cadastro.remover.pendenteEmprestimo"));                
             }
         }
     
@@ -91,66 +91,66 @@ public class NegocioPessoa {
 
     private String validarPessoa(Pessoa pessoa) throws Exception {
         String erro = "";
-        LerProperties ler = new LerProperties();
+        LerMessage ler = new LerMessage();
 
-        Properties prop = ler.getProp();
+        
         if (pessoa.getNome().isEmpty()) {
-            erro += prop.getProperty("msg.cadastro.sem.nome");
+            erro += ler.getMessage("msg.cadastro.sem.nome");
         }
 
         if (pessoa.getNome().length() < 3) {
-            erro += prop.getProperty("msg.cadastro.curto.nome");
+            erro += ler.getMessage("msg.cadastro.curto.nome");
         }
 
         if (pessoa.getDt_nascimento() == null) {
-            erro += prop.getProperty("msg.cadastro.sem.dtNascimento");
+            erro += ler.getMessage("msg.cadastro.sem.dtNascimento");
         }
 
         if (!Validar.isCPF(pessoa.getCpf())) {
-            erro += prop.getProperty("msg.cadastro.cpfInvalido");
+            erro += ler.getMessage("msg.cadastro.cpfInvalido");
         }
 
         if (pessoa.getFone_principal().isEmpty()) {
-            erro += prop.getProperty("msg.cadastro.principalVazio");
+            erro += ler.getMessage("msg.cadastro.principalVazio");
         }
 
         if (pessoa.getNum_matricula().isEmpty()) {
-            erro += prop.getProperty("msg.cadastro.numMatriculaVazio");
+            erro += ler.getMessage("msg.cadastro.numMatriculaVazio");
         }
 
         if (pessoa.getEndereco().isEmpty()) {
-            erro += prop.getProperty("msg.cadastro.enderecoVazio");
+            erro += ler.getMessage("msg.cadastro.enderecoVazio");
         }
 
         if (pessoa.getSenha().isEmpty()) {
-            erro += prop.getProperty("msg.cadastro.senhaVazio");
+            erro += ler.getMessage("msg.cadastro.senhaVazio");
         }
 
         if (pessoa.getSenha().length() < 4) {
-            erro += prop.getProperty("msg.cadastro.senhaPequena");
+            erro += ler.getMessage("msg.cadastro.senhaPequena");
         }
         if (!pessoa.getEmail().isEmpty()) {
             if (!Validar.isEmail(pessoa.getEmail())) {
-                erro += prop.getProperty("msg.cadastro.emailInvalido");
+                erro += ler.getMessage("msg.cadastro.emailInvalido");
             }
         }
         if (pessoa.getId() == null || pessoa.getId() == 0) {
 
             if (pessoaDAO.EncontrarUsuario(pessoa)) {
-                erro += prop.getProperty("msg.cadastro.usuarioJaCadastrado");
+                erro += ler.getMessage("msg.cadastro.usuarioJaCadastrado");
             }
 
             if (pessoa.getId() == null || pessoa.getId() == 0) {
                 if (!buscarPorCPF(pessoa).isEmpty()) {
-                    erro += prop.getProperty("msg.cadastro.cpfJaCadastrado");
+                    erro += ler.getMessage("msg.cadastro.cpfJaCadastrado");
                 }
 
                 if (!buscarPorRG(pessoa).isEmpty()) {
-                    erro += prop.getProperty("msg.cadastro.rgJaCadastrado");
+                    erro += ler.getMessage("msg.cadastro.rgJaCadastrado");
                 }
 
                 if (!buscarPorMatricula(pessoa).isEmpty()) {
-                    erro += prop.getProperty("msg.cadastro.MatriculaJaCadastrada");
+                    erro += ler.getMessage("msg.cadastro.MatriculaJaCadastrada");
                 }
 
             }

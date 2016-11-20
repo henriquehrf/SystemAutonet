@@ -45,7 +45,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import utilitarios.Alertas;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.Emprestimo;
 import vo.EmprestimoEstoqueMaterial;
 import vo.Emprestimo;
@@ -146,8 +146,8 @@ public class AcompanharEmprestimoController {
             completarTabelaDetalhe(NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarTodosIdEmprestimo(tblPrincipal.getSelectionModel().getSelectedItem()));
         } else {
             Alertas alert = new Alertas();
-            Properties ler = LerProperties.getProp();
-            alert.alerta(Alert.AlertType.ERROR, "Selecionar", ler.getProperty("msg.erro.naoselecionado"));
+            LerMessage ler = new LerMessage();
+            alert.alerta(Alert.AlertType.ERROR, "Selecionar", ler.getMessage("msg.erro.naoselecionado"));
         }
 
     }

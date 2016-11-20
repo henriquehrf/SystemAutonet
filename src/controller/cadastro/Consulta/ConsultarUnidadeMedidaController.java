@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegocioTipoUnidade;
 import utilitarios.Alertas;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.TipoUnidade;
 
 public class ConsultarUnidadeMedidaController {
@@ -66,8 +66,8 @@ public class ConsultarUnidadeMedidaController {
     private Button btnBuscar;
 
     public void initialize() {
-       // negocioTU = new NegocioTipoUnidade();
-        List<TipoUnidade> lista =NegociosEstaticos.getNegocioTipoUnidade().buscarTodos();
+        // negocioTU = new NegocioTipoUnidade();
+        List<TipoUnidade> lista = NegociosEstaticos.getNegocioTipoUnidade().buscarTodos();
         completarTabela(lista);
         rdbdescricao.setSelected(true);
     }
@@ -75,7 +75,7 @@ public class ConsultarUnidadeMedidaController {
     @FXML
     void btnVoltar_OnAction(ActionEvent event) {
         try {
-          //  negocioTU = null;
+            //  negocioTU = null;
             Parent root;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -89,7 +89,7 @@ public class ConsultarUnidadeMedidaController {
         try {
             CadastroUnidadeMedidaController.setCadastrar(true);
             Parent root;
-           // negocioTU = null;
+            // negocioTU = null;
             root = FXMLLoader.load(CadastroUnidadeMedidaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_UnidadeMedida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -104,7 +104,7 @@ public class ConsultarUnidadeMedidaController {
             CadastroUnidadeMedidaController.setCadastrar(false);
             CadastroUnidadeMedidaController.setAlterar(p);
             Parent root;
-           // negocioTU = null;
+            // negocioTU = null;
             root = FXMLLoader.load(CadastroUnidadeMedidaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_UnidadeMedida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -114,11 +114,10 @@ public class ConsultarUnidadeMedidaController {
 
     @FXML
     void btnExcluir_OnAction(ActionEvent event) {
-         try {
+        try {
             Alertas alert = new Alertas();
-            Properties prop;
-            prop = LerProperties.getProp();
-            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", prop.getProperty("msg.temcerteza"), "Sim", "Não")) {
+            LerMessage ler = new LerMessage();
+            if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
                 NegociosEstaticos.getNegocioTipoUnidade().remover(tblPrincipal.getSelectionModel().getSelectedItem());
                 completarTabela(NegociosEstaticos.getNegocioTipoUnidade().buscarTodos());
             }

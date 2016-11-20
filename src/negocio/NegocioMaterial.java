@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utilitarios.LerProperties;
+import utilitarios.LerMessage;
 import vo.Categoria;
 import vo.Material;
 
@@ -48,8 +48,8 @@ public class NegocioMaterial {
             materialDAO.remover(Material.class, material);
 
         } catch (Exception ex) {
-            Properties prop = LerProperties.getProp();
-            throw new Exception(prop.getProperty("msg.remover"));
+            LerMessage ler = new LerMessage();
+            throw new Exception(ler.getMessage("msg.remover"));
         }
     }
 
