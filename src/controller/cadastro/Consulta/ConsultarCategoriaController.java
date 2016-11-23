@@ -11,9 +11,11 @@ import controller.cadastro.Cadastro.CadastroCategoriaController;
 import gui.SystemAutonet;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -91,7 +93,103 @@ public class ConsultarCategoriaController {
     }
 
     @FXML
+    void btnInserirOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+
+            CadastroCategoriaController.setCadastrar(true);
+
+            try {
+                Parent root;
+                root = FXMLLoader.load(CadastroCategoriaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Categoria.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+
+    }
+
+    @FXML
+    void btnAlterarOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+
+            if (tblPrincipal.getSelectionModel().getSelectedItem() == null) {
+                LerMessage ler = new LerMessage();
+                Alertas aviso = new Alertas();
+                aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
+                return;
+            }
+            Categoria p = tblPrincipal.getSelectionModel().getSelectedItem();
+
+            CadastroCategoriaController.setCadastrar(false);
+            CadastroCategoriaController.setAlterar(p);
+            try {
+                Parent root;
+                root = FXMLLoader.load(CadastroCategoriaController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Categoria.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    void btnExcluirOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+
+            if (tblPrincipal.getSelectionModel().getSelectedItem() == null) {
+                Alertas aviso = new Alertas();
+                LerMessage ler = new LerMessage();
+                aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
+                return;
+            }
+            try {
+                Alertas alert = new Alertas();
+                LerMessage ler = new LerMessage();
+                if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
+                    NegociosEstaticos.getNegocioCategoria().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+                    completarTabela(NegociosEstaticos.getNegocioCategoria().bucarTodos());
+                }
+            } catch (Exception ex) {
+                Alertas alert = new Alertas();
+                alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    void btnVoltarOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+
+            try {
+                Parent root;
+                root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    void btnBuscarOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+
+            Categoria cat = new Categoria();
+            cat.setDescricao(txtBuscador.getText());
+            completarTabela(NegociosEstaticos.getNegocioCategoria().buscarPorDescricao(cat));
+        }
+    }
+
+    @FXML
     void btnAlterar_OnAction(ActionEvent event) {
+
+        if (tblPrincipal.getSelectionModel().getSelectedItem() == null) {
+            Alertas aviso = new Alertas();
+            LerMessage ler = new LerMessage();
+            aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
+            return;
+        }
         Categoria p = tblPrincipal.getSelectionModel().getSelectedItem();
 
         CadastroCategoriaController.setCadastrar(false);
@@ -108,9 +206,15 @@ public class ConsultarCategoriaController {
 
     @FXML
     void btnExcluir_OnAction(ActionEvent event) {
+        if (tblPrincipal.getSelectionModel().getSelectedItem() == null) {
+            Alertas aviso = new Alertas();
+            LerMessage ler = new LerMessage();
+            aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
+            return;
+        }
         try {
             Alertas alert = new Alertas();
-            LerMessage ler =  new LerMessage();
+            LerMessage ler = new LerMessage();
             if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
                 NegociosEstaticos.getNegocioCategoria().remover(tblPrincipal.getSelectionModel().getSelectedItem());
                 completarTabela(NegociosEstaticos.getNegocioCategoria().bucarTodos());
@@ -127,27 +231,31 @@ public class ConsultarCategoriaController {
         cat.setDescricao(txtBuscador.getText());
         completarTabela(NegociosEstaticos.getNegocioCategoria().buscarPorDescricao(cat));
     }
-       @FXML
+
+    @FXML
     void btnBuscar_OnActionKey(KeyEvent event) {
         Categoria cat = new Categoria();
         cat.setDescricao(txtBuscador.getText());
         completarTabela(NegociosEstaticos.getNegocioCategoria().buscarPorDescricao(cat));
     }
+
     @FXML
-    void txtBuscadorOnKeyPressed(KeyEvent event){
-        
-        if(event.getCode() == KeyCode.ENTER){
+    void txtBuscadorOnKeyPressed(KeyEvent event) {
+
+        if (event.getCode() == KeyCode.ENTER) {
             btnBuscar_OnActionKey(event);
         }
     }
 
     public void initialize() {
-//          
-//        btnAlterar.setFocusTraversable(false);
-//        btnBuscar.setFocusTraversable(false);
-//        btnExcluir.setFocusTraversable(false);
-//        btnInserir.setFocusTraversable(false);
-//        btnVoltar.setFocusTraversable(false);
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                txtBuscador.requestFocus();
+            }
+        });
+
         List<Categoria> lista = NegociosEstaticos.getNegocioCategoria().bucarTodos();
 
         completarTabela(lista);

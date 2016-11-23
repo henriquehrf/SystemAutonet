@@ -24,10 +24,10 @@
 }
 
 .button:hover{
-    -fx-background-color: linear-gradient( #b0c4de,  #20b2aa);
+    -fx-background-color: linear-gradient( #f0f8ff,   #5f9ea0);
 }
 .button:focused{
-    -fx-background-color: linear-gradient( #b0c4de,  #20b2aa);
+    -fx-background-color: linear-gradient( #f0f8ff,   #5f9ea0);
 }
 .text-field{
     -fx-border-color:darkgrey;
@@ -36,6 +36,9 @@
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
 
+}
+.text-field:focused{
+    -fx-background-color: linear-gradient( #f0f8ff,  #faebd7);
 }
 .text-area{
     -fx-border-color:darkgrey;
