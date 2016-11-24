@@ -9,26 +9,31 @@ import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroCategoriaController;
 import gui.SystemAutonet;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import utilitarios.Alertas;
 import utilitarios.LerMessage;
 import vo.Categoria;
@@ -94,9 +99,8 @@ public class ConsultarCategoriaController {
 
     @FXML
     void btnInserirOnKeyPressed(KeyEvent event) {
+         CadastroCategoriaController.setCadastrar(true);
         if (event.getCode() == KeyCode.ENTER) {
-
-            CadastroCategoriaController.setCadastrar(true);
 
             try {
                 Parent root;
@@ -240,6 +244,32 @@ public class ConsultarCategoriaController {
     }
 
     @FXML
+    void tblPrincipalOnMouseClicked(MouseEvent event) {
+        if (event.getButton() == MouseButton.SECONDARY) {
+            final ContextMenu cm = new ContextMenu();
+            LerMessage ler = new LerMessage();
+            MenuItem cmItem1 = new MenuItem(ler.getMessage("btn.alterar"));
+            MenuItem cmItem2 = new MenuItem(ler.getMessage("btn.excluir"));
+
+            cm.getItems().add(cmItem1);
+            cm.getItems().add(cmItem2);
+
+            cmItem1.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e) {
+                    btnAlterar_OnAction(e);
+                }
+            });
+            cmItem2.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e) {
+                    btnExcluir_OnAction(e);
+                }
+            });
+            cm.show(Title, event.getScreenX(), event.getScreenY());
+
+        }
+    }
+
+    @FXML
     void txtBuscadorOnKeyPressed(KeyEvent event) {
 
         if (event.getCode() == KeyCode.ENTER) {
@@ -269,6 +299,14 @@ public class ConsultarCategoriaController {
         }
         this.tbcDescricao.setCellValueFactory(new PropertyValueFactory<Categoria, String>("descricao"));
 
+        Comparator<Categoria> cmp = new Comparator<Categoria>() {
+            @Override
+            public int compare(Categoria cat1, Categoria cat2) {
+                return cat1.getDescricao().compareTo(cat2.getDescricao());
+
+            }
+        };
+        Collections.sort(dado, cmp);
         this.tblPrincipal.setItems(dado);
 
     }

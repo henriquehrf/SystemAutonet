@@ -10,7 +10,6 @@
     -fx-max-width:450;
     -fx-min-height:250;
     -fx-min-width:450; 
-
 }
 
 .button{
@@ -154,7 +153,7 @@
     -fx-background-color:#6495ed;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-image: url('icon.png');
     -fx-background-size: 20 20 ;
     -fx-background-repeat: no-repeat;
@@ -166,7 +165,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/salvar.png');
     -fx-background-size: 20 20 ;
@@ -184,7 +183,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/cancelar.png');
     -fx-background-size: 20 20 ;
@@ -202,7 +201,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/solicitar.png');
     -fx-background-size: 20 20 ;
@@ -221,7 +220,7 @@
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
     -fx-text-alignment:left;
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/cadastrar.png');
     -fx-background-size: 20 20 ;
@@ -239,7 +238,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/editar.png');
     -fx-background-size: 20 20 ;
@@ -257,7 +256,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/remover.png');
     -fx-background-size: 20 20 ;
@@ -275,7 +274,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/voltar.png');
     -fx-background-size: 20 20 ;
@@ -293,7 +292,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #f0ffff, #90ee90);
     -fx-background-image: url('icones/adicionar.png');
     -fx-background-size: 20 20 ;
@@ -312,7 +311,7 @@
     -fx-background-color: linear-gradient( #ffffff,  #daa520);
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-image: url('icones/editar.png');
     -fx-background-size: 20 20 ;
     -fx-background-repeat: no-repeat;
@@ -330,7 +329,7 @@
     -fx-background-color: linear-gradient( #ffffff,   #cd5c5c);
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-image: url('icones/remover.png');
     -fx-background-size: 20 20 ;
     -fx-background-repeat: no-repeat;
@@ -346,7 +345,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/analisar.png');
     -fx-background-size: 20 20 ;
@@ -371,7 +370,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/consultar.png');
     -fx-background-size: 20 20 ;
@@ -388,7 +387,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/adicionarPedido.png');
     -fx-background-size: 20 20 ;
@@ -406,7 +405,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff,#8fbc8f);
     -fx-background-image: url('icones/aprovar.png');
     -fx-background-size: 20 20 ;
@@ -424,7 +423,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient(#e6e6fa, #cd5c5c);
     -fx-background-image: url('icones/recusar.png');
     -fx-background-size: 20 20 ;
@@ -442,7 +441,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/adicionar.png');
     -fx-background-size: 20 20 ;
@@ -461,7 +460,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/baixar.png');
     -fx-background-size: 20 20 ;
@@ -478,7 +477,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/devolver.png');
     -fx-background-size: 20 20 ;
@@ -495,7 +494,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/imprimir.png');
     -fx-background-size: 20 20 ;
@@ -512,7 +511,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/login.png');
     -fx-background-size: 20 20 ;
@@ -529,7 +528,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/sair.png');
     -fx-background-size: 20 20 ;
@@ -546,7 +545,7 @@
     -fx-background-color:none;
     -fx-font-size: 9pt;
     -fx-font-family: "Arial";
-    -fx-cursor:hand;
+/*    -fx-cursor:hand;*/
     -fx-background-color: linear-gradient( #ffffff, #808080);
     -fx-background-image: url('icones/logoff.png');
     -fx-background-size: 20 20 ;

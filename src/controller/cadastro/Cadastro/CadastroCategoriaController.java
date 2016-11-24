@@ -10,6 +10,7 @@ import controller.cadastro.Consulta.ConsultarCategoriaController;
 import gui.SystemAutonet;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +20,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import utilitarios.Alertas;
 import utilitarios.LerMessage;
 import vo.Categoria;
@@ -45,6 +49,9 @@ public class CadastroCategoriaController implements Initializable {
 
     @FXML
     private Button btnsalvar;
+
+    @FXML
+    private Tab tabCadastro;
 
     private static Categoria alterar;
 
@@ -84,7 +91,7 @@ public class CadastroCategoriaController implements Initializable {
                 LerMessage ler = new LerMessage();
                 Alertas aviso = new Alertas();
                 try {
-                    aviso.alerta(Alert.AlertType.ERROR,ler.getMessage("msg.cadastro.erro"), ex.getMessage());
+                    aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
                 } catch (Exception ex1) {
                     System.out.println(ex1.getMessage());
                 }
@@ -94,7 +101,7 @@ public class CadastroCategoriaController implements Initializable {
             try {
                 LerMessage ler = new LerMessage();
                 Alertas aviso = new Alertas();
-                aviso.alerta(AlertType.ERROR,ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
+                aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
 
@@ -115,9 +122,78 @@ public class CadastroCategoriaController implements Initializable {
 
     }
 
+    @FXML
+    void btnsalvarOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (verificaCampoObrigatorio()) {
+
+                try {
+                    if (alterar != null) {
+                        System.out.println("caso 1");
+                        salvar(alterar);
+                    } else {
+                        Categoria categoria = new Categoria();
+                        System.out.println("caso 2");
+                        salvar(categoria);
+
+                    }
+                } catch (Exception ex) {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    try {
+                        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
+                    } catch (Exception ex1) {
+                        System.out.println(ex1.getMessage());
+                    }
+                }
+
+            } else {
+                try {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+
+                }
+            }
+
+        }
+
+    }
+
+    @FXML
+    void btnCancelarOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                Parent root;
+                root = FXMLLoader.load(ConsultarCategoriaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Categoria.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+
+    }
+
+    @FXML
+    void txtCategoriaOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnsalvarOnKeyPressed(event);
+        }
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        btnCancelar.setFocusTraversable(false);
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+               
+                txtCategoria.requestFocus();
+            }
+        });
         setcamposObrigatorio();
 
         if (!isCadastrar()) {
@@ -141,7 +217,6 @@ public class CadastroCategoriaController implements Initializable {
             System.out.println(ex.getMessage());
         }
     }
-
 
     private boolean verificaCampoObrigatorio() {
         setcamposObrigatorio();
@@ -171,7 +246,7 @@ public class CadastroCategoriaController implements Initializable {
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
             LerMessage ler = new LerMessage();
-            Alertas aviso =  new Alertas();
+            Alertas aviso = new Alertas();
             aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
         }
 
