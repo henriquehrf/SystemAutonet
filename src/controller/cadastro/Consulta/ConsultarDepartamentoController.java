@@ -4,7 +4,6 @@ import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroDepartamentoController;
 import gui.SystemAutonet;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -181,7 +180,7 @@ public class ConsultarDepartamentoController {
             if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
                 Local aux = new Local();
                 aux.setId_departamento(tblPrincipal.getSelectionModel().getSelectedItem());
-                if (NegociosEstaticos.getNegocioLocal().buscarPorDepartamento(aux) == null) {
+                if (NegociosEstaticos.getNegocioLocal().buscarPorDepartamento(aux).size()==0) {
 
                     NegociosEstaticos.getNegocioDepartamento().remover(tblPrincipal.getSelectionModel().getSelectedItem());
                     completarTabela(NegociosEstaticos.getNegocioDepartamento().buscarTodos());
@@ -346,7 +345,7 @@ public class ConsultarDepartamentoController {
                 if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
                     Local aux = new Local();
                     aux.setId_departamento(tblPrincipal.getSelectionModel().getSelectedItem());
-                    if (NegociosEstaticos.getNegocioLocal().buscarPorDepartamento(aux) == null) {
+                     if (NegociosEstaticos.getNegocioLocal().buscarPorDepartamento(aux).size()==0) {
 
                         NegociosEstaticos.getNegocioDepartamento().remover(tblPrincipal.getSelectionModel().getSelectedItem());
                         completarTabela(NegociosEstaticos.getNegocioDepartamento().buscarTodos());
@@ -358,7 +357,6 @@ public class ConsultarDepartamentoController {
 
             } catch (Exception ex) {
                 Logger.getLogger(ConsultarDepartamentoController.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Passou no ");
                 alert.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.erro.remover"), ex.getMessage());
             }
         }

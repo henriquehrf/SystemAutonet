@@ -13,6 +13,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -99,7 +101,7 @@ public class ConsultarCategoriaController {
 
     @FXML
     void btnInserirOnKeyPressed(KeyEvent event) {
-         CadastroCategoriaController.setCadastrar(true);
+        CadastroCategoriaController.setCadastrar(true);
         if (event.getCode() == KeyCode.ENTER) {
 
             try {
@@ -147,16 +149,25 @@ public class ConsultarCategoriaController {
                 aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
                 return;
             }
+
+            Alertas alert = new Alertas();
+            LerMessage ler = new LerMessage();
             try {
-                Alertas alert = new Alertas();
-                LerMessage ler = new LerMessage();
+
                 if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
-                    NegociosEstaticos.getNegocioCategoria().remover(tblPrincipal.getSelectionModel().getSelectedItem());
-                    completarTabela(NegociosEstaticos.getNegocioCategoria().bucarTodos());
+                    Categoria cat = new Categoria();
+                   cat.setId_categoria(tblPrincipal.getSelectionModel().getSelectedItem().getId());
+                    if (NegociosEstaticos.getNegocioMaterial().buscarPorCategoria(cat).size() == 0) {
+                        NegociosEstaticos.getNegocioCategoria().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+                        completarTabela(NegociosEstaticos.getNegocioCategoria().bucarTodos());
+                    } else {
+                        alert.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.erro.remover"), ler.getMessage("msg.remover"));
+                    }
+
                 }
             } catch (Exception ex) {
-                Alertas alert = new Alertas();
-                alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex.getMessage());
+                Logger.getLogger(ConsultarDepartamentoController.class.getName()).log(Level.SEVERE, null, ex);
+                alert.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.erro.remover"), ex.getMessage());
             }
         }
     }
@@ -216,16 +227,25 @@ public class ConsultarCategoriaController {
             aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
             return;
         }
+
+        Alertas alert = new Alertas();
+        LerMessage ler = new LerMessage();
         try {
-            Alertas alert = new Alertas();
-            LerMessage ler = new LerMessage();
+
             if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
-                NegociosEstaticos.getNegocioCategoria().remover(tblPrincipal.getSelectionModel().getSelectedItem());
-                completarTabela(NegociosEstaticos.getNegocioCategoria().bucarTodos());
+                Categoria cat = new Categoria();
+                cat.setId_categoria(tblPrincipal.getSelectionModel().getSelectedItem().getId());
+                if (NegociosEstaticos.getNegocioMaterial().buscarPorCategoria(cat).size() == 0) {
+                    NegociosEstaticos.getNegocioCategoria().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+                    completarTabela(NegociosEstaticos.getNegocioCategoria().bucarTodos());
+                } else {
+                    alert.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.erro.remover"), ler.getMessage("msg.remover"));
+                }
+
             }
         } catch (Exception ex) {
-            Alertas alert = new Alertas();
-            alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex.getMessage());
+            Logger.getLogger(ConsultarDepartamentoController.class.getName()).log(Level.SEVERE, null, ex);
+            alert.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.erro.remover"), ex.getMessage());
         }
     }
 
