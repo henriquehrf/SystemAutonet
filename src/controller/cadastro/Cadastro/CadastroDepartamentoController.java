@@ -86,7 +86,7 @@ public class CadastroDepartamentoController {
                 try {
                     salvar(alterar);
                 } catch (Exception ex) {
-                    Logger.getLogger(CadastroDepartamentoController.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex.getMessage());
                 }
             } else {
                 Departamento departamento = new Departamento();
@@ -253,7 +253,7 @@ public class CadastroDepartamentoController {
 
         try {
             // NegocioP.salvar(departamento);
-            NegociosEstaticos.getNegocioDepartamento().salvar(departamento);
+            NegociosEstaticos.getNegocioDepartamento().salvar(departamento,cadastrar);
             alterar = null;
             // NegocioP = null;
             Parent root;

@@ -7,6 +7,7 @@ package negocio;
 
 import DAO.DepartamentoDAO;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 import utilitarios.LerMessage;
 import vo.Departamento;
@@ -23,8 +24,8 @@ public class NegocioDepartamento {
         departamentoDAO = new DepartamentoDAO();
     }
 
-    public Departamento salvar(Departamento dp) throws Exception {
-        String erro = validar(dp);
+    public Departamento salvar(Departamento dp, boolean cadastrar) throws Exception {
+        String erro = validar(dp, cadastrar);
         if (erro.equals("")) {
             return departamentoDAO.salvar(Departamento.class, dp);
         } else {
@@ -34,7 +35,7 @@ public class NegocioDepartamento {
     }
 
     public void remover(Departamento dp) throws Exception {
-        
+
         try {
             departamentoDAO.remover(Departamento.class, dp);
 
@@ -59,24 +60,42 @@ public class NegocioDepartamento {
     public List<Departamento> buscarTodos() {
         return departamentoDAO.buscarTodos();
     }
+//arrumar aqui
 
-    private String validar(Departamento dp) {
+    private String validar(Departamento dp, boolean cadastrar) {
         String erro = "";
-
         List<Departamento> lista = buscarTodos();
+        if (cadastrar) {
 
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getNome().equals(dp.getNome())) {
-                erro += "Nome ja existente";
+            for (int i = 0; i < lista.size(); i++) {
+                if (lista.get(i).getNome().equals(dp.getNome())) {
+                    erro += "Nome ja existente";
+                }
+                if (lista.get(i).getSigla().equals(dp.getSigla())) {
+                    erro += "\nSigla ja existente";
+                    break;
+                }
             }
-            if (lista.get(i).getSigla().equals(dp.getSigla())) {
-                erro += "\nSigla ja existente";
-                break;
+            return erro;
+        } else {
+
+            for (int i = 0; i < lista.size(); i++) {
+                if (lista.get(i).getNome().equals(dp.getNome()) && lista.get(i).getId() != dp.getId()) {
+                  
+                        erro += "Nome ja existente";
+                    
+                }
+                if (lista.get(i).getSigla().equals(dp.getSigla())&& lista.get(i).getId() != dp.getId()) {
+                  
+                        erro += "\nSigla ja existente";
+                    
+                    break;
+                }
+
             }
 
         }
-
         return erro;
-    }
 
+    }
 }
