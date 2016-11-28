@@ -9,8 +9,8 @@ import classesAuxiliares.NegociosEstaticos;
 import classesAuxiliares.Validar;
 import controller.cadastro.Consulta.ConsultarFornecedorController;
 import gui.SystemAutonet;
-import java.util.Properties;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import utilitarios.Alertas;
 import utilitarios.LerMessage;
 import vo.Fornecedor;
@@ -110,6 +111,15 @@ public class CadastroFornecedorController {
     }
 
     public void initialize() {
+        
+           Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+               
+               txtRazaoSocial.requestFocus();
+            }
+        });
+           
     //    negocioF = new NegocioFornecedor();
         setcamposObrigatorio();
         if (!isCadastrar()) {
@@ -118,6 +128,48 @@ public class CadastroFornecedorController {
             alterar = null;
         }
 
+    }
+    @FXML
+    void txtRazaoSocialOnKeyPressed(KeyEvent event){
+        
+        
+        
+    }
+    @FXML
+    void txtNomeFantasiaOnKeyPressed(KeyEvent event){
+        
+    }
+    @FXML
+    void txtCnpjOnKeyPressed(KeyEvent event){
+        
+    }
+    @FXML
+    void txtInscricaoEstadualOnKeyPressed(KeyEvent event){
+        
+    }
+    @FXML
+    void txtTelefoneOnKeyPressed(KeyEvent event){
+        
+    }
+    @FXML
+    void txtEmailOnKeyPressed(KeyEvent event){
+        
+    }
+    @FXML
+    void txtEnderecoOnKeyPressed(KeyEvent event){
+        
+    }
+    @FXML
+    void txtPessoaResponsavelOnKeyPressed(KeyEvent event){
+        
+    }
+    @FXML
+    void btnSalvarOnKeyPressed(KeyEvent event){
+        
+    }
+    @FXML
+    void btnCancelarOnKeyPressed(KeyEvent event){
+        
     }
 
     @FXML
