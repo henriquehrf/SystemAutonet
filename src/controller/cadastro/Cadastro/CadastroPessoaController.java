@@ -40,7 +40,9 @@ import enumm.Atividade;
 import enumm.PerfilUsuario;
 import vo.Pessoa;
 import enumm.Sexo;
+import java.security.MessageDigest;
 import utilitarios.Alertas;
+import utilitarios.Criptografia;
 
 /**
  *
@@ -208,7 +210,7 @@ public class CadastroPessoaController {
                 LerMessage ler = new LerMessage();
                 Alertas aviso = new Alertas();
                 try {
-                    
+
                     aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
                 } catch (Exception ex1) {
                     System.out.println(ex1.getMessage());
@@ -218,7 +220,7 @@ public class CadastroPessoaController {
         } else {
             try {
                 LerMessage ler = new LerMessage();
-               Alertas aviso =  new Alertas();
+                Alertas aviso = new Alertas();
                 aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
@@ -252,7 +254,10 @@ public class CadastroPessoaController {
         pessoa.setEndereco(txtEndereco.getText());
 
         pessoa.setUsuario(txtUsuario.getText());
-        pessoa.setSenha(txtSenha.getText());
+         
+        Criptografia x = new Criptografia(txtSenha.getText());
+        pessoa.setSenha(x.getSenha_criptografada());
+      
         pessoa.setUltimo_acesso(data);
         pessoa.setFuncao(cmbFuncao.getValue());
 
@@ -320,8 +325,7 @@ public class CadastroPessoaController {
             Alertas aviso = new Alertas();
             // NegocioP = null;
             alterar = null;
-          
-            
+
             aviso.alerta(AlertType.INFORMATION, ler.getMessage("msg.cadastro.confirmacao"), ler.getMessage("msg.cadastro.sucesso"));
             root = FXMLLoader.load(ConsultarPessoaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Pessoa.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -366,8 +370,6 @@ public class CadastroPessoaController {
     void rdbMasculinoOnKeyPressed(KeyEvent event) {
 
     }
-
-
 
     private void setcamposObrigatorio() {
         nomeObrigatorio.setVisible(false);
@@ -466,7 +468,7 @@ public class CadastroPessoaController {
         }
         LerMessage ler = new LerMessage();
         try {
-       
+
             Title.setText(ler.getMessage("title.alterar.departamento"));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

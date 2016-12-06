@@ -8,6 +8,7 @@ package gui;
 import classesAuxiliares.ClasseDoSistemaEstatico;
 import classesAuxiliares.NegociosEstaticos;
 import controller.PrincipalController;
+import java.security.MessageDigest;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import utilitarios.Criptografia;
 import vo.Pessoa;
 
 /**
@@ -56,12 +58,17 @@ public class LoginController {
 
         Pessoa user = new Pessoa();
         Pessoa otherUser = null;
-        user.setUsuario(txtUsuario.getText());
-        user.setSenha(txtSenha.getText());
+
         try {
+
+            Criptografia x = new Criptografia(txtSenha.getText());
+
+            user.setUsuario(txtUsuario.getText());
+            user.setSenha(x.getSenha_criptografada());
+
             otherUser = NegociosEstaticos.getNegocioPessoa().buscarPorUsuario(user);
             if (otherUser.getId() != null) {
-                if (otherUser.getSenha().equals(txtSenha.getText())) {
+                if (otherUser.getSenha().equals(x.getSenha_criptografada())) {
                     ClasseDoSistemaEstatico.setPessoa(otherUser);
                     return true;
                 } else {
@@ -117,7 +124,6 @@ public class LoginController {
         lblautenticacao.setVisible(false);
         labelSenhaAlerta.setVisible(false);
     }
-
 
     @FXML
     void txtSenhaonKeyPressed(KeyEvent event) {
