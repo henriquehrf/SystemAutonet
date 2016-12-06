@@ -82,33 +82,6 @@
                                  <children>
                                     <GridPane prefHeight="99.0" prefWidth="798.0">
                                        <children>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="798.0" GridPane.rowIndex="1">
-                                             <children>
-                                                <Label text="Fornecedor">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin></Label>
-                                                <TextField fx:id="txtFornecedor" disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="330.0">
-                                                   <HBox.margin>
-                                                      <Insets left="2.0" />
-                                                   </HBox.margin></TextField>
-                                                <Button fx:id="btnAdicionarFornecedor" mnemonicParsing="false" onAction="#btnAdicionarFornecedorOnAction" styleClass="button-adicionar" text="Button">
-                                                   <HBox.margin>
-                                                      <Insets right="5.0" />
-                                                   </HBox.margin>
-                                                </Button>
-                                                <Button fx:id="btnEditarFornecedor" disable="true" mnemonicParsing="false" onAction="#btnEditarFornecedorOnAction" styleClass="button-editar" text="Button">
-                                                   <HBox.margin>
-                                                      <Insets right="5.0" />
-                                                   </HBox.margin>
-                                                </Button>
-                                                <Label text="CNPJ" />
-                                                <TextField fx:id="txtCNPJ" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="155.0">
-                                                   <HBox.margin>
-                                                      <Insets left="2.0" />
-                                                   </HBox.margin></TextField>
-                                             </children>
-                                          </HBox>
                                           <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="798.0">
                                              <children>
                                                 <Label text="Numero da Nota Fiscal">
@@ -135,6 +108,33 @@
                                                       <Insets left="2.0" />
                                                    </HBox.margin></TextField>
                                                 <Label fx:id="valorNFObrigatorio" styleClass="label-alert" text="%lbl.campoObrigatorio" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="798.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label text="Fornecedor">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin></Label>
+                                                <TextField fx:id="txtFornecedor" disable="true" maxHeight="25.0" prefHeight="25.0" prefWidth="330.0">
+                                                   <HBox.margin>
+                                                      <Insets left="2.0" />
+                                                   </HBox.margin></TextField>
+                                                <Button fx:id="btnAdicionarFornecedor" mnemonicParsing="false" onAction="#btnAdicionarFornecedorOnAction" styleClass="button-adicionar" text="Button">
+                                                   <HBox.margin>
+                                                      <Insets right="5.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnEditarFornecedor" disable="true" mnemonicParsing="false" onAction="#btnEditarFornecedorOnAction" styleClass="button-editar" text="Button">
+                                                   <HBox.margin>
+                                                      <Insets right="5.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <Label text="CNPJ" />
+                                                <TextField fx:id="txtCNPJ" disable="true" editable="false" maxHeight="25.0" prefHeight="25.0" prefWidth="155.0">
+                                                   <HBox.margin>
+                                                      <Insets left="2.0" />
+                                                   </HBox.margin></TextField>
                                              </children>
                                           </HBox>
                                           <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">

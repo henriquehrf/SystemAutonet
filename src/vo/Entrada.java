@@ -33,6 +33,10 @@ public class Entrada implements Serializable, EntidadeBase {
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dt_entrada;
+    
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dt_NF;
 
     @Column(scale = 8, precision = 2)
     private float valor_total;
