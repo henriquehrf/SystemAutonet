@@ -5,9 +5,11 @@ import classesAuxiliares.Validar;
 import controller.PrincipalController;
 import controller.cadastro.Cadastro.CadastroSalaBlocoController;
 import gui.SystemAutonet;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,14 +18,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import negocio.NegocioDepartamento;
-import negocio.NegocioLocal;
 import utilitarios.Alertas;
 import utilitarios.LerMessage;
 import vo.Departamento;
@@ -79,22 +80,48 @@ public class ConsultarLocaisController {
     @FXML
     private Button btnBuscar;
 
-  //  private NegocioLocal negocioLocal;
+    @FXML
+    private ComboBox<String> cbmDepartamento;
 
+    @FXML
+    private TableColumn<Local, String> tbcDepartamento;
+
+    //  private NegocioLocal negocioLocal;
     public void initialize() {
-      //  negocioLocal = new NegocioLocal();
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                txtBuscador.requestFocus();
+            }
+        });
+
+        //  negocioLocal = new NegocioLocal();
         List<Local> lista = NegociosEstaticos.getNegocioLocal().buscarTodos();
+        List<Departamento> aux = NegociosEstaticos.getNegocioDepartamento().buscarTodos();
 
-        completarTabela(lista);
         rdbDescricao.setSelected(true);
+        completarCombo(aux);
+        completarTabela(lista);
+        
 
+    }
+
+    void completarCombo(List<Departamento> lista) {
+        ObservableList<String> dado = FXCollections.observableArrayList();
+        for (int i = 0; i < lista.size(); i++) {
+            dado.add(lista.get(i).getSigla());
+        }
+        dado.add("TODOS");
+        cbmDepartamento.setItems(dado);
+        cbmDepartamento.setValue("TODOS");
     }
 
     @FXML
     void btnVoltar_OnAction(ActionEvent event) {
         try {
             Parent root;
-          //  negocioLocal = null;
+            //  negocioLocal = null;
             root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -107,7 +134,7 @@ public class ConsultarLocaisController {
         try {
             CadastroSalaBlocoController.setCadastrar(true);
             Parent root;
-          //  negocioLocal = null;
+            //  negocioLocal = null;
             root = FXMLLoader.load(CadastroSalaBlocoController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_SalaBloco.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -122,7 +149,7 @@ public class ConsultarLocaisController {
             CadastroSalaBlocoController.setCadastrar(false);
             CadastroSalaBlocoController.setAlterar(p);
             Parent root;
-         //   negocioLocal = null;
+            //   negocioLocal = null;
             root = FXMLLoader.load(CadastroSalaBlocoController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_SalaBloco.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -132,9 +159,9 @@ public class ConsultarLocaisController {
 
     @FXML
     void btnExcluir_OnAction(ActionEvent event) {
-         try {
+        try {
             Alertas alert = new Alertas();
-            LerMessage ler =  new LerMessage();
+            LerMessage ler = new LerMessage();
             if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
                 NegociosEstaticos.getNegocioLocal().remover(tblPrincipal.getSelectionModel().getSelectedItem());
                 completarTabela(NegociosEstaticos.getNegocioLocal().buscarTodos());
@@ -168,7 +195,7 @@ public class ConsultarLocaisController {
             } else {
                 try {
                     LerMessage ler = new LerMessage();
-                   Alertas aviso =  new Alertas();
+                    Alertas aviso = new Alertas();
                     aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.incompatibilidade.numero"), ler.getMessage("msg.incompatibilidade.numero"));
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
@@ -187,17 +214,31 @@ public class ConsultarLocaisController {
         }
     }
 
-    private void completarTabela(List<Local> lista) {
+    void completarTabela(List<Local> lista) {
         ObservableList<Local> dado = FXCollections.observableArrayList();
         for (int i = 0; i < lista.size(); i++) {
             dado.add(lista.get(i));
         }
+
+        if (rdbDescricao.isSelected()) {
+            Comparator<Local> cmp = new Comparator<Local>() {
+                @Override
+                public int compare(Local loc1, Local loc2) {
+                    return loc1.getDescricao().compareTo(loc2.getDescricao());
+                }
+            };
+
+            Collections.sort(dado, cmp);
+        }
+        
+        
         this.tbcDescricao.setCellValueFactory(new PropertyValueFactory<Local, String>("descricao"));
         this.tbcNumero.setCellValueFactory(new PropertyValueFactory<Local, Integer>("numero"));
         this.tbcPessoaResponsavel.setCellValueFactory(new PropertyValueFactory<Local, String>("responsavel"));
+        this.tbcDepartamento.setCellValueFactory(new PropertyValueFactory<Local, String>("Sigla"));
+
         this.tblPrincipal.setItems(dado);
 
     }
-
 
 }

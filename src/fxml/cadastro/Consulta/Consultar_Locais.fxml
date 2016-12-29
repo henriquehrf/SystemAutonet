@@ -21,21 +21,6 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-               <children>
-                  <Button fx:id="btnVoltar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnVoltar_OnAction" prefWidth="100.0" styleClass="button-voltar" text="%btn.voltar">
-                     <HBox.margin>
-                        <Insets right="50.0" top="30.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="35.0" prefWidth="816.0">
@@ -57,6 +42,21 @@
                         </Button>
                      </children>
                   </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <children>
+                  <Button fx:id="btnVoltar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnVoltar_OnAction" prefWidth="100.0" styleClass="button-voltar" text="%btn.voltar">
+                     <HBox.margin>
+                        <Insets right="50.0" top="30.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
          </children>
@@ -124,7 +124,20 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <ComboBox fx:id="cbmDepartamento" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="%lbl.Departamento">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="200.0" />
@@ -144,9 +157,10 @@
          <children>
             <TableView fx:id="tblPrincipal" prefHeight="286.0" prefWidth="735.0">
               <columns>
-                <TableColumn fx:id="tbcDescricao" prefWidth="374.0" text="%tblColumn.descricao" />
-                <TableColumn fx:id="tbcNumero" minWidth="0.0" prefWidth="92.0" text="%tblColumn.numero" />
-                  <TableColumn fx:id="tbcPessoaResponsavel" prefWidth="267.0" text="%tblColumn.pessoa.responsavel" />
+                <TableColumn fx:id="tbcDescricao" prefWidth="299.0" text="%tblColumn.descricao" />
+                <TableColumn fx:id="tbcNumero" minWidth="0.0" prefWidth="104.0" text="%tblColumn.numero" />
+                  <TableColumn fx:id="tbcDepartamento" maxWidth="123.0" prefWidth="120.0" text="%tblColumn.departamento" />
+                  <TableColumn fx:id="tbcPessoaResponsavel" prefWidth="210.0" text="%tblColumn.pessoa.responsavel" />
               </columns>
             </TableView>
          </children>

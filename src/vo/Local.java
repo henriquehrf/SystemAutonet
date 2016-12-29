@@ -64,6 +64,10 @@ public class Local implements Serializable, EntidadeBase {
     @ManyToOne(fetch = FetchType.EAGER)
     private Departamento id_departamento = null;
     
+    public String getSigla(){
+        return id_departamento.getSigla();
+    }
+    
         
 
     public Local() {
