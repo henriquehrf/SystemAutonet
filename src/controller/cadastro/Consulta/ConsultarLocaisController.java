@@ -190,6 +190,13 @@ public class ConsultarLocaisController {
 
     @FXML
     void btnAlterar_OnAction(ActionEvent event) {
+        if (tblPrincipal.getSelectionModel().getSelectedItem() == null) {
+            Alertas aviso = new Alertas();
+            LerMessage ler = new LerMessage();
+            aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
+            return;
+
+        }
         Local p = tblPrincipal.getSelectionModel().getSelectedItem();
         try {
             CadastroSalaBlocoController.setCadastrar(false);
@@ -205,6 +212,13 @@ public class ConsultarLocaisController {
 
     @FXML
     void btnExcluir_OnAction(ActionEvent event) {
+        if (tblPrincipal.getSelectionModel().getSelectedItem() == null) {
+            Alertas aviso = new Alertas();
+            LerMessage ler = new LerMessage();
+            aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
+            return;
+
+        }
         try {
             Alertas alert = new Alertas();
             LerMessage ler = new LerMessage();
@@ -456,8 +470,8 @@ public class ConsultarLocaisController {
     }
 
     @FXML
-    void tblPrincipal_OnMouseClicked(MouseEvent event){
-         if (event.getButton() == MouseButton.SECONDARY) {
+    void tblPrincipal_OnMouseClicked(MouseEvent event) {
+        if (event.getButton() == MouseButton.SECONDARY) {
             final ContextMenu cm = new ContextMenu();
             LerMessage ler = new LerMessage();
             MenuItem cmItem1 = new MenuItem(ler.getMessage("btn.alterar"));
@@ -479,5 +493,89 @@ public class ConsultarLocaisController {
             cm.show(Title, event.getScreenX(), event.getScreenY());
 
         }
+    }
+
+    @FXML
+    void btnInserirOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                CadastroSalaBlocoController.setCadastrar(true);
+                Parent root;
+                //  negocioLocal = null;
+                root = FXMLLoader.load(CadastroSalaBlocoController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_SalaBloco.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+
+    }
+
+    @FXML
+    void btnAlterarOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (tblPrincipal.getSelectionModel().getSelectedItem() == null) {
+                Alertas aviso = new Alertas();
+                LerMessage ler = new LerMessage();
+                aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
+                return;
+
+            }
+            Local p = tblPrincipal.getSelectionModel().getSelectedItem();
+            try {
+                CadastroSalaBlocoController.setCadastrar(false);
+                CadastroSalaBlocoController.setAlterar(p);
+                Parent root;
+                //   negocioLocal = null;
+                root = FXMLLoader.load(CadastroSalaBlocoController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_SalaBloco.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+
+    }
+
+    @FXML
+    void btnExcluirOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+
+            if (tblPrincipal.getSelectionModel().getSelectedItem() == null) {
+                Alertas aviso = new Alertas();
+                LerMessage ler = new LerMessage();
+                aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
+                return;
+
+            }
+            try {
+                Alertas alert = new Alertas();
+                LerMessage ler = new LerMessage();
+                if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
+                    NegociosEstaticos.getNegocioLocal().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+                    completarTabela(NegociosEstaticos.getNegocioLocal().buscarTodos());
+                }
+            } catch (Exception ex) {
+                Alertas alert = new Alertas();
+                alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex.getMessage());
+            }
+
+        }
+
+    }
+
+    @FXML
+    void btnVoltar_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                Parent root;
+                //  negocioLocal = null;
+                root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+
+        }
+
     }
 }
