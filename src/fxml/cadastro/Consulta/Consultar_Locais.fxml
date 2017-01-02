@@ -86,12 +86,12 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <TextField fx:id="txtBuscador" maxHeight="25.0" prefHeight="25.0" prefWidth="379.0">
+                        <TextField fx:id="txtBuscador" maxHeight="25.0" onKeyPressed="#txtBuscador_OnKeyPressed" prefHeight="25.0" prefWidth="379.0">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#btnBuscar_OnAction" prefHeight="25.0" prefWidth="25.0" styleClass="button-search">
+                        <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#btnBuscar_OnAction" onKeyPressed="#btnBuscar_OnKeyPressed" prefHeight="25.0" prefWidth="25.0" styleClass="button-search">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -102,7 +102,7 @@
                      <children>
                         <HBox alignment="TOP_CENTER" prefHeight="28.0" prefWidth="413.0">
                            <children>
-                              <RadioButton fx:id="rdbDescricao" mnemonicParsing="false" text="%rdb.descricao">
+                              <RadioButton fx:id="rdbDescricao" mnemonicParsing="false" onAction="#rdbDescricao_OnAction" onKeyPressed="#rdbDescricao_OnKeyPressed" text="%rdb.descricao">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
@@ -110,12 +110,12 @@
                                     <ToggleGroup fx:id="Filtro" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton fx:id="rdbNumero" mnemonicParsing="false" text="%rdb.numero" toggleGroup="$Filtro">
+                              <RadioButton fx:id="rdbNumero" mnemonicParsing="false" onAction="#rdbNumero_OnAction" onKeyPressed="#rdbNumero_OnKeyPressed" text="%rdb.numero" toggleGroup="$Filtro">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </RadioButton>
-                              <RadioButton fx:id="rdbPessoaResponsavel" mnemonicParsing="false" text="%rdb.pessoa.responsavel" toggleGroup="$Filtro">
+                              <RadioButton fx:id="rdbPessoaResponsavel" mnemonicParsing="false" onAction="#rdbPessoaResponsavel_OnAction" onKeyPressed="#rdbPessoaResponsavel_OnKeyPressed" text="%rdb.pessoa.responsavel" toggleGroup="$Filtro">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
@@ -126,7 +126,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <ComboBox fx:id="cbmDepartamento" prefWidth="150.0" />
+                        <ComboBox fx:id="cbmDepartamento" onAction="#cbmDepartamento_OnAction" prefWidth="150.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -155,7 +155,7 @@
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="tblPrincipal" prefHeight="286.0" prefWidth="735.0">
+            <TableView fx:id="tblPrincipal" onMouseClicked="#tblPrincipal_OnMouseClicked" prefHeight="286.0" prefWidth="735.0">
               <columns>
                 <TableColumn fx:id="tbcDescricao" prefWidth="299.0" text="%tblColumn.descricao" />
                 <TableColumn fx:id="tbcNumero" minWidth="0.0" prefWidth="104.0" text="%tblColumn.numero" />
