@@ -8,9 +8,12 @@ package controller.cadastro.Cadastro;
 import classesAuxiliares.NegociosEstaticos;
 import controller.cadastro.Consulta.ConsultarLocaisController;
 import gui.SystemAutonet;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +26,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import utilitarios.Alertas;
 import utilitarios.LerMessage;
 import vo.Departamento;
@@ -76,6 +81,14 @@ public class CadastroSalaBlocoController {
     List<Departamento> lista;
 
     public void initialize() {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                txtdescricao.requestFocus();
+            }
+        });
+
         //   NegocioL = new NegocioLocal();
         //  negocioDepartamento = new NegocioDepartamento();
         setcamposObrigatorio();
@@ -85,7 +98,7 @@ public class CadastroSalaBlocoController {
         for (int i = 0; i < lista.size(); i++) {
             dado.add(lista.get(i).getSigla());
         }
-
+        Collections.sort(dado);
         cmbDepartamento.setItems(dado);
 
         if (!isCadastrar()) {
@@ -111,7 +124,7 @@ public class CadastroSalaBlocoController {
                 LerMessage ler = new LerMessage();
                 Alertas aviso = new Alertas();
                 try {
-                    
+
                     aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
                 } catch (Exception ex1) {
                     System.out.println(ex1.getMessage());
@@ -121,7 +134,7 @@ public class CadastroSalaBlocoController {
         } else {
             try {
                 LerMessage ler = new LerMessage();
-                Alertas aviso =  new Alertas();
+                Alertas aviso = new Alertas();
                 aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
@@ -192,8 +205,8 @@ public class CadastroSalaBlocoController {
         cmbDepartamento.setValue(alterar.getId_departamento().getSigla());
         try {
             LerMessage ler = new LerMessage();
-         
-            Title.setText(ler.getMessage("title.alterar.TipoSaida"));
+
+            Title.setText(ler.getMessage("title.alterar.local"));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -215,7 +228,7 @@ public class CadastroSalaBlocoController {
         local.setId_departamento(dp);
         try {
             //NegocioL.salvar(local);
-            NegociosEstaticos.getNegocioLocal().salvar(local);
+                NegociosEstaticos.getNegocioLocal().salvar(local,alterar);
             //  NegocioL = null;
             alterar = null;
             //  negocioDepartamento = null;
@@ -231,8 +244,204 @@ public class CadastroSalaBlocoController {
 
         } catch (Exception ex) {
             LerMessage ler = new LerMessage();
-            Alertas aviso =  new Alertas();
+            Alertas aviso = new Alertas();
             aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
+        }
+    }
+
+    @FXML
+    void txtdescricao_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (verificaCampoObrigatorio()) {
+                try {
+                    if (alterar != null) {
+                        salvar(alterar);
+                    } else {
+                        Local local = new Local();
+                        salvar(local);
+                    }
+                } catch (Exception ex) {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    try {
+
+                        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
+                    } catch (Exception ex1) {
+                        System.out.println(ex1.getMessage());
+                    }
+                }
+
+            } else {
+                try {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+
+                }
+            }
+
+        }
+
+    }
+
+    @FXML
+    void txtnumero_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (verificaCampoObrigatorio()) {
+                try {
+                    if (alterar != null) {
+                        salvar(alterar);
+                    } else {
+                        Local local = new Local();
+                        salvar(local);
+                    }
+                } catch (Exception ex) {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    try {
+
+                        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
+                    } catch (Exception ex1) {
+                        System.out.println(ex1.getMessage());
+                    }
+                }
+
+            } else {
+                try {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+
+                }
+            }
+        }
+    }
+
+    @FXML
+    void cmbDepartamento_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (verificaCampoObrigatorio()) {
+                try {
+                    if (alterar != null) {
+                        salvar(alterar);
+                    } else {
+                        Local local = new Local();
+                        salvar(local);
+                    }
+                } catch (Exception ex) {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    try {
+
+                        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
+                    } catch (Exception ex1) {
+                        System.out.println(ex1.getMessage());
+                    }
+                }
+
+            } else {
+                try {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+
+                }
+            }
+        }
+    }
+
+    @FXML
+    void txtresponsavel_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (verificaCampoObrigatorio()) {
+                try {
+                    if (alterar != null) {
+                        salvar(alterar);
+                    } else {
+                        Local local = new Local();
+                        salvar(local);
+                    }
+                } catch (Exception ex) {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    try {
+
+                        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
+                    } catch (Exception ex1) {
+                        System.out.println(ex1.getMessage());
+                    }
+                }
+
+            } else {
+                try {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+
+                }
+            }
+        }
+    }
+
+    @FXML
+    void btnSalvar_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+
+            if (verificaCampoObrigatorio()) {
+                try {
+                    if (alterar != null) {
+                        salvar(alterar);
+                    } else {
+                        Local local = new Local();
+                        salvar(local);
+                    }
+                } catch (Exception ex) {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    try {
+
+                        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
+                    } catch (Exception ex1) {
+                        System.out.println(ex1.getMessage());
+                    }
+                }
+
+            } else {
+                try {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+
+                }
+            }
+        }
+    }
+
+    @FXML
+    void btnCancelar_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+
+            try {
+                Parent root;
+                //NegocioL = null;
+                alterar = null;
+                //negocioDepartamento = null;
+                root = FXMLLoader.load(ConsultarLocaisController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Locais.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
         }
     }
 

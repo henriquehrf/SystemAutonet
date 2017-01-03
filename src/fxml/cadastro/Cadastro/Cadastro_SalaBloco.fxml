@@ -21,25 +21,25 @@
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
-                                    <TextField fx:id="txtdescricao" prefHeight="25.0" prefWidth="350.0" />
+                                    <TextField fx:id="txtdescricao" onKeyPressed="#txtdescricao_OnKeyPressed" prefHeight="25.0" prefWidth="350.0" />
                                     <Label fx:id="lblDescricaoObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
-                                    <TextField fx:id="txtnumero" prefWidth="75.0" />
+                                    <TextField fx:id="txtnumero" onKeyPressed="#txtnumero_OnKeyPressed" prefWidth="75.0" />
                                     <Label fx:id="lblNumeroObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                 <children>
-                                    <TextField fx:id="txtresponsavel" prefWidth="350.0" />
-                                    <Label fx:id="lblResponsavelObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
-                                 </children></HBox>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
-                                    <ComboBox fx:id="cmbDepartamento" prefWidth="150.0" />
+                                    <ComboBox fx:id="cmbDepartamento" onKeyPressed="#cmbDepartamento_OnKeyPressed" prefWidth="150.0" />
                                     <Label fx:id="lblDepartamentoObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
+                                 </children></HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <children>
+                                    <TextField fx:id="txtresponsavel" onKeyPressed="#txtresponsavel_OnKeyPressed" prefWidth="350.0" />
+                                    <Label fx:id="lblResponsavelObrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children></HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
@@ -106,7 +106,7 @@
          <children>
             <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#btnSalvar_OnAction" prefWidth="100.0" styleClass="button-save" stylesheets="@../../../utilitarios/teste.css" text="%btn.salvar" />
+                  <Button fx:id="btnSalvar" alignment="CENTER" mnemonicParsing="false" onAction="#btnSalvar_OnAction" onKeyPressed="#btnSalvar_OnKeyPressed" prefWidth="100.0" styleClass="button-save" stylesheets="@../../../utilitarios/teste.css" text="%btn.salvar" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -117,7 +117,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCancelar_OnAction" prefWidth="100.0" styleClass="button-cancel" stylesheets="@../../../utilitarios/teste.css" text="%btn.cancelar">
+                  <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCancelar_OnAction" onKeyPressed="#btnCancelar_OnKeyPressed" prefWidth="100.0" styleClass="button-cancel" stylesheets="@../../../utilitarios/teste.css" text="%btn.cancelar">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

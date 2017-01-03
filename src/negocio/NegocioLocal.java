@@ -6,6 +6,7 @@
 package negocio;
 
 import DAO.LocalDAO;
+import classesAuxiliares.NegociosEstaticos;
 import java.util.List;
 import java.util.Properties;
 import utilitarios.LerMessage;
@@ -23,8 +24,8 @@ public class NegocioLocal {
         localDAO = new LocalDAO();
     }
 
-    public Local salvar(Local local) throws Exception {
-        String erro = validar(local);
+    public Local salvar(Local local, Local cadastrar) throws Exception {
+        String erro = validar(local, cadastrar);
 
         if (erro.equals("")) {
             return localDAO.salvar(Local.class, local);
@@ -47,13 +48,35 @@ public class NegocioLocal {
         return localDAO.consutarPorId(Local.class, local);
     }
 
-    public String validar(Local local) {
+    public String validar(Local local, Local cadastrar) {
         String erro = "";
 
         if (local.getId_departamento() == null) {
             erro += "Erro: não foi encontrado o departamento";
         }
+        if (cadastrar == null) {
+            List<Local> loc = NegociosEstaticos.getNegocioLocal().buscarTodos();
 
+            for (int i = 0; i < loc.size(); i++) {
+                if (loc.get(i).getDescricao().equals(local.getDescricao())
+                        && loc.get(i).getNumero() == local.getNumero()
+                        && loc.get(i).getSigla().equals(local.getSigla())) {
+                    erro += "Este cadastro com estas informações já existe";
+                }
+            }
+
+        } else {
+            List<Local> loc = NegociosEstaticos.getNegocioLocal().buscarTodos();
+            for (int i = 0; i < loc.size(); i++) {
+                if (loc.get(i).getDescricao().equals(local.getDescricao())
+                        && loc.get(i).getNumero() == local.getNumero()
+                        && loc.get(i).getSigla().equals(local.getSigla())) {
+                    if (loc.get(i).getId() != local.getId()) {
+                        erro += "Este cadastro com estas informações já existe";
+                    }
+                }
+            }
+        }
         return erro;
     }
 

@@ -159,6 +159,7 @@ public class ConsultarLocaisController {
             dado.add(lista.get(i).getSigla());
         }
         dado.add("TODOS");
+        Collections.sort(dado);
         cbmDepartamento.setItems(dado);
         cbmDepartamento.setValue("TODOS");
     }
