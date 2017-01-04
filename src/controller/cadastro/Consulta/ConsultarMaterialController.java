@@ -16,6 +16,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -29,6 +31,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import negocio.NegocioPessoa;
 import utilitarios.Alertas;
@@ -93,8 +96,6 @@ public class ConsultarMaterialController {
         dado.add("TODOS");
         Collections.sort(dado);
         cmbCategoria.setItems(dado);
-        //cmbCategoria.setValue("TODOS");
-        // cmbCategoria.getSelectionModel().select(cmbCategoria.getItems().size() - 1);
         cmbCategoria.setValue("TODOS");
     }
 
@@ -109,12 +110,13 @@ public class ConsultarMaterialController {
         List<Material> lista = NegociosEstaticos.getNegocioMaterial().buscarTodos();
         completarCombo();
         completarTabela(lista);
+        SliderBarQtd.setValue(1);
         habilitarSlider(lista);
+        MaxAndMinSlider(lista);
 
     }
 
-    void habilitarSlider(List<Material> lista) {
-
+    void MaxAndMinSlider(List<Material> lista) {
         int menor, maior;
         if (lista.isEmpty()) {
             menor = 0;
@@ -132,10 +134,13 @@ public class ConsultarMaterialController {
                 }
             }
         }
-        txtQuantidade.setText("" + menor);
-        SliderBarQtd.setMin(menor);
-        SliderBarQtd.setMax(maior);
-        SliderBarQtd.setValue(menor);
+    }
+
+    void habilitarSlider(List<Material> lista) {
+
+        txtQuantidade.setText("" + (int) SliderBarQtd.getValue());
+        SliderBarQtd.setMin(1);
+        SliderBarQtd.setMax(100);
         SliderBarQtd.setShowTickLabels(true);
         SliderBarQtd.setShowTickMarks(true);
         SliderBarQtd.setMajorTickUnit(50);
@@ -147,42 +152,49 @@ public class ConsultarMaterialController {
     void SliderBarQtd_OnDragDetected(MouseEvent event) {
         int qtd = (int) SliderBarQtd.getValue();
         txtQuantidade.setText("" + qtd);
+        btnBusca_OnMouseClicked(event);
     }
 
     @FXML
     void SliderBarQtd_OnDragDone(MouseEvent event) {
         int qtd = (int) SliderBarQtd.getValue();
         txtQuantidade.setText("" + qtd);
+        btnBusca_OnMouseClicked(event);
     }
 
     @FXML
     void SliderBarQtd_OnDragDropped(MouseEvent event) {
         int qtd = (int) SliderBarQtd.getValue();
         txtQuantidade.setText("" + qtd);
+        btnBusca_OnMouseClicked(event);
     }
 
     @FXML
     void SliderBarQtd_OnDragEntered(MouseEvent event) {
         int qtd = (int) SliderBarQtd.getValue();
         txtQuantidade.setText("" + qtd);
+        btnBusca_OnMouseClicked(event);
     }
 
     @FXML
     void SliderBarQtd_OnDragExited(MouseEvent event) {
         int qtd = (int) SliderBarQtd.getValue();
         txtQuantidade.setText("" + qtd);
+        btnBusca_OnMouseClicked(event);
     }
 
     @FXML
     void SliderBarQtd_OnMouseClicked(MouseEvent event) {
         int qtd = (int) SliderBarQtd.getValue();
         txtQuantidade.setText("" + qtd);
+        btnBusca_OnMouseClicked(event);
     }
 
     @FXML
     void SliderBarQtd_OnMouseDragged(MouseEvent event) {
         int qtd = (int) SliderBarQtd.getValue();
         txtQuantidade.setText("" + qtd);
+        btnBusca_OnMouseClicked(event);
     }
 
     @FXML
@@ -190,6 +202,10 @@ public class ConsultarMaterialController {
         if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.LEFT) {
             int qtd = (int) SliderBarQtd.getValue();
             txtQuantidade.setText("" + qtd);
+            btnBusca_OnKeyPressed(event);
+        }
+        if (event.getCode() == KeyCode.ENTER) {
+            txtQuantidade_OnKeyPressed(event);
         }
     }
 
@@ -198,22 +214,18 @@ public class ConsultarMaterialController {
         if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.LEFT) {
             int qtd = (int) SliderBarQtd.getValue();
             txtQuantidade.setText("" + qtd);
+            btnBusca_OnKeyPressed(event);
         }
     }
 
     @FXML
-    void txtQuantidade_OnAction(ActionEvent event) {
-        double value = Double.parseDouble(txtQuantidade.getText());
-        SliderBarQtd.setValue(value);
-//     //   btnBusca_OnAction(event);
-//        // tblPrincipal.getItems();
-//        List<Material> list =new ArrayList<Material>();
-//        for(int i=0;i<tblPrincipal.getItems().size();i++){
-//            if(tblPrincipal.getItems().get(i).getQuantidade()<=Integer.parseInt(txtQuantidade.getText())){
-//                list.add(tblPrincipal.getItems().get(i));
-//            }
-//        }
-//        completarTabela(list);
+    void txtQuantidade_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER && !txtQuantidade.getText().isEmpty()) {
+            double value = Double.parseDouble(txtQuantidade.getText());
+            SliderBarQtd.setValue(value);
+            btnBusca_OnKeyPressed(event);
+            txtQuantidade.selectAll();
+        }
     }
 
     @FXML
@@ -262,21 +274,79 @@ public class ConsultarMaterialController {
 
     @FXML
     void btnInserir_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                CadastroMaterialController.setCadastrar(true);
+                Parent root;
+                root = FXMLLoader.load(CadastroMaterialController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Material.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
 
     }
 
     @FXML
     void btnAlterar_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (tblPrincipal.getSelectionModel().getSelectedItem() == null) {
+                Alertas aviso = new Alertas();
+                LerMessage ler = new LerMessage();
+                aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
+                return;
+
+            }
+            try {
+                Material p = tblPrincipal.getSelectionModel().getSelectedItem();
+                CadastroMaterialController.setCadastrar(false);
+                CadastroMaterialController.setAlterar(p);
+                Parent root;
+                root = FXMLLoader.load(CadastroMaterialController.class.getClassLoader().getResource("fxml/cadastro/Cadastro/Cadastro_Material.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
 
     }
 
     @FXML
     void btnExcluir_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (tblPrincipal.getSelectionModel().getSelectedItem() == null) {
+                Alertas aviso = new Alertas();
+                LerMessage ler = new LerMessage();
+                aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
+                return;
+
+            }
+            try {
+                Alertas alert = new Alertas();
+                LerMessage ler = new LerMessage();
+                if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
+                    NegociosEstaticos.getNegocioMaterial().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+                    completarTabela(NegociosEstaticos.getNegocioMaterial().buscarTodos());
+                }
+            } catch (Exception ex) {
+                Alertas alert = new Alertas();
+                alert.alerta(Alert.AlertType.ERROR, "Erro na remoção", ex.getMessage());
+            }
+        }
 
     }
 
     @FXML
     void btnVoltar_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                Parent root;
+                root = FXMLLoader.load(PrincipalController.class.getClassLoader().getResource("fxml/Principal.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
 
     }
 
@@ -294,10 +364,19 @@ public class ConsultarMaterialController {
 
             }
         }
+        if (event.getCode() == KeyCode.TAB) {
+            cmbCategoria.requestFocus();
+        }
 
     }
 
     void completarTabela(List<Material> lista) {
+        try {
+            lista = ListarQtd(lista);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
         ObservableList<Material> dado = FXCollections.observableArrayList();
         for (int i = 0; i < lista.size(); i++) {
             dado.add(lista.get(i));
@@ -310,16 +389,17 @@ public class ConsultarMaterialController {
         this.tblPrincipal.setItems(dado);
 
     }
-//    ObservableList<Material> ListarQtd(ObservableList<Material> lista){
-//        ObservableList<Material> aux = FXCollections.observableArrayList();
-//        for(int i=0;i<lista.size();i++){
-//            if(lista.get(i).getQuantidade()>= Integer.parseInt(txtQuantidade.getText())){
-//                aux.add(lista.get(i));
-//            }
-//        }
-//        System.out.println(aux.size());
-//        return aux;
-//    }
+
+    List<Material> ListarQtd(List<Material> lista) {
+        List<Material> aux = new ArrayList<Material>();
+        int qtd = (int) SliderBarQtd.getValue();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getQuantidade() >= qtd) {
+                aux.add(lista.get(i));
+            }
+        }
+        return aux;
+    }
 
     @FXML
     void btnVoltar_OnAction(ActionEvent event) {
@@ -333,16 +413,12 @@ public class ConsultarMaterialController {
 
     }
 
-    void buscar(String str) {
-        Material material = new Material();
-        material.setDescricao(str);
-        completarTabela(NegociosEstaticos.getNegocioMaterial().buscarPorDescricao(material));
-    }
-
     @FXML
     void btnBusca_OnAction(ActionEvent event) {
         if (cmbCategoria.getValue().equals("TODOS")) {
-            buscar(txtBuscador.getText());
+            Material material = new Material();
+            material.setDescricao(txtBuscador.getText());
+            completarTabela(NegociosEstaticos.getNegocioMaterial().buscarPorDescricao(material));
         } else {
             Material material = new Material();
             material.setDescricao(txtBuscador.getText());
@@ -352,7 +428,30 @@ public class ConsultarMaterialController {
     }
 
     @FXML
+    void btnBusca_OnMouseClicked(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY) {
+            if (cmbCategoria.getValue().equals("TODOS")) {
+                Material material = new Material();
+                material.setDescricao(txtBuscador.getText());
+                completarTabela(NegociosEstaticos.getNegocioMaterial().buscarPorDescricao(material));
+            } else {
+                Material material = new Material();
+                material.setDescricao(txtBuscador.getText());
+                CategoriaFilter(NegociosEstaticos.getNegocioMaterial().buscarPorDescricao(material));
+
+            }
+        }
+    }
+
+    @FXML
     void btnAlterar_OnAction(ActionEvent event) {
+        if (tblPrincipal.getSelectionModel().getSelectedItem() == null) {
+            Alertas aviso = new Alertas();
+            LerMessage ler = new LerMessage();
+            aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
+            return;
+
+        }
         try {
             Material p = tblPrincipal.getSelectionModel().getSelectedItem();
             CadastroMaterialController.setCadastrar(false);
@@ -367,6 +466,13 @@ public class ConsultarMaterialController {
 
     @FXML
     void btnExcluir_OnAction(ActionEvent event) {
+        if (tblPrincipal.getSelectionModel().getSelectedItem() == null) {
+            Alertas aviso = new Alertas();
+            LerMessage ler = new LerMessage();
+            aviso.alerta(Alert.AlertType.WARNING, ler.getMessage("msg.warning.selecao"), ler.getMessage("msg.warning.faltaselecao"));
+            return;
+
+        }
         try {
             Alertas alert = new Alertas();
             LerMessage ler = new LerMessage();

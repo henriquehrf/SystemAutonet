@@ -552,6 +552,7 @@ public class ConsultarLocaisController {
                 Alertas alert = new Alertas();
                 LerMessage ler = new LerMessage();
                 if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
+                //    if(NegociosEstaticos.getNegocioEstoqueMateria().g)
                     NegociosEstaticos.getNegocioLocal().remover(tblPrincipal.getSelectionModel().getSelectedItem());
                     completarTabela(NegociosEstaticos.getNegocioLocal().buscarTodos());
                 }
