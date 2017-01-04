@@ -102,27 +102,26 @@ public class CadastroMaterialController {
         ObservableList<PoliticaUso> perf = FXCollections.observableArrayList((PoliticaUso.values()));
         List<TipoUnidade> lista = NegociosEstaticos.getNegocioTipoUnidade().buscarTodos();
         List<Categoria> lista2 = NegociosEstaticos.getNegocioCategoria().bucarTodos();
-        
+
         ObservableList<String> dado = FXCollections.observableArrayList();
         ObservableList<String> dado2 = FXCollections.observableArrayList();
         for (int i = 0; i < lista.size(); i++) {
             dado.add(lista.get(i).getSigla());
         }
-        
+
         for (int i = 0; i < lista2.size(); i++) {
             dado2.add(lista2.get(i).getDescricao());
         }
-        
-        
+
         setcamposObrigatorio();
         cmbPoliticaUso.setItems(perf);
         cmbUnidadeMedida.setItems(dado);
         cmbCategoria.setItems(dado2);
-        
+
         cmbUnidadeMedida.getSelectionModel().select(0);
         cmbPoliticaUso.getSelectionModel().select(0);
         cmbCategoria.getSelectionModel().select(0);
-        
+
         if (!isCadastrar()) {
             completar();
         } else {
@@ -147,17 +146,17 @@ public class CadastroMaterialController {
         cmbPoliticaUso.setValue(alterar.getPoliticaUso());
         LerMessage ler = new LerMessage();
         try {
-            
+
             Title.setText(ler.getMessage("title.alterar.material"));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     private boolean verificaCampoObrigatorio() {
         setcamposObrigatorio();
         boolean verifica = true;
-       
+
         if (txtdescricao.getText().isEmpty()) {
             lblPolitacaDeUsoObrigatorio.setVisible(true);
             verifica = false;
@@ -190,32 +189,54 @@ public class CadastroMaterialController {
 
         Categoria cat = new Categoria();
         TipoUnidade tu = new TipoUnidade();
-        tu.setDescricao(cmbUnidadeMedida.getValue());
+        tu.setSigla(cmbUnidadeMedida.getValue());
         cat.setDescricao(cmbCategoria.getValue());
 
-        List<Categoria> categori = NegociosEstaticos.getNegocioCategoria().buscarPorDescricao(cat);
-        List<TipoUnidade> Ltu = NegociosEstaticos.getNegocioTipoUnidade().buscarPorDescricao(tu);
-        
-        if (categori.size() == 1) {
-            material.setId_categoria(categori.get(0));  
-        }else{
-            System.out.println("erro inesperado Categoria");
-            return;
+        List<Categoria> categoria = NegociosEstaticos.getNegocioCategoria().buscarPorDescricao(cat);
+        List<TipoUnidade> TUnidade = NegociosEstaticos.getNegocioTipoUnidade().buscarPorSigla(tu);
+
+        if (categoria.size() == 1) {
+            material.setId_categoria(categoria.get(0));
         }
-        
-        if (Ltu.size() == 1) {
-            material.setId_tipo_unidade(Ltu.get(0));
-        }else{
-            System.out.println("erro inesperado Tipo Unidade");
-            return;
+        if (TUnidade.size() == 1) {
+            material.setId_tipo_unidade(TUnidade.get(0));
+        }
+        if (categoria.size() > 1) {
+            for (int i = 0; i < categoria.size(); i++) {
+                if (categoria.get(i).getDescricao().equals(cat.getDescricao())) {
+                    material.setId_categoria(categoria.get(i));
+                }
+            }
+        }
+        if (TUnidade.size() > 1) {
+            for (int i = 0; i < TUnidade.size(); i++) {
+                if (TUnidade.get(i).getSigla().equals(tu.getSigla())) {
+                    material.setId_tipo_unidade(TUnidade.get(i));
+                }
+            }
         }
 
+//        NegociosEstaticos.getNegocioCategoria()
+//        
+//        if (categori.size() == 1) {
+//            material.setId_categoria(categori.get(0));  
+//        }else{
+//            System.out.println("erro inesperado Categoria");
+//            return;
+//        }
+//        
+//        if (Ltu.size() == 1) {
+//            material.setId_tipo_unidade(Ltu.get(0));
+//        }else{
+//            System.out.println("erro inesperado Tipo Unidade");
+//            return;
+//        }
         try {
             //   NegocioP.salvar(pessoa);
             NegociosEstaticos.getNegocioMaterial().salvar(material);
             Parent root;
             LerMessage ler = new LerMessage();
-            Alertas aviso =  new Alertas();
+            Alertas aviso = new Alertas();
             // NegocioP = null;
             alterar = null;
 
@@ -245,8 +266,8 @@ public class CadastroMaterialController {
                 LerMessage ler = new LerMessage();
                 Alertas aviso = new Alertas();
                 try {
-                    
-                   aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
+
+                    aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
                 } catch (Exception ex1) {
                     System.out.println(ex1.getMessage());
                 }
@@ -255,7 +276,7 @@ public class CadastroMaterialController {
         } else {
             try {
                 LerMessage ler = new LerMessage();
-                Alertas aviso =  new Alertas();
+                Alertas aviso = new Alertas();
                 aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
