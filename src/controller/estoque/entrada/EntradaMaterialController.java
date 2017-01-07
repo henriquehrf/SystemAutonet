@@ -286,7 +286,7 @@ public class EntradaMaterialController implements Initializable {
                     NegociosEstaticos.getNegocioEstoqueMateria().salvar(estoqueMaterial);
                     
                     vo.getId_material().setQuantidade(vo.getId_material().getQuantidade() + vo.getQuantidade_material());
-                    NegociosEstaticos.getNegocioMaterial().salvar(vo.getId_material());
+                    NegociosEstaticos.getNegocioMaterial().salvar(vo.getId_material(),vo.getId_material());
                        estoqueMaterial = null;
                 }
              

@@ -10,9 +10,11 @@ import controller.cadastro.Consulta.ConsultarMaterialController;
 import enumm.PoliticaUso;
 import gui.SystemAutonet;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,6 +28,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import utilitarios.Alertas;
 import utilitarios.LerMessage;
 import vo.Categoria;
@@ -99,6 +103,14 @@ public class CadastroMaterialController {
 
     public void initialize() {
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                txtdescricao.requestFocus();
+            }
+        });
+
         ObservableList<PoliticaUso> perf = FXCollections.observableArrayList((PoliticaUso.values()));
         List<TipoUnidade> lista = NegociosEstaticos.getNegocioTipoUnidade().buscarTodos();
         List<Categoria> lista2 = NegociosEstaticos.getNegocioCategoria().bucarTodos();
@@ -114,6 +126,9 @@ public class CadastroMaterialController {
         }
 
         setcamposObrigatorio();
+        Collections.sort(dado);
+        Collections.sort(dado2);
+        Collections.sort(perf);
         cmbPoliticaUso.setItems(perf);
         cmbUnidadeMedida.setItems(dado);
         cmbCategoria.setItems(dado2);
@@ -157,10 +172,7 @@ public class CadastroMaterialController {
         setcamposObrigatorio();
         boolean verifica = true;
 
-        if (txtdescricao.getText().isEmpty()) {
-            lblPolitacaDeUsoObrigatorio.setVisible(true);
-            verifica = false;
-        }
+ 
         if (txtdescricao.getText().isEmpty()) {
             lbldescricaoObrigatorio.setVisible(true);
             verifica = false;
@@ -169,7 +181,7 @@ public class CadastroMaterialController {
             lblcategorioobrigatorio.setVisible(true);
             verifica = false;
         }
-        if (cmbPoliticaUso.getValue() == null) {
+        if (cmbPoliticaUso.getValue() ==null) {
             lblPolitacaDeUsoObrigatorio.setVisible(true);
             verifica = false;
         }
@@ -216,24 +228,10 @@ public class CadastroMaterialController {
             }
         }
 
-//        NegociosEstaticos.getNegocioCategoria()
-//        
-//        if (categori.size() == 1) {
-//            material.setId_categoria(categori.get(0));  
-//        }else{
-//            System.out.println("erro inesperado Categoria");
-//            return;
-//        }
-//        
-//        if (Ltu.size() == 1) {
-//            material.setId_tipo_unidade(Ltu.get(0));
-//        }else{
-//            System.out.println("erro inesperado Tipo Unidade");
-//            return;
-//        }
+
         try {
             //   NegocioP.salvar(pessoa);
-            NegociosEstaticos.getNegocioMaterial().salvar(material);
+            NegociosEstaticos.getNegocioMaterial().salvar(material,alterar);
             Parent root;
             LerMessage ler = new LerMessage();
             Alertas aviso = new Alertas();
@@ -296,6 +294,87 @@ public class CadastroMaterialController {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    @FXML
+    void txtdescricao_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvar_OnKeyPressed(event);
+        }
+    }
+
+    @FXML
+    void cmbCategoria_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvar_OnKeyPressed(event);
+        }
+    }
+
+    @FXML
+    void cmbUnidadeMedida_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvar_OnKeyPressed(event);
+        }
+    }
+
+    @FXML
+    void cmbPoliticaUso_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvar_OnKeyPressed(event);
+        }
+    }
+
+    @FXML
+    void btnSalvar_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (verificaCampoObrigatorio()) {
+
+                try {
+                    if (alterar != null) {
+                        salvar(alterar);
+                    } else {
+                        Material material = new Material();
+                        salvar(material);
+
+                    }
+                } catch (Exception ex) {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    try {
+
+                        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
+                    } catch (Exception ex1) {
+                        System.out.println(ex1.getMessage());
+                    }
+                }
+
+            } else {
+                try {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+
+                }
+            }
+        }
+    }
+
+    @FXML
+    void btnCancelar_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                Parent root;
+                // NegocioP = null;
+                alterar = null;
+                root = FXMLLoader.load(ConsultarMaterialController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Material.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
     }
 
 }

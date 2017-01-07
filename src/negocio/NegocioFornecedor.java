@@ -76,6 +76,16 @@ public class NegocioFornecedor {
             if (!buscarPorCnpj(fornecedor).isEmpty()) {
                 erro += "Erro: CNPJ já cadastrado";
             }
+        }else{
+            List<Fornecedor> lista =buscarPorCnpj(fornecedor); 
+            if(lista.size()>0){
+                for(int i=0;i<lista.size();i++){
+                    if(lista.get(i).getCnpj().equalsIgnoreCase(fornecedor.getCnpj())&&
+                            lista.get(i).getId()!=fornecedor.getId()){
+                        erro += "Erro: CNPJ já cadastrado";
+                    }
+                }
+            }
         }
         return erro;
     }

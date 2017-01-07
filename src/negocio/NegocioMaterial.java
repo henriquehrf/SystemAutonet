@@ -33,8 +33,8 @@ public class NegocioMaterial {
         categoriaDAO = new CategoriaDAO();
     }
 
-    public Material salvar(Material material) throws Exception {
-        String erro = validar(material);
+    public Material salvar(Material material, Material alterar) throws Exception {
+        String erro = validar(material, alterar);
 
         if (erro.equals("")) {
             return materialDAO.salvar(Material.class, material);
@@ -78,7 +78,7 @@ public class NegocioMaterial {
         return preencher(materialDAO.buscarPorCategoria(categoria));
     }
 
-    private String validar(Material material) {
+    private String validar(Material material, Material alterar) {
         String erro = "";
 
         if (material.getId_categoria() == null) {
@@ -87,6 +87,23 @@ public class NegocioMaterial {
 
         if (material.getId_tipo_unidade() == null) {
             erro += "Favor selecionar a unidade do material";
+        }
+        List<Material> lista = NegociosEstaticos.getNegocioMaterial().buscarPorDescricao(material);
+        if (alterar == null) {
+            if (lista.size() > 0) {
+                for (int i = 0; i < lista.size(); i++) {
+                    if (lista.get(i).getDescricao().equalsIgnoreCase(material.getDescricao())) {
+                        erro += "Existe(m) registro(s) com esta descrição";
+                    }
+                }
+            }
+        } else if (lista.size() > 0) {
+            for (int i = 0; i < lista.size(); i++) {
+                if (lista.get(i).getDescricao().equalsIgnoreCase(material.getDescricao())
+                        && lista.get(i).getId() != material.getId()) {
+                    erro += "Existe(m) registro(s) com esta descrição";
+                }
+            }
         }
 
         return erro;

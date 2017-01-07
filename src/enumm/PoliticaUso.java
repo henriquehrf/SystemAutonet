@@ -11,6 +11,7 @@ package enumm;
  */
 public enum PoliticaUso {
     CONSUMO,
+    CONSUMO_EMPRESTIMO,
     EMPRESTIMO,
     PATRIMÔNIO
 }

@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import utilitarios.Alertas;
 import utilitarios.LerMessage;
@@ -35,8 +36,7 @@ public class CadastroFornecedorController {
 
     private static boolean cadastrar;
 
-   // private NegocioFornecedor negocioF;
-
+    // private NegocioFornecedor negocioF;
     @FXML
     private Label lblCnpjObrigatorio;
 
@@ -111,16 +111,16 @@ public class CadastroFornecedorController {
     }
 
     public void initialize() {
-        
-           Platform.runLater(new Runnable() {
+
+        Platform.runLater(new Runnable() {
             @Override
             public void run() {
-               
-               txtRazaoSocial.requestFocus();
+
+                txtRazaoSocial.requestFocus();
             }
         });
-           
-    //    negocioF = new NegocioFornecedor();
+
+        //    negocioF = new NegocioFornecedor();
         setcamposObrigatorio();
         if (!isCadastrar()) {
             completar();
@@ -129,47 +129,111 @@ public class CadastroFornecedorController {
         }
 
     }
+
     @FXML
-    void txtRazaoSocialOnKeyPressed(KeyEvent event){
-        
-        
-        
+    void txtRazaoSocialOnKeyPressed(KeyEvent event) {
+
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvarOnKeyPressed(event);
+        }
+
     }
+
     @FXML
-    void txtNomeFantasiaOnKeyPressed(KeyEvent event){
-        
+    void txtNomeFantasiaOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvarOnKeyPressed(event);
+        }
+
     }
+
     @FXML
-    void txtCnpjOnKeyPressed(KeyEvent event){
-        
+    void txtCnpjOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvarOnKeyPressed(event);
+        }
+
     }
+
     @FXML
-    void txtInscricaoEstadualOnKeyPressed(KeyEvent event){
-        
+    void txtInscricaoEstadualOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvarOnKeyPressed(event);
+        }
+
     }
+
     @FXML
-    void txtTelefoneOnKeyPressed(KeyEvent event){
-        
+    void txtTelefoneOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvarOnKeyPressed(event);
+        }
+
     }
+
     @FXML
-    void txtEmailOnKeyPressed(KeyEvent event){
-        
+    void txtEmailOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvarOnKeyPressed(event);
+        }
+
     }
+
     @FXML
-    void txtEnderecoOnKeyPressed(KeyEvent event){
-        
+    void txtPessoaResponsavelOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvarOnKeyPressed(event);
+        }
     }
+
     @FXML
-    void txtPessoaResponsavelOnKeyPressed(KeyEvent event){
-        
+    void btnSalvarOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (verificaCampoObrigatorio()) {
+                try {
+                    if (alterar != null) {
+                        salvar(alterar);
+                    } else {
+                        Fornecedor fornecedor = new Fornecedor();
+                        salvar(fornecedor);
+                    }
+                } catch (Exception ex) {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    try {
+
+                        aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
+                    } catch (Exception ex1) {
+                        System.out.println(ex1.getMessage());
+                    }
+                }
+            } else {
+                try {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+
+                }
+            }
+        }
     }
+
     @FXML
-    void btnSalvarOnKeyPressed(KeyEvent event){
-        
-    }
-    @FXML
-    void btnCancelarOnKeyPressed(KeyEvent event){
-        
+    void btnCancelarOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                Parent root;
+                alterar = null;
+                //     negocioF = null;
+                root = FXMLLoader.load(ConsultarFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
     }
 
     @FXML
@@ -186,7 +250,7 @@ public class CadastroFornecedorController {
                 LerMessage ler = new LerMessage();
                 Alertas aviso = new Alertas();
                 try {
-                   
+
                     aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
                 } catch (Exception ex1) {
                     System.out.println(ex1.getMessage());
@@ -209,7 +273,7 @@ public class CadastroFornecedorController {
         try {
             Parent root;
             alterar = null;
-       //     negocioF = null;
+            //     negocioF = null;
             root = FXMLLoader.load(ConsultarFornecedorController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_Fornecedor.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
@@ -230,7 +294,7 @@ public class CadastroFornecedorController {
         LerMessage ler = new LerMessage();
 
         try {
-      
+
             Title.setText(ler.getMessage("title.alterar.fornecedor"));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -261,9 +325,9 @@ public class CadastroFornecedorController {
         }
         try {
             //negocioF.salvar(fornecedor);
-             NegociosEstaticos.getNegocioFornecedor().salvar(fornecedor);
+            NegociosEstaticos.getNegocioFornecedor().salvar(fornecedor);
             alterar = null;
-           // negocioF = null;
+            // negocioF = null;
             Parent root;
             LerMessage ler = new LerMessage();
             Alertas aviso = new Alertas();
@@ -284,7 +348,6 @@ public class CadastroFornecedorController {
         aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.dados.erro"), ler.getMessage("msg.incompatibilidade.numero"));
 
     }
-
 
     private void setcamposObrigatorio() {
         lblCnpjObrigatorio.setVisible(false);
