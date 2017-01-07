@@ -142,7 +142,7 @@
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="tblPrincipal" prefHeight="286.0" prefWidth="735.0">
+            <TableView fx:id="tblPrincipal" onMouseClicked="#tblPrincipal_OnMouseClicked" prefHeight="286.0" prefWidth="735.0">
               <columns>
                 <TableColumn fx:id="tbcDescricao" prefWidth="314.0" text="%tblColumn.descricao" />
                 <TableColumn fx:id="tbcQuantidade" minWidth="0.0" prefWidth="127.0" text="%tblColumn.quantidade" />

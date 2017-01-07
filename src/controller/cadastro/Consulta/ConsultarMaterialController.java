@@ -7,6 +7,7 @@ import controller.cadastro.Cadastro.CadastroMaterialController;
 import gui.SystemAutonet;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -14,6 +15,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -22,7 +24,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
@@ -160,6 +164,31 @@ public class ConsultarMaterialController {
         int qtd = (int) SliderBarQtd.getValue();
         txtQuantidade.setText("" + qtd);
         btnBusca_OnMouseClicked(event);
+    }
+
+    @FXML
+    void tblPrincipal_OnMouseClicked(MouseEvent event) {
+        if (event.getButton() == MouseButton.SECONDARY) {
+            final ContextMenu cm = new ContextMenu();
+            LerMessage ler = new LerMessage();
+            MenuItem cmItem1 = new MenuItem(ler.getMessage("btn.alterar"));
+            MenuItem cmItem2 = new MenuItem(ler.getMessage("btn.excluir"));
+
+            cm.getItems().add(cmItem1);
+            cm.getItems().add(cmItem2);
+
+            cmItem1.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e) {
+                    btnAlterar_OnAction(e);
+                }
+            });
+            cmItem2.setOnAction(new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e) {
+                    btnExcluir_OnAction(e);
+                }
+            });
+            cm.show(Title, event.getScreenX(), event.getScreenY());
+        }
     }
 
     @FXML
@@ -386,6 +415,21 @@ public class ConsultarMaterialController {
         this.tbcQuantidade.setCellValueFactory(new PropertyValueFactory<Material, Number>("quantidade"));
         this.tbcUnidadeMedida.setCellValueFactory(new PropertyValueFactory<Material, String>("unidadeMedida"));
         this.tbcCategoria.setCellValueFactory(new PropertyValueFactory<Material, String>("CategoriaNome"));
+        Comparator<Material> cmp = new Comparator<Material>() {
+            @Override
+            public int compare(Material mat1, Material mat2) {
+                int x = mat1.getDescricao().compareTo(mat2.getDescricao());
+                if (x != 0) {
+                    return x;
+                } else {
+                    Integer x1 = ((Material) mat1).getQuantidade();
+                    Integer x2 = ((Material) mat2).getQuantidade();
+                    return x1.compareTo(x2);
+                }
+            }
+
+        };
+        Collections.sort(dado, cmp);
         this.tblPrincipal.setItems(dado);
 
     }
