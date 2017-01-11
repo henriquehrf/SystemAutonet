@@ -386,6 +386,12 @@ public class CadastroPessoaController {
         if (rdbInativo.isSelected()) {
             pessoa.setAtivo(Atividade.I);
         }
+        if(!txtSenha.getText().equals(txtRSenha.getText())){
+            Alertas aviso = new Alertas();
+            LerMessage ler = new LerMessage();
+            aviso.alerta(Alert.AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.senhaDiferente"));
+            return;
+        }
 
         Instant instant = dtpDtNascimento.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
         pessoa.setDt_nascimento(Date.from(instant));

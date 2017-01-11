@@ -21,7 +21,7 @@
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
-                                    <TextField fx:id="txtfinalidade" prefHeight="25.0" prefWidth="350.0" />
+                                    <TextField fx:id="txtfinalidade" onKeyPressed="#txtfinalidade_OnKeyPressed" prefHeight="25.0" prefWidth="350.0" />
                                     <Label fx:id="lblfinalidadeobrigatorio" styleClass="label-alert" stylesheets="@../../../utilitarios/teste.css" text="%lbl.campoObrigatorio" textFill="#fc0909" />
                                  </children>
                               </HBox>
@@ -92,7 +92,7 @@
          <children>
             <HBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="btnsalvar" alignment="CENTER" mnemonicParsing="false" onAction="#btnsalvar_OnAction" prefWidth="100.0" styleClass="button-save" text="%btn.salvar" />
+                  <Button fx:id="btnsalvar" alignment="CENTER" mnemonicParsing="false" onAction="#btnsalvar_OnAction" onKeyPressed="#btnsalvar_OnKeyPressed" prefWidth="100.0" styleClass="button-save" text="%btn.salvar" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -103,7 +103,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCancelar_OnAction" prefWidth="100.0" styleClass="button-cancel" text="%btn.cancelar">
+                  <Button fx:id="btnCancelar" alignment="CENTER" mnemonicParsing="false" onAction="#btnCancelar_OnAction" onKeyPressed="#btnCancelar_OnKeyPressed" prefWidth="100.0" styleClass="button-cancel" text="%btn.cancelar">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

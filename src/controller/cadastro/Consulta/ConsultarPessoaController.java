@@ -218,6 +218,7 @@ public class ConsultarPessoaController {
             LerMessage ler = new LerMessage();
             if (alert.alerta(Alert.AlertType.CONFIRMATION, "Remoção", ler.getMessage("msg.temcerteza"), "Sim", "Não")) {
                 NegociosEstaticos.getNegocioPessoa().remover(tblPrincipal.getSelectionModel().getSelectedItem());
+                 completarTabela(NegociosEstaticos.getNegocioPessoa().buscarTodos());
             }
         } catch (Exception ex) {
 

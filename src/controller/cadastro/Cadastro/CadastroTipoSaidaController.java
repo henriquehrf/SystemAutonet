@@ -8,19 +8,20 @@ package controller.cadastro.Cadastro;
 import classesAuxiliares.NegociosEstaticos;
 import controller.cadastro.Consulta.ConsultarTipoSaidaController;
 import gui.SystemAutonet;
-import java.io.IOException;
-import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import negocio.NegocioTipoSaida;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import utilitarios.Alertas;
 import utilitarios.LerMessage;
 import vo.TipoSaida;
@@ -46,8 +47,7 @@ public class CadastroTipoSaidaController {
     @FXML
     private Label lblfinalidadeobrigatorio;
 
- //   private NegocioTipoSaida NegocioT;
-
+    //   private NegocioTipoSaida NegocioT;
     private static TipoSaida alterar;
 
     private static boolean cadastrar;
@@ -69,8 +69,16 @@ public class CadastroTipoSaidaController {
     }
 
     public void initialize() {
-      //  NegocioT = new NegocioTipoSaida();
-      
+        //  NegocioT = new NegocioTipoSaida();
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                txtfinalidade.requestFocus();
+            }
+        });
+
         setcamposObrigatorio();
 
         if (!isCadastrar()) {
@@ -82,19 +90,27 @@ public class CadastroTipoSaidaController {
     }
 
     @FXML
-    void btnsalvar_OnAction(ActionEvent event) throws Exception {
+    void btnsalvar_OnAction(ActionEvent event) {
         if (verificaCampoObrigatorio()) {
             if (alterar != null) {
-                salvar(alterar);
+                try {
+                    salvar(alterar);
+                } catch (Exception ex) {
+                    Logger.getLogger(CadastroTipoSaidaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 TipoSaida ts = new TipoSaida();
-                salvar(ts);
+                try {
+                    salvar(ts);
+                } catch (Exception ex) {
+                    Logger.getLogger(CadastroTipoSaidaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         } else {
             try {
                 LerMessage ler = new LerMessage();
-                Alertas aviso =  new Alertas();
+                Alertas aviso = new Alertas();
                 aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
@@ -107,7 +123,7 @@ public class CadastroTipoSaidaController {
     void btnCancelar_OnAction(ActionEvent event) {
         try {
             Parent root;
-           // NegocioT = null;
+            // NegocioT = null;
             alterar = null;
             root = FXMLLoader.load(ConsultarTipoSaidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_TipoSaida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -135,35 +151,86 @@ public class CadastroTipoSaidaController {
         ts.setDescricao(txtfinalidade.getText());
 
         try {
-           // NegocioT.salvar(ts);
-            NegociosEstaticos.getNegocioTipoSaida().salvar(ts);
+            // NegocioT.salvar(ts);
+            NegociosEstaticos.getNegocioTipoSaida().salvar(ts, alterar);
             alterar = null;
-           
+
             Parent root;
             LerMessage ler = new LerMessage();
-            Alertas aviso =  new Alertas();
-         //   NegocioT = null;
+            Alertas aviso = new Alertas();
+            //   NegocioT = null;
             aviso.alerta(AlertType.INFORMATION, ler.getMessage("msg.cadastro.confirmacao"), ler.getMessage("msg.cadastro.sucesso"));
             root = FXMLLoader.load(ConsultarTipoSaidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_TipoSaida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
         } catch (Exception ex) {
             LerMessage ler = new LerMessage();
-            Alertas aviso =  new Alertas();
+            Alertas aviso = new Alertas();
             aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
         }
     }
-
-
 
     private void completar() {
         txtfinalidade.setText(alterar.getDescricao());
 
         try {
             LerMessage ler = new LerMessage();
-            
+
             Title.setText(ler.getMessage("title.alterar.TipoSaida"));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void txtfinalidade_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnsalvar_OnKeyPressed(event);
+        }
+
+    }
+
+    @FXML
+    void btnsalvar_OnKeyPressed(KeyEvent event) {
+        if (verificaCampoObrigatorio()) {
+            if (alterar != null) {
+                try {
+                    salvar(alterar);
+                } catch (Exception ex) {
+                    Logger.getLogger(CadastroTipoSaidaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                TipoSaida ts = new TipoSaida();
+                try {
+                    salvar(ts);
+                } catch (Exception ex) {
+                    Logger.getLogger(CadastroTipoSaidaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        } else {
+            try {
+                LerMessage ler = new LerMessage();
+                Alertas aviso = new Alertas();
+                aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+
+            }
+        }
+    }
+
+    @FXML
+    void btnCancelar_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                Parent root;
+                // NegocioT = null;
+                alterar = null;
+                root = FXMLLoader.load(ConsultarTipoSaidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_TipoSaida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 

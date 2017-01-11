@@ -19,6 +19,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import utilitarios.Alertas;
 import utilitarios.LerMessage;
 import vo.TipoUnidade;
@@ -50,8 +52,7 @@ public class CadastroUnidadeMedidaController {
     @FXML
     private TextField txtsigla;
 
-   // private NegocioTipoUnidade NegocioT;
-
+    // private NegocioTipoUnidade NegocioT;
     private static TipoUnidade alterar;
 
     private static boolean cadastrar;
@@ -73,7 +74,7 @@ public class CadastroUnidadeMedidaController {
     }
 
     public void initialize() {
-       // NegocioT = new NegocioTipoUnidade();
+        // NegocioT = new NegocioTipoUnidade();
         setcamposObrigatorio();
 
         if (!isCadastrar()) {
@@ -98,7 +99,7 @@ public class CadastroUnidadeMedidaController {
                 LerMessage ler = new LerMessage();
                 Alertas aviso = new Alertas();
                 try {
-                    
+
                     aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
                 } catch (Exception ex1) {
                     System.out.println(ex1.getMessage());
@@ -108,7 +109,7 @@ public class CadastroUnidadeMedidaController {
         } else {
             try {
                 LerMessage ler = new LerMessage();
-             Alertas aviso = new Alertas();
+                Alertas aviso = new Alertas();
                 aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
@@ -121,7 +122,7 @@ public class CadastroUnidadeMedidaController {
     void btnCancelar_OnAction(ActionEvent event) {
         try {
             Parent root;
-           // NegocioT = null;
+            // NegocioT = null;
             alterar = null;
             root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_UnidadeMedida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
             SystemAutonet.SCENE.setRoot(root);
@@ -142,13 +143,12 @@ public class CadastroUnidadeMedidaController {
 
         try {
             LerMessage ler = new LerMessage();
-           
+
             Title.setText(ler.getMessage("title.alterar.tipounidade"));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
-
 
     private void salvar(TipoUnidade ts) throws Exception {
 
@@ -156,11 +156,11 @@ public class CadastroUnidadeMedidaController {
         ts.setSigla(txtsigla.getText());
 
         try {
-            NegociosEstaticos.getNegocioTipoUnidade().salvar(ts);
+            NegociosEstaticos.getNegocioTipoUnidade().salvar(ts, alterar);
             //NegocioT.salvar(ts);
             alterar = null;
             //NegocioT = null;
-            
+
             Parent root;
             LerMessage ler = new LerMessage();
             Alertas aviso = new Alertas();
@@ -188,4 +188,70 @@ public class CadastroUnidadeMedidaController {
         }
         return verifica;
     }
+
+    @FXML
+    void txtdescricao_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvar_onKeyPressed(event);
+        }
+
+    }
+
+    @FXML
+    void txtsigla_OnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            btnSalvar_onKeyPressed(event);
+        }
+    }
+
+    @FXML
+    void btnSalvar_onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (verificaCampoObrigatorio()) {
+                try {
+                    if (alterar != null) {
+                        salvar(alterar);
+                    } else {
+                        TipoUnidade ts = new TipoUnidade();
+                        salvar(ts);
+                    }
+                } catch (Exception ex) {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    try {
+
+                        aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ex.getMessage());
+                    } catch (Exception ex1) {
+                        System.out.println(ex1.getMessage());
+                    }
+
+                }
+            } else {
+                try {
+                    LerMessage ler = new LerMessage();
+                    Alertas aviso = new Alertas();
+                    aviso.alerta(AlertType.ERROR, ler.getMessage("msg.cadastro.erro"), ler.getMessage("msg.cadastro.incompleto"));
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+
+                }
+            }
+        }
+    }
+
+    @FXML
+    void btnCancelar_onKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                Parent root;
+                // NegocioT = null;
+                alterar = null;
+                root = FXMLLoader.load(ConsultarUnidadeMedidaController.class.getClassLoader().getResource("fxml/cadastro/Consulta/Consultar_UnidadeMedida.fxml"), ResourceBundle.getBundle("utilitarios/i18N_pt_BR"));
+                SystemAutonet.SCENE.setRoot(root);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+
 }
