@@ -10,6 +10,7 @@ import classesAuxiliares.NegociosEstaticos;
 import classesAuxiliares.Validar;
 import enumm.Atividade;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 import utilitarios.LerMessage;
 import vo.Emprestimo;
@@ -28,8 +29,8 @@ public class NegocioPessoa {
         pessoaDAO = new PessoaDAO();
     }
 
-    public Pessoa salvar(Pessoa pessoa) throws Exception {
-        String erro = validarPessoa(pessoa);
+    public Pessoa salvar(Pessoa pessoa, Pessoa alterar) throws Exception {
+        String erro = validarPessoa(pessoa, alterar);
         if (erro.equals("")) {
 
             return (pessoaDAO.salvar(Pessoa.class, pessoa));
@@ -42,22 +43,21 @@ public class NegocioPessoa {
         pessoaDAO.remover(Pessoa.class, pessoa);
 
     }
-  
-    
+
     public void Inativar(Pessoa pessoa) throws Exception {
         List<Emprestimo> listaEmprestimo = NegociosEstaticos.getNegocioEmprestimo().buscarPorIdPessoa(pessoa);
-       
+
         LerMessage ler = new LerMessage();
         for (Emprestimo vo : listaEmprestimo) {
             List<EmprestimoEstoqueMaterial> listaEmprestimoEstoqueMaterial = NegociosEstaticos.getNegocioEmprestiomEstoqueMaterial().consultarPorNaoDevolvido(vo);
 
             if (listaEmprestimoEstoqueMaterial.size() > 0) {
-                throw new Exception(ler.getMessage("msg.cadastro.remover.pendenteEmprestimo"));                
+                throw new Exception(ler.getMessage("msg.cadastro.remover.pendenteEmprestimo"));
             }
         }
-    
+
         pessoa.setAtivo(Atividade.I);
-        salvar(pessoa);
+        salvar(pessoa, pessoa);
 
     }
 
@@ -89,11 +89,10 @@ public class NegocioPessoa {
         return pessoaDAO.BuscarPorUsuario(pessoa);
     }
 
-    private String validarPessoa(Pessoa pessoa) throws Exception {
+    private String validarPessoa(Pessoa pessoa, Pessoa alterar) throws Exception {
         String erro = "";
         LerMessage ler = new LerMessage();
 
-        
         if (pessoa.getNome().isEmpty()) {
             erro += ler.getMessage("msg.cadastro.sem.nome");
         }
@@ -134,29 +133,65 @@ public class NegocioPessoa {
                 erro += ler.getMessage("msg.cadastro.emailInvalido");
             }
         }
-        if (pessoa.getId() == null || pessoa.getId() == 0) {
-
-            if (pessoaDAO.EncontrarUsuario(pessoa)) {
-                erro += ler.getMessage("msg.cadastro.usuarioJaCadastrado");
-            }
+        if (alterar == null) {
 
             if (pessoa.getId() == null || pessoa.getId() == 0) {
-                if (!buscarPorCPF(pessoa).isEmpty()) {
-                    erro += ler.getMessage("msg.cadastro.cpfJaCadastrado");
+
+                if (pessoaDAO.EncontrarUsuario(pessoa)) {
+                    erro += ler.getMessage("msg.cadastro.usuarioJaCadastrado");
                 }
 
-                if (!buscarPorRG(pessoa).isEmpty()) {
-                    erro += ler.getMessage("msg.cadastro.rgJaCadastrado");
-                }
+                if (pessoa.getId() == null || pessoa.getId() == 0) {
+                    if (!buscarPorCPF(pessoa).isEmpty()) {
+                        erro += ler.getMessage("msg.cadastro.cpfJaCadastrado");
+                    }
 
-                if (!buscarPorMatricula(pessoa).isEmpty()) {
-                    erro += ler.getMessage("msg.cadastro.MatriculaJaCadastrada");
-                }
+                    if (!buscarPorRG(pessoa).isEmpty()) {
+                        erro += ler.getMessage("msg.cadastro.rgJaCadastrado");
+                    }
 
+                    if (!buscarPorMatricula(pessoa).isEmpty()) {
+                        erro += ler.getMessage("msg.cadastro.MatriculaJaCadastrada");
+                    }
+
+                }
             }
+            return erro;
+        } else {
+            List<Pessoa> p = NegociosEstaticos.getNegocioPessoa().buscarTodos();
+            if (p.size() > 0) {
+                for (int i = 0; i < p.size(); i++) {
+                    if (p.get(i).getCpf().equals(alterar.getCpf()) && !p.get(i).getId().equals(alterar.getId())) {
+                        erro += ler.getMessage("msg.cadastro.cpfJaCadastrado");
+                        System.out.println(p.get(i).getCpf());
+                        System.out.println(alterar.getCpf());
+                        System.out.println(p.get(i).getId());
+                        System.out.println(alterar.getId());
+                        System.out.println("Ver cpf");
+                        return erro;
+                    }
+                    if (p.get(i).getNum_matricula().equals(alterar.getNum_matricula())
+                            && !Objects.equals(p.get(i).getId(), alterar.getId())) {
+                        erro += ler.getMessage("msg.cadastro.MatriculaJaCadastrada");
+                            System.out.println("Ver numero de matricula");
+                        return erro;
+                    }
+                    if (p.get(i).getRg().equals(alterar.getRg())
+                            && !Objects.equals(p.get(i).getId(), alterar.getId())) {
+                        erro += ler.getMessage("msg.cadastro.rgJaCadastrado");
+                            System.out.println("Ver rg");
+                        return erro;
+                    }
+                    if (p.get(i).getUsuario().equals(alterar.getUsuario())
+                            && !Objects.equals(p.get(i).getId(), alterar.getId())) {
+                        erro += ler.getMessage("msg.cadastro.usuarioJaCadastrado");
+                            System.out.println("Ver usuário");
+                        return erro;
+                    }
+                }
+            }
+            return erro;
         }
-        return erro;
-
     }
 
 }
