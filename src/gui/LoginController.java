@@ -67,6 +67,7 @@ public class LoginController {
             user.setSenha(x.getSenha_criptografada());
 
             otherUser = NegociosEstaticos.getNegocioPessoa().buscarPorUsuario(user);
+            System.out.println("Aqui -> "+otherUser);
             if (otherUser.getId() != null) {
                 if (otherUser.getSenha().equals(x.getSenha_criptografada())) {
                     ClasseDoSistemaEstatico.setPessoa(otherUser);
